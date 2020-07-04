@@ -26,6 +26,8 @@ export class AppComponent {
     });
   }
 
+
+  // after the screen size gets too low it scale the zoom level down to keep it fit in one screen..this is a re-usable behaviour across app
   reScaleScreen() {
     let element = document.getElementById("toScale");
     let screen = window.screen;

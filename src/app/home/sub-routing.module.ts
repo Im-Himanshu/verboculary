@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: "POCs",
     children: [
-      { path: "", redirectTo: "bottomSheet", pathMatch: "full" },
+      { path: "", redirectTo: "dashBoard", pathMatch: "full" },
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },
