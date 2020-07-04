@@ -1,6 +1,6 @@
 import { Component, Input, ViewChildren, QueryList, EventEmitter, ElementRef, Output, Renderer2 } from '@angular/core';
 
-import { trigger, keyframes, animate, transition} from "@angular/animations";
+import { trigger, keyframes, animate, transition } from "@angular/animations";
 import * as kf from "../../keyframes";
 
 @Component({
@@ -8,7 +8,7 @@ import * as kf from "../../keyframes";
   templateUrl: './swipable-card.component.html',
   styleUrls: ['./swipable-card.component.scss'],
 })
-export class SwipableCardComponent  {
+export class SwipableCardComponent {
   animationState: string;
   @Input('cards') allCardsIDs: Array<any>; // will have all the 
   @Input('allWordsDetails') allWordDetails;
@@ -24,19 +24,19 @@ export class SwipableCardComponent  {
   transitionInProgress: boolean;
   heartVisible: boolean;
   crossVisible: boolean;
-  isToShowMeaning : boolean = false;
+  isToShowMeaning: boolean = false;
 
-  constructor(private renderer: Renderer2) { 
-  this.choiceMade.subscribe(data=>{
-    this.controlCardPopulation();
-  })
+  constructor(private renderer: Renderer2) {
+    this.choiceMade.subscribe(data => {
+      this.controlCardPopulation();
+    })
 
 
   }
 
-  controlCardPopulation(){
-    if(this.allCardsIDs.length >6){
-      this.allCardsIDs.splice(6,this.allCardsIDs.length-6); // from 5 till end
+  controlCardPopulation() {
+    if (this.allCardsIDs.length > 6) {
+      this.allCardsIDs.splice(6, this.allCardsIDs.length - 6); // from 5 till end
     }
   }
   startAnimation(state) {
@@ -51,7 +51,7 @@ export class SwipableCardComponent  {
   ngOnInit() {
 
   }
-  toggleMeaning(){
+  toggleMeaning() {
     this.isToShowMeaning = !this.isToShowMeaning;
   }
 
@@ -60,11 +60,11 @@ export class SwipableCardComponent  {
     if (!this.allCardsIDs.length) return false;
     if (heart) {
       this.renderer.setStyle(this.tinderCardsArray[0].nativeElement, 'transform', 'translate(' + this.moveOutWidth + 'px, -100px) rotate(-30deg)');
-      this.toggleChoiceIndicator(false,true);
+      this.toggleChoiceIndicator(false, true);
       this.emitChoice(heart, this.allCardsIDs[0]);
     } else {
       this.renderer.setStyle(this.tinderCardsArray[0].nativeElement, 'transform', 'translate(-' + this.moveOutWidth + 'px, -100px) rotate(30deg)');
-      this.toggleChoiceIndicator(true,false);
+      this.toggleChoiceIndicator(true, false);
       this.emitChoice(heart, this.allCardsIDs[0]);
     };
     this.shiftRequired = true;
@@ -81,8 +81,8 @@ export class SwipableCardComponent  {
 
     this.renderer.addClass(this.tinderCardsArray[0].nativeElement, 'moving');
 
-    if (event.deltaX > 0) { this.toggleChoiceIndicator(false,true) }
-    if (event.deltaX < 0) { this.toggleChoiceIndicator(true,false) }
+    if (event.deltaX > 0) { this.toggleChoiceIndicator(false, true) }
+    if (event.deltaX < 0) { this.toggleChoiceIndicator(true, false) }
 
     let xMulti = event.deltaX * 0.03;
     let yMulti = event.deltaY / 80;
@@ -96,7 +96,7 @@ export class SwipableCardComponent  {
 
   handlePanEnd(event) {
 
-    this.toggleChoiceIndicator(false,false);
+    this.toggleChoiceIndicator(false, false);
 
     if (!this.allCardsIDs.length) return;
 
@@ -134,7 +134,7 @@ export class SwipableCardComponent  {
 
   handleShift() {
     this.transitionInProgress = false;
-    this.toggleChoiceIndicator(false,false)
+    this.toggleChoiceIndicator(false, false)
     if (this.shiftRequired) {
       this.shiftRequired = false;
       this.allCardsIDs.shift();
@@ -147,21 +147,21 @@ export class SwipableCardComponent  {
     this.choiceMade.emit({
       choice: heart,
       payload: card,
-      wordID : card
+      wordID: card
     })
   };
 
   ngAfterViewInit() {
     this.moveOutWidth = document.documentElement.clientWidth * 1.5;
     this.tinderCardsArray = this.tinderCards.toArray();
-    this.tinderCards.changes.subscribe(()=>{
+    this.tinderCards.changes.subscribe(() => {
       this.tinderCardsArray = this.tinderCards.toArray();
     })
   };
-  changeMark(newMark, wordId){
+  changeMark(newMark, wordId) {
     this.changeMarkEvent.emit({
-      newMark : newMark,
-      wordId : wordId
+      newMark: newMark,
+      wordId: wordId
     })
     this.isToShowMeaning = true;
 

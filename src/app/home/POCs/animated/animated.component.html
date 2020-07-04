@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Second Page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle @fadein>Awesome Subtitle</ion-card-subtitle>
+      <ion-card-title @slidelefttitle>My animated card</ion-card-title>
+      <ion-card-title @anyChangeinthis>My animated card</ion-card-title>
+    </ion-card-header>
+    <ion-card-content @fadein>
+      <img src="https://d2hkzae1xmryt1.cloudfront.net/wp-content/uploads/2017/06/simon-dwx.png">
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-content>
+  <div class="animate-me" #box></div>
+
+  <ion-button (click)="callAnime()">
+    animaeJs
+  </ion-button>
+  <ion-button (click)="animateItems()">
+    Animate.css
+  </ion-button>
+  <ion-button (click)="usingFunction()">
+    Animate.css
+  </ion-button>
+
+
+
+  <h1 text-center class="animated infinite rubberBand delay-1s">Example</h1>
+
+  <ion-list>
+    <ion-item *ngFor="let val of ['First', 'Second', 'Third']; let i = index;"
+      class="animated fadeInLeft delay-{{ i }}s" #itemlist>
+      {{ val }} Item
+    </ion-item>
+  </ion-list>
+
+
+  <div class="box"></div>
+
+  <p>Reusable Angular Animation</p>
+  <div class="prod-image-wrapper">
+    <div class="prod-image-box" [@flipState]="flip">
+      <div class="prod-image-box__side prod-image-box__front">
+        <img src="https://d2hkzae1xmryt1.cloudfront.net/wp-content/uploads/2017/06/simon-dwx.png">
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <ion-button (click)="toggleFlip()">Flip</ion-button>
+  </div>
+
+
+</ion-content>
