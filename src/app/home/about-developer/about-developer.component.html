@@ -1,0 +1,44 @@
+<ion-header class="setBackground">
+  <ion-toolbar class="modalToolbar">
+    <ion-title>About Developer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close
+
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="modalContent">
+  <div class="parent">
+    <div class="center">
+      <div id="social-test">
+        <p class="text" ion-text>Hope You are liking the app, for any feedback/Query connect with me from any of the
+          given options.</p>
+
+        <ul class="social">
+          <li>
+            <ion-icon (click)=" redirecttoURl('https://www.linkedin.com/in/-himanshugoyal/')" name="logo-linkedin"
+              item-left>
+
+            </ion-icon>
+
+
+          </li>
+          <li>
+            <ion-icon
+              (click)=" redirecttoURl('mailto:goyal.himanshu414@gmail.com?subject=Regarding%20Verboculary%20app')"
+              name="logo-google" item-left>
+            </ion-icon>
+
+
+          </li>
+          <li>
+            <ion-icon (click)=" redirecttoURl('https://github.com/ImHimanShoe/')" name="logo-github" item-left>
+            </ion-icon>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

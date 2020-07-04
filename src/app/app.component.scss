@@ -1,0 +1,23 @@
+* ::-webkit-scrollbar{
+    display: none;
+}
+
+body{
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+//I don't know why but the ion-radio in popover was accesible only through this path, try only this for future 
+::ng-deep ion-radio-group{
+    ion-item{
+        --background : var(--app-popover-background);
+        --color : var(--app-popover-color);
+       
+        ion-radio{
+            --color-checked: var(--app-popoverRadioSelect-color);
+
+        }
+    }
+}
+
+

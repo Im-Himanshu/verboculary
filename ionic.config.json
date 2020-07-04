@@ -1,0 +1,7 @@
+{
+  "name": "GREWordPrepapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

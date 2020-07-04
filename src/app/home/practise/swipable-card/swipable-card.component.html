@@ -1,0 +1,94 @@
+<div  class="tinder" [hidden]="!allCardsIDs.length">
+
+        <div class="tinder--status">
+      
+            <div [style.opacity]="crossVisible? '1':'0'">
+                <svg width="200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style = "top: 77%;">
+                    <svg:path
+                        d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"
+                        fill="#CDD6DD" />
+                </svg>
+            </div>
+      
+            <div [style.opacity]="heartVisible? '1':'0'">
+              <svg width="200px" xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 512 512" >
+                <path fill="#FFACE4" d="M186.3 339.893L96 249.46 64 279.97 186.3 402 448 140.506 416 110z"></path></svg>
+            </div>
+      
+        </div>
+      
+        <!-- 
+          // add this to any div which is not control by any other animnation this will work
+          
+          [@cardAnimator]="animationState" 
+    (@cardAnimator.done)="resetAnimationState()"
+    (swipeleft)="startAnimation('slideOutLeft')"
+    (swiperight)="startAnimation('zoomOutRight')"
+    
+     -->
+        <div class="tinder--cards" (pan)="handlePan($event)" (panend)="handlePanEnd($event)">
+      
+            <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let selectedId of allCardsIDs; let i = index"
+            [ngStyle]="{ zIndex: allCardsIDs.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)' }">
+                <!-- <img #tinderCardImage [src]="card.img" (load)="tinderCardImage.style.opacity = 1">
+                <h3>{{ card.title }}</h3>
+                <p>{{ card.description }}</p>
+                <ng-content></ng-content> -->
+                <div (click)="toggleMeaning()">
+                    <div *ngIf="!isToShowMeaning || i !=0"> 
+                                  <br>
+                                    <h1 class="wordStyle">{{allWordDetails[selectedId][1]}}</h1>
+                                    <!-- <p *ngIf = "isToShowMeaning">{{allWordDetails[selectedId][2]}}</p> -->
+                                <br>
+                    </div>
+                    <div *ngIf="isToShowMeaning  && i == 0" > 
+                            <h1 class="wordHeading">{{allWordDetails[selectedId][1] }}
+                                    <small>{{"  (" +allWordDetails[selectedId][3] + ") "}}</small>
+                            
+                                    <ion-buttons style = "float:left">
+                                        <ion-icon style = "float:left;transform: rotate(180deg);"name="log-out" slot="end" [routerLink]="'/mainmodule/base/learn/'+selectedId"></ion-icon>
+                                  </ion-buttons>
+                                    <ion-buttons style="float:right">
+                                      <ion-icon (click)="changeMark(0,selectedId)" *ngIf="selectedIDsDynamicData[selectedId]['isMarked']"
+                                        name="star"></ion-icon>
+                                      <ion-icon (click)="changeMark(1,selectedId)" *ngIf="!selectedIDsDynamicData[selectedId]['isMarked']"
+                                        name="star-outline"></ion-icon>
+                                    </ion-buttons>
+                                  </h1>
+                                  <p class="wordMeaning">{{allWordDetails[selectedId][2]}}</p>
+                                  <p class="wordExample">
+                                    <em>
+                                      <div
+                                        innerHTML="<b>e.g. : </b> {{' ' + allWordDetails[selectedId][4] | highlightText : allWordDetails[selectedId][1]}}">
+                            
+                                      </div>
+                            
+                                    </em>
+                                  </p>                      
+                            
+
+                    </div>
+
+                </div>      
+            </div>
+      
+        </div>
+      
+        <div class="tinder--buttons">
+      
+          <button (click)="userClickedButton($event, false)">
+              <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <svg:path
+                      d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"
+                      fill="#CDD6DD" />
+              </svg>
+          </button>
+      
+          <button (click)="userClickedButton($event, true)">             
+              <svg width="30px" xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 512 512" >
+                <path fill="#FFACE4" d="M186.3 339.893L96 249.46 64 279.97 186.3 402 448 140.506 416 110z"></path></svg>
+          </button>
+      
+        </div>
+      
+      </div>

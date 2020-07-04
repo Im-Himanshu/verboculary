@@ -1,0 +1,56 @@
+.practiseContent{
+  --background:var(--app-practiseContent-background);
+  
+}
+
+.progressBar{
+  --buffer-background	: var(--app-practiseProgressBarbuffer-background);
+}
+
+
+.wordStyle{
+    text-align: center;
+    font-weight: 400;
+    // color: #222428;
+    font-size: 45px;
+
+}
+
+.wordHeading{
+  font-weight: 400;
+  // color: #222428;
+  font-size: 28px;
+
+}
+.wordMeaning{
+  font-weight: 400;
+  // color: #222428;
+  padding-top: 8px;
+  padding-left: 3px;
+  font-size: 20px;
+  line-height: 1.0;
+
+}
+.wordExample{
+  font-weight: 400;
+  // color: #222428;
+  padding-top: 8px;
+  margin-bottom: 14px;
+  font-size: 15px;  
+  line-height: 1.2;
+
+}
+.ion-activatable {
+    position: relative;
+    overflow: hidden;
+    line-height: 2.5;
+  }
+
+  .alignMiddle{
+    top : 0%
+  }
+  .iframe{
+    width: 100%;
+    height: 83%;
+    margin-top: 12%;
+  }

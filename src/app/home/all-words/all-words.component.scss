@@ -1,0 +1,67 @@
+.alWordsContent{
+  --background:var(--app-alWordsContent-background);
+  ion-list{
+    --background: var(--app-alWordsContent-background);
+    --ion-item-background: var(--app-alWordsContent-background);
+    ion-item{
+      --background: var(--app-alWordsContent-background);
+      --color: var(--app-alWordsContent-color);
+      --border-color: var(--app-alWordsborder-color); // decide the inter item line space
+      // --min-height: 48px;
+      // --background-activated: var(--background);
+      // --background-focused: var(--ion-item-background-focused,var(--ion-color-step-100,#e1e1e1));
+      // --background-hover: var(--ion-item-background-hover,rgba(var(--ion-text-color-rgb,0,0,0),0.04));
+      // --transition: background-color 300ms cubic-bezier(0.4,0,0.2,1);
+      // --padding-start: 16px;
+      // --inner-padding-end: 16px;
+      // --inner-border-width: 0 0 1px 0;
+      // --highlight-height: 2px;
+      // --highlight-color-focused: #00000000;
+      // --highlight-color-valid: #10dc60;
+      // --highlight-color-invalid: #f04141;
+      ion-icon{
+        color: var(--app-alWordsContent-color);
+      }
+
+    }
+  }
+}
+
+
+.subline{
+    display: inline-flex;
+    white-space: normal;
+    padding-left: 12px;
+    padding-top: 12px;
+    width: 100%;
+}
+
+.alignMiddle{
+    top : 10%
+  }
+
+  .wordMeaning{
+    font-weight: 400;
+    // color: #222428;
+    padding-top: 8px;
+    padding-left: 3px;
+    font-size: 20px;
+    line-height: 1.0;
+    text-align: center;
+  
+  }
+
+  .toolBar{
+    border: 2px outset #70757a21;
+    border-radius: 8px;
+    width: 105%;
+    height: 34px;
+    margin-left: -9px;
+    margin-right: 13px;
+  }
+  .contentInside{
+    position: absolute;
+    top : -13%;
+    margin-left : 3px;
+    margin-right: 3px
+  }
