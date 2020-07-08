@@ -7,7 +7,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatTabsModule } from "@angular/material/tabs"; // used in learning
 import { FormsModule } from "@angular/forms";
-
+import { MatSelectModule } from '@angular/material/select';
 /// ionic modules
 import { IonicModule } from "@ionic/angular";
 import { IonicStorageModule } from "@ionic/storage";
@@ -49,7 +49,7 @@ import { ProgressChartComponent } from './progress-chart/progress-chart.componen
 import { ChartsModule } from 'ng2-charts';
 import 'chartjs-plugin-zoom';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
-import { ViewComponent } from "./view/view.component"
+import { ViewComponent } from "./view/view.component";
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -69,6 +69,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatTabsModule,
     MatChipsModule,
     MatExpansionModule,
+    MatSelectModule,
     FivBottomSheetModule,
     ChartModule,
     ChartsModule

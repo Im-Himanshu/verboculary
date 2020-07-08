@@ -1,3 +1,32 @@
+<div class="parentDropDown">
+  <div class="dropdownDiv">
+
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label> Sorting type</mat-label>
+      <mat-select (selectionChange)="changeSorting($event)" [(ngModel)]="selectedSorting" name="Sorting">
+        <mat-option *ngFor="let type of sortingTypes" [value]="type.value">
+          {{type.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdownDiv">
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>
+        Filter words
+      </mat-label>
+      <mat-select (selectionChange)="changeFilter($event)" [(ngModel)]="selectedFilter" name="filter">
+        <mat-option *ngFor="let type of filterTypes" [value]="type.value">
+          {{type.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+
+
 <ion-content>
 
   <ion-item-sliding *ngFor="let oneWord of wordlist">

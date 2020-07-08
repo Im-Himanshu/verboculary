@@ -6,7 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view.component.scss'],
 })
 export class ViewComponent implements OnInit {
-  wordlist = null
+  wordlist = null;
+  selectedSorting: string = "alpha";
+  selectedFilter: string = "all"
+
+
+  sortingTypes = [
+    { value: 'alpha', viewValue: 'Alphabetical' },
+    { value: 'shuffel', viewValue: 'Shuffeled' }
+  ];
+  filterTypes = [
+    { value: 'all', viewValue: 'All' },
+    { value: 'viewed', viewValue: 'Viewed' },
+    { value: 'marked', viewValue: 'Marked' }
+  ]
   constructor() {
 
     this.wordlist = [
@@ -31,6 +44,14 @@ export class ViewComponent implements OnInit {
   toggleBookMark(event, word: any) {
     word.isBookMarked = !word.isBookMarked
     event.stopPropagation();
+
+  }
+  changeFilter(event) {
+    console.log("Filter Changed")
+
+  }
+  changeSorting(event) {
+    console.log("sorting chnaged")
 
   }
 
