@@ -1,46 +1,58 @@
 <ion-content>
 
-  <ion-item-sliding *ngFor="let oneword of wordlist" (click)="onWordClickToggleit(oneword)">
+  <ion-item-sliding *ngFor="let oneWord of wordlist">
     <ion-item>
       <div class="parentBox">
 
-        <div class="wordBox">
-
+        <div class="firstRow" (click)="onWordClickToggleit(oneWord)">
           <div class="iconBox">
             <div id="iconsGroup">
               <svg-icon name='beginner'></svg-icon>
             </div>
           </div>
-          <div class="alignleftRemoveMe subWordBox" slot="start">{{oneword.word}}</div>
-          <div class="iconBox">
-            <div id="iconsGroup2">
-              <svg-icon name='beginner'></svg-icon>
+          <div class="word"> {{oneWord.word}}</div>
+          <div class="iconBox2" (click)="toggleBookMark($event, oneWord)">
+            <div id="iconsGroup">
+              <svg-icon *ngIf="oneWord.isBookMarked" name='fill-bookmark'></svg-icon>
+              <svg-icon *ngIf="!oneWord.isBookMarked" name='bookMark'></svg-icon>
             </div>
           </div>
+        </div>
 
+        <div *ngIf="oneWord.isOpen" class="secondRow" (click)="onWordClickToggleit(oneWord)">
+          <div class="meaningtextStyle">{{oneWord.meaning}} </div>
 
         </div>
 
-        <div class="meaningBox" *ngIf="oneword.isOpen">
-
-          <div class="meaningtextStyle"> a very very very long text goes here so that we can see how it wraps</div>
-          <div class="meaningiconsGroup">
-
-            <div>
+        <div *ngIf="oneWord.isOpen" class="thirdRow">
+          <div class="iconBox" (click)="takeNoteToggle($event, oneWord)">
+            <div class="icon">
               <div id="iconsGroup">
                 <svg-icon name='noteIcon'></svg-icon>
               </div>
+            </div>
+            <div class="text">
               Note
             </div>
 
-            <div>
+          </div>
+          <div class="iconBox">
+            <div class="text">
               Explore
+            </div>
+            <div class="icon">
               <div id="iconsGroup">
                 <svg-icon name='leftAngleIcon'></svg-icon>
               </div>
             </div>
 
           </div>
+
+        </div>
+
+        <div *ngIf="(oneWord.isOpen) && (oneWord.isToTakeNote || oneWord.Note)" class="fourthRow">
+          <textarea [(ngModel)]="oneWord.Note" class="textArea" rows="4" cols="50"
+            placeholder="Make a Note to remember this word "></textarea>
 
         </div>
 
