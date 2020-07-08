@@ -1,0 +1,98 @@
+.parentBox{
+    display: flex;
+    flex-direction: column ;
+    width: 100%;
+}
+
+.wordBox{
+	width: 100%;
+    margin: 2px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:  nowrap;
+    align-items: center;
+}
+.meaningBox{
+    width: 100%;
+    margin: 2px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:  nowrap;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.meaningiconsGroup{
+    display:  flex;
+    justify-content: space-between;
+    width: 87%;
+    height: 37px;
+    margin-top: 12px;
+    
+}
+
+
+.subElements{
+
+}
+
+
+
+
+
+#iconsGroup {
+    width: 10%;
+    height: 41%;
+    position: relative;
+}
+
+
+#iconsGroup2 {
+    width: 10%;
+    height: 41%;
+    position: relative;
+}
+
+.iconBox{
+    width: 100%;
+    height: 58px;
+    align-items: center;
+    position: relative;
+    /* justify-content: center; */
+    display: flex;
+}
+
+.subWordBox{
+    /* Impertinent */
+font-family: Rubik;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+color: #6B6B6B;
+
+
+}
+
+.meaningtextStyle{
+    /* Be undecided about something; waver
+between conflicting positions or courses
+of action. */
+font-family: Rubik;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 14px;
+
+color: #000000;
+
+opacity: 0.56;
+
+}
+
+.alignleftRemoveMe{
+	position: absolute;
+    left: 50px;
+}

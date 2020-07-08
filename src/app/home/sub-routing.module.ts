@@ -12,8 +12,9 @@ import { HowToUseComponent } from './how-to-use/how-to-use.component';
 import { DashBoardComponent } from "./dash-board/dash-board.component"
 import { ProgressChartComponent } from './progress-chart/progress-chart.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { ViewComponent } from "./view/view.component"
 const routes: Routes = [
-  { path: "", redirectTo: "POCs", pathMatch: "full" },
+  { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
     component: HomePage,
@@ -35,7 +36,8 @@ const routes: Routes = [
       { path: "horizontalSlides", component: HorizontalScrollComponent },
       { path: "animation", component: AnimatedComponent },
       { path: "dashBoard", component: DashBoardComponent },
-      { path: "progressChart", component: HomeScreenComponent }
+      { path: "progressChart", component: HomeScreenComponent },
+      { path: "view", component: ViewComponent }
     ]
   }
 ];

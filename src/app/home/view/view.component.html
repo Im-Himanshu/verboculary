@@ -1,0 +1,60 @@
+<ion-content>
+
+  <ion-item-sliding *ngFor="let oneword of wordlist" (click)="onWordClickToggleit(oneword)">
+    <ion-item>
+      <div class="parentBox">
+
+        <div class="wordBox">
+
+          <div class="iconBox">
+            <div id="iconsGroup">
+              <svg-icon name='beginner'></svg-icon>
+            </div>
+          </div>
+          <div class="alignleftRemoveMe subWordBox" slot="start">{{oneword.word}}</div>
+          <div class="iconBox">
+            <div id="iconsGroup2">
+              <svg-icon name='beginner'></svg-icon>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="meaningBox" *ngIf="oneword.isOpen">
+
+          <div class="meaningtextStyle"> a very very very long text goes here so that we can see how it wraps</div>
+          <div class="meaningiconsGroup">
+
+            <div>
+              <div id="iconsGroup">
+                <svg-icon name='noteIcon'></svg-icon>
+              </div>
+              Note
+            </div>
+
+            <div>
+              Explore
+              <div id="iconsGroup">
+                <svg-icon name='leftAngleIcon'></svg-icon>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </ion-item>
+
+
+
+
+
+
+
+
+
+  </ion-item-sliding>
+</ion-content>
