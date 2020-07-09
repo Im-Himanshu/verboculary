@@ -50,6 +50,7 @@ import { ChartsModule } from 'ng2-charts';
 import 'chartjs-plugin-zoom';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ViewComponent } from "./view/view.component";
+import { LearnComponentPOC } from './POCs/learn/learn.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -93,7 +94,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     SvgComponent,
     ProgressChartComponent,
     HomeScreenComponent,
-    ViewComponent
+    ViewComponent,
+    LearnComponentPOC
   ],
   providers: [
     DatabaseService,

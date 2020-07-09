@@ -13,6 +13,7 @@ import { DashBoardComponent } from "./dash-board/dash-board.component"
 import { ProgressChartComponent } from './progress-chart/progress-chart.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ViewComponent } from "./view/view.component"
+import {LearnComponentPOC} from './POCs/learn/learn.component';
 const routes: Routes = [
   { path: "", redirectTo: "base", pathMatch: "full" },
   {
@@ -37,7 +38,8 @@ const routes: Routes = [
       { path: "animation", component: AnimatedComponent },
       { path: "dashBoard", component: DashBoardComponent },
       { path: "progressChart", component: HomeScreenComponent },
-      { path: "view", component: ViewComponent }
+      { path: "view", component: ViewComponent },
+      { path: "learn", component: LearnComponentPOC}
     ]
   }
 ];
