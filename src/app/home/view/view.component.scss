@@ -1,0 +1,235 @@
+.parentDropDown{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 28px;
+}
+
+.dropdownDiv{
+    width: 32%;
+    padding-right: 11px;
+    justify-content:flex-end;
+}
+
+::ng-deep .mat-form-field-infix{
+    width: 100%;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix{
+    padding : 3px;
+}
+
+
+
+.parentBox{
+    display: flex;    
+    flex-direction: column;
+    width: 96%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6px;
+}
+
+
+.firstRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    //padding-left: 10%;
+    .iconBox{
+        width : 10%
+    }
+    .iconBox2{
+        width : 10%;
+        height: 165%;
+    }
+    .word{
+        width : 80%;
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #6B6B6B;
+    }
+}
+
+.secondRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 10% !important;
+    padding: 14px;
+    .meaningtextStyle{
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+
+    }
+}
+
+.thirdRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 10%;
+    height: 21px;
+    .iconBox{
+        height: 100%;
+        display: flex;
+        color :  #61C688;
+        .icon{
+            width : 32px;
+        }
+        .text{
+            font-family: Rubik;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            color: #61C688;
+
+        }
+        
+    }
+
+}
+
+.fourthRow{
+    width: 100%;
+    padding-left: 10% !important;
+    margin-top: 7px;
+    .textArea{
+        width: 95%;
+        background: #F9FBFC;
+        border-radius: 25px;
+        line-height: 18px;
+        font-size: 13px;
+        height: 85px;
+        height: 85px;
+        border: 0.2px solid #61c6882b;
+        background-color: #cdecd836;
+        color: #4CAF50;
+        padding: 8px;
+    }
+}
+
+
+
+#iconsGroup {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+
+
+// .wordBox{
+// 	width: 100%;
+//     margin: 2px;
+//     display: flex;
+//     justify-content: space-between;
+//     flex-wrap:  nowrap;
+//     align-items: center;
+// }
+// .meaningBox{
+//     width: 100%;
+//     margin: 2px;
+//     display: flex;
+//     justify-content: space-between;
+//     flex-wrap:  nowrap;
+//     align-items: center;
+//     flex-direction: column;
+
+// }
+
+// .meaningiconsGroup{
+//     display:  flex;
+//     justify-content: space-between;
+//     width: 87%;
+//     height: 37px;
+//     margin-top: 12px;
+    
+// }
+
+
+// .subElements{
+
+// }
+
+
+
+
+
+// #iconsGroup {
+//     width: 10%;
+//     height: 41%;
+//     position: relative;
+// }
+
+
+// #iconsGroup2 {
+//     width: 10%;
+//     height: 41%;
+//     position: relative;
+// }
+
+// .iconBox{
+//     width: 100%;
+//     height: 58px;
+//     align-items: center;
+//     position: relative;
+//     /* justify-content: center; */
+//     display: flex;
+// }
+
+// .subWordBox{
+//     /* Impertinent */
+// font-family: Rubik;
+// font-style: normal;
+// font-weight: 500;
+// font-size: 16px;
+// line-height: 19px;
+// /* identical to box height */
+// color: #6B6B6B;
+
+
+/* Rectangle 310 */
+
+
+
+
+/* Vector */
+
+
+/* Make a note to remember this word... */
+
+
+
+// }
+
+// .meaningtextStyle{
+//     /* Be undecided about something; waver
+// between conflicting positions or courses
+// of action. */
+// font-family: Rubik;
+// font-style: normal;
+// font-weight: normal;
+// font-size: 12px;
+// line-height: 14px;
+
+// color: #000000;
+
+// opacity: 0.56;
+
+// }
+
+// .alignleftRemoveMe{
+// 	position: absolute;
+//     left: 50px;
+// }

@@ -22,6 +22,37 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.reScaleScreen();
     });
   }
+
+
+  // after the screen size gets too low it scale the zoom level down to keep it fit in one screen..this is a re-usable behaviour across app
+  reScaleScreen() {
+    let element = document.getElementById("toScale");
+    let screen = window.screen;
+    console.log("just a buffer")
+    let parentElement = document.getElementById("parentdiv");
+    if (screen.availWidth < element.clientWidth) {
+      //client-width is set to minimum of 400 is it goes below that the screen will scale to always show 400 px else the default view is shown
+      var scale =
+        Math.ceil((screen.availWidth / element.clientWidth) * 100) / 100;
+      let scaleString = "scale(" + scale + ")";
+      element.style.transform = scaleString;
+      element.style.height = Math.ceil(100 / scale) + "vh";
+    }
+    else {
+      var scale =
+        Math.ceil((screen.availWidth / element.clientWidth) * 100) / 100;
+      let scaleString = "scale(" + 1.0 + ")";
+      element.style.transform = scaleString;
+      element.style.height = "100vh"
+
+    }
+
+
+  }
+
+
+
 }

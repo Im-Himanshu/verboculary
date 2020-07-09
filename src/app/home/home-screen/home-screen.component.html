@@ -1,0 +1,32 @@
+<div class="backgroundGraph">
+  <div class="chartArea">
+    <app-progress-chart>
+
+    </app-progress-chart>
+
+    <div id="overChartText">
+      <span>Hello,</span><br>
+      <span style="font-style:normal;font-weight:normal;font-size:30px;">Rishabh!</span><br>
+      <span class="message">Track the progress.</span>
+    </div>
+  </div>
+
+  <div class="masterFilter">
+
+    <div class="allMasterCards">
+
+      <div class="emptySides"></div>
+      <div *ngFor="let oneCard of masterCard" class="oneCard">
+        <div class="subElement">
+          <span>Viewed</span>
+          <span style="font-style:normal;font-weight:normal;font-size:25px;">43/1000</span>
+        </div>
+      </div>
+      <div class="emptySides"></div>
+
+    </div>
+
+  </div>
+
+  <app-dash-board class="dashboard"></app-dash-board>
+</div>

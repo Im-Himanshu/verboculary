@@ -1,0 +1,24 @@
+canvas {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.reSetIcon{
+	
+    bottom: 1%;
+    position: absolute;
+    left: 1%;
+}
+
+.graphDiv{
+	width: 100%;
+	height: 100%;
+	max-height: 100vh;
+	position: relative;
+}
+
+#main{
+	width: 100%;
+    height: 100%;
+}

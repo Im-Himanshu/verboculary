@@ -1,8 +1,11 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
-
+import { LoginComponent } from "./login/login.component"
+import { RegisterComponent } from "./register/register.component"
 const routes: Routes = [
   { path: "", redirectTo: "mainmodule", pathMatch: "full" },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
   {
     path: "mainmodule",
     loadChildren: () => import("./home/home.module").then(m => m.HomePageModule)
@@ -18,6 +21,6 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 //imports: [RouterModule.forRoot(routes, {useHash: true})]
