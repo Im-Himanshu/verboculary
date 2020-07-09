@@ -13,31 +13,36 @@ import { DashBoardComponent } from "./dash-board/dash-board.component"
 import { ProgressChartComponent } from './progress-chart/progress-chart.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ViewComponent } from "./view/view.component"
+import { GroupSelectorComponent } from "./group-selector/group-selector.component"
+import { LearnComponentPOC } from './POCs/learn/learn.component';
 const routes: Routes = [
   { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
-    component: HomePage,
+    component: DashBoardComponent,
     children: [
-      { path: "", redirectTo: "allWords", pathMatch: "full" },
+      { path: "", redirectTo: "selectGroup", pathMatch: "full" },
       { path: "allWords", component: AllWordsComponent },
       { path: "practise", component: PractiseComponent },
       { path: "practise/:wordId", component: PractiseComponent },
       { path: "learn", component: LearnComponent },
-      { path: "learn/:wordId", component: LearnComponent }
+      { path: "learn/:wordId", component: LearnComponent },
+      { path: "learn", component: LearnComponent },
+      { path: "selectGroup", component: GroupSelectorComponent },
     ]
   },
   {
     path: "POCs",
+    //component: DashBoardComponent, // this would be the parent of all
     children: [
-      { path: "", redirectTo: "dashBoard", pathMatch: "full" },
+      { path: "", redirectTo: "selectGroup", pathMatch: "full" }, // this is the base url from where user navigations begins
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },
       { path: "animation", component: AnimatedComponent },
-      { path: "dashBoard", component: DashBoardComponent },
       { path: "progressChart", component: HomeScreenComponent },
-      { path: "view", component: ViewComponent }
+      { path: "view", component: ViewComponent },
+      { path: "selectGroup", component: GroupSelectorComponent },
     ]
   }
 ];

@@ -11,7 +11,7 @@
           --handle-background-checked : var(--app-learnWordTogglehandle-background);
         }
       }
-    
+
 }
 .learnWordsChangeButton{
   --background:var(--app-learnWordsContent-background);
@@ -42,6 +42,7 @@ color : var(--app-learnWordsMatTab-color);
     font-weight: 400;
     // color: #222428;
     font-size: 40px;
+    margin-top: 6px;
 
 }
 .alignMiddle{
@@ -53,22 +54,27 @@ color : var(--app-learnWordsMatTab-color);
   top: -6px;
   font-size: 27px;
   position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 .starbutton{
   right: 1px;
   top: 1px;
   font-size: 27px;
   position: absolute;
+  margin-right: 5px;
+  margin-top: 7px;
+  color: #CDD9E4;
 }
 .seenButton{
-  
+
   right: 1px;
   bottom: 1px;
   font-size: 27px;
   position: absolute;
 }
-.seenButton :focus {     
-  background-color:yellow;    
+.seenButton :focus {
+  background-color:yellow;
 }
 
 .wordHeading{
@@ -92,9 +98,9 @@ color : var(--app-learnWordsMatTab-color);
   // color: #222428;
   padding-top: 8px;
   margin-bottom: 14px;
-  font-size: 15px;  
+  font-size: 15px;
   line-height: 1.2;
-
+  margin: 1%;
 }
 .ion-activatable {
     position: relative;
@@ -122,4 +128,14 @@ color : var(--app-learnWordsMatTab-color);
   height:200px;
   text-align:center;
   vertical-align:middle;
+}
+
+.ion-card-image{
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+.ion-card-meaning{
+  margin: 1%;
 }

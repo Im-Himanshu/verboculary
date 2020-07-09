@@ -24,7 +24,8 @@
     *ngIf="isData2Ready && isData1Ready"
     [ngClass]="{ alignMiddle: !isToShowDetails }"
   >
-    <ion-card-content class="ion-activatable">
+  <ion-card-content class="ion-activatable ion-card-image">
+    <img src="https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" />
       <ion-buttons class="detailsToggleButton">
         <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
       </ion-buttons>

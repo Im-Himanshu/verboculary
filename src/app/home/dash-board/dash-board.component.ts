@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, ViewChildren, ElementRef, ViewChild } from '@angular/core';
-import { IonContent } from '@ionic/angular' //
+// this component is the parent folder for all thesub routing it displays them in a shutter
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -10,21 +10,11 @@ export class DashBoardComponent implements OnInit {
   repetitions = [1, 2, 3, 4, 5, 6, 7];
   prevDeltaX = 0;
   prevDeltaY = 0;
-  @ViewChild('ion_content', { static: false }) ionScroll: IonContent;
+  masterCard = [1, 2, 3]
 
   constructor(private renderer: Renderer2) { }
 
   ngOnInit() { }
-
-
-  scrollParentToChild($child) {
-    this.ionScroll.scrollToPoint(0, $child.offsetTop, 500)
-  }
-
-  scrollToTop() {
-    this.ionScroll.scrollToTop(1000);
-
-  }
 
   handlePan(event) {
 
@@ -32,13 +22,13 @@ export class DashBoardComponent implements OnInit {
     if (absoluteY < 30 || absoluteY > 500) { return; }
     if (event.deltaX === 0 || (event.center.x === 0 && event.center.y === 0)) return;
 
-    console.log(event.deltaX, event.deltaY)
+    //console.log(event.deltaX, event.deltaY)
     let newDeltaX = event.deltaX - this.prevDeltaX; // the new delta 
     let newDeltaY = event.deltaY - this.prevDeltaY // the new delta more then the previous one
     this.prevDeltaX = event.deltaX;
     this.prevDeltaY = event.deltaY;
     let rotate = newDeltaX * newDeltaY;
-    console.log(newDeltaX, newDeltaY)
+    //console.log(newDeltaX, newDeltaY)
 
     let move: any = event.deltaY;
     if (event.deltaY >= 0) {
