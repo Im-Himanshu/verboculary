@@ -51,7 +51,7 @@ import 'chartjs-plugin-zoom';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ViewComponent } from "./view/view.component";
 import { LearnComponentPOC } from './POCs/learn/learn.component';
-
+import { GroupSelectorComponent } from "./group-selector/group-selector.component"
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     'swipe': { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -95,6 +95,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ProgressChartComponent,
     HomeScreenComponent,
     ViewComponent,
+    GroupSelectorComponent,
     LearnComponentPOC
   ],
   providers: [
