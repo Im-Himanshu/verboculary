@@ -11,8 +11,8 @@ export class LearnComponentPOC implements OnInit {
   allWordOfSets : any;
   allSelectedWordIDs: string[];
   allWordDetails : any;
-  isData1Ready : boolean = true;
-  isData2Ready : boolean = true;
+  isData2Ready : boolean = false;
+  isData1Ready : boolean = false;
   selectedId = '3'; // randomly setting it to avoid error
   isToShowAll : boolean = false;
   selectedIDsDynamicData : any; // of type wordAppData
