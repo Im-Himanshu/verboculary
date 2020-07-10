@@ -20,7 +20,8 @@
 </ion-content>
 
 <ion-content class="learnWordsContent" *ngIf="!isAllWordMastered">
-  <ion-card
+  <span #container>
+    <ion-card
     *ngIf="isData2Ready && isData1Ready"
     [ngClass]="{ alignMiddle: !isToShowDetails }"
   >
@@ -81,6 +82,8 @@
     </ion-card-content>
   </ion-card>
 
+  </span>
+  <!-- <ion-button (click)="shareButtonClone()">Image</ion-button> -->
   <ion-content
     class="learnWordsContent"
     *ngIf="isData2Ready && isData1Ready && isToShowDetails"
