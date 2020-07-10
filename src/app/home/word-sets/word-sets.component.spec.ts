@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GroupSelectorComponent } from './group-selector.component';
+import { WordSetsComponent } from './word-sets.component';
 
-describe('GroupSelectorComponent', () => {
-  let component: GroupSelectorComponent;
-  let fixture: ComponentFixture<GroupSelectorComponent>;
+describe('WordSetsComponent', () => {
+  let component: WordSetsComponent;
+  let fixture: ComponentFixture<WordSetsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupSelectorComponent ],
+      declarations: [ WordSetsComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GroupSelectorComponent);
+    fixture = TestBed.createComponent(WordSetsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

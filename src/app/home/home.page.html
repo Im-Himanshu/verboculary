@@ -1,10 +1,4 @@
-<ion-menu
-  class="sideMenu"
-  side="end"
-  swipe-gesture="true"
-  menuId="first"
-  contentId="mainContent"
->
+<ion-menu class="sideMenu" side="end" swipe-gesture="true" menuId="first" contentId="mainContent">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -17,92 +11,7 @@
   </ion-header>
 
   <ion-content fullscreen>
-    <ion-list *ngIf="isProcessed">
-      <ion-item>
-        <ion-icon
-          class="listIcon headerColor"
-          name="options"
-          slot="start"
-        ></ion-icon>
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Filters
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <ion-list class="filterItem" *ngIf="isProcessed">
-            <ion-item>
-              <ion-label>Category</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="categoryChanged($event)"
-                [(ngModel)]="selectedCategory"
-                [compareWith]="compareWith_category"
-              >
-                <ion-select-option
-                  [value]="oneCategory"
-                  *ngFor="let oneCategory of allCategoryType"
-                  >{{oneCategory}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>Type</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="setChanged($event)"
-                [(ngModel)]="selectedSet"
-                [compareWith]="compareWith_set"
-                multiple="isMultiple"
-              >
-                <ion-select-option [value]="'All'"
-                  >Select All</ion-select-option
-                >
-                <ion-select-option
-                  [value]="oneSet"
-                  *ngFor="let oneSet of allSetOfcategory[selectedCategory]"
-                  >{{oneSet}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Filter</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="filterChanged($event)"
-                [(ngModel)]="selectedFilter"
-                [compareWith]="compareWith_category"
-              >
-                <ion-select-option [value]="'all'">All</ion-select-option>
-                <ion-select-option [value]="'starred'"
-                  >Starred</ion-select-option
-                >
-                <ion-select-option [value]="'Non-Starred'"
-                  >Non-Starred</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Sort</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="sortingChanged($event)"
-                [(ngModel)]="selectedSorting"
-                [compareWith]="compareWith_category"
-              >
-                <ion-select-option [value]="'shuffle'"
-                  >Shuffle</ion-select-option
-                >
-                <ion-select-option [value]="'alphabetically'"
-                  >Alphabetically</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-          </ion-list>
-        </mat-expansion-panel>
-      </ion-item>
-
+    <ion-list>
       <ion-item (click)="presentHowToUseModal()">
         <ion-icon name="help-circle" slot="start"></ion-icon>
         <ion-label>How To Use?</ion-label>
@@ -156,85 +65,53 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-tabs class="tabs">
-      <ion-tab-bar class="navigatonMenubar" slot="top">
-        <ion-tab-button tab="allWords">
-          <ion-icon name="calendar"></ion-icon>
-          <ion-label>All Words</ion-label>
-          <ion-badge>{{totalWordsCount}}</ion-badge>
-        </ion-tab-button>
-        <ion-tab-button tab="learn">
-          <ion-icon name="paper"></ion-icon>
-          <ion-label>Learn Set</ion-label>
-        </ion-tab-button>
-        <ion-tab-button tab="practise">
-          <ion-icon name="body"></ion-icon>
-          <ion-label>Practise</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-      <ion-tab-bar
-        *ngIf="isProcessed"
-        class="selectedFilterTabbar"
-        slot="top"
-        style="height: 43px;"
-      >
-        <ion-toolbar
-          class="selectedfilterToolbar"
-          style="width: 100%;padding-left: 15px;"
-        >
-          <mat-chip-list aria-label="Filter Selection">
-            <mat-chip class="categoryChip">{{selectedCategory}}</mat-chip>
-            <mat-chip
-              class="filterChip"
-              removable="true"
-              (removed)="removeFilter()"
-              *ngIf="selectedFilter !== 'all' "
-              selected
-            >
-              <ion-buttons style="float:left">
-                <ion-icon
-                  *ngIf="selectedFilter === 'starred'"
-                  name="star"
-                ></ion-icon>
-                <ion-icon
-                  *ngIf="selectedFilter === 'Non-Starred'"
-                  name="star-outline"
-                ></ion-icon>
-              </ion-buttons>
-              {{selectedFilter}}
+    <div class="backgroundGraph">
+      <div class="chartArea">
+        <app-progress-chart>
 
-              <ion-icon matChipRemove name="close"></ion-icon>
-            </mat-chip>
-            <mat-chip
-              class="setChip"
-              removable="true"
-              (removed)="removeSet(oneSet)"
-              *ngFor="let oneSet of (selectedSet.length<=titleThreshold)? selectedSet : selectedSet.slice(0,titleThreshold)"
-            >
-              {{oneSet}}
-              <ion-icon matChipRemove name="close"></ion-icon>
-            </mat-chip>
-            <mat-chip
-              class="setChip"
-              *ngIf="selectedSet.length>titleThreshold"
-              removable="true"
-              (removed)="removeSet('tails')"
-            >
-              {{"+"+(selectedSet.length-titleThreshold)+" more"}}
-              <ion-icon matChipRemove name="close"></ion-icon>
-            </mat-chip>
-          </mat-chip-list>
+          <!-- this will be adjusting its view based a service event where we will publish on what it need to see
+            have to see if chart can load data dynamically or not...
+           
+          
+          -->
 
-          <ion-buttons
-            slot="secondary"
-            style="margin-left: -9px;margin-right: -11px;"
-          >
-            <ion-menu-button>
-              <ion-icon name="settings"></ion-icon>
-            </ion-menu-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-tab-bar>
-    </ion-tabs>
+        </app-progress-chart>
+
+        <div id="overChartText">
+          <span>Hello,</span><br>
+          <span style="font-style:normal;font-weight:normal;font-size:30px;">Rishabh!</span><br>
+          <span class="message">Track the progress.</span>
+        </div>
+      </div>
+
+      <div class="masterFilter">
+
+        <div class="allMasterCards">
+
+          <div class="emptySides"></div>
+          <div *ngFor="let oneCard of masterCard" class="oneCard">
+            <div class="subElement">
+              <span>Viewed</span>
+              <span style="font-style:normal;font-weight:normal;font-size:25px;">43/1000</span>
+            </div>
+          </div>
+          <div class="emptySides"></div>
+
+        </div>
+
+      </div>
+      <div #mainDiv class="full" style="top:430px;" id="toMove">
+
+        <div #parent class="parentBox" (swipe)="swipeup($event)" (pandown)="handlePan($event)"
+          (panup)="handlePan($event)" (panend)="handlePanEnd($event)">
+
+          <ion-router-outlet>
+          </ion-router-outlet>
+
+          <!-- this router outlet handled routing coming from the sub-routing module -->
+        </div>
+      </div>
+
+    </div>
   </ion-content>
 </div>

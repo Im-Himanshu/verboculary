@@ -10,7 +10,6 @@ import { FormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
 /// ionic modules
 import { IonicModule } from "@ionic/angular";
-import { IonicStorageModule } from "@ionic/storage";
 
 //five-coreModules
 import { FivBottomSheetModule } from "@fivethree/core";
@@ -51,13 +50,13 @@ import "chartjs-plugin-zoom";
 import { HomeScreenComponent } from "./home-screen/home-screen.component";
 import { ViewComponent } from "./view/view.component";
 import { LearnComponentPOC } from "./POCs/learn/learn.component";
-import { GroupSelectorComponent } from "./group-selector/group-selector.component";
+import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
-    swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
-    pan: { threshold: 5 },
-  };
+    'swipe': { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
+    'pan': { threshold: 5 },
+  }
 }
 
 @NgModule({
@@ -67,14 +66,13 @@ export class MyHammerConfig extends HammerGestureConfig {
     IonicModule,
     HttpClientModule,
     ModuleRouting,
-    IonicStorageModule.forRoot(),
     MatTabsModule,
     MatChipsModule,
     MatExpansionModule,
     MatSelectModule,
     FivBottomSheetModule,
     ChartModule,
-    ChartsModule,
+    ChartsModule
   ],
   declarations: [
     HomePage,
@@ -96,12 +94,11 @@ export class MyHammerConfig extends HammerGestureConfig {
     ProgressChartComponent,
     HomeScreenComponent,
     ViewComponent,
-    GroupSelectorComponent,
     LearnComponentPOC,
     ShareComponent,
+    WordSetsComponent
   ],
   providers: [
-    DatabaseService,
     HammerGestureConfig,
     ThemeChangeService,
     {
@@ -116,4 +113,4 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   exports: [SvgComponent],
 })
-export class HomePageModule {}
+export class HomePageModule { }

@@ -26,7 +26,24 @@ export class ViewComponent implements OnInit {
       { word: "First", meaning: "a very very very long text goes here so that we can see how it wraps with the other element", isOpen: false, isToTakeNote: false, isBookMarked: true },
       { word: "Second", meaning: "Second's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
       { word: "Third", meaning: "Third's meaning", isOpen: false, isToTakeNote: false, isBookMarked: false },
-      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true }
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
+      { word: "Fourth-last", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true }
     ]
   }
 

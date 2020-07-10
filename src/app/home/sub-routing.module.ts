@@ -13,24 +13,43 @@ import { DashBoardComponent } from "./dash-board/dash-board.component";
 import { ProgressChartComponent } from "./progress-chart/progress-chart.component";
 import { HomeScreenComponent } from "./home-screen/home-screen.component";
 import { ViewComponent } from "./view/view.component";
-import { GroupSelectorComponent } from "./group-selector/group-selector.component";
+import { WordSetsComponent } from "./word-sets/word-sets.component"
 import { LearnComponentPOC } from "./POCs/learn/learn.component";
 import { ShareComponent } from "./POCs/share/share.component";
 const routes: Routes = [
   { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
-    // component: DashBoardComponent,
+    component: HomePage,
     children: [
-      { path: "", redirectTo: "selectGroup", pathMatch: "full" },
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
       { path: "allWords", component: AllWordsComponent },
       { path: "practise", component: PractiseComponent },
       { path: "practise/:wordId", component: PractiseComponent },
       { path: "learn", component: LearnComponent },
       { path: "learn/:wordId", component: LearnComponent },
       { path: "learn", component: LearnComponent },
-      { path: "selectGroup", component: GroupSelectorComponent },
-    ],
+      { path: "dashboard", component: DashBoardComponent },
+      { path: "wordSets/:setName/", component: WordSetsComponent }, // defaul
+      { path: "wordSets/:setName/:viewType/", component: WordSetsComponent }, // default 
+      { path: "wordSets/:setName/:viewType/:wordId", component: WordSetsComponent }, // in case specifc view and specific word is to be loaded
+
+
+    ]
+  },
+  {
+    path: "old",
+    component: HomePage,
+    children: [
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      { path: "allWords", component: AllWordsComponent },
+      { path: "practise", component: PractiseComponent },
+      { path: "practise/:wordId", component: PractiseComponent },
+      { path: "learn", component: LearnComponent },
+      { path: "learn/:wordId", component: LearnComponent },
+      { path: "learn", component: LearnComponent },
+      { path: "dashboard", component: DashBoardComponent },
+    ]
   },
   {
     path: "POCs",
@@ -43,10 +62,8 @@ const routes: Routes = [
       { path: "animation", component: AnimatedComponent },
       { path: "progressChart", component: HomeScreenComponent },
       { path: "view", component: ViewComponent },
-      { path: "selectGroup", component: GroupSelectorComponent },
-      { path: "share", component: ShareComponent },
-    ],
-  },
+    ]
+  }
 ];
 
 export const ModuleRouting: ModuleWithProviders = RouterModule.forChild(routes);
