@@ -17,7 +17,7 @@ import { GroupSelectorComponent } from "./group-selector/group-selector.componen
 import { LearnComponentPOC } from "./POCs/learn/learn.component";
 import { ShareComponent } from "./POCs/share/share.component";
 const routes: Routes = [
-  { path: "", redirectTo: "base", pathMatch: "full" },
+  { path: "", redirectTo: "POCs", pathMatch: "full" },
   {
     path: "base",
     component: DashBoardComponent,
@@ -36,7 +36,7 @@ const routes: Routes = [
     path: "POCs",
     //component: DashBoardComponent, // this would be the parent of all
     children: [
-      { path: "", redirectTo: "selectGroup", pathMatch: "full" }, // this is the base url from where user navigations begins
+      { path: "", redirectTo: "share", pathMatch: "full" }, // this is the base url from where user navigations begins
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },

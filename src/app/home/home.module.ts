@@ -53,6 +53,7 @@ import { ViewComponent } from "./view/view.component";
 import { LearnComponentPOC } from "./POCs/learn/learn.component";
 import { GroupSelectorComponent } from "./group-selector/group-selector.component";
 import { ShareComponent } from "./POCs/share/share.component";
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -108,6 +109,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    SocialSharing,
   ],
   entryComponents: [
     FilterPopOverComponent,
