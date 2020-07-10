@@ -18,7 +18,6 @@ export class ShareComponent implements OnInit {
       var img = new Image();
       img.src = dataUrl;
       console.log(img);
-      // this.container2.nativeElement.innerHTML = img;
       this.renderer.appendChild(this.container.nativeElement,img);
       console.log("working");
     })
