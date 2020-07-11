@@ -1,12 +1,22 @@
 import { Injectable, ElementRef } from '@angular/core';
 import domtoimage from 'dom-to-image';
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+
 @Injectable({
   providedIn: 'root'
 })
 export class SharingServiceService {
 
-  constructor() { }
+  constructor(private socialSharing: SocialSharing) { }
 
+  onShare(url: any) {
+    this.socialSharing.share(
+      "Join us at verboculary",
+      null,
+      [url],
+      "gre.verboculary.com"
+    );
+  }
 
   // this is where the social sharing component will come
 
@@ -18,7 +28,7 @@ export class SharingServiceService {
       img.src = dataUrl;
       console.log(img);
 
-      //this is where the social sharing component will be called with the img.src
+      this.onShare(img.src);
 
       console.log("working");//remove this once checked on your terminal
     })

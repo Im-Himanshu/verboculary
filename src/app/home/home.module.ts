@@ -10,7 +10,6 @@ import { FormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
 /// ionic modules
 import { IonicModule } from "@ionic/angular";
-import { IonicStorageModule } from "@ionic/storage";
 
 //five-coreModules
 import { FivBottomSheetModule } from "@fivethree/core";
@@ -26,7 +25,6 @@ import {
 // internal-components
 import { HomePage } from "./home.page";
 import { PractiseComponent } from "./practise/practise.component";
-import { AllWordsComponent } from "./all-words/all-words.component";
 import { LearnComponent } from "./learn/learn.component";
 import { FilterPopOverComponent } from "./filter-pop-over/filter-pop-over.component";
 import { HowToUseComponent } from "./how-to-use/how-to-use.component";
@@ -48,11 +46,11 @@ import { ChartModule } from "angular2-chartjs";
 import { ProgressChartComponent } from "./progress-chart/progress-chart.component";
 import { ChartsModule } from "ng2-charts";
 import "chartjs-plugin-zoom";
-import { HomeScreenComponent } from "./home-screen/home-screen.component";
 import { ViewComponent } from "./view/view.component";
-import { LearnComponentPOC } from "./POCs/learn/learn.component";
-import { GroupSelectorComponent } from "./group-selector/group-selector.component";
+import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -67,7 +65,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     IonicModule,
     HttpClientModule,
     ModuleRouting,
-    IonicStorageModule.forRoot(),
     MatTabsModule,
     MatChipsModule,
     MatExpansionModule,
@@ -79,7 +76,6 @@ export class MyHammerConfig extends HammerGestureConfig {
   declarations: [
     HomePage,
     PractiseComponent,
-    AllWordsComponent,
     FilterPopOverComponent,
     LearnComponent,
     HighlightTextPipe,
@@ -94,20 +90,18 @@ export class MyHammerConfig extends HammerGestureConfig {
     DashBoardComponent,
     SvgComponent,
     ProgressChartComponent,
-    HomeScreenComponent,
     ViewComponent,
-    GroupSelectorComponent,
-    LearnComponentPOC,
     ShareComponent,
+    WordSetsComponent,
   ],
   providers: [
-    DatabaseService,
     HammerGestureConfig,
     ThemeChangeService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    SocialSharing,
   ],
   entryComponents: [
     FilterPopOverComponent,

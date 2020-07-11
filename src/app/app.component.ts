@@ -1,21 +1,28 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { DatabaseService } from './home/services/data-base.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  private isAppReady = false;
+
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private db: DatabaseService,
+    private router: Router,
   ) {
     this.initializeApp();
+    this.isTheUserNew();
   }
 
   initializeApp() {
@@ -24,6 +31,22 @@ export class AppComponent {
       this.splashScreen.hide();
       this.reScaleScreen();
     });
+  }
+
+
+  isTheUserNew() {
+    this.db.isTheUserNew().subscribe(data => {
+      console.log(data)
+
+      // if the first promise return false then show slides
+      if (!data[0]) {
+        this.router.navigate(['/slides']);
+      }
+      this.isAppReady = true;
+
+    })
+
+
   }
 
 
