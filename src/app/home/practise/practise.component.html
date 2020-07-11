@@ -15,7 +15,7 @@
 <ion-content class="practiseContent alignMiddle" *ngIf="!isAllWordMastered" overflow-scroll="false">
 
   <app-swipable-card *ngIf="isData1Ready" [cards]="randomizedWordIDsList" [selectedIDsDynamicData]="wordDynamicData"
-    [allWordsDetails]="allWordDetails" (choiceMade)="userResponse2($event)" (changeMarkEvent)="changeMark($event)">
+    [allWordsDetails]="allWordsData" (choiceMade)="userResponse2($event)" (changeMarkEvent)="changeMark($event)">
 
   </app-swipable-card>
 
