@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import domtoimage from "dom-to-image";
+import { SharingServiceService } from '../../services/sharing-service.service';
 
 @Component({
   selector: "app-share",
@@ -19,33 +20,37 @@ export class ShareComponent implements OnInit {
   // @ViewChild("container2", { static: false, read: ElementRef })
   // container2: ElementRef;
   constructor(
-    private socialSharing: SocialSharing,
-    private renderer: Renderer2
+    private sharingService: SharingServiceService
   ) {}
 
   ngOnInit() {}
-  onShare(url: any) {
-    this.socialSharing.share(
-      "Join us at verboculary",
-      null,
-      [url],
-      "gre.verboculary.com"
-    );
+  screenshot(event){
+    this.sharingService.shareImageViaScreenshot(this.container);
   }
-  screenshot(event) {
-    domtoimage
-      .toPng(this.container.nativeElement)
-      .then((dataUrl) => {
-        var img = new Image();
-        img.src = dataUrl;
-        // console.log(img);
-        this.onShare(img.src);
-        // this.container2.nativeElement.innerHTML = img;
-        this.renderer.appendChild(this.container.nativeElement, img);
-        // console.log("working");
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
-  }
+
+
 }
+// onShare(url: any) {
+  //   this.socialSharing.share(
+  //     "Join us at verboculary",
+  //     null,
+  //     [url],
+  //     "gre.verboculary.com"
+  //   );
+  // }
+  // screenshot(event) {
+  //   domtoimage
+  //     .toPng(this.container.nativeElement)
+  //     .then((dataUrl) => {
+  //       var img = new Image();
+  //       img.src = dataUrl;
+  //       // console.log(img);
+  //       this.onShare(img.src);
+  //       // this.container2.nativeElement.innerHTML = img;
+  //       this.renderer.appendChild(this.container.nativeElement, img);
+  //       // console.log("working");
+  //     })
+  //     .catch(function (error) {
+  //       console.log("error", error);
+  //     });
+  // }
