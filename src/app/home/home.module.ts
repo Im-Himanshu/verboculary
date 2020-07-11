@@ -25,7 +25,6 @@ import {
 // internal-components
 import { HomePage } from "./home.page";
 import { PractiseComponent } from "./practise/practise.component";
-import { AllWordsComponent } from "./all-words/all-words.component";
 import { LearnComponent } from "./learn/learn.component";
 import { FilterPopOverComponent } from "./filter-pop-over/filter-pop-over.component";
 import { HowToUseComponent } from "./how-to-use/how-to-use.component";
@@ -47,9 +46,7 @@ import { ChartModule } from "angular2-chartjs";
 import { ProgressChartComponent } from "./progress-chart/progress-chart.component";
 import { ChartsModule } from "ng2-charts";
 import "chartjs-plugin-zoom";
-import { HomeScreenComponent } from "./home-screen/home-screen.component";
 import { ViewComponent } from "./view/view.component";
-import { LearnComponentPOC } from "./POCs/learn/learn.component";
 import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
 export class MyHammerConfig extends HammerGestureConfig {
@@ -77,7 +74,6 @@ export class MyHammerConfig extends HammerGestureConfig {
   declarations: [
     HomePage,
     PractiseComponent,
-    AllWordsComponent,
     FilterPopOverComponent,
     LearnComponent,
     HighlightTextPipe,
@@ -92,9 +88,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     DashBoardComponent,
     SvgComponent,
     ProgressChartComponent,
-    HomeScreenComponent,
     ViewComponent,
-    LearnComponentPOC,
     ShareComponent,
     WordSetsComponent
   ],
