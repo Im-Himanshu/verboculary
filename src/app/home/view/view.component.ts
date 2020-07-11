@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../services/data-base.service';
 
 @Component({
   selector: 'app-view',
@@ -11,6 +12,14 @@ export class ViewComponent implements OnInit {
   selectedFilter: string = "all"
 
 
+  allSelectedWordIDs: string[];
+  allWordsData: any;
+  wordsDynamicData: any;
+  isWordopen: any = {}; // {id:boolean}
+  isToTakeNote: any = {};
+  wordState: any = {}; // save isOpen, isToShowNote
+
+
   sortingTypes = [
     { value: 'alpha', viewValue: 'Alphabetical' },
     { value: 'shuffel', viewValue: 'Shuffeled' }
@@ -20,30 +29,45 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor() {
+  constructor(private db: DatabaseService) {
+    this.allSelectedWordIDs = this.db.allSelectedWordIds;
+    this.allWordsData = this.db.allWordsData;
+    this.wordsDynamicData = this.db.wordsDynamicData;
 
-    this.wordlist = [
-      { word: "First", meaning: "a very very very long text goes here so that we can see how it wraps with the other element", isOpen: false, isToTakeNote: false, isBookMarked: true },
-      { word: "Second", meaning: "Second's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
-      { word: "Third", meaning: "Third's meaning", isOpen: false, isToTakeNote: false, isBookMarked: false },
-      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true }
-    ]
+
   }
 
   ngOnInit() { }
 
-  onWordClickToggleit(word: any) {
-    word.isOpen = !word.isOpen;
+  ngOnDestroy() {
+    this.saveDynamicData();
   }
 
-  takeNoteToggle(event, word: any) {
-    word.isToTakeNote = !word.isToTakeNote;
+  saveDynamicData() {
+    this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
+  }
+
+  onWordClickToggleit(wordId: any) {
+    if (!this.isWordopen[wordId]) {
+      this.isWordopen[wordId] = false;
+
+    }
+    this.isWordopen[wordId] = !this.isWordopen[wordId];
     event.stopPropagation();
   }
 
-  toggleBookMark(event, word: any) {
-    word.isBookMarked = !word.isBookMarked
+  takeNoteToggle(event, wordId: any) {
+    if (!this.isToTakeNote[wordId]) {
+      this.isToTakeNote[wordId] = false;
+    }
+    this.isToTakeNote[wordId] = !this.isToTakeNote[wordId];
     event.stopPropagation();
+  }
+
+  toggleBookMark(event, wordId: any) {
+    this.wordsDynamicData[wordId]['isMarked'] = !this.wordsDynamicData[wordId]['isMarked'];
+    event.stopPropagation();
+    this.saveDynamicData();
 
   }
   changeFilter(event) {

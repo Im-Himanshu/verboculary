@@ -12,6 +12,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthService } from "./auth.service";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
+import { DatabaseService } from "./home/services/data-base.service";
+import { IonicStorageModule } from "@ionic/storage";
+import { HttpClientModule } from "@angular/common/http";
+
 // 1. Import the libs you need
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
@@ -43,14 +47,17 @@ var firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
+    HttpClientModule
   ],
   providers: [
+    DatabaseService,
     StatusBar,
     SplashScreen,
     AuthService,
@@ -58,4 +65,4 @@ var firebaseConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

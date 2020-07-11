@@ -1,15 +1,12 @@
-<ion-content *ngIf="isAllWordMastered" class="alignMiddle">
+<ion-content *ngIf="isAllWordMastered" class="alignMiddle ionContentHeight">
   <ion-card>
     <ion-card-content class="ion-activatable">
       <p class="wordMeaning">
-        No Matched Word Found
+        Hurray!! ALl words are mastered For this set.
 
-        <ion-buttons
-          style="right: 0px;
+        <ion-buttons style="right: 0px;
                position: absolute;
-               top: 5px;"
-          slot="secondary"
-        >
+               top: 5px;" slot="secondary">
           <ion-menu-button>
             <ion-icon name="settings"></ion-icon>
           </ion-menu-button>
@@ -19,94 +16,65 @@
   </ion-card>
 </ion-content>
 
-<ion-content class="learnWordsContent" *ngIf="!isAllWordMastered">
-  <ion-card
-    *ngIf="isData2Ready && isData1Ready"
-    [ngClass]="{ alignMiddle: !isToShowDetails }"
-  >
-  <ion-card-content class="ion-activatable ion-card-image">
-    <img src="https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" />
-      <ion-buttons class="detailsToggleButton">
-        <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
-      </ion-buttons>
-      <ion-buttons class="starbutton">
-        <ion-icon
-          (click)="changeMark(0, selectedId)"
-          *ngIf="selectedIDsDynamicData[selectedId]['isMarked']"
-          name="star"
-        >
-        </ion-icon>
-        <ion-icon
-          (click)="changeMark(1, selectedId)"
-          *ngIf="!selectedIDsDynamicData[selectedId]['isMarked']"
-          name="star-outline"
-        ></ion-icon>
-      </ion-buttons>
-      <h1 class="wordStyle">
-        {{ allWordDetails[selectedId][1] }}
-        <small style="font-size: 54%;">{{
-          "  (" + allWordDetails[selectedId][3].substring(0, 4) + ") "
-        }}</small>
-      </h1>
-      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
-
-      <p class="wordMeaning">{{ allWordDetails[selectedId][2] }}</p>
-
-      <p class="wordExample">
-        <em>
-          <div
-            innerHTML="<b>e.g. : </b> {{
-              ' ' + allWordDetails[selectedId][4]
-                | highlightText: allWordDetails[selectedId][1]
-            }}"
-          ></div>
-        </em>
-      </p>
-      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
-
-      <h1>
-        <ion-buttons class="seenButton">
-          <ion-icon
-            (click)="changeSeen(0, selectedId)"
-            *ngIf="selectedIDsDynamicData[selectedId]['isSeen']"
-            name="done-all"
-          ></ion-icon>
-          <ion-icon
-            (click)="changeSeen(1, selectedId)"
-            *ngIf="!selectedIDsDynamicData[selectedId]['isSeen']"
-            name="checkmark"
-          ></ion-icon>
+<ion-content class="learnWordsContent ionContentHeight" *ngIf="!isAllWordMastered">
+  <span #container *ngIf="allWordsData[selectedId] as crntWordAppData">
+    <ion-card *ngIf="wordDynamicData[selectedId] as crntWordDynamicData" [ngClass]="{ alignMiddle: !isToShowDetails }">
+      <ion-card-content class="ion-activatable ion-card-image">
+        <img src="https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" />
+        <ion-buttons class="detailsToggleButton">
+          <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
         </ion-buttons>
-      </h1>
-    </ion-card-content>
-  </ion-card>
+        <ion-buttons class="starbutton">
+          <ion-icon (click)="changeMark(0, selectedId)" *ngIf="crntWordDynamicData['isMarked']" name="star">
+          </ion-icon>
+          <ion-icon (click)="changeMark(1, selectedId)" *ngIf="!crntWordDynamicData['isMarked']" name="star-outline">
+          </ion-icon>
+        </ion-buttons>
+        <h1 class="wordStyle">
+          {{ crntWordAppData[1] }}
+          <small style="font-size: 54%;">{{
+          "  (" + crntWordAppData[3].substring(0, 4) + ") "
+        }}</small>
+        </h1>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
 
-  <ion-content
-    class="learnWordsContent"
-    *ngIf="isData2Ready && isData1Ready && isToShowDetails"
-  >
+        <p class="wordMeaning">{{ crntWordAppData[2] }}</p>
+
+        <p class="wordExample">
+          <em>
+            <div innerHTML="<b>e.g. : </b> {{
+              ' ' + crntWordAppData[4]
+                | highlightText: crntWordAppData[1]
+            }}"></div>
+          </em>
+        </p>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+
+        <h1>
+          <ion-buttons class="seenButton">
+            <ion-icon (click)="changeSeen(0, selectedId)" *ngIf="crntWordDynamicData['isSeen']" name="done-all">
+            </ion-icon>
+            <ion-icon (click)="changeSeen(1, selectedId)" *ngIf="!crntWordDynamicData['isSeen']" name="checkmark">
+            </ion-icon>
+          </ion-buttons>
+        </h1>
+      </ion-card-content>
+    </ion-card>
+
+  </span>
+  <!-- <ion-button (click)="shareButtonClone()">Image</ion-button> -->
+  <ion-content class="learnWordsContent ionContentHeight" *ngIf="isToShowDetails">
     <ion-card>
-      <mat-tab-group
-        backgroundColor="primary"
-        (selectedTabChange)="onTabChanged($event)"
-        [selectedIndex]="activeURL"
-      >
+      <mat-tab-group backgroundColor="primary" (selectedTabChange)="onTabChanged($event)" [selectedIndex]="activeURL">
         <mat-tab *ngFor="let thisTab of tabBarsKeys" [label]="thisTab">
           <ng-template matTabContent>
             <div id="loadImg">
               <div><img src="assets/gif.gif" /></div>
             </div>
-            <div
-              #frame
-              style="width:100%;height:100%;overflow:scroll !important;-webkit-overflow-scrolling:touch !important"
-            >
-              <iframe
-                target="_parent"
-                [src]="url[thisTab]"
-                class="iframe e2e-iframe-trusted-src"
-                (load)="onLoad()"
-                scrolling="yes"
-              ></iframe>
+            <div #frame
+              style="width:100%;height:100%;overflow:scroll !important;-webkit-overflow-scrolling:touch !important">
+              <iframe target="_parent" [src]="url[thisTab]" class="iframe e2e-iframe-trusted-src" (load)="onLoad()"
+                scrolling="yes"></iframe>
             </div>
           </ng-template>
         </mat-tab>
@@ -116,19 +84,7 @@
 </ion-content>
 <section>
   <ion-toolbar class="learnWordsChangeButton">
-    <ion-button
-      style="width: 48%;"
-      *ngIf="!isAllWordMastered"
-      shape="round"
-      (click)="previous()"
-      >Previous</ion-button
-    >
-    <ion-button
-      style="width: 48%;"
-      *ngIf="!isAllWordMastered"
-      shape="round"
-      (click)="next()"
-      >Next</ion-button
-    >
+    <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="previous()">Previous</ion-button>
+    <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="next()">Next</ion-button>
   </ion-toolbar>
 </section>

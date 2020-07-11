@@ -1,12 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { ActivatedRoute } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { wordAppData } from "../interfaces/wordAppData.interface";
 import { processedDataSharing } from "../interfaces/dropdown.interface";
-import { Subject } from "rxjs";
+import { Subject, forkJoin, Observable } from "rxjs";
 import { appSessionData } from "../appSessionData.interface";
 import { ToastController } from "@ionic/angular";
-
+import { PRIMARY_OUTLET } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd, Event as NavigationEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -16,132 +19,156 @@ const STORAGE_KEY_sessionData = "sessionData";
 })
 export class DatabaseService {
   public allSetData: processedDataSharing;
-
-  // this is for the event when the sets data has been fetched from the localstorage
-  public fetchingSetDataCompleted: Subject<any> = new Subject<any>();
-  public fetchingWordDataCompleted: Subject<any> = new Subject<any>();
-  allSelectedWordIDs: any;
-  // thie is for the event, user changes the set from the dropdown and selected word changes
-  public wordListChangeEvent: Subject<any> = new Subject<any>();
-
-  // for event when the word state is chnaged like marked, unmarked so to publish this to all
-  // this is the only way to fetch starting with null to create a if condition
-  public wordDynamicData: any; // this always need to in synced with the stored data;
+  public wordsDynamicData: any; // this always need to in synced with the stored data;
   public allWordsData: any;
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
   public filteredSelectedWordIds: any;
-  public selectedCategory;
-  public appSessionData: appSessionData;
-
-  ///this have to be changed based on the dataset Name
-  private defaultappSessionData: appSessionData = {
-    selectedCategory: "Set Based",
-    selectedSet: ["Set 1"],
-    selectedFilter: "all",
-    selectedSorting: "shuffle"
-  };
+  public selectedSet;
 
   constructor(
     public storage: Storage,
     public http: HttpClient,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    this.processSetDataIfNotExist();
-    this.ProcessWordDynamicDataIfNotExist(); //  this is the dynamic app data, to be fetched from the local storage and initiated only once in ap lifecycle
-    // this need to be resave everytime in localstorage because it is dynamic
+    router.events.forEach((event: NavigationEvent) => {
+      //After Navigation, because firstchild are populated only till navigation ends
+      if (event instanceof NavigationEnd) {
+        if (event.urlAfterRedirects.startsWith("/mainmodule/base/wordSets")) {
+          this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
+            if (params.get('setName')) {
+              this.selectedSet = params.get('setName');
+              this.selectedSet = "Begineer-1";
+              this.getAllwordsOfSelectedSet();
+            }
+          })
+        }
+      }
+    });
+  }
+
+  getAllwordsOfSelectedSet() {
+
+    this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet]; // this will save all the selected word IDs which will be displayed
+
   }
 
   // one time function, have to reset all the data if need to reset all the progress.
-  processSetDataIfNotExist() {
-    return this.getSetDataFromStorage().then(data => {
-      if (!data) {
-        let output: processedDataSharing = {} as processedDataSharing;
-        let allCategoryType = [];
-        let allSetOfcategory = {};
-        let allWordOfSets = {};
-        output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
-        output.allSetOfcategory = allSetOfcategory;
-        output.allWordOfSets = allWordOfSets;
+  isTheUserNew() {
+    //just check if the user-session data exist if yes then redirect to the actual screen
+    let isTheUserNew = true;
+    let promise1 = new Promise((resolve1, reject) => {
+      this.getAllWordsStateFromStorage().then(data => {
         if (!data) {
-          this.getSetDataFromJSON().subscribe(data => {
-            for (var key in data) {
-              if (data.hasOwnProperty(key)) {
-                var allSets = data[key];
-                allCategoryType.push(key);
-                allSetOfcategory[key] = Object.keys(allSets);
-                for (var set in allSets) {
-                  allWordOfSets[set] = allSets[set];
-                }
-              }
-            }
-            this.setSetDatainStorage(output).then(data => {
-              this.fetchSetDataFromLocalStorage();
-            }); // after the data is processed save it in the local storage, this could be retrived later and need not to be processed again and again
-          });
+          this.reStartWordDynamicData().then(data => {
+            resolve1(false);
+          }
+
+          ); // this will save the initiate the data in cache memory
+        } else {
+          this.wordsDynamicData = data; // will save the data
+          resolve1(true); // there was session data
         }
-      } else {
-        this.fetchSetDataFromLocalStorage();
-        //return this.getSetDataFromStorage();
-      }
-    });
+      });
+    })
+
+    let promise2 = new Promise((resolve2, reject) => {
+      this.getSetDataFromStorage().then(data => {
+        if (!data) {
+          this.reStartSetDynamicData(); // this will create the set data in data-base
+          resolve2(false);
+        } else {
+          this.allSetData = data;
+          resolve2(true);
+        }
+      });
+
+    })
+
+    let promise3 = this.getAllWordsDataFromJSON();
+
+    let allPromises: Observable<any> = forkJoin(promise1, promise2, promise3)
+    return allPromises;
+
+
+
   }
-  ProcessWordDynamicDataIfNotExist() {
-    this.getAllWordsStateFromStorage().then(data => {
-      if (!data) {
-        let allWords = {};
-        let i = 0;
-        this.getData().subscribe(data => {
-          for (var key in data) {
-            i++;
-            if (data.hasOwnProperty(key)) {
-              var val = data[key]; // all word data
-              let wordData: wordAppData = {} as wordAppData;
-              allWords[key] = wordData;
-              wordData.id = key;
-              wordData.word = val[1];
-              wordData.isMarked = false;
-              wordData.isSeen = false;
+
+
+  // to be executed only when no data is found in session
+  private reStartSetDynamicData() {
+    return new Promise((resolve, reject) => {
+      let output: processedDataSharing = {} as processedDataSharing;
+      let allCategoryType = [];
+      let allSetOfcategory = {};
+      let allWordOfSets = {};
+      output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
+      output.allSetOfcategory = allSetOfcategory;
+      output.allWordOfSets = allWordOfSets;
+      this.getSetDataFromJSON().subscribe(data => {
+        for (var key in data) {
+          if (data.hasOwnProperty(key)) {
+            var allSets = data[key];
+            allCategoryType.push(key);
+            allSetOfcategory[key] = Object.keys(allSets);
+            for (var set in allSets) {
+              allWordOfSets[set] = allSets[set];
             }
           }
-          this.setAllWordsStateinStorage(allWords);
-          this.wordDynamicData = allWords; // only first time the app is loaded
-          return this.getAllWordsDataFromJSON();
-        });
-      } else {
-        this.wordDynamicData = data; // will save the data
-        return this.getAllWordsDataFromJSON();
-      }
-    });
+        }
+        this.allSetData = output;
+        this.setSetDatainStorage(output);
+        resolve("reset all the set Data");
+      });
+    })
+
+
+
   }
 
-  getAllWordsDataFromJSON() {
-    this.getData().subscribe((data: any) => {
-      this.allWordsData = data;
-      this.isDataFetched = true;
-      this.fetchingWordDataCompleted.next(data);
-      //this.fetchingWordDataCompleted.complete();
-    });
+  //to be executed only when no data is found in session
+  private reStartWordDynamicData() {
+    return new Promise((resolve, reject) => {
+      let allWords = {};
+      let i = 0;
+      this.getData().subscribe(data => {
+        for (var key in data) {
+          i++;
+          if (data.hasOwnProperty(key)) {
+            var val = data[key]; // all word data
+            let wordData: wordAppData = {} as wordAppData;
+            allWords[key] = wordData;
+            wordData.id = key;
+            wordData.word = val[1];
+            wordData.isMarked = false;
+            wordData.isSeen = false;
+            wordData.isMastered = false;
+            wordData.correctCount = 0;
+          }
+        }
+        this.setAllWordsStateinStorage(allWords);
+        this.wordsDynamicData = allWords; // only first time the app is loaded
+        resolve("restarted all words Dynamic Data");
+      });
+
+    })
   }
 
-  fetchSetDataFromLocalStorage() {
-    this.getSetDataFromStorage().then(data => {
-      this.allSetData = data;
-      this.processAppSesionData(data);
-    });
+  private getAllWordsDataFromJSON() {
+    return new Promise((resolve, reject) => {
+      this.getData().subscribe((data: any) => {
+        this.allWordsData = data;
+        this.isDataFetched = true;
+        resolve("fetched all words data");
+        //this.fetchingWordDataCompleted.next(data);
+        //this.fetchingWordDataCompleted.complete();
+      });
+    })
+
   }
 
-  processAppSesionData(data2) {
-    this.getSessionDataFromStorage().then((data: appSessionData) => {
-      if (data) {
-        this.appSessionData = data;
-      } else {
-        this.appSessionData = this.defaultappSessionData;
-        this.setSessionDatainStorage();
-      }
-      this.fetchingSetDataCompleted.next(data2); // data2 otherwise null is send in the event
-    });
-  }
 
   getData() {
     return this.http.get("assets/csvToJsonData.json");
@@ -153,7 +180,7 @@ export class DatabaseService {
 
   getOneWordState(wordId) {
     // getting it from the RAM data only
-    let oneWordData: wordAppData = this.wordDynamicData[wordId];
+    let oneWordData: wordAppData = this.wordsDynamicData[wordId];
     return oneWordData;
   }
   getMultipleWordsState(wordIds: string[]) {
@@ -162,14 +189,14 @@ export class DatabaseService {
       return {};
     }
     for (let wordId of wordIds) {
-      let oneWordData: wordAppData = this.wordDynamicData[wordId];
+      let oneWordData: wordAppData = this.wordsDynamicData[wordId];
       allWordData[wordId] = oneWordData;
     }
-    return this.wordDynamicData; // giving it all it causing un-necassary trouble
+    return this.wordsDynamicData; // giving it all it causing un-necassary trouble
   }
 
   saveCurrentStateofDynamicData() {
-    return this.setAllWordsStateinStorage(this.wordDynamicData); // can only be stored from this function
+    return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
   }
 
   setOneWordState(wordData: wordAppData) {
@@ -179,7 +206,7 @@ export class DatabaseService {
         result[id] = wordData; // update the word in the dynamic data;
         return this.setAllWordsStateinStorage(result);
       } else {
-        this.ProcessWordDynamicDataIfNotExist();
+        this.reStartWordDynamicData();
         return this.setOneWordState(wordData);
       }
     });
@@ -187,8 +214,8 @@ export class DatabaseService {
 
   public reSetApp() {
     this.storage.clear().then(data => {
-      this.processSetDataIfNotExist();
-      this.ProcessWordDynamicDataIfNotExist();
+      this.reStartSetDynamicData();
+      this.reStartWordDynamicData();
       this.presentToast("All progress has been Reset."); // to save the session data from getting destroyed
     });
   }
@@ -223,7 +250,7 @@ export class DatabaseService {
   }
   // not having a checker but should be checked before using it
   public setSessionDatainStorage() {
-    return this.storage.set(STORAGE_KEY_sessionData, this.appSessionData);
+    //return this.storage.set(STORAGE_KEY_sessionData, this.appSessionData);
   }
 
   // this will shuffle the given array
