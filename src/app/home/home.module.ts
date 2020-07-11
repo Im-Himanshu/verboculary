@@ -7,10 +7,9 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatTabsModule } from "@angular/material/tabs"; // used in learning
 import { FormsModule } from "@angular/forms";
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from "@angular/material/select";
 /// ionic modules
 import { IonicModule } from "@ionic/angular";
-import { IonicStorageModule } from "@ionic/storage";
 
 //five-coreModules
 import { FivBottomSheetModule } from "@fivethree/core";
@@ -20,13 +19,12 @@ import { ModuleRouting } from "./sub-routing.module";
 
 import {
   HammerGestureConfig,
-  HAMMER_GESTURE_CONFIG
+  HAMMER_GESTURE_CONFIG,
 } from "@angular/platform-browser";
 
 // internal-components
 import { HomePage } from "./home.page";
 import { PractiseComponent } from "./practise/practise.component";
-import { AllWordsComponent } from "./all-words/all-words.component";
 import { LearnComponent } from "./learn/learn.component";
 import { FilterPopOverComponent } from "./filter-pop-over/filter-pop-over.component";
 import { HowToUseComponent } from "./how-to-use/how-to-use.component";
@@ -34,28 +32,27 @@ import { SwipableCardComponent } from "./practise/swipable-card/swipable-card.co
 import { AboutDeveloperComponent } from "./about-developer/about-developer.component";
 import { BottomSheetComponent } from "./POCs/bottom-sheet/bottom-sheet.component";
 import { ExpandableHeaderComponent } from "../components/expandable-header/expandable-header.component";
-import { ExpandableHeadearDemoComponent } from "./expandable-headear-demo/expandable-headear-demo.component"
-import { HorizontalScrollComponent } from "./POCs/horizontal-scroll/horizontal-scroll.component"
-import { AnimatedComponent } from "./POCs/animated/animated.component"
-import { DashBoardComponent } from "./dash-board/dash-board.component"
+import { ExpandableHeadearDemoComponent } from "./expandable-headear-demo/expandable-headear-demo.component";
+import { HorizontalScrollComponent } from "./POCs/horizontal-scroll/horizontal-scroll.component";
+import { AnimatedComponent } from "./POCs/animated/animated.component";
+import { DashBoardComponent } from "./dash-board/dash-board.component";
 //internal-services
 import { DatabaseService } from "./services/data-base.service";
 import { ThemeChangeService } from "./services/theme-change.service";
 import { HighlightTextPipe } from "./services/highlight-text.pipe";
-import { SvgComponent } from '../components/svg/svg.component';
+import { SvgComponent } from "../components/svg/svg.component";
 
-import { ChartModule } from 'angular2-chartjs';
-import { ProgressChartComponent } from './progress-chart/progress-chart.component';
-import { ChartsModule } from 'ng2-charts';
-import 'chartjs-plugin-zoom';
-import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { ChartModule } from "angular2-chartjs";
+import { ProgressChartComponent } from "./progress-chart/progress-chart.component";
+import { ChartsModule } from "ng2-charts";
+import "chartjs-plugin-zoom";
 import { ViewComponent } from "./view/view.component";
-import { LearnComponentPOC } from './POCs/learn/learn.component';
-import { GroupSelectorComponent } from "./group-selector/group-selector.component"
+import { WordSetsComponent } from "./word-sets/word-sets.component";
+import { ShareComponent } from "./POCs/share/share.component";
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     'swipe': { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
-    'pan': { threshold: 5 }
+    'pan': { threshold: 5 },
   }
 }
 
@@ -66,7 +63,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     IonicModule,
     HttpClientModule,
     ModuleRouting,
-    IonicStorageModule.forRoot(),
     MatTabsModule,
     MatChipsModule,
     MatExpansionModule,
@@ -78,7 +74,6 @@ export class MyHammerConfig extends HammerGestureConfig {
   declarations: [
     HomePage,
     PractiseComponent,
-    AllWordsComponent,
     FilterPopOverComponent,
     LearnComponent,
     HighlightTextPipe,
@@ -93,28 +88,23 @@ export class MyHammerConfig extends HammerGestureConfig {
     DashBoardComponent,
     SvgComponent,
     ProgressChartComponent,
-    HomeScreenComponent,
     ViewComponent,
-    GroupSelectorComponent,
-    LearnComponentPOC
+    ShareComponent,
+    WordSetsComponent
   ],
   providers: [
-    DatabaseService,
     HammerGestureConfig,
     ThemeChangeService,
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
-    }
+      useClass: MyHammerConfig,
+    },
   ],
   entryComponents: [
     FilterPopOverComponent,
     AboutDeveloperComponent,
-    HowToUseComponent
+    HowToUseComponent,
   ],
-  exports: [
-    SvgComponent
-
-  ]
+  exports: [SvgComponent],
 })
 export class HomePageModule { }
