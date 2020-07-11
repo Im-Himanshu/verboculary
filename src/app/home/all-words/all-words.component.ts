@@ -25,25 +25,6 @@ export class AllWordsComponent implements OnInit {
     private popoverController: PopoverController,
     private events: Events
   ) {
-    this.db.wordListChangeEvent.asObservable().subscribe(data => {
-      // data will be the list of sets  // here data will be the list of sets selected on the screen I have to fetch all the owrds to be shown in this// if it comes here before the actual event it will be publis
-      if (data) {
-        this.fetchSelectedIdfromService();
-      }
-    });
-
-    this.db.fetchingWordDataCompleted.asObservable().subscribe(data => {
-      if (data) {
-        this.fetchallWordsFromService();
-      }
-    });
-    // in case the data has already been published then go for it in starting
-    if (this.db.allSelectedWordIDs) {
-      this.fetchSelectedIdfromService();
-    }
-    if (this.db.allWordsData) {
-      this.fetchallWordsFromService();
-    }
   }
   isToShowAll: boolean = false;
 
@@ -54,7 +35,7 @@ export class AllWordsComponent implements OnInit {
     });
 
     /** Sync event from popover component */
-    this.events.subscribe("fromPopoverEvent", () => {});
+    this.events.subscribe("fromPopoverEvent", () => { });
     return await popover.present();
   }
 
@@ -100,7 +81,7 @@ export class AllWordsComponent implements OnInit {
     this.isData1Ready = true;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   toggleMeaning(idToExpand) {
     if (idToExpand === this.clickedWordId) {
       this.clickedWordId = null; // to provide toggle of meaning

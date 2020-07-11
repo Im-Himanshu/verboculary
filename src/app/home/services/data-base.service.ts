@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { ActivatedRoute } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { wordAppData } from "../interfaces/wordAppData.interface";
 import { processedDataSharing } from "../interfaces/dropdown.interface";
@@ -7,7 +8,8 @@ import { Subject, forkJoin, Observable } from "rxjs";
 import { appSessionData } from "../appSessionData.interface";
 import { ToastController } from "@ionic/angular";
 import { PRIMARY_OUTLET } from '@angular/router';
-
+import { Router, NavigationStart, NavigationEnd, Event as NavigationEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -17,30 +19,43 @@ const STORAGE_KEY_sessionData = "sessionData";
 })
 export class DatabaseService {
   public allSetData: processedDataSharing;
-
-  allSelectedWordIDs: any;
-
-  // for event when the word state is chnaged like marked, unmarked so to publish this to all
-  // this is the only way to fetch starting with null to create a if condition
-  public wordDynamicData: any; // this always need to in synced with the stored data;
+  public wordsDynamicData: any; // this always need to in synced with the stored data;
   public allWordsData: any;
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
   public filteredSelectedWordIds: any;
-  public selectedCategory;
-  public appSessionData: appSessionData;
-
-
+  public selectedSet;
 
   constructor(
     public storage: Storage,
     public http: HttpClient,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    router.events.forEach((event: NavigationEvent) => {
+      //After Navigation, because firstchild are populated only till navigation ends
+      if (event instanceof NavigationEnd) {
+        if (event.urlAfterRedirects.startsWith("/mainmodule/base/wordSets")) {
+          this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
+            if (params.get('setName')) {
+              this.selectedSet = params.get('setName');
+              this.selectedSet = "Begineer-1";
+              this.getAllwordsOfSelectedSet();
+            }
+          })
+        }
+      }
+    });
+  }
+
+  getAllwordsOfSelectedSet() {
+
+    this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet]; // this will save all the selected word IDs which will be displayed
+
   }
 
   // one time function, have to reset all the data if need to reset all the progress.
-
   isTheUserNew() {
     //just check if the user-session data exist if yes then redirect to the actual screen
     let isTheUserNew = true;
@@ -53,7 +68,7 @@ export class DatabaseService {
 
           ); // this will save the initiate the data in cache memory
         } else {
-          this.wordDynamicData = data; // will save the data
+          this.wordsDynamicData = data; // will save the data
           resolve1(true); // there was session data
         }
       });
@@ -134,7 +149,7 @@ export class DatabaseService {
           }
         }
         this.setAllWordsStateinStorage(allWords);
-        this.wordDynamicData = allWords; // only first time the app is loaded
+        this.wordsDynamicData = allWords; // only first time the app is loaded
         resolve("restarted all words Dynamic Data");
       });
 
@@ -155,15 +170,6 @@ export class DatabaseService {
   }
 
 
-
-
-
-
-
-
-
-
-
   getData() {
     return this.http.get("assets/csvToJsonData.json");
   }
@@ -174,7 +180,7 @@ export class DatabaseService {
 
   getOneWordState(wordId) {
     // getting it from the RAM data only
-    let oneWordData: wordAppData = this.wordDynamicData[wordId];
+    let oneWordData: wordAppData = this.wordsDynamicData[wordId];
     return oneWordData;
   }
   getMultipleWordsState(wordIds: string[]) {
@@ -183,14 +189,14 @@ export class DatabaseService {
       return {};
     }
     for (let wordId of wordIds) {
-      let oneWordData: wordAppData = this.wordDynamicData[wordId];
+      let oneWordData: wordAppData = this.wordsDynamicData[wordId];
       allWordData[wordId] = oneWordData;
     }
-    return this.wordDynamicData; // giving it all it causing un-necassary trouble
+    return this.wordsDynamicData; // giving it all it causing un-necassary trouble
   }
 
   saveCurrentStateofDynamicData() {
-    return this.setAllWordsStateinStorage(this.wordDynamicData); // can only be stored from this function
+    return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
   }
 
   setOneWordState(wordData: wordAppData) {
@@ -244,7 +250,7 @@ export class DatabaseService {
   }
   // not having a checker but should be checked before using it
   public setSessionDatainStorage() {
-    return this.storage.set(STORAGE_KEY_sessionData, this.appSessionData);
+    //return this.storage.set(STORAGE_KEY_sessionData, this.appSessionData);
   }
 
   // this will shuffle the given array

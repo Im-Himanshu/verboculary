@@ -10,33 +10,24 @@ import domtoimage from 'dom-to-image';
 })
 export class LearnComponent implements OnInit {
 
-  @ViewChild('container', { static: false }) container;
 
-  shareButtonClone() {
-    domtoimage.toPng(this.container.nativeElement)
-      .then(function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-        document.body.appendChild(img);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-  }
+
+
+  allSelectedWordIDs: string[];
+  public wordDynamicData: any; // this always need to in synced with the stored data;
+  allWordsData: any;
+  selectedId = '3'; // randomly setting it to avoid error
+
 
   allWordOfSets: any;
-  allSelectedWordIDs: string[];
-  allWordDetails: any;
-  isData1Ready: boolean = false;
-  isData2Ready: boolean = false;
-  selectedId = '3'; // randomly setting it to avoid error
-  isToShowAll: boolean = false;
   selectedIDsDynamicData: any; // of type wordAppData
   url: any = {};
   activeURL = 0;
   isToShowDetails: boolean = false;
   isSafeUrlReady: boolean = true;
   isAllWordMastered: boolean = false;
+  @ViewChild('container', { static: false }) container;
+
 
   tabBars: any = ["https://www.google.com/search?igu=1&ei=&q=define+",
     "https://www.merriam-webster.com/dictionary/",
@@ -57,46 +48,49 @@ export class LearnComponent implements OnInit {
     this.isAllWordMastered = true;
   }
   ngOnInit() {
+
+    this.allSelectedWordIDs = this.db.allSelectedWordIds;
+    this.wordDynamicData = this.db.wordsDynamicData;
+    this.allWordsData = this.db.allWordsData;
+
+    if (this.allSelectedWordIDs.length == 0) {
+      this.isAllWordMastered = true;
+    }
     this.route.paramMap.subscribe(params => {
       if (params.get('wordId')) {
         this.selectedId = params.get('wordId');
       }
+      else if (this.allSelectedWordIDs.length != 0) {
+        this.selectedId = this.allSelectedWordIDs[0]; // starting with the first word if no wordid is given in url
+      }
     });
   }
 
-  fetchSelectedIdfromService() {
-    this.allSelectedWordIDs = this.db.filteredSelectedWordIds; // set the selected IDs everytime it has been changed there
-    this.allWordDetails = this.db.allWordsData;
-    this.fetchselectedIdsDynamicData();
-    if (!this.allSelectedWordIDs || this.allSelectedWordIDs.length == 0) {
-      this.noSelectedData()
-      return;
-    }
-    this.isAllWordMastered = false;
-    this.next();
-  }
 
-  fetchallWordsFromService() {
-    this.allSelectedWordIDs = this.db.filteredSelectedWordIds; // set the selected IDs everytime it has been changed there
-    this.allWordDetails = this.db.allWordsData;
-    this.isData2Ready = true;
-  }
-  fetchselectedIdsDynamicData() {
-    this.selectedIDsDynamicData = this.db.getMultipleWordsState(this.allSelectedWordIDs);
-    this.isData1Ready = true;
-
-  }
 
   getSafeUrl(type?) {
 
     if (type == 1 && this.url[this.tabBarsKeys[this.activeURL]]) {
       return; // the event is coming from the tab changed and the url is already existing then don't repeat it.
     }
-    let word = this.allWordDetails[this.selectedId][1]
+    let word = this.allWordsData[this.selectedId][1]
     this.url[this.tabBarsKeys[this.activeURL]] = this.sanitizer.bypassSecurityTrustResourceUrl(this.tabBars[this.activeURL] + word);
     this.isSafeUrlReady = true;
     this.afterFrameAppear();
   }
+
+  shareButtonClone() {
+    domtoimage.toPng(this.container.nativeElement)
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
 
   onDynamicDataChange() {
     this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage

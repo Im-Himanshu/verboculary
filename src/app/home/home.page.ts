@@ -58,88 +58,6 @@ export class HomePage implements OnInit {
 
   }
 
-  fetchDataFromAPI() {
-
-  }
-
-  saveData() {
-    ///waiting for the Database service object ot get completed 
-    this.allSetData = this.db.allSetData; /// not fetch directly to avoid creation of multiple object in the app of the same things 
-    this.allCategoryType = this.allSetData.allCategoryType;
-    this.allSetOfcategory = this.allSetData.allSetOfcategory;
-    this.allWordOfSets = this.allSetData.allWordOfSets;
-    this.setPreviousSessionData();
-    // must be set befoere this as event is trigeered only then
-    //this.allCategories = new categories()
-    //this.selectedCategory = this.allCategoryType[this.default_category]; // default is set
-    this.db.selectedCategory = this.selectedCategory;
-    //this.selectedSet = []
-    //this.selectedSet.push(this.allSetOfcategory[this.selectedCategory][this.default_set]); // changing of option will happen dynamically through the html
-    this.setChanged({});
-    this.isProcessed = true;
-  }
-
-  setPreviousSessionData() {
-    this.appSessionData = this.db.appSessionData
-    this.selectedCategory = this.appSessionData.selectedCategory;
-    this.selectedSet = this.appSessionData.selectedSet;
-    this.selectedFilter = this.appSessionData.selectedFilter;
-    this.selectedSorting = this.appSessionData.selectedSorting;
-
-  }
-
-  // these will trickle down from 1-5 like if starts from 2 will flow till 5
-  //1
-  categoryChanged($event) {
-    this.selectedSet = [this.allSetOfcategory[this.selectedCategory][this.default_set]] // this will trigger the setChnaged Event;
-    this.db.selectedCategory = this.selectedCategory;
-    //this.selectedWords = this.allWordOfSets[this.selectedSet];
-  }
-
-  //2
-  setChanged($event) {
-    //this.selectedWords = this.allWordOfSets[this.selectedSet];
-    if (!this.selectedSet || this.selectedSet.length == 0) {
-      this.selectedSet = [this.allSetOfcategory[this.selectedCategory][this.default_set]]
-      return; // will come again due to chnage of selectedSet event 
-    }
-
-    let toProcessList = this.selectedSet;
-    if (this.selectedSet[0] === 'All') {
-      toProcessList = this.allSetOfcategory[this.selectedCategory]; // to process all of it.
-      if (this.selectedSet.length > 1) {
-        this.selectedSet = this.selectedSet.slice(0, 1);
-        return; // changes so the loop will be triggreed again
-      }
-    }
-
-    this.db.allSelectedWordIDs = [];
-    for (let oneSet of toProcessList) {
-      this.db.allSelectedWordIDs = this.db.allSelectedWordIDs.concat(this.allSetData.allWordOfSets[oneSet]); // making a master list of all the words
-    }
-    this.filterSelectedIDs();
-    // this.db.wordListChangeEvent.next(this.selectedSet); // this event will publish the list of words selected 
-  }
-
-  //3
-  filterSelectedIDs() {
-    if (this.selectedFilter === 'starred') {
-      this.db.filteredSelectedWordIds = this.filterWords(1, this.db.allSelectedWordIDs); // marked word
-    }
-    else if (this.selectedFilter == 'Non-Starred') {
-      this.db.filteredSelectedWordIds = this.filterWords(0, this.db.allSelectedWordIDs); // non-marked word
-
-    }
-    else {
-      this.db.filteredSelectedWordIds = this.db.allSelectedWordIDs;
-      this.selectedFilter = 'all'
-    }
-    this.sortSelectedIds();
-    this.db.wordListChangeEvent.next(this.selectedSet);
-    this.totalWordsCount = this.db.filteredSelectedWordIds.length;
-    return;
-
-  }
 
   //4 
   sortSelectedIds() {
@@ -156,16 +74,12 @@ export class HomePage implements OnInit {
 
   //5
   updateSessionData() {
-    this.db.appSessionData.selectedCategory = this.selectedCategory;
-    this.db.appSessionData.selectedSet = this.selectedSet;
-    this.db.appSessionData.selectedFilter = this.selectedFilter;
-    this.db.appSessionData.selectedSorting = this.selectedSorting;
-    this.db.setSessionDatainStorage();
+
   }
 
 
   filterWords(type: number, wordIDs: string[]) {
-    let dynamicData = this.db.wordDynamicData;
+    let dynamicData = this.db.wordsDynamicData;
     let filteredIds = [];
 
     for (let wordID of wordIDs) {
@@ -187,9 +101,6 @@ export class HomePage implements OnInit {
 
   }
 
-  filterChanged($event) {
-    this.filterSelectedIDs();
-  }
   sortingChanged($event) {
     this.sortSelectedIds();
   }

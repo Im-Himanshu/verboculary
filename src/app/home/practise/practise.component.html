@@ -1,24 +1,24 @@
-<ion-content *ngIf = "isAllWordMastered" class="alignMiddle" >
+<ion-content *ngIf="isAllWordMastered" class="alignMiddle">
   <ion-card>
- <ion-card-content class="ion-activatable">
-   <p  class="wordMeaning"> No Words Selected | All Words Done</p>
-   <ion-button (click) = "resetSelectedWordStatus()" >
-    <ion-icon slot="start" name="refresh"></ion-icon> Reset Selected Word Progress
-  </ion-button>
-</ion-card-content>
+    <ion-card-content class="ion-activatable">
+      <p class="wordMeaning"> No Words Selected | All Words Done</p>
+      <ion-button (click)="resetSelectedWordStatus()">
+        <ion-icon slot="start" name="refresh"></ion-icon> Reset Selected Word Progress
+      </ion-button>
+    </ion-card-content>
   </ion-card>
 </ion-content>
 
-<ion-progress-bar class= "progressBar" color="primary" style="top:2%;z-index: 1;" *ngIf="isData2Ready && isData1Ready && !isAllWordMastered"
-  [value]="(masteredWordPoint/totalWordPoint)" [buffer]="seenWordCount/(allSelectedWordIDs.length)"></ion-progress-bar>
-<ion-content class = "practiseContent alignMiddle" *ngIf = "!isAllWordMastered" overflow-scroll="false">
-  
-  <app-swipable-card *ngIf="isData2Ready && isData1Ready" [cards]="randomizedWordIDsList" [selectedIDsDynamicData] = "selectedIDsDynamicData" [allWordsDetails] = "allWordDetails" 
-  (choiceMade)="userResponse2($event)"
-  (changeMarkEvent) = "changeMark($event)" >
+<ion-progress-bar class="progressBar" color="primary" style="top:2%;z-index: 1;"
+  *ngIf="isData1Ready && !isAllWordMastered" [value]="(masteredWordPoint/totalWordPoint)"
+  [buffer]="seenWordCount/(allSelectedWordIDs.length)"></ion-progress-bar>
+<ion-content class="practiseContent alignMiddle" *ngIf="!isAllWordMastered" overflow-scroll="false">
+
+  <app-swipable-card *ngIf="isData1Ready" [cards]="randomizedWordIDsList" [selectedIDsDynamicData]="wordDynamicData"
+    [allWordsDetails]="allWordDetails" (choiceMade)="userResponse2($event)" (changeMarkEvent)="changeMark($event)">
 
   </app-swipable-card>
-  
+
 
 
 </ion-content>

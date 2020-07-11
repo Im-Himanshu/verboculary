@@ -13,15 +13,10 @@ export class PractiseComponent implements OnInit {
 
   isToShowMeaning: boolean = false;
   allWordOfSets: any;
-  allSelectedWordIDs: string[];
-  randomizedWordIDsList: string[];
-  allWordDetails: any;
   isData1Ready: boolean = false;
-  isData2Ready: boolean = false;
   selectedId; // randomly setting it to avoid error
   selectedIdIndex;
   isToShowAll: boolean = false;
-  selectedIDsDynamicData: any; // of type wordAppData
   practiseStats: any;
   totalWordPoint; // number Of words * correctThreshold like 1 point for every correct trial...
   masteredWordPoint;
@@ -34,102 +29,65 @@ export class PractiseComponent implements OnInit {
   cards;
 
 
+  allSelectedWordIDs: string[];
+  wordDynamicData: any;
+  allWordsData: any;
+  randomizedWordIDsList: string[];
+
+
   constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public toastController: ToastController) {
 
+    this.allSelectedWordIDs = this.db.allSelectedWordIds;
+    this.wordDynamicData = this.db.wordsDynamicData;
+    this.allWordsData = this.db.allWordsData;
+    this.processDynamicData();
   }
-
-  resetSelectedWordStatus() {
-    if (this.allSelectedWordIDs.length == 0) {
-      this.db.presentToast("No Word selected!!");
-      return;
-    }
-    for (let oneID of this.allSelectedWordIDs) {
-      let oneWordCrntCategoryData = this.selectedIDsDynamicData[oneID][this.selectedCategory];
-      oneWordCrntCategoryData['isMastered'] = false;
-      oneWordCrntCategoryData['correctCount'] = 0;
-
-    }
-
-    this.processDynamicData() // restart the initial process, this will also persist the data in the memory
-    if (this.nonMasteredWordIds.length != 0) {
-      this.isAllWordMastered = false;
-    }
-    this.db.presentToast("Reseted the selected word progress.")
-  }
-
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      if (params.get('wordId')) {
-        this.selectedId = params.get('wordId');
-
-      }
-    });
-  }
-
-
-  fetchallWordsFromService() {
-    this.allSelectedWordIDs = this.db.filteredSelectedWordIds; // set the selected IDs everytime it has been changed there
-    this.allWordDetails = this.db.allWordsData;
-    this.isData2Ready = true;
 
   }
 
-  fetchSelectedIdfromService() {
-    this.allSelectedWordIDs = this.db.filteredSelectedWordIds; // set the selected IDs everytime it has been changed there
-    this.allWordDetails = this.db.allWordsData;
-    if (!this.allSelectedWordIDs || this.allSelectedWordIDs.length == 0) {
-      this.noSelectedData()
-      return;
-    }
-    this.isAllWordMastered = false; // if it comes here means all things are right
-    this.fetchselectedIdsDynamicData();
+  ngOnDestroy() {
+    this.onDynamicDataChange();
   }
 
 
-  fetchselectedIdsDynamicData() {
-    this.selectedIDsDynamicData = this.db.getMultipleWordsState(this.allSelectedWordIDs);
-    if (Object.keys(this.selectedIDsDynamicData).length == 0) {
-      this.noSelectedData();
-      return;
-    }
-    this.processDynamicData();
-
-  }
-  noSelectedData() {
-    this.isAllWordMastered = true;
-  }
 
 
   processDynamicData() {
-    this.selectedCategory = this.db.selectedCategory;
+    if (!this.allSelectedWordIDs || this.allSelectedWordIDs.length == 0) {
+      this.isAllWordMastered = true;
+      return;
+    }
+    this.isAllWordMastered = false; // if it comes here means all things are right
+    //this.selectedCategory = this.db.selectedCategory;
     this.totalWordPoint = (this.allSelectedWordIDs.length) * this.correctThreshold;
     this.masteredWordPoint = 0;
     this.nonMasteredWordIds = []; // list of Ids to be shown in the practise now.
     this.seenWordCount = 0;
     for (let onewordsID of this.allSelectedWordIDs) {
-      let oneWordCrntCategoryData = this.selectedIDsDynamicData[onewordsID][this.selectedCategory];
-      if (oneWordCrntCategoryData && oneWordCrntCategoryData['isMastered']) { // to avoid error in case the category is null
+      let oneWordDynamicData = this.wordDynamicData[onewordsID];
+      if (oneWordDynamicData && oneWordDynamicData['isMastered']) { // to avoid error in case the category is null
         this.masteredWordPoint = this.masteredWordPoint + this.correctThreshold;
       }
       else {
-        if (!oneWordCrntCategoryData) {
-          this.selectedIDsDynamicData[onewordsID][this.selectedCategory] = {}
-          oneWordCrntCategoryData = this.selectedIDsDynamicData[onewordsID][this.selectedCategory];
-          oneWordCrntCategoryData['isMastered'] = false;
-          oneWordCrntCategoryData['correctCount'] = 0;
+        if (!oneWordDynamicData) {
+          this.wordDynamicData[onewordsID] = {}
+          oneWordDynamicData = this.wordDynamicData[onewordsID];
+          oneWordDynamicData['isMastered'] = false;
+          oneWordDynamicData['correctCount'] = 0;
         }
         this.nonMasteredWordIds.push(onewordsID);
       }
 
 
-      if (this.selectedIDsDynamicData[onewordsID]['isSeen']) {
+      if (this.wordDynamicData[onewordsID]['isSeen']) {
         this.seenWordCount++;
 
       }
     }
     if (this.nonMasteredWordIds.length == 0) {
-      this.noSelectedData();
+      this.isAllWordMastered = true;
       return;
     }
     this.onDynamicDataChange();
@@ -166,11 +124,11 @@ export class PractiseComponent implements OnInit {
     this.toggleMeaning();
     if (newMark) {
 
-      this.selectedIDsDynamicData[wordId]["isMarked"] = true;
+      this.wordDynamicData[wordId]["isMarked"] = true;
     }
     else {
 
-      this.selectedIDsDynamicData[wordId]["isMarked"] = false;
+      this.wordDynamicData[wordId]["isMarked"] = false;
     }
     this.onDynamicDataChange();
   }
@@ -183,7 +141,7 @@ export class PractiseComponent implements OnInit {
 
   next() {
     if (this.nonMasteredWordIds.length == 0) {
-      this.noSelectedData();
+      this.isAllWordMastered = true;
       return;
     }
     this.isToShowMeaning = false;
@@ -233,37 +191,37 @@ export class PractiseComponent implements OnInit {
       return;
     }
 
-    let wordSelectedCategoryDynamicData = this.selectedIDsDynamicData[this.selectedId][this.selectedCategory] // will never be null always make sure to start this
-    let correctCount = wordSelectedCategoryDynamicData['correctCount'];
+    let oneWordDynamicData = this.wordDynamicData[this.selectedId]  // will never be null always make sure to start this
+    let correctCount = oneWordDynamicData['correctCount'];
 
     if (type == 1) {
-      wordSelectedCategoryDynamicData['correctCount']++;
+      oneWordDynamicData['correctCount']++;
       this.masteredWordPoint = this.masteredWordPoint + 1;
     }
     if (type == 0) {
-      wordSelectedCategoryDynamicData['correctCount'] = correctCount - 2;
+      oneWordDynamicData['correctCount'] = correctCount - 2;
       this.masteredWordPoint = this.masteredWordPoint - 2;
     }
     if (type == -1) {
-      this.masteredWordPoint = this.masteredWordPoint - wordSelectedCategoryDynamicData['correctCount']
-      wordSelectedCategoryDynamicData['correctCount'] = 0; // restart the word
+      this.masteredWordPoint = this.masteredWordPoint - oneWordDynamicData['correctCount']
+      oneWordDynamicData['correctCount'] = 0; // restart the word
     }
 
     /// let's sanitize the result
 
-    if (wordSelectedCategoryDynamicData['correctCount'] >= this.correctThreshold) {
-      wordSelectedCategoryDynamicData['isMastered'] = true;
-      this.selectedIDsDynamicData[this.selectedId]['isMastered'] = true;
+    if (oneWordDynamicData['correctCount'] >= this.correctThreshold) {
+      oneWordDynamicData['isMastered'] = true;
+      this.wordDynamicData[this.selectedId]['isMastered'] = true;
       let index = this.nonMasteredWordIds.indexOf(this.selectedId);
       if (index || index == 0) {
         this.nonMasteredWordIds.splice(index, 1)
       }
-      this.presentToast(this.allWordDetails[this.selectedId][1])
+      this.presentToast(this.allWordsData[this.selectedId][1])
     }
 
-    if (wordSelectedCategoryDynamicData['correctCount'] < 0) {
-      this.masteredWordPoint = this.masteredWordPoint + (0 - wordSelectedCategoryDynamicData['correctCount']);// increase by the same factor mijnus but count is negative
-      wordSelectedCategoryDynamicData['correctCount'] = 0;
+    if (oneWordDynamicData['correctCount'] < 0) {
+      this.masteredWordPoint = this.masteredWordPoint + (0 - oneWordDynamicData['correctCount']);// increase by the same factor mijnus but count is negative
+      oneWordDynamicData['correctCount'] = 0;
     }
 
     this.onDynamicDataChange();

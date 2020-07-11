@@ -22,7 +22,7 @@ const routes: Routes = [
     path: "base",
     component: HomePage,
     children: [
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      { path: "", redirectTo: "wordSets/begineer-1", pathMatch: "full" },
       { path: "allWords", component: AllWordsComponent },
       { path: "practise", component: PractiseComponent },
       { path: "practise/:wordId", component: PractiseComponent },
@@ -30,8 +30,8 @@ const routes: Routes = [
       { path: "learn/:wordId", component: LearnComponent },
       { path: "learn", component: LearnComponent },
       { path: "dashboard", component: DashBoardComponent },
-      { path: "wordSets/:setName/", component: WordSetsComponent }, // defaul
-      { path: "wordSets/:setName/:viewType/", component: WordSetsComponent }, // default 
+      { path: "wordSets/:setName", component: WordSetsComponent }, // defaul
+      { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default 
       { path: "wordSets/:setName/:viewType/:wordId", component: WordSetsComponent }, // in case specifc view and specific word is to be loaded
 
 
