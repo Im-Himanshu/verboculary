@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
     "@fivethree/core": "^1.0.0-alpha.2",
+    "@ionic-native/admob-free": "^5.27.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/social-sharing": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
@@ -41,6 +42,7 @@
     "chartjs-plugin-zoom": "^0.7.5",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
+    "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-x-socialsharing": "^5.6.8",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
@@ -101,6 +103,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "uk.co.workingedge.cordova.plugin.sqliteporter": {},
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-4352525331879046~1258287684"
+      },
       "cordova-plugin-x-socialsharing": {}
     },
     "platforms": [

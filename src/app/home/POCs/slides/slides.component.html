@@ -1,0 +1,99 @@
+
+<ion-content>
+  <ion-slides mode="md" #slides [options]="slideOpts">
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <h1 id="heading">Mark & Note Down</h1>
+              <p>Mark down the learning & takereal-time short</p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img src="./assets/pen.svg">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row  class="btn" >
+              <ion-col>
+                <ion-button shape="round" (click)="next()" style="--background:indigo">NEXT
+                  <ion-icon name="chevron-forward-sharp"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-img src="./assets/book.svg"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <h1>Prepare Verbal Better</h1>
+              <p>An App designed to help you out with verbal</p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row  class="btn2" >
+              <ion-col>
+                <ion-button shape="round" (click)="prev()" style="--background:indigo">
+                  <ion-icon name="chevron-back-sharp"></ion-icon>
+                  BACK
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button shape="round" (click)="next()" style="--background:indigo">NEXT
+                  <ion-icon name="chevron-forward-sharp"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <h1>Track The Progress</h1>
+              <p>Learn,test and track the knowledge</p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row  class="btn3" >
+              <ion-col>
+                <ion-button shape="round" (click)="prev()" style="--background:indigo">
+                  <ion-icon name="chevron-back-sharp"></ion-icon>
+                  BACK
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button shape="round" style="--background:indigo" (click)='slidesDestroy()' [routerLink]="['./view']">NEXT
+                  <ion-icon name="chevron-forward-sharp"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>  
