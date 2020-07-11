@@ -49,11 +49,21 @@ import "chartjs-plugin-zoom";
 import { ViewComponent } from "./view/view.component";
 import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+
+//slides
+import { SlidesComponent } from "./POCs/slides/slides.component";
+import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
+
+//Advertisment component
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
+
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
-    'swipe': { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
-    'pan': { threshold: 5 },
-  }
+    swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
+    pan: { threshold: 5 },
+  };
 }
 
 @NgModule({
@@ -69,7 +79,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatSelectModule,
     FivBottomSheetModule,
     ChartModule,
-    ChartsModule
+    ChartsModule,
   ],
   declarations: [
     HomePage,
@@ -90,7 +100,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     ProgressChartComponent,
     ViewComponent,
     ShareComponent,
-    WordSetsComponent
+    WordSetsComponent,
+    SlidesComponent,
+    AdMobComponent,
   ],
   providers: [
     HammerGestureConfig,
@@ -99,6 +111,8 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    AdMobFree, // add module
+    SocialSharing,
   ],
   entryComponents: [
     FilterPopOverComponent,
@@ -107,4 +121,4 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   exports: [SvgComponent],
 })
-export class HomePageModule { }
+export class HomePageModule {}
