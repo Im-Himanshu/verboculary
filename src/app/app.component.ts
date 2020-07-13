@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DatabaseService } from './home/services/data-base.service'
 import { Router } from '@angular/router';
+import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,6 +14,7 @@ export class AppComponent {
 
   private isAppReady = false;
 
+//deeplinks will work like verboculary://url_ahead.com
 
   constructor(
     private platform: Platform,
@@ -20,6 +22,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private db: DatabaseService,
     private router: Router,
+    private deepLinks: Deeplinks
   ) {
     this.initializeApp();
     this.isTheUserNew();
@@ -30,8 +33,16 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.reScaleScreen();
+      this.deepLinks.route({
+
+      }).subscribe((match) => {
+          console.log(match);
+      },(noMatch) => {
+
+      })
     });
   }
+
 
 
   isTheUserNew() {

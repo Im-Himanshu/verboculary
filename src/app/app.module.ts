@@ -23,6 +23,7 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { SvgDefinitionsComponent } from "./components/svg-definitions/svg-definitions.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -62,8 +63,10 @@ var firebaseConfig = {
     StatusBar,
     SplashScreen,
     AuthService,
+    Deeplinks,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
+
   ],
   bootstrap: [AppComponent],
 })

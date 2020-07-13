@@ -9,12 +9,15 @@ export class SharingServiceService {
 
   constructor(private socialSharing: SocialSharing) { }
 
+  //deeplinking call or create service
+
   onShare(url: any) {
     this.socialSharing.share(
       "Join us at verboculary",
       null,
       [url],
-      "gre.verboculary.com"
+      "https://verboculary.page.link/PZXe",
+      //deeplinking part here only
     );
   }
 
