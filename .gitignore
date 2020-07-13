@@ -28,7 +28,7 @@ npm-debug.log*
 /dist
 /node_modules
 /platforms/
-/package-lock.json
+**/package-lock.json
 /config.xml
 /plugins
 /www
