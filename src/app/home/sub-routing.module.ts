@@ -13,8 +13,12 @@ import { ProgressChartComponent } from "./progress-chart/progress-chart.componen
 import { ViewComponent } from "./view/view.component";
 import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
+
+import { SlidesComponent } from './POCs/slides/slides.component';
+import { AdMobComponent } from './POCs/ad-mob/ad-mob.component';
+
 const routes: Routes = [
-  { path: "", redirectTo: "POCs", pathMatch: "full" },
+  { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
     component: HomePage,
@@ -27,7 +31,7 @@ const routes: Routes = [
       { path: "learn", component: LearnComponent },
       { path: "dashboard", component: DashBoardComponent },
       { path: "wordSets/:setName", component: WordSetsComponent }, // defaul
-      { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default
+      { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default 
       {
         path: "wordSets/:setName/:viewType/:wordId",
         component: WordSetsComponent,
@@ -44,6 +48,8 @@ const routes: Routes = [
       { path: "horizontalSlides", component: HorizontalScrollComponent },
       { path: "animation", component: AnimatedComponent },
       { path: "view", component: ViewComponent },
+      { path: "slides", component: SlidesComponent },
+      { path: "admob", component: AdMobComponent },
       { path: "share", component: ShareComponent },
     ],
   },

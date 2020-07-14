@@ -51,6 +51,14 @@ import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
+//slides
+import { SlidesComponent } from "./POCs/slides/slides.component";
+import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
+
+//Advertisment component
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
+
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -93,6 +101,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ViewComponent,
     ShareComponent,
     WordSetsComponent,
+    SlidesComponent,
+    AdMobComponent,
   ],
   providers: [
     HammerGestureConfig,
@@ -101,6 +111,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    AdMobFree, // add module
     SocialSharing,
   ],
   entryComponents: [
