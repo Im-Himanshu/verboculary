@@ -25,6 +25,7 @@
     "@angular/router": "~8.1.2",
     "@fivethree/core": "^1.0.0-alpha.2",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/deeplinks": "^5.27.0",
     "@ionic-native/social-sharing": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/sqlite": "^5.19.1",
@@ -101,7 +102,13 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "uk.co.workingedge.cordova.plugin.sqliteporter": {},
-      "cordova-plugin-x-socialsharing": {}
+      "cordova-plugin-x-socialsharing": {},
+      "ionic-plugin-deeplinks": {
+        "URL_SCHEME": "verboculary",
+        "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "gre.verboculary.com",
+        "ANDROID_PATH_PREFIX": "/"
+      }
     },
     "platforms": [
       "android",
