@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./slides.component.scss'],
 })
 export class SlidesComponent implements OnInit {
-  
+
   slideOpts = {
-    initialSlide: 1,  
-    speed: 300,  
+    initialSlide: 1,
+    speed: 300,
     effect: 'Cube',
   }
 
@@ -23,7 +23,7 @@ export class SlidesComponent implements OnInit {
 
   ngOnInit() {}
 
-  
+
   next(){
     this.slides.slideNext();
   }
@@ -35,7 +35,7 @@ export class SlidesComponent implements OnInit {
   slidesDestroy(){
     this.storage.set('slidesStatus',"false");
     console.log(this.storage.get('slidesStatus'));
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);  //why was this line being used
   }
 
 }

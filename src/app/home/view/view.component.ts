@@ -11,7 +11,6 @@ export class ViewComponent implements OnInit {
   wordlist = null;
   selectedSorting: string = "alpha";
   selectedFilter: string = "all"
-
   id = wordToIdMap;
   allSelectedWordIDs: string[];
   allWordsData: any;
@@ -34,8 +33,6 @@ export class ViewComponent implements OnInit {
     this.allSelectedWordIDs = this.db.allSelectedWordIds;
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
-
-
   }
 
   ngOnInit() {
@@ -82,7 +79,4 @@ export class ViewComponent implements OnInit {
     console.log("sorting chnaged")
 
   }
-
-
-
 }
