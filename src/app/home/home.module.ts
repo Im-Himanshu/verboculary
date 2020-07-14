@@ -57,6 +57,7 @@ import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
 
 //Advertisment component
 import { AdMobFree } from '@ionic-native/admob-free/ngx';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -80,6 +81,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     FivBottomSheetModule,
     ChartModule,
     ChartsModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     HomePage,

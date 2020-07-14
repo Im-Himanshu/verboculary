@@ -28,68 +28,140 @@
   <div>
 
     <ion-content #ion_content style="--background: #fff8dc00;height: 57vh" forceOverscroll="true">
-      <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs">
-        <ion-item>
-          <div class="parentBox">
+      <!-- this part checks if the search query is empty -->
+      <div *ngIf="!searchService.searchQuery">
+          <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs">
+              <ion-item>
+                <div class="parentBox">
 
-            <div class="firstRow" (click)="onWordClickToggleit(oneWordId)">
-              <div class="iconBox">
-                <div id="iconsGroup">
-                  <svg-icon name='beginner'></svg-icon>
-                </div>
-              </div>
-              <div class="word"> {{allWordsData[oneWordId][1]}}</div>
-              <div class="iconBox2" (click)="toggleBookMark($event, oneWordId)">
-                <div id="iconsGroup">
-                  <svg-icon *ngIf="wordsDynamicData[oneWordId]['isMarked']" name='fill-bookmark'></svg-icon>
-                  <svg-icon *ngIf="!wordsDynamicData[oneWordId]['isMarked']" name='bookMark'></svg-icon>
-                </div>
-              </div>
-            </div>
-
-            <div *ngIf="isWordopen[oneWordId]" class="secondRow" (click)="onWordClickToggleit(oneWordId)">
-              <div class="meaningtextStyle">{{allWordsData[oneWordId][2]}} </div>
-
-            </div>
-
-            <div *ngIf="isWordopen[oneWordId]" class="thirdRow">
-              <div class="iconBox" (click)="takeNoteToggle($event, oneWordId)">
-                <div class="icon">
-                  <div id="iconsGroup">
-                    <svg-icon name='noteIcon'></svg-icon>
+                  <div class="firstRow" (click)="onWordClickToggleit(oneWordId)">
+                    <div class="iconBox">
+                      <div id="iconsGroup">
+                        <svg-icon name='beginner'></svg-icon>
+                      </div>
+                    </div>
+                    <div class="word"> {{allWordsData[oneWordId][1]}}</div>
+                    <div class="iconBox2" (click)="toggleBookMark($event, oneWordId)">
+                      <div id="iconsGroup">
+                        <svg-icon *ngIf="wordsDynamicData[oneWordId]['isMarked']" name='fill-bookmark'></svg-icon>
+                        <svg-icon *ngIf="!wordsDynamicData[oneWordId]['isMarked']" name='bookMark'></svg-icon>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="text">
-                  Note
-                </div>
 
-              </div>
-              <div class="iconBox">
-                <div class="text">
-                  Explore
-                </div>
-                <div class="icon">
-                  <div id="iconsGroup">
-                    <svg-icon name='leftAngleIcon'></svg-icon>
+                  <div *ngIf="isWordopen[oneWordId]" class="secondRow" (click)="onWordClickToggleit(oneWordId)">
+                    <div class="meaningtextStyle">{{allWordsData[oneWordId][2]}} </div>
+
                   </div>
+
+                  <div *ngIf="isWordopen[oneWordId]" class="thirdRow">
+                    <div class="iconBox" (click)="takeNoteToggle($event, oneWordId)">
+                      <div class="icon">
+                        <div id="iconsGroup">
+                          <svg-icon name='noteIcon'></svg-icon>
+                        </div>
+                      </div>
+                      <div class="text">
+                        Note
+                      </div>
+
+                    </div>
+                    <div class="iconBox">
+                      <div class="text">
+                        Explore
+                      </div>
+                      <div class="icon">
+                        <div id="iconsGroup">
+                          <svg-icon name='leftAngleIcon'></svg-icon>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div *ngIf="(isWordopen[oneWordId]) && (isToTakeNote[oneWordId] || wordsDynamicData[oneWordId][notes])"
+                    class="fourthRow">
+                    <textarea [(ngModel)]="wordsDynamicData[oneWordId]['Notes']" class="textArea" rows="4" cols="50"
+                      placeholder="Make a Note to remember this word"></textarea>
+
+                  </div>
+
                 </div>
 
-              </div>
+              </ion-item>
 
-            </div>
+            </ion-item-sliding>
+      </div>
 
-            <div *ngIf="(isWordopen[oneWordId]) && (isToTakeNote[oneWordId] || wordsDynamicData[oneWordId][notes])"
-              class="fourthRow">
-              <textarea [(ngModel)]="wordsDynamicData[oneWordId]['Notes']" class="textArea" rows="4" cols="50"
-                placeholder="Make a Note to remember this word"></textarea>
+      <!-- here we decide what to show and how to show if search query has elements -->
+      <div *ngIf="searchService.searchQuery">
+        <!-- <div *ngFor="let word of wordArray | filter:searchService.searchQuery">
+          {{word.name}}
+        </div> -->
+        <ion-item-sliding *ngFor="let word of wordArray | filter:searchService.searchQuery">
+              <ion-item>
+                <div class="parentBox">
+                  <div class="firstRow" (click)="onWordClickToggleit(word.id)">
+                    <div class="iconBox">
+                      <div id="iconsGroup">
+                        <svg-icon name='beginner'></svg-icon>
+                      </div>
+                    </div>
+                    <div class="word"> {{word.name}}</div>
+                    <div class="iconBox2" (click)="toggleBookMark($event, word.id)">
+                      <div id="iconsGroup">
+                        <svg-icon *ngIf="wordsDynamicData[word.id]['isMarked']" name='fill-bookmark'></svg-icon>
+                        <svg-icon *ngIf="!wordsDynamicData[word.id]['isMarked']" name='bookMark'></svg-icon>
+                      </div>
+                    </div>
+                  </div>
 
-            </div>
+                  <div *ngIf="isWordopen[word.id]" class="secondRow" (click)="onWordClickToggleit(word.id)">
+                    <div class="meaningtextStyle">{{allWordsData[word.id][2]}} </div>
 
-          </div>
+                  </div>
 
-        </ion-item>
+                  <div *ngIf="isWordopen[word.id]" class="thirdRow">
+                    <div class="iconBox" (click)="takeNoteToggle($event, word.id)">
+                      <div class="icon">
+                        <div id="iconsGroup">
+                          <svg-icon name='noteIcon'></svg-icon>
+                        </div>
+                      </div>
+                      <div class="text">
+                        Note
+                      </div>
 
-      </ion-item-sliding>
+                    </div>
+                    <div class="iconBox">
+                      <div class="text">
+                        Explore
+                      </div>
+                      <div class="icon">
+                        <div id="iconsGroup">
+                          <svg-icon name='leftAngleIcon'></svg-icon>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div *ngIf="(isWordopen[word.id]) && (isToTakeNote[word.id] || wordsDynamicData[word.id][notes])"
+                    class="fourthRow">
+                    <textarea [(ngModel)]="wordsDynamicData[word.id]['Notes']" class="textArea" rows="4" cols="50"
+                      placeholder="Make a Note to remember this word"></textarea>
+
+                  </div>
+
+                </div>
+
+              </ion-item>
+
+            </ion-item-sliding>
+      </div>
+
     </ion-content>
   </div>
 </div>

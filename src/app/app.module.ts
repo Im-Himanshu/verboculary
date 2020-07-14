@@ -24,6 +24,8 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { SvgDefinitionsComponent } from "./components/svg-definitions/svg-definitions.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -57,6 +59,7 @@ var firebaseConfig = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     HttpClientModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     DatabaseService,

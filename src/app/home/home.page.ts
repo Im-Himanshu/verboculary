@@ -9,7 +9,8 @@ import { AlertController } from '@ionic/angular';
 import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
-
+import {SearchService} from './services/search.service'
+import { wordToIdMap } from '../wordToId'
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,7 @@ export class HomePage implements OnInit {
   willComeAgain: boolean = false;
   appSessionData: appSessionData;
   isDarkMode: boolean = false;
-
+  searchQuery: string = 'Hey yo';
 
   repetitions = [1, 2, 3, 4, 5, 6, 7];
   prevDeltaX = 0;
@@ -49,7 +50,7 @@ export class HomePage implements OnInit {
   masterCard = [1, 2, 3]
 
 
-  constructor(private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService) {
+  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService) {
     this.cards = [];
 
   }
@@ -59,7 +60,7 @@ export class HomePage implements OnInit {
   }
 
 
-  //4 
+  //4
   sortSelectedIds() {
     if (!this.db.filteredSelectedWordIds) return;
     if (this.selectedSorting === 'alphabetically') {
@@ -112,7 +113,7 @@ export class HomePage implements OnInit {
     let startIndex = this.selectedSet.indexOf(oneSet);
     if (this.selectedSet.length <= 1) {
       if (this.selectedSet[0] && this.selectedSet[0] !== 'All') {
-        this.selectedSet = ['All']; // if the last element is not all then show all;        
+        this.selectedSet = ['All']; // if the last element is not all then show all;
         this.presentToast('Last Filter removed, All words are selected!!');
         return;
       }
@@ -130,7 +131,7 @@ export class HomePage implements OnInit {
     }
 
     this.presentToast('Removed ' + deleteCount + " Selected Sets : " + deletedSet)
-    this.selectedSet = [].concat(this.selectedSet); // to trigger the setChnaged Event 
+    this.selectedSet = [].concat(this.selectedSet); // to trigger the setChnaged Event
   }
 
   removeFilter() {
@@ -246,7 +247,7 @@ export class HomePage implements OnInit {
     if (event.deltaX === 0 || (event.center.x === 0 && event.center.y === 0)) return;
 
     //console.log(event.deltaX, event.deltaY)
-    let newDeltaX = event.deltaX - this.prevDeltaX; // the new delta 
+    let newDeltaX = event.deltaX - this.prevDeltaX; // the new delta
     let newDeltaY = event.deltaY - this.prevDeltaY // the new delta more then the previous one
     this.prevDeltaX = event.deltaX;
     this.prevDeltaY = event.deltaY;
@@ -318,5 +319,10 @@ export class HomePage implements OnInit {
   };
   compareWith_category = this.compareWithFn_category;
   compareWith_set = this.compareWithFn_set;
+
+  searchBarOnFocus = (event) => {
+    console.log(this.searchService.searchQuery);
+
+  }
 
 }
