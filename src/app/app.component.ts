@@ -4,7 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DatabaseService } from './home/services/data-base.service'
 import { Router } from '@angular/router';
-import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
+import { Deeplinks } from '@ionic-native/deeplinks/ngx'
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,7 +14,7 @@ export class AppComponent {
 
   private isAppReady = false;
 
-//deeplinks will work like verboculary://url_ahead.com
+  //deeplinks will work like verboculary://url_ahead.com
 
   constructor(
     private platform: Platform,
@@ -36,8 +36,8 @@ export class AppComponent {
       this.deepLinks.route({
 
       }).subscribe((match) => {
-          console.log(match);
-      },(noMatch) => {
+        console.log(match);
+      }, (noMatch) => {
 
       })
     });
@@ -54,7 +54,7 @@ export class AppComponent {
         this.router.navigate(['/slides']);
       }
       this.isAppReady = true;
-
+      this.db.getAllwordsOfSelectedSet();
     })
 
 

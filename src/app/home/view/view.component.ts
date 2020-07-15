@@ -66,7 +66,9 @@ export class ViewComponent implements OnInit {
   }
 
   toggleBookMark(event, wordId: any) {
+
     this.wordsDynamicData[wordId]['isMarked'] = !this.wordsDynamicData[wordId]['isMarked'];
+    this.db.editWordIdInDynamicSet("allMarked", wordId, this.wordsDynamicData[wordId]['isMarked']);
     event.stopPropagation();
     this.saveDynamicData();
 
