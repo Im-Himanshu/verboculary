@@ -16,7 +16,8 @@
         </div>
 
         <div id="levelStatus">
-          <span>126/300 Words</span>
+          <span>{{collectiveProgress['beginner']['totalLearned']}}/{{collectiveProgress['beginner']['totalWords']}}
+            Words</span>
           <!-- do the calculation part here s -->
         </div>
 
@@ -35,7 +36,8 @@
         </div>
 
         <div id="levelStatus">
-          <span>126/300 Words</span>
+          <span>{{collectiveProgress['transitional']['totalLearned']}}/{{collectiveProgress['transitional']['totalWords']}}
+            Words</span>
         </div>
       </div>
       <div class="subLevel subFlexing" (click)="scrollParentToChild(pro)">
@@ -47,7 +49,7 @@
         </div>
 
         <div id="levelStatus">
-          <span>126/300 Words</span>
+          <span>{{collectiveProgress['pro']['totalLearned']}}/{{collectiveProgress['pro']['totalWords']}} Words</span>
         </div>
 
 
@@ -104,11 +106,25 @@
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
-            <div class="progressBar">
-              <div class="progressBarBackground"></div>
+            <div class="progressBar" style="background-color: #c0e8cf;">
+              <div
+                [ngStyle]="{'width': ((crntSetProgressData['totalViewed']/crntSetProgressData['totalWords'])*100+3) + '%'}"
+                class="progressBarBackground" style="background-color: #62c589"></div>
             </div>
             <div class="progresStats">
-              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}Words</span>
+              <span>{{crntSetProgressData['totalViewed']}}/ {{crntSetProgressData['totalWords']+ " "}}
+                Viewed</span>
+            </div>
+          </div>
+          <div class="progressStatus">
+            <div class="progressBar" style="background-color: #fde6c1;">
+              <div
+                [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
+                class="progressBarBackground" style="background-color: #ffbb4d"></div>
+            </div>
+            <div class="progresStats">
+              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}
+                Learned</span>
             </div>
           </div>
 
@@ -145,11 +161,25 @@
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #fecc7b">
-              <div class="progressBarBackground"></div>
+            <div class="progressBar" style="background-color: #c0e8cf;">
+              <div
+                [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
+                class="progressBarBackground" style="background-color: #62c589"></div>
             </div>
             <div class="progresStats">
-              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "]}}Words</span>
+              <span>{{crntSetProgressData['totalViewed']}}/ {{crntSetProgressData['totalWords']+ " "}}
+                Viewed</span>
+            </div>
+          </div>
+          <div class="progressStatus">
+            <div class="progressBar" style="background-color: #fde6c1;">
+              <div
+                [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
+                class="progressBarBackground" style="background-color: #ffbb4d"></div>
+            </div>
+            <div class="progresStats">
+              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}
+                Learned</span>
             </div>
           </div>
 
@@ -186,11 +216,25 @@
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #fe805d ">
-              <div class="progressBarBackground"></div>
+            <div class="progressBar" style="background-color: #c0e8cf;">
+              <div
+                [ngStyle]="{'width': ((crntSetProgressData['totalViewed']/crntSetProgressData['totalWords'])*100+3) + '%'}"
+                class="progressBarBackground" style="background-color: #62c589"></div>
             </div>
             <div class="progresStats">
-              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords'] + " "}}Words</span>
+              <span>{{crntSetProgressData['totalViewed']}}/ {{crntSetProgressData['totalWords']+ " "}}
+                Viewed</span>
+            </div>
+          </div>
+          <div class="progressStatus">
+            <div class="progressBar" style="background-color: #fde6c1;">
+              <div
+                [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
+                class="progressBarBackground" style="background-color: #ffbb4d"></div>
+            </div>
+            <div class="progresStats">
+              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}
+                Learned</span>
             </div>
           </div>
 
