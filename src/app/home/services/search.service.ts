@@ -9,7 +9,7 @@ export class SearchService {
   searchQuery: string = '';
 
   convertWordMapToArray = () => {
-    console.log(wordToIdMap);
+    // console.log(wordToIdMap);
     let wordArray = [];
     for(let key in wordToIdMap){
         wordArray.push({name: key, id: wordToIdMap[key]});

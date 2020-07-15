@@ -321,7 +321,6 @@ export class HomePage implements OnInit {
   compareWith_set = this.compareWithFn_set;
 
   searchBarOnFocus = (event) => {
-    console.log(this.searchService.searchQuery);
 
   }
 

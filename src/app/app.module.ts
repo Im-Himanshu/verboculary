@@ -25,6 +25,7 @@ import { SvgDefinitionsComponent } from "./components/svg-definitions/svg-defini
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SlidesComponent } from './home/POCs/slides/slides.component'
 
 
 var firebaseConfig = {
@@ -44,6 +45,7 @@ var firebaseConfig = {
     LoginComponent,
     RegisterComponent,
     SvgDefinitionsComponent,
+    SlidesComponent,
   ],
   entryComponents: [],
   imports: [

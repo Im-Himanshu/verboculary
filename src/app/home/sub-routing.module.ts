@@ -18,12 +18,12 @@ import { SlidesComponent } from './POCs/slides/slides.component';
 import { AdMobComponent } from './POCs/ad-mob/ad-mob.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "POCs", pathMatch: "full" },
+  { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
     component: HomePage,
     children: [
-      { path: "", redirectTo: "wordSets/begineer-1", pathMatch: "full" },
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
       { path: "practise", component: PractiseComponent },
       { path: "practise/:wordId", component: PractiseComponent },
       { path: "learn", component: LearnComponent },
@@ -42,13 +42,12 @@ const routes: Routes = [
     path: "POCs",
     //component: DashBoardComponent, // this would be the parent of all
     children: [
-      { path: "", redirectTo: "slides", pathMatch: "full" }, // this is the base url from where user navigations begins
+      { path: "", redirectTo: "dashboard", pathMatch: "full" }, // this is the base url from where user navigations begins
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },
       { path: "animation", component: AnimatedComponent },
       { path: "view", component: ViewComponent },
-      { path: "slides", component: SlidesComponent },
       { path: "admob", component: AdMobComponent },
       { path: "share", component: ShareComponent },
     ],

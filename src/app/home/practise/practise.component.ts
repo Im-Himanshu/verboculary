@@ -37,7 +37,8 @@ export class PractiseComponent implements OnInit {
 
   constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public toastController: ToastController) {
 
-    this.allSelectedWordIDs = this.db.allSelectedWordIds;
+    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
+    console.log(this.allSelectedWordIDs)
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;
     this.processDynamicData();
@@ -92,7 +93,7 @@ export class PractiseComponent implements OnInit {
     }
     this.onDynamicDataChange();
     this.getInitialWordList();
-    //this.next(); 
+    //this.next();
   }
 
 
@@ -105,7 +106,7 @@ export class PractiseComponent implements OnInit {
       let next = this.next();
       if (next) this.randomizedWordIDsList.push(next); // will come null if the word is mastered still a buffer of 5 will remain
     }
-    this.selectedId = this.randomizedWordIDsList[0]; // first element will be shown first    
+    this.selectedId = this.randomizedWordIDsList[0]; // first element will be shown first
     this.isData1Ready = true;
   }
 

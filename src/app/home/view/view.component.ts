@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
 import { SearchService } from '../services/search.service'
 import { wordToIdMap } from '../../wordToId';
+
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -9,7 +11,7 @@ import { wordToIdMap } from '../../wordToId';
 })
 export class ViewComponent implements OnInit {
   wordlist = null;
-  selectedSorting: string = "alpha";
+  selectedSorting: string = "shuffel";
   selectedFilter: string = "all"
   id = wordToIdMap;
   allSelectedWordIDs: string[];
@@ -19,10 +21,10 @@ export class ViewComponent implements OnInit {
   isToTakeNote: any = {};
   wordState: any = {}; // save isOpen, isToShowNote
   wordArray: any[];
-
+  sortedAllSelectedWordIds: string[] = [];
   sortingTypes = [
+    { value: 'shuffel', viewValue: 'Shuffeled' },
     { value: 'alpha', viewValue: 'Alphabetical' },
-    { value: 'shuffel', viewValue: 'Shuffeled' }
   ];
   filterTypes = [
     { value: 'all', viewValue: 'All' },
@@ -30,14 +32,34 @@ export class ViewComponent implements OnInit {
     { value: 'marked', viewValue: 'Marked' }
   ]
   constructor(private db: DatabaseService, public searchService: SearchService) {
-    this.allSelectedWordIDs = this.db.allSelectedWordIds;
+    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
   }
 
   ngOnInit() {
     this.wordArray = this.searchService.convertWordMapToArray();
+    this.db.recoverValues();
     console.log(this.wordArray);
+    let stringList: string[] = [];
+    for(var i = 0; i<this.allSelectedWordIDs.length; i++){
+      stringList.push(this.allWordsData[this.allSelectedWordIDs[i]][1]);
+    }
+    stringList.sort(function(a,b){
+      if(a>b){
+        return 1;
+      }
+      if(a<b){
+        return -1;
+      }
+      return 0;
+    })
+    for(var i = 0; i<stringList.length; i++){
+      this.sortedAllSelectedWordIds.push(this.id[stringList[i]]);
+    }
+    // this.allSelectedWordIDs = this.sortedAllSelectedWordIds;
+    // console.log(this.sortedAllSelectedWordIds);
+
   }
 
   ngOnDestroy() {
@@ -73,12 +95,37 @@ export class ViewComponent implements OnInit {
     this.saveDynamicData();
 
   }
+
+
+
   changeFilter(event) {
-    console.log("Filter Changed")
+
+    this.selectedSorting = "shuffel";
+    if(event.value == "marked"){
+      this.db.recoverValues();
+      this.db.markedFilter();
+      console.log("marked");
+    }
+    else if(event.value == "viewed"){
+      this.db.recoverValues();
+      this.db.viewedAllWordsOfSelectedSet();
+    }
+    else{
+      this.db.recoverValues();
+    }
 
   }
   changeSorting(event) {
-    console.log("sorting chnaged")
+    if(event.value == "alpha"){
+      this.db.sortAllWordsOfSelectedSet();
+    }
+
+    else{
+      this.db.shuffleAllWordsOfSelectedSet();
+    }
+    // this.allSelectedWordIDs = this.db.sortAllWordsOfSelectedSet();
+
+    //switch the object to sorted object
 
   }
 }

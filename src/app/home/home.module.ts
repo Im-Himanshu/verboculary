@@ -103,7 +103,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     ViewComponent,
     ShareComponent,
     WordSetsComponent,
-    SlidesComponent,
     AdMobComponent,
   ],
   providers: [
