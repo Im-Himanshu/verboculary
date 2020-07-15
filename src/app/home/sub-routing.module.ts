@@ -20,12 +20,12 @@ import { AudioComponent } from "./POCs/audio/audio.component";
 import { SwiperComponent } from "./POCs/swiper/swiper.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "POCs", pathMatch: "full" },
+  { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
     component: HomePage,
     children: [
-      { path: "", redirectTo: "wordSets/begineer-1", pathMatch: "full" },
+      { path: "", redirectTo: "wordSets/beginner-1", pathMatch: "full" },
       { path: "practise", component: PractiseComponent },
       { path: "practise/:wordId", component: PractiseComponent },
       { path: "learn", component: LearnComponent },
