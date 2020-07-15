@@ -43,7 +43,11 @@ const routes: Routes = [
     path: "POCs",
     //component: DashBoardComponent, // this would be the parent of all
     children: [
+<<<<<<< HEAD
       { path: "", redirectTo: "audio", pathMatch: "full" }, // this is the base url from where user navigations begins
+=======
+      { path: "", redirectTo: "slides", pathMatch: "full" }, // this is the base url from where user navigations begins
+>>>>>>> 1c7c676d993a2c756697ef7e2ece9f5be5fe16f5
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },

@@ -2,6 +2,7 @@ import { Component, Input, ViewChildren, QueryList, EventEmitter, ElementRef, Ou
 
 import { trigger, keyframes, animate, transition } from "@angular/animations";
 import * as kf from "../../keyframes";
+import { DatabaseService } from "../../services/data-base.service"
 
 @Component({
   selector: 'app-swipable-card',
@@ -25,8 +26,10 @@ export class SwipableCardComponent {
   heartVisible: boolean;
   crossVisible: boolean;
   isToShowMeaning: boolean = false;
+  selectedSet;
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private db: DatabaseService) {
+    this.selectedSet = this.db.selectedSet;
     this.choiceMade.subscribe(data => {
       this.controlCardPopulation();
     })

@@ -92,7 +92,10 @@ export class LearnComponent implements OnInit {
   }
 
 
-  onDynamicDataChange() {
+  onDynamicDataChange(setName?, wordId?, isToAdd?) {
+    if (setName && wordId) {
+      this.db.editWordIdInDynamicSet(setName, wordId, isToAdd);
+    }
     this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
   }
 
@@ -109,27 +112,13 @@ export class LearnComponent implements OnInit {
 
 
   changeMark(newMark, wordId) {
-    if (newMark) {
-
-      this.selectedIDsDynamicData[wordId]["isMarked"] = true;
-    }
-    else {
-
-      this.selectedIDsDynamicData[wordId]["isMarked"] = false;
-    }
-    this.onDynamicDataChange();
+    this.wordDynamicData[wordId]["isMarked"] = newMark
+    this.onDynamicDataChange("allMarked", wordId, newMark);
   }
 
   changeSeen(newMark, wordId) {
-    if (newMark) {
-
-      this.selectedIDsDynamicData[wordId]["isSeen"] = true;
-    }
-    else {
-
-      this.selectedIDsDynamicData[wordId]["isSeen"] = false;
-    }
-    this.onDynamicDataChange();
+    this.wordDynamicData[wordId]["isSeen"] = newMark;
+    this.onDynamicDataChange("allViewed", wordId, newMark);
   }
 
 

@@ -24,7 +24,7 @@ export class DatabaseService {
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
   public filteredSelectedWordIds: any;
-  public selectedSet;
+  public selectedSet = "Begineer-1";
 
   constructor(
     public storage: Storage,
@@ -40,7 +40,7 @@ export class DatabaseService {
           this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
             if (params.get('setName')) {
               this.selectedSet = params.get('setName');
-              this.selectedSet = "Begineer-1";
+              //this.selectedSet = "Begineer-1";
               this.getAllwordsOfSelectedSet();
             }
           })
@@ -50,9 +50,9 @@ export class DatabaseService {
   }
 
   getAllwordsOfSelectedSet() {
-
-    this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet]; // this will save all the selected word IDs which will be displayed
-
+    if (this.allSetData) {
+      this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet]; // this will save all the selected word IDs which will be displayed
+    }
   }
 
   // one time function, have to reset all the data if need to reset all the progress.
@@ -196,7 +196,25 @@ export class DatabaseService {
   }
 
   saveCurrentStateofDynamicData() {
+    this.setSetDatainStorage(this.allSetData)
     return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
+
+  }
+  editWordIdInDynamicSet(setName, wordID, isToAdd: boolean) {
+    // first check if it already exist or not...
+    let oneSetData = this.allSetData.allWordOfSets[setName]
+    if (!oneSetData) {
+      this.allSetData.allWordOfSets[setName] = [];
+    }
+    if (!oneSetData.includes(wordID) && isToAdd) {
+      oneSetData.push(wordID);
+    }
+    else if (!isToAdd) {
+      const index = oneSetData.indexOf(wordID);
+      if (index > -1) {
+        oneSetData.splice(index, 1);
+      }
+    }
   }
 
   setOneWordState(wordData: wordAppData) {

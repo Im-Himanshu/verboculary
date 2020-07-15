@@ -130,10 +130,13 @@ export class PractiseComponent implements OnInit {
 
       this.wordDynamicData[wordId]["isMarked"] = false;
     }
-    this.onDynamicDataChange();
+    this.onDynamicDataChange("allMarked", wordId);
   }
 
-  onDynamicDataChange() {
+  onDynamicDataChange(setName?, wordId?) {
+    if (setName && wordId) {
+      this.db.editWordIdInDynamicSet(setName, wordId, true)
+    }
     this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
   }
 
@@ -224,7 +227,7 @@ export class PractiseComponent implements OnInit {
       oneWordDynamicData['correctCount'] = 0;
     }
 
-    this.onDynamicDataChange();
+    this.onDynamicDataChange("allMastered", wordID);
     //this.next();
 
   }

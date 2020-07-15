@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
-
+import { SearchService } from '../services/search.service'
+import { wordToIdMap } from '../../wordToId';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -10,15 +11,14 @@ export class ViewComponent implements OnInit {
   wordlist = null;
   selectedSorting: string = "alpha";
   selectedFilter: string = "all"
-
-
+  id = wordToIdMap;
   allSelectedWordIDs: string[];
   allWordsData: any;
   wordsDynamicData: any;
   isWordopen: any = {}; // {id:boolean}
   isToTakeNote: any = {};
   wordState: any = {}; // save isOpen, isToShowNote
-
+  wordArray: any[];
 
   sortingTypes = [
     { value: 'alpha', viewValue: 'Alphabetical' },
@@ -29,15 +29,16 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(private db: DatabaseService) {
+  constructor(private db: DatabaseService, public searchService: SearchService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIds;
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
-
-
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.wordArray = this.searchService.convertWordMapToArray();
+    console.log(this.wordArray);
+  }
 
   ngOnDestroy() {
     this.saveDynamicData();
@@ -65,7 +66,9 @@ export class ViewComponent implements OnInit {
   }
 
   toggleBookMark(event, wordId: any) {
+
     this.wordsDynamicData[wordId]['isMarked'] = !this.wordsDynamicData[wordId]['isMarked'];
+    this.db.editWordIdInDynamicSet("allMarked", wordId, this.wordsDynamicData[wordId]['isMarked']);
     event.stopPropagation();
     this.saveDynamicData();
 
@@ -78,7 +81,4 @@ export class ViewComponent implements OnInit {
     console.log("sorting chnaged")
 
   }
-
-
-
 }

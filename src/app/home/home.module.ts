@@ -65,6 +65,7 @@ import {
   FileTransferObject,
 } from "@ionic-native/file-transfer/ngx";
 import { DatePipe } from "@angular/common";
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -87,6 +88,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     FivBottomSheetModule,
     ChartModule,
     ChartsModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     HomePage,

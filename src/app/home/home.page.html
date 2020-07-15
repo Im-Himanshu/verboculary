@@ -2,6 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
+
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>Verboculary</ion-title>
@@ -42,7 +43,7 @@
                 <ion-label>Theme</ion-label>
                 <ion-select interface="popover" (ionChange)="changeAppTheme()"[(ngModel)]="selectedTheme"
                   [compareWith]="compareWith_category">
-                  
+
                   <ion-select-option [value] = "'default'">Default</ion-select-option>
                   <ion-select-option [value] = "'darkTheme'">Dark</ion-select-option>
                   <ion-select-option [value] = "'lightTheme'">Light</ion-select-option>
@@ -60,6 +61,11 @@
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
       <ion-title class="titleicon">{{appTitle}}</ion-title>
       <ion-buttons slot="secondary">
+        <ion-searchbar [(ngModel)] = "searchService.searchQuery"
+        (ionFocus)="searchBarOnFocus($event)"
+        [routerLink] = "['/mainmodule/base/wordSets/begineer-1']"
+        (ionChange)="searchBarOnFocus($event)"
+        ></ion-searchbar>
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
@@ -71,8 +77,8 @@
 
           <!-- this will be adjusting its view based a service event where we will publish on what it need to see
             have to see if chart can load data dynamically or not...
-           
-          
+
+
           -->
 
         </app-progress-chart>
