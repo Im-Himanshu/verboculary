@@ -24,7 +24,7 @@ export class DatabaseService {
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
   public filteredSelectedWordIds: any;
-  public selectedSet;
+  public selectedSet = "Begineer-1";
 
   constructor(
     public storage: Storage,
@@ -40,7 +40,7 @@ export class DatabaseService {
           this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
             if (params.get('setName')) {
               this.selectedSet = params.get('setName');
-              this.selectedSet = "Begineer-1";
+              //this.selectedSet = "Begineer-1";
               this.getAllwordsOfSelectedSet();
             }
           })
