@@ -23,20 +23,9 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { SvgDefinitionsComponent } from "./components/svg-definitions/svg-definitions.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
-<<<<<<< HEAD
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { Media } from "@ionic-native/media/ngx";
-import { File } from "@ionic-native/file/ngx";
-import {
-  FileTransfer,
-  FileTransferObject,
-} from "@ionic-native/file-transfer/ngx";
-import { DatePipe } from "@angular/common";
-=======
-import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
->>>>>>> 1c7c676d993a2c756697ef7e2ece9f5be5fe16f5
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -81,10 +70,6 @@ var firebaseConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
     Media,
-    File,
-    FileTransfer,
-    FileTransferObject,
-    DatePipe,
   ],
   bootstrap: [AppComponent],
 })
