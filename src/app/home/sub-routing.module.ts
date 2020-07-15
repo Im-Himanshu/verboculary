@@ -17,6 +17,7 @@ import { ShareComponent } from "./POCs/share/share.component";
 import { SlidesComponent } from "./POCs/slides/slides.component";
 import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
 import { AudioComponent } from "./POCs/audio/audio.component";
+import { SwiperComponent } from "./POCs/swiper/swiper.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "POCs", pathMatch: "full" },
@@ -43,7 +44,7 @@ const routes: Routes = [
     path: "POCs",
     //component: DashBoardComponent, // this would be the parent of all
     children: [
-      { path: "", redirectTo: "audio", pathMatch: "full" }, // this is the base url from where user navigations begins
+      { path: "", redirectTo: "swiper", pathMatch: "full" }, // this is the base url from where user navigations begins
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
       { path: "admob", component: AdMobComponent },
       { path: "share", component: ShareComponent },
       { path: "audio", component: AudioComponent },
+      { path: "swiper", component: SwiperComponent },
     ],
   },
 ];

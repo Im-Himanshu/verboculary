@@ -1,59 +1,53 @@
-.ionContentHeight{
-  height : 50vh;
+.ionContentHeight {
+  height: 95%;
+  // width: 100%;
 }
 
-.learnWordsContent{
-  --background:var(--app-learnWordsContent-background);
-      ion-card{
-        --background: var(--app-learnWordsCard-background);
-        --color: var(--app-learnWordsContent-color);
+.learnWordsContent {
+  --background: var(--app-learnWordsContent-background);
+  ion-card {
+    --background: var(--app-learnWordsCard-background);
+    --color: var(--app-learnWordsContent-color);
 
-        ion-toggle{
-          --background	: var(--app-learnWordsContent-color);
-          --background-checked	: var(--app-learnWordToggleChecked-background);
-          --handle-background	: var(--app-learnWordTogglehandle-background);
-          --handle-background-checked : var(--app-learnWordTogglehandle-background);
-        }
-      }
-
-}
-.learnWordsChangeButton{
-  --background:var(--app-learnWordsContent-background);
-  ion-button{
-    --background:var(--app-learnWordsChangeButton-background);
-    --color:var(--app-learnWordsChangeButton-color);
-
+    ion-toggle {
+      --background: var(--app-learnWordsContent-color);
+      --background-checked: var(--app-learnWordToggleChecked-background);
+      --handle-background: var(--app-learnWordTogglehandle-background);
+      --handle-background-checked: var(--app-learnWordTogglehandle-background);
+    }
   }
-
+}
+.learnWordsChangeButton {
+  --background: var(--app-learnWordsContent-background);
+  ion-button {
+    --background: var(--app-learnWordsChangeButton-background);
+    --color: var(--app-learnWordsChangeButton-color);
+  }
 }
 
 ::ng-deep .mat-tab-labels {
   background: var(--app-practiseContent-background);
-
 }
-::ng-deep .mat-tab-group.mat-background-primary .mat-tab-label{
-color : var(--app-learnWordsMatTab-color);
+::ng-deep .mat-tab-group.mat-background-primary .mat-tab-label {
+  color: var(--app-learnWordsMatTab-color);
 }
 
 ::ng-deep .mat-ink-bar {
   background-color: var(--app-learnWordsMatTab-color) !important;
-
 }
 
-
-.wordStyle{
-    text-align: center;
-    font-weight: 400;
-    // color: #222428;
-    font-size: 40px;
-    margin-top: 6px;
-
+.wordStyle {
+  text-align: center;
+  font-weight: 400;
+  // color: #222428;
+  font-size: 40px;
+  margin-top: 6px;
 }
-.alignMiddle{
-  top : 10%
+.alignMiddle {
+  top: 10%;
 }
 
-.detailsToggleButton{
+.detailsToggleButton {
   left: -9px;
   top: -6px;
   font-size: 27px;
@@ -61,43 +55,40 @@ color : var(--app-learnWordsMatTab-color);
   margin-top: 10px;
   margin-left: 10px;
 }
-.starbutton{
+.starbutton {
   right: 1px;
   top: 1px;
   font-size: 27px;
   position: absolute;
   margin-right: 5px;
   margin-top: 7px;
-  color: #CDD9E4;
+  color: #cdd9e4;
 }
-.seenButton{
-
+.seenButton {
   right: 1px;
   bottom: 1px;
   font-size: 27px;
   position: absolute;
 }
 .seenButton :focus {
-  background-color:yellow;
+  background-color: yellow;
 }
 
-.wordHeading{
+.wordHeading {
   font-weight: 400;
   // color: #222428;
   font-size: 25px;
-
 }
-.wordMeaning{
+.wordMeaning {
   font-weight: 400;
   // color: #222428;
   padding-top: 8px;
   padding-left: 3px;
   font-size: 20px;
-  line-height: 1.0;
+  line-height: 1;
   text-align: center;
-
 }
-.wordExample{
+.wordExample {
   font-weight: 400;
   // color: #222428;
   padding-top: 8px;
@@ -107,39 +98,38 @@ color : var(--app-learnWordsMatTab-color);
   margin: 1%;
 }
 .ion-activatable {
-    position: relative;
-    overflow: hidden;
-    line-height: 2.5;
-  }
+  position: relative;
+  overflow: hidden;
+  line-height: 2.5;
+}
 
+.iframe {
+  width: 100%;
+  height: 520px;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+}
 
-  .iframe{
-    width: 100%;
-    height: 520px;
-    will-change: transform;
-    transition: all 0.3s ease-in-out;
-  }
-
-#loadImg{
-  position:absolute;
-  z-index:999;
+#loadImg {
+  position: absolute;
+  z-index: 999;
   left: 19%;
   top: 21%;
 }
-#loadImg div{
-  display:table-cell;
-  width:200px;
-  height:200px;
-  text-align:center;
-  vertical-align:middle;
+#loadImg div {
+  display: table-cell;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.ion-card-image{
+.ion-card-image {
   padding-left: 0px;
   padding-right: 0px;
   padding-top: 0px;
 }
 
-.ion-card-meaning{
+.ion-card-meaning {
   margin: 1%;
 }

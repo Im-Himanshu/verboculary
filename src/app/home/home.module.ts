@@ -59,6 +59,7 @@ import { Media } from "@ionic-native/media/ngx";
 //Advertisment component
 import { AdMobFree } from "@ionic-native/admob-free/ngx";
 import { AudioComponent } from "./POCs/audio/audio.component";
+import { SwiperComponent } from "./POCs/swiper/swiper.component";
 import { File } from "@ionic-native/file/ngx";
 import {
   FileTransfer,
@@ -66,6 +67,7 @@ import {
 } from "@ionic-native/file-transfer/ngx";
 import { DatePipe } from "@angular/common";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -89,6 +91,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ChartModule,
     ChartsModule,
     Ng2SearchPipeModule,
+    SuperTabsModule,
   ],
   declarations: [
     HomePage,
@@ -113,6 +116,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     SlidesComponent,
     AdMobComponent,
     AudioComponent,
+    SwiperComponent,
   ],
   providers: [
     HammerGestureConfig,
