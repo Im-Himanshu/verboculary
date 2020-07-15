@@ -14,11 +14,12 @@ import { ViewComponent } from "./view/view.component";
 import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
 
-import { SlidesComponent } from './POCs/slides/slides.component';
-import { AdMobComponent } from './POCs/ad-mob/ad-mob.component';
+import { SlidesComponent } from "./POCs/slides/slides.component";
+import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
+import { AudioComponent } from "./POCs/audio/audio.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "base", pathMatch: "full" },
+  { path: "", redirectTo: "POCs", pathMatch: "full" },
   {
     path: "base",
     component: HomePage,
@@ -31,7 +32,7 @@ const routes: Routes = [
       { path: "learn", component: LearnComponent },
       { path: "dashboard", component: DashBoardComponent },
       { path: "wordSets/:setName", component: WordSetsComponent }, // defaul
-      { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default 
+      { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default
       {
         path: "wordSets/:setName/:viewType/:wordId",
         component: WordSetsComponent,
@@ -42,7 +43,7 @@ const routes: Routes = [
     path: "POCs",
     //component: DashBoardComponent, // this would be the parent of all
     children: [
-      { path: "", redirectTo: "share", pathMatch: "full" }, // this is the base url from where user navigations begins
+      { path: "", redirectTo: "audio", pathMatch: "full" }, // this is the base url from where user navigations begins
       { path: "bottomSheet", component: BottomSheetComponent },
       { path: "expandableHeader", component: ExpandableHeadearDemoComponent },
       { path: "horizontalSlides", component: HorizontalScrollComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: "slides", component: SlidesComponent },
       { path: "admob", component: AdMobComponent },
       { path: "share", component: ShareComponent },
+      { path: "audio", component: AudioComponent },
     ],
   },
 ];

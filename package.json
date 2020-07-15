@@ -27,6 +27,9 @@
     "@ionic-native/admob-free": "^5.27.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/deeplinks": "^5.27.0",
+    "@ionic-native/file": "^5.27.0",
+    "@ionic-native/file-transfer": "^5.27.0",
+    "@ionic-native/media": "^5.27.0",
     "@ionic-native/social-sharing": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/sqlite": "^5.19.1",
@@ -44,6 +47,9 @@
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-admob-free": "^0.27.0",
+    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-file-transfer": "^1.7.1",
+    "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-x-socialsharing": "^5.6.8",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
@@ -126,7 +132,10 @@
       },
       "cordova-plugin-admob-free": {
         "ADMOB_APP_ID": "ca-app-pub-4352525331879046~1258287684"
-      }
+      },
+      "cordova-plugin-media": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "android",
