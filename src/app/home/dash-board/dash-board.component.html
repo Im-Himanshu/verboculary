@@ -99,7 +99,7 @@
           </div>
 
         </div>
-        <div class="middleDetails">
+        <div *ngIf="allSetProgressData[setName] as crntSetProgressData" class="middleDetails">
           <div>
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
@@ -108,7 +108,7 @@
               <div class="progressBarBackground"></div>
             </div>
             <div class="progresStats">
-              <span>12/55 Words</span>
+              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}Words</span>
             </div>
           </div>
 
@@ -140,7 +140,7 @@
           </div>
 
         </div>
-        <div class="middleDetails">
+        <div class="middleDetails" *ngIf="allSetProgressData[setName] as crntSetProgressData">
           <div>
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
@@ -149,7 +149,7 @@
               <div class="progressBarBackground"></div>
             </div>
             <div class="progresStats">
-              <span>12/55 Words</span>
+              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "]}}Words</span>
             </div>
           </div>
 
@@ -181,7 +181,7 @@
           </div>
 
         </div>
-        <div class="middleDetails">
+        <div class="middleDetails" *ngIf="allSetProgressData[setName] as crntSetProgressData">
           <div>
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
@@ -190,7 +190,7 @@
               <div class="progressBarBackground"></div>
             </div>
             <div class="progresStats">
-              <span>12/55 Words</span>
+              <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords'] + " "}}Words</span>
             </div>
           </div>
 

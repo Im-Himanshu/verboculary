@@ -16,9 +16,12 @@ export class DashBoardComponent implements OnInit {
   @ViewChild('ion_content', { static: false }) ionScroll: IonContent;
   appNametoUINameMapping = new appNameToUINameMapping().appNametoUINamemapping;
   allSelectedSet;
+  allSetProgressData;
 
   constructor(private renderer: Renderer2, private db: DatabaseService) {
     this.allSelectedSet = this.db.allSetinSelectedCategory;
+    this.allSetProgressData = this.db.allSetData.setLevelProgressData;
+
   }
 
   ngOnInit() { }

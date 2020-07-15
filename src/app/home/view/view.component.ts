@@ -19,6 +19,7 @@ export class ViewComponent implements OnInit {
   isToTakeNote: any = {};
   wordState: any = {}; // save isOpen, isToShowNote
   wordArray: any[];
+  selectedSet;
 
   sortingTypes = [
     { value: 'alpha', viewValue: 'Alphabetical' },
@@ -33,6 +34,8 @@ export class ViewComponent implements OnInit {
     this.allSelectedWordIDs = this.db.allSelectedWordIds;
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
+
+    this.selectedSet = this.db.selectedSet;
   }
 
   ngOnInit() {
