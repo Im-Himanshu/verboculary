@@ -92,7 +92,7 @@
 
     </div>
     <div *ngFor="let one of repetitions" class="oneSet">
-      <div class="oneSetData">
+      <div class="oneSetData" *ngIf="allSelectedSet[one] as setName">
         <div class="initialIcon">
           <div class="actualIcon">
             <svg-icon name='beginner'></svg-icon>
@@ -101,7 +101,7 @@
         </div>
         <div class="middleDetails">
           <div>
-            <span id="mainText">Beginner - Level {{" "+one}}</span>
+            <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
             <div class="progressBar">
@@ -115,11 +115,8 @@
         </div>
         <div class="navigationIcon">
 
-          <ion-icon
-          style="width: 100%;height: 100%;color: #87768d;max-width: 36px;"
-          name="arrow-forward"
-          routerLink = "/mainmodule/base/wordSets/begineer-{{one}}"
-          >
+          <ion-icon style="width: 100%;height: 100%;color: #87768d;max-width: 36px;" name="arrow-forward"
+            routerLink="/mainmodule/base/wordSets/{{setName}}">
           </ion-icon>
 
         </div>
@@ -136,7 +133,7 @@
     </div>
 
     <div *ngFor="let one of repetitions" class="oneSet">
-      <div class="oneSetData">
+      <div class="oneSetData" *ngIf="allSelectedSet[7+one] as setName">
         <div class="initialIcon" style="background-color: #fbecd3b0;">
           <div class="actualIcon">
             <svg-icon name='transistional'></svg-icon>
@@ -145,7 +142,7 @@
         </div>
         <div class="middleDetails">
           <div>
-            <span id="mainText">Transitional - Level {{" "+one}}</span>
+            <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
             <div class="progressBar" style="background-color: #fecc7b">
@@ -159,11 +156,8 @@
         </div>
         <div class="navigationIcon">
 
-          <ion-icon
-          style="width: 100%;height: 100%;color: #87768d;max-width: 36px;"
-          name="arrow-forward"
-          routerLink = "/mainmodule/base/wordSets/intermediate-{{one}}"
-          >
+          <ion-icon style="width: 100%;height: 100%;color: #87768d;max-width: 36px;" name="arrow-forward"
+            routerLink="/mainmodule/base/wordSets/{{setName}}">
           </ion-icon>
 
         </div>
@@ -180,7 +174,7 @@
     </div>
 
     <div *ngFor="let one of repetitions" class="oneSet">
-      <div class="oneSetData">
+      <div class="oneSetData" *ngIf="allSelectedSet[14+one] as setName ">
         <div class="initialIcon" style="background-color: #fbd4ca85;">
           <div class="actualIcon">
             <svg-icon name='proIcon'></svg-icon>
@@ -189,7 +183,7 @@
         </div>
         <div class="middleDetails">
           <div>
-            <span id="mainText">Pro - Level {{" "+one}}</span>
+            <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
             <div class="progressBar" style="background-color: #fe805d ">
@@ -203,11 +197,8 @@
         </div>
         <div class="navigationIcon">
 
-          <ion-icon
-          style="width: 100%;height: 100%;color: #87768d;max-width: 36px;"
-          name="arrow-forward"
-          routerLink = "/mainmodule/base/wordSets/pro-{{one}}"
-          >
+          <ion-icon style="width: 100%;height: 100%;color: #87768d;max-width: 36px;" name="arrow-forward"
+            routerLink="/mainmodule/base/wordSets/{{setName}}">
           </ion-icon>
 
         </div>

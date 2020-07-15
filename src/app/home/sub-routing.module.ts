@@ -19,12 +19,12 @@ import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
 import { AudioComponent } from "./POCs/audio/audio.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "POCs", pathMatch: "full" },
+  { path: "", redirectTo: "base", pathMatch: "full" },
   {
     path: "base",
     component: HomePage,
     children: [
-      { path: "", redirectTo: "wordSets/begineer-1", pathMatch: "full" },
+      { path: "", redirectTo: "wordSets/beginner-1", pathMatch: "full" },
       { path: "practise", component: PractiseComponent },
       { path: "practise/:wordId", component: PractiseComponent },
       { path: "learn", component: LearnComponent },

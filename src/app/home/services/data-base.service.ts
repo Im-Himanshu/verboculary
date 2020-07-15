@@ -24,7 +24,9 @@ export class DatabaseService {
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
   public filteredSelectedWordIds: any;
-  public selectedSet = "Begineer-1";
+  public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
+  public allSetinSelectedCategory;
+  public selectedSet = "beginner-1";
 
   constructor(
     public storage: Storage,
@@ -52,6 +54,7 @@ export class DatabaseService {
   getAllwordsOfSelectedSet() {
     if (this.allSetData) {
       this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet]; // this will save all the selected word IDs which will be displayed
+      this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
     }
   }
 
