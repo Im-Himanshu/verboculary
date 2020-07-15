@@ -26,6 +26,7 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { Media } from "@ionic-native/media/ngx";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -60,6 +61,7 @@ var firebaseConfig = {
     AngularFireStorageModule, // storage
     HttpClientModule,
     Ng2SearchPipeModule,
+    SuperTabsModule.forRoot(),
   ],
   providers: [
     DatabaseService,
