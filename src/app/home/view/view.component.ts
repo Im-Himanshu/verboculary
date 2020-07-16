@@ -22,6 +22,8 @@ export class ViewComponent implements OnInit {
   wordState: any = {}; // save isOpen, isToShowNote
   wordArray: any[];
   sortedAllSelectedWordIds: string[] = [];
+  selectedSet;
+
   sortingTypes = [
     { value: 'shuffel', viewValue: 'Shuffeled' },
     { value: 'alpha', viewValue: 'Alphabetical' },
@@ -33,14 +35,16 @@ export class ViewComponent implements OnInit {
   ]
   constructor(private db: DatabaseService, public searchService: SearchService) {
     this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
+    // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
+
+    this.selectedSet = this.db.selectedSet;
   }
 
   ngOnInit() {
     this.wordArray = this.searchService.convertWordMapToArray();
     this.db.recoverValues();
-    console.log(this.wordArray);
     let stringList: string[] = [];
     for(var i = 0; i<this.allSelectedWordIDs.length; i++){
       stringList.push(this.allWordsData[this.allSelectedWordIDs[i]][1]);
@@ -104,7 +108,7 @@ export class ViewComponent implements OnInit {
     if(event.value == "marked"){
       this.db.recoverValues();
       this.db.markedFilter();
-      console.log("marked");
+      // console.log("marked");
     }
     else if(event.value == "viewed"){
       this.db.recoverValues();

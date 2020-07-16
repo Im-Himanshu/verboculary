@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { wordAppData } from "../interfaces/wordAppData.interface";
-import { processedDataSharing } from "../interfaces/dropdown.interface";
+import { processedDataSharing, setLevelProgress } from "../interfaces/dropdown.interface";
 import { Subject, forkJoin, Observable } from "rxjs";
 import { appSessionData } from "../appSessionData.interface";
 import { ToastController } from "@ionic/angular";
@@ -28,6 +28,8 @@ export class DatabaseService {
   public allSelectedWordFiltered: any = [];
   public filteredSelectedWordIds: any;
   public selectedSet = "begineer-1";
+  public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
+  public allSetinSelectedCategory;
 
   constructor(
     public storage: Storage,
@@ -142,6 +144,7 @@ export class DatabaseService {
       for(var i = 0; i<this.allSelectedWordIds.length; i++){
         this.allSelectedWordFiltered.push(this.allSelectedWordIds[i]);
       }
+      this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
       // this will save all the selected word IDs which will be displayed
     }
   }
@@ -195,9 +198,11 @@ export class DatabaseService {
       let allCategoryType = [];
       let allSetOfcategory = {};
       let allWordOfSets = {};
+      let setLevelProgressData = {}
       output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
       output.allSetOfcategory = allSetOfcategory;
       output.allWordOfSets = allWordOfSets;
+      output.setLevelProgressData = setLevelProgressData;
       this.getSetDataFromJSON().subscribe(data => {
         for (var key in data) {
           if (data.hasOwnProperty(key)) {
@@ -206,6 +211,11 @@ export class DatabaseService {
             allSetOfcategory[key] = Object.keys(allSets);
             for (var set in allSets) {
               allWordOfSets[set] = allSets[set];
+              let setProgress = {} as setLevelProgress;
+              setProgress.totalLearned = 0;
+              setProgress.totalViewed = 0;
+              setProgress.totalWords = allSets[set].length
+              setLevelProgressData[set] = setProgress;
             }
           }
         }
@@ -293,19 +303,42 @@ export class DatabaseService {
   }
   editWordIdInDynamicSet(setName, wordID, isToAdd: boolean) {
     // first check if it already exist or not...
-    let oneSetData = this.allSetData.allWordOfSets[setName]
+    let oneSetData = this.allSetData.allWordOfSets[setName];
     if (!oneSetData) {
       this.allSetData.allWordOfSets[setName] = [];
     }
     if (!oneSetData.includes(wordID) && isToAdd) {
       oneSetData.push(wordID);
+      this.editSetLevelProgress(setName, isToAdd) // increase only when it was not already availaible
     }
     else if (!isToAdd) {
       const index = oneSetData.indexOf(wordID);
       if (index > -1) {
         oneSetData.splice(index, 1);
+        this.editSetLevelProgress(setName, isToAdd) // decrease count only when it was in the learned list
       }
     }
+
+  }
+
+  editSetLevelProgress(setName, isToAdd) {
+
+    let setProgressData = this.allSetData.setLevelProgressData[this.selectedSet] as setLevelProgress;
+    let statName;
+    if (setName == "allViewed") {
+      statName = "totalViewed"
+    }
+    else if (setName == "allLearned") {
+      statName = "totalLearned"
+    }
+    else return;
+    if (isToAdd) {
+      setProgressData[statName] = setProgressData[statName] + 1
+    }
+    else {
+      setProgressData[statName] = setProgressData[statName] - 1
+    }
+
   }
 
   setOneWordState(wordData: wordAppData) {
@@ -354,13 +387,6 @@ export class DatabaseService {
     return this.storage.set(STORAGE_KEY_SetData, data);
   }
 
-  public getSessionDataFromStorage(): Promise<appSessionData> {
-    return this.storage.get(STORAGE_KEY_sessionData);
-  }
-  // not having a checker but should be checked before using it
-  public setSessionDatainStorage() {
-    //return this.storage.set(STORAGE_KEY_sessionData, this.appSessionData);
-  }
 
   // this will shuffle the given array
   public shuffle(array) {

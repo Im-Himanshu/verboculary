@@ -26,7 +26,8 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SlidesComponent } from './home/POCs/slides/slides.component'
-
+import { Media } from "@ionic-native/media/ngx";
+import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -62,6 +63,7 @@ var firebaseConfig = {
     AngularFireStorageModule, // storage
     HttpClientModule,
     Ng2SearchPipeModule,
+    SuperTabsModule.forRoot(),
   ],
   providers: [
     DatabaseService,
@@ -71,7 +73,7 @@ var firebaseConfig = {
     Deeplinks,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
-
+    Media,
   ],
   bootstrap: [AppComponent],
 })

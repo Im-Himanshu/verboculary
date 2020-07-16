@@ -50,7 +50,7 @@ export class LearnComponent implements OnInit {
   ngOnInit() {
 
     this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
-    console.log(this.allSelectedWordIDs);
+    // console.log(this.allSelectedWordIDs);
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;
 
@@ -65,6 +65,8 @@ export class LearnComponent implements OnInit {
         this.selectedId = this.allSelectedWordIDs[0]; // starting with the first word if no wordid is given in url
       }
     });
+    // console.log(this.allWordsData[this.selectedId],this.wordDynamicData[this.selectedId]);
+
   }
 
 

@@ -54,11 +54,20 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 //slides
 import { SlidesComponent } from "./POCs/slides/slides.component";
 import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
+import { Media } from "@ionic-native/media/ngx";
 
 //Advertisment component
-import { AdMobFree } from '@ionic-native/admob-free/ngx';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { AdMobFree } from "@ionic-native/admob-free/ngx";
+import { AudioComponent } from "./POCs/audio/audio.component";
+import { SwiperComponent } from "./POCs/swiper/swiper.component";
+import { File } from "@ionic-native/file/ngx";
+import {
+  FileTransfer,
+  FileTransferObject,
+} from "@ionic-native/file-transfer/ngx";
+import { DatePipe } from "@angular/common";
+import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -82,6 +91,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ChartModule,
     ChartsModule,
     Ng2SearchPipeModule,
+    SuperTabsModule,
   ],
   declarations: [
     HomePage,
@@ -104,6 +114,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ShareComponent,
     WordSetsComponent,
     AdMobComponent,
+    AudioComponent,
+    SwiperComponent,
   ],
   providers: [
     HammerGestureConfig,
@@ -114,6 +126,11 @@ export class MyHammerConfig extends HammerGestureConfig {
     },
     AdMobFree, // add module
     SocialSharing,
+    Media,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    DatePipe,
   ],
   entryComponents: [
     FilterPopOverComponent,

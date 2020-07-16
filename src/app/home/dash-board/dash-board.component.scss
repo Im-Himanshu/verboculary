@@ -34,7 +34,7 @@ position: absolute;
 left: 6%;
 right: 6%;
 top: 2%;
-// bottom: 63.75%; 
+// bottom: 63.75%;
 height: 103px;
 background: #F9FBFC;
 border-radius: 31px;
@@ -59,8 +59,8 @@ flex-direction: column;
 
 
 .subFlexing{
-    position: relative; 
-    width: 100%; 
+    position: relative;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -71,8 +71,8 @@ flex-direction: column;
 }
 
 .subFlexing2{
-    position: relative; 
-    width: 100%; 
+    position: relative;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -149,7 +149,7 @@ flex-direction: column;
 
 .wordSets{
     position: relative;
-    margin-top: 6%;
+    margin-top: 1%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -161,16 +161,16 @@ flex-direction: column;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
-    height: 91px;
+    height: 122px;
 
 }
 .oneSetData{
     width : 95%;
     display: flex;
     flex-wrap: nowrap;
-    height: 60px;
+    height: 76px;
     justify-content: space-between;
     align-items: stretch;
 
@@ -185,6 +185,7 @@ flex-direction: column;
     background-color: #ecf8f1;
     display: flex;
     border-radius: 20px;
+    max-width: 82px;
 }
 
 .actualIcon{
@@ -214,17 +215,16 @@ flex-direction: column;
 }
 .progressStatus{
     width: 100%;
-    height: 8px;
+    height:11px;
     position: relative;
     padding-top: 6px;
     display: flex;
     justify-content: flex-end;
 }
 .progressBar{
-    width: 50%;
+    width: 66%;
     height: 100%;
     position: absolute;
-    background-color: #61c688;
     border-radius: 7px;
     left: 0px;
 }
@@ -236,13 +236,15 @@ flex-direction: column;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 13px;
     color: rgba(112,112,112,1);
     width: 30%;
     margin-top: -3px;
 
 }
 .progressBarBackground{
+    height: 100%;
+    border-radius: 7px;
 
 }
 

@@ -14,8 +14,10 @@ import { ViewComponent } from "./view/view.component";
 import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
 
-import { SlidesComponent } from './POCs/slides/slides.component';
-import { AdMobComponent } from './POCs/ad-mob/ad-mob.component';
+import { SlidesComponent } from "./POCs/slides/slides.component";
+import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
+import { AudioComponent } from "./POCs/audio/audio.component";
+import { SwiperComponent } from "./POCs/swiper/swiper.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "base", pathMatch: "full" },
@@ -50,6 +52,8 @@ const routes: Routes = [
       { path: "view", component: ViewComponent },
       { path: "admob", component: AdMobComponent },
       { path: "share", component: ShareComponent },
+      { path: "audio", component: AudioComponent },
+      { path: "swiper", component: SwiperComponent },
     ],
   },
 ];
