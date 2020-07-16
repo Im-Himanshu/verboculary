@@ -10,7 +10,7 @@ import { ToastController } from "@ionic/angular";
 import { PRIMARY_OUTLET } from '@angular/router';
 import { Router, NavigationStart, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import {wordToIdMap} from '../../wordToId';
+import { wordToIdMap } from '../../wordToId';
 
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
@@ -27,7 +27,7 @@ export class DatabaseService {
   public allSelectedWordIds: any;
   public allSelectedWordFiltered: any = [];
   public filteredSelectedWordIds: any;
-  public selectedSet = "begineer-1";
+  public selectedSet = "beginner-1";
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
   public allSetinSelectedCategory;
 
@@ -46,9 +46,9 @@ export class DatabaseService {
             if (params.get('setName')) {
               this.selectedSet = params.get('setName');
               //this.selectedSet = "Begineer-1";
-              if(!this.allSelectedWordFiltered.length)
-              //to make sure db doesn't change all the computed filters to default
-              this.getAllwordsOfSelectedSet();
+              if (!this.allSelectedWordFiltered.length)
+                //to make sure db doesn't change all the computed filters to default
+                this.getAllwordsOfSelectedSet();
             }
           })
         }
@@ -57,24 +57,24 @@ export class DatabaseService {
   }
 
 
-  sortAllWordsOfSelectedSet(){
+  sortAllWordsOfSelectedSet() {
     // console.log(this.allSelectedWordIds);
     let stringList: string[] = [];
-    for(var i = 0; i<this.allSelectedWordFiltered.length; i++){
+    for (var i = 0; i < this.allSelectedWordFiltered.length; i++) {
       stringList.push(this.allWordsData[this.allSelectedWordFiltered[i]][1]);
     }
-    stringList.sort(function(a,b){
-      if(a>b){
+    stringList.sort(function (a, b) {
+      if (a > b) {
         return 1;
       }
-      if(a<b){
+      if (a < b) {
         return -1;
       }
       return 0;
     })
     // let sortedSelectedId: string[] = [];
-    this.allSelectedWordFiltered.splice(0,this.allSelectedWordFiltered.length);
-    for(let i = 0; i<stringList.length; i++){
+    this.allSelectedWordFiltered.splice(0, this.allSelectedWordFiltered.length);
+    for (let i = 0; i < stringList.length; i++) {
       this.allSelectedWordFiltered.push(wordToIdMap[stringList[i]]);
     }
     // this.allSelectedWordIds = sortedSelectedId;
@@ -82,25 +82,25 @@ export class DatabaseService {
 
   }
 
-  markedFilter(){
+  markedFilter() {
 
     let idList: string[] = [];
-    for(var i = 0; i<this.allSelectedWordFiltered.length; i++){
+    for (var i = 0; i < this.allSelectedWordFiltered.length; i++) {
       idList.push(this.allSelectedWordFiltered[i]);
     }
-    this.allSelectedWordFiltered.splice(0,this.allSelectedWordIds.length);
-    for(var i = 0; i<idList.length; i++){
-      if(this.wordsDynamicData[idList[i]].isMarked){
+    this.allSelectedWordFiltered.splice(0, this.allSelectedWordIds.length);
+    for (var i = 0; i < idList.length; i++) {
+      if (this.wordsDynamicData[idList[i]].isMarked) {
         this.allSelectedWordFiltered.push(idList[i]);
       }
     }
 
   }
 
-  shuffleAllWordsOfSelectedSet(){
+  shuffleAllWordsOfSelectedSet() {
     var currentIndex = this.allSelectedWordFiltered.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
+    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
 
       // Pick a remaining element...
@@ -115,36 +115,37 @@ export class DatabaseService {
     // console.log(this.allSelectedWordIds);
   }
 
-  viewedAllWordsOfSelectedSet(){
+  viewedAllWordsOfSelectedSet() {
     let idList: string[] = [];
-    for(let i = 0; i<this.allSelectedWordFiltered.length; i++){
+    for (let i = 0; i < this.allSelectedWordFiltered.length; i++) {
       idList.push(this.allSelectedWordFiltered[i]);
     }
-    this.allSelectedWordFiltered.splice(0,this.allSelectedWordFiltered.length);
-    for(let i = 0; i<idList.length; i++){
-      if(this.wordsDynamicData[idList[i]].isSeen){
+    this.allSelectedWordFiltered.splice(0, this.allSelectedWordFiltered.length);
+    for (let i = 0; i < idList.length; i++) {
+      if (this.wordsDynamicData[idList[i]].isSeen) {
         this.allSelectedWordFiltered.push(idList[i]);
       }
     }
   }
 
 
-  recoverValues(){
+  recoverValues() {
     console.log("Recovered Service called");
-    this.allSelectedWordFiltered.splice(0,this.allSelectedWordFiltered.length);
-    for(var i = 0; i<this.allSelectedWordIds.length; i++){
+    this.allSelectedWordFiltered.splice(0, this.allSelectedWordFiltered.length);
+    for (var i = 0; i < this.allSelectedWordIds.length; i++) {
       this.allSelectedWordFiltered.push(this.allSelectedWordIds[i]);
     }
   }
 
   getAllwordsOfSelectedSet() {
+    // first process after all the data is laoded from the data base...
     if (this.allSetData) {
       console.log("RESET WORDS")
       this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet];
-      for(var i = 0; i<this.allSelectedWordIds.length; i++){
+      this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
+      for (var i = 0; i < this.allSelectedWordIds.length; i++) {
         this.allSelectedWordFiltered.push(this.allSelectedWordIds[i]);
       }
-      this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
       // this will save all the selected word IDs which will be displayed
     }
   }
@@ -171,8 +172,9 @@ export class DatabaseService {
     let promise2 = new Promise((resolve2, reject) => {
       this.getSetDataFromStorage().then(data => {
         if (!data) {
-          this.reStartSetDynamicData(); // this will create the set data in data-base
-          resolve2(false);
+          this.reStartSetDynamicData().then(data => {
+            resolve2(false); // this will create the set data in data-base
+          });
         } else {
           this.allSetData = data;
           resolve2(true);
