@@ -16,15 +16,12 @@
       <app-practise></app-practise>
 
     </div> -->
-  <super-tabs
-    activeTabIndex="1"
-    [config]="{
+  <super-tabs [(activeTabIndex)]="activeTabIndex" [config]="{
       debug: true,
       allowElementScroll: true,
       nativeSmoothScroll: true,
       avoidElements: true
-    }"
-  >
+    }">
     <super-tabs-toolbar slot="top">
       <super-tab-button>
         <ion-label>View</ion-label>

@@ -202,6 +202,8 @@ export class DatabaseService {
             wordData.isSeen = false;
             wordData.isMastered = false;
             wordData.correctCount = 0;
+            wordData.masteredDate = null;
+            wordData.viewedDate = null;
           }
         }
         this.setAllWordsStateinStorage(allWords);

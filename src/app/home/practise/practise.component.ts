@@ -73,16 +73,17 @@ export class PractiseComponent implements OnInit {
     this.seenWordCount = 0;
     for (let onewordsID of this.allSelectedWordIDs) {
       let oneWordDynamicData = this.wordDynamicData[onewordsID];
-      if (oneWordDynamicData && oneWordDynamicData['isMastered']) { // to avoid error in case the category is null
+      if (oneWordDynamicData && oneWordDynamicData['isMastered']) {
+        // to avoid error in case the category is null
         this.masteredWordPoint = this.masteredWordPoint + this.correctThreshold;
       }
       else {
-        if (!oneWordDynamicData) {
-          this.wordDynamicData[onewordsID] = {}
-          oneWordDynamicData = this.wordDynamicData[onewordsID];
-          oneWordDynamicData['isMastered'] = false;
-          oneWordDynamicData['correctCount'] = 0;
-        }
+        // if (!oneWordDynamicData) {
+        //   this.wordDynamicData[onewordsID] = {}
+        //   oneWordDynamicData = this.wordDynamicData[onewordsID];
+        //   oneWordDynamicData['isMastered'] = false;
+        //   oneWordDynamicData['correctCount'] = 0;
+        // }
         this.nonMasteredWordIds.push(onewordsID);
       }
 
@@ -218,6 +219,10 @@ export class PractiseComponent implements OnInit {
     if (oneWordDynamicData['correctCount'] >= this.correctThreshold) {
       oneWordDynamicData['isMastered'] = true;
       this.wordDynamicData[this.selectedId]['isMastered'] = true;
+      if (!this.wordDynamicData[this.selectedId]['masteredDate']) {
+        // if the previous viewedDate doesn't exist then only edit it otherwise leave it
+        this.wordDynamicData[this.selectedId]['masteredDate'] = (new Date()).toLocaleString();
+      }
       let index = this.nonMasteredWordIds.indexOf(this.selectedId);
       if (index || index == 0) {
         this.nonMasteredWordIds.splice(index, 1)
@@ -225,7 +230,6 @@ export class PractiseComponent implements OnInit {
       this.presentToast(this.allWordsData[this.selectedId][1])
       this.onDynamicDataChange("allLearned", wordID);
     }
-
     if (oneWordDynamicData['correctCount'] < 0) {
       this.masteredWordPoint = this.masteredWordPoint + (0 - oneWordDynamicData['correctCount']);// increase by the same factor mijnus but count is negative
       oneWordDynamicData['correctCount'] = 0;

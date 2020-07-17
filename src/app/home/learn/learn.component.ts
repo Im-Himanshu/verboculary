@@ -126,6 +126,14 @@ export class LearnComponent implements OnInit {
 
   changeSeen(newMark, wordId) {
     this.wordDynamicData[wordId]["isSeen"] = newMark;
+    if (newMark && !this.wordDynamicData[wordId]['viewedDate']) {
+      // if the previous viewedDate doesn't exist then only edit it otherwise leave it
+      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toLocaleString();
+    }
+    else if (!newMark) {
+      this.wordDynamicData[wordId]['viewedDate'] = null; //if newmark is notSeen unset the viewedDate as well
+
+    }
     this.onDynamicDataChange("allViewed", wordId, newMark);
   }
 
