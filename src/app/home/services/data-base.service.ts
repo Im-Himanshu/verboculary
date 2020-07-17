@@ -7,10 +7,7 @@ import { processedDataSharing, setLevelProgress } from "../interfaces/dropdown.i
 import { Subject, forkJoin, Observable } from "rxjs";
 import { appSessionData } from "../appSessionData.interface";
 import { ToastController } from "@ionic/angular";
-import { PRIMARY_OUTLET } from '@angular/router';
-import { Router, NavigationStart, NavigationEnd, Event as NavigationEvent } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { wordToIdMap } from '../../wordToId';
+import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
@@ -30,6 +27,7 @@ export class DatabaseService {
   public selectedSet = "beginner-1";
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
   public allSetinSelectedCategory;
+  public wordFilterChangeEvent: Subject<any> = new Subject();
 
   constructor(
     public storage: Storage,
@@ -96,6 +94,7 @@ export class DatabaseService {
           });
         } else {
           this.allSetData = data;
+          this.generateTotalProgressReportTillToday()
           resolve2(true);
         }
       });
@@ -107,8 +106,39 @@ export class DatabaseService {
     let allPromises: Observable<any> = forkJoin(promise1, promise2, promise3)
     return allPromises;
 
+  }
 
 
+  generateTotalProgressReportTillToday() {
+
+    // this function will run through all the sets progress and calculate progress report till today
+
+    let setLevelProgress = this.allSetData.setLevelProgressData;
+    let allSets = this.allSetData.allSetOfcategory[this.selectedCategory]; // all 
+    let totalViewed = 0;
+    let totalLearned = 0;
+    let totalAllWords = 0;
+
+    for (let oneSet of allSets) {
+      let setViewed = setLevelProgress[oneSet]["totalViewed"];
+      let setLearned = setLevelProgress[oneSet]["totalLearned"];
+      let totalWords = setLevelProgress[oneSet]["totalWords"];
+      totalViewed += setViewed;
+      totalLearned += setLearned
+      totalAllWords += totalWords
+    }
+    let newProgressReportEntry = {
+      "viewed": totalViewed,
+      "learned": totalLearned
+    }
+    let todaysDate = (new Date()).toLocaleDateString(); // MM/DD/YYYY format will be published
+
+    //(new Date()).toLocaleString() -- >  "7/17/2020, 7:05:31 PM"
+
+    // will keep only one entry for one date that is computed every time the applicaTION IS loaded for the first time itself
+    this.allSetData.dateWiseTotalProgressReport[todaysDate] = newProgressReportEntry;
+    this.saveCurrentStateofDynamicData();
+    console.log("total words used for the chartign ; ", totalAllWords)
   }
 
 
@@ -120,10 +150,14 @@ export class DatabaseService {
       let allSetOfcategory = {};
       let allWordOfSets = {};
       let setLevelProgressData = {}
+      let todaysDate = new Date().toDateString();
+      let dateWiseTotalProgressReport = {} // "date" :  #number of wordsword maping
+      dateWiseTotalProgressReport[todaysDate] = { "viewed": 0, "learned": 0 };
       output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
       output.allSetOfcategory = allSetOfcategory;
       output.allWordOfSets = allWordOfSets;
       output.setLevelProgressData = setLevelProgressData;
+      output.dateWiseTotalProgressReport = dateWiseTotalProgressReport;
       this.getSetDataFromJSON().subscribe(data => {
         for (var key in data) {
           if (data.hasOwnProperty(key)) {
@@ -184,93 +218,70 @@ export class DatabaseService {
         this.allWordsData = data;
         this.isDataFetched = true;
         resolve("fetched all words data");
-        //this.fetchingWordDataCompleted.next(data);
-        //this.fetchingWordDataCompleted.complete();
       });
     })
 
   }
 
 
-  sortAllWordsOfSelectedSet() {
-    // console.log(this.allSelectedWordIds);
-    let stringList: string[] = [];
-    for (var i = 0; i < this.allSelectedWordIdsFiltered.length; i++) {
-      stringList.push(this.allWordsData[this.allSelectedWordIdsFiltered[i]][1]);
+  changeSortingOfIds(sortingType) {
+    if (sortingType == 'alpha') {
+      this.allSelectedWordIdsFiltered.sort(function (a, b) {
+        if (a > b) {
+          return 1;
+        }
+        if (a < b) {
+          return -1;
+        }
+        return 0;
+      })
     }
-    stringList.sort(function (a, b) {
-      if (a > b) {
-        return 1;
+    else {
+      // randomly shuffled 
+      var currentIndex = this.allSelectedWordIdsFiltered.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = this.allSelectedWordIdsFiltered[currentIndex];
+        this.allSelectedWordIdsFiltered[currentIndex] = this.allSelectedWordIdsFiltered[randomIndex];
+        this.allSelectedWordIdsFiltered[randomIndex] = temporaryValue;
       }
-      if (a < b) {
-        return -1;
-      }
-      return 0;
-    })
-    // let sortedSelectedId: string[] = [];
-    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
-    for (let i = 0; i < stringList.length; i++) {
-      this.allSelectedWordIdsFiltered.push(wordToIdMap[stringList[i]]);
-    }
-    // this.allSelectedWordIds = sortedSelectedId;
-    // return sortedSelectedId;
 
-  }
-
-  filterMarkedWordIds() {
-
-    let idList: string[] = [];
-    for (var i = 0; i < this.allSelectedWordIdsFiltered.length; i++) {
-      idList.push(this.allSelectedWordIdsFiltered[i]);
-    }
-    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIds.length);
-    for (var i = 0; i < idList.length; i++) {
-      if (this.wordsDynamicData[idList[i]].isMarked) {
-        this.allSelectedWordIdsFiltered.push(idList[i]);
-      }
-    }
-
-  }
-
-  shuffleAllWordIdsOfSelectedSet() {
-    var currentIndex = this.allSelectedWordIdsFiltered.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = this.allSelectedWordIdsFiltered[currentIndex];
-      this.allSelectedWordIdsFiltered[currentIndex] = this.allSelectedWordIdsFiltered[randomIndex];
-      this.allSelectedWordIdsFiltered[randomIndex] = temporaryValue;
-    }
-    // console.log(this.allSelectedWordIds);
-  }
-
-  filterViewedWordIds() {
-    let idList: string[] = [];
-    for (let i = 0; i < this.allSelectedWordIdsFiltered.length; i++) {
-      idList.push(this.allSelectedWordIdsFiltered[i]);
-    }
-    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
-    for (let i = 0; i < idList.length; i++) {
-      if (this.wordsDynamicData[idList[i]].isSeen) {
-        this.allSelectedWordIdsFiltered.push(idList[i]);
-      }
     }
   }
 
+  filterSelectedIDBasedOnGivenCriterion(filterName) {
 
-  recoverValues() {
+    // reset all the given IDs
     this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
     for (var i = 0; i < this.allSelectedWordIds.length; i++) {
-      this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
-    }
-  }
+      let crntId = this.allSelectedWordIds[i]
 
+      if (filterName == 'all') {
+        // push all of them
+        this.allSelectedWordIdsFiltered.push(crntId);
+      }
+      if (filterName == 'viewed') {
+        if (this.wordsDynamicData[crntId].isSeen) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      if (filterName == 'marked') {
+        if (this.wordsDynamicData[crntId].isMarked) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+
+    }
+    this.wordFilterChangeEvent.next(true);
+
+  }
 
 
   getData() {
@@ -303,11 +314,15 @@ export class DatabaseService {
     return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
 
   }
+
+
+  // these are the set created dynamically for keeping only either viewed/learned/marked words
   editWordIdInDynamicSet(setName, wordID, isToAdd: boolean) {
     // first check if it already exist or not...
     let oneSetData = this.allSetData.allWordOfSets[setName];
     if (!oneSetData) {
-      this.allSetData.allWordOfSets[setName] = [];
+      oneSetData = [];
+      this.allSetData.allWordOfSets[setName] = oneSetData;
     }
     if (!oneSetData.includes(wordID) && isToAdd) {
       oneSetData.push(wordID);

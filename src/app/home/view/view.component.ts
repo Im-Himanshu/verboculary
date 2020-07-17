@@ -25,7 +25,7 @@ export class ViewComponent implements OnInit {
   selectedSet;
 
   sortingTypes = [
-    { value: 'shuffel', viewValue: 'Shuffeled' },
+    { value: 'shuffel', viewValue: 'Shuffeled' }, // default state
     { value: 'alpha', viewValue: 'Alphabetical' },
   ];
   filterTypes = [
@@ -44,25 +44,7 @@ export class ViewComponent implements OnInit {
 
   ngOnInit() {
     this.wordArray = this.searchService.convertWordMapToArray();
-    this.db.recoverValues();
-    let stringList: string[] = [];
-    for (var i = 0; i < this.allSelectedWordIDs.length; i++) {
-      stringList.push(this.allWordsData[this.allSelectedWordIDs[i]][1]);
-    }
-    stringList.sort(function (a, b) {
-      if (a > b) {
-        return 1;
-      }
-      if (a < b) {
-        return -1;
-      }
-      return 0;
-    })
-    for (var i = 0; i < stringList.length; i++) {
-      this.sortedAllSelectedWordIds.push(this.id[stringList[i]]);
-    }
-    // this.allSelectedWordIDs = this.sortedAllSelectedWordIds;
-    // console.log(this.sortedAllSelectedWordIds);
+    //this.db.changeSortingOfIds("alpha")
 
   }
 
@@ -74,10 +56,17 @@ export class ViewComponent implements OnInit {
     this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
   }
 
+  changeFilter(event) {
+    this.db.filterSelectedIDBasedOnGivenCriterion(event.value);
+    this.selectedSorting = "shuffel";
+  }
+  changeSorting(event) {
+    this.db.changeSortingOfIds(event.value)
+  }
+
   onWordClickToggleit(wordId: any) {
     if (!this.isWordopen[wordId]) {
       this.isWordopen[wordId] = false;
-
     }
     this.isWordopen[wordId] = !this.isWordopen[wordId];
     event.stopPropagation();
@@ -92,44 +81,10 @@ export class ViewComponent implements OnInit {
   }
 
   toggleBookMark(event, wordId: any) {
-
     this.wordsDynamicData[wordId]['isMarked'] = !this.wordsDynamicData[wordId]['isMarked'];
     this.db.editWordIdInDynamicSet("allMarked", wordId, this.wordsDynamicData[wordId]['isMarked']);
     event.stopPropagation();
     this.saveDynamicData();
-
   }
 
-
-
-  changeFilter(event) {
-
-    this.selectedSorting = "shuffel";
-    if (event.value == "marked") {
-      this.db.recoverValues();
-      this.db.filterMarkedWordIds();
-      // console.log("marked");
-    }
-    else if (event.value == "viewed") {
-      this.db.recoverValues();
-      this.db.filterViewedWordIds();
-    }
-    else {
-      this.db.recoverValues();
-    }
-
-  }
-  changeSorting(event) {
-    if (event.value == "alpha") {
-      this.db.sortAllWordsOfSelectedSet();
-    }
-
-    else {
-      this.db.shuffleAllWordIdsOfSelectedSet();
-    }
-    // this.allSelectedWordIDs = this.db.sortAllWordsOfSelectedSet();
-
-    //switch the object to sorted object
-
-  }
 }
