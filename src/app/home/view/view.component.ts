@@ -34,7 +34,7 @@ export class ViewComponent implements OnInit {
     { value: 'marked', viewValue: 'Marked' }
   ]
   constructor(private db: DatabaseService, public searchService: SearchService) {
-    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
+    this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
@@ -46,19 +46,19 @@ export class ViewComponent implements OnInit {
     this.wordArray = this.searchService.convertWordMapToArray();
     this.db.recoverValues();
     let stringList: string[] = [];
-    for(var i = 0; i<this.allSelectedWordIDs.length; i++){
+    for (var i = 0; i < this.allSelectedWordIDs.length; i++) {
       stringList.push(this.allWordsData[this.allSelectedWordIDs[i]][1]);
     }
-    stringList.sort(function(a,b){
-      if(a>b){
+    stringList.sort(function (a, b) {
+      if (a > b) {
         return 1;
       }
-      if(a<b){
+      if (a < b) {
         return -1;
       }
       return 0;
     })
-    for(var i = 0; i<stringList.length; i++){
+    for (var i = 0; i < stringList.length; i++) {
       this.sortedAllSelectedWordIds.push(this.id[stringList[i]]);
     }
     // this.allSelectedWordIDs = this.sortedAllSelectedWordIds;
@@ -105,27 +105,27 @@ export class ViewComponent implements OnInit {
   changeFilter(event) {
 
     this.selectedSorting = "shuffel";
-    if(event.value == "marked"){
+    if (event.value == "marked") {
       this.db.recoverValues();
-      this.db.markedFilter();
+      this.db.filterMarkedWordIds();
       // console.log("marked");
     }
-    else if(event.value == "viewed"){
+    else if (event.value == "viewed") {
       this.db.recoverValues();
-      this.db.viewedAllWordsOfSelectedSet();
+      this.db.filterViewedWordIds();
     }
-    else{
+    else {
       this.db.recoverValues();
     }
 
   }
   changeSorting(event) {
-    if(event.value == "alpha"){
+    if (event.value == "alpha") {
       this.db.sortAllWordsOfSelectedSet();
     }
 
-    else{
-      this.db.shuffleAllWordsOfSelectedSet();
+    else {
+      this.db.shuffleAllWordIdsOfSelectedSet();
     }
     // this.allSelectedWordIDs = this.db.sortAllWordsOfSelectedSet();
 

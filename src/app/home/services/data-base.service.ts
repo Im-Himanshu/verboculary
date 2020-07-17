@@ -25,7 +25,7 @@ export class DatabaseService {
   public allWordsData: any;
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
-  public allSelectedWordFiltered: any = [];
+  public allSelectedWordIdsFiltered: any = [];
   public filteredSelectedWordIds: any;
   public selectedSet = "beginner-1";
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
@@ -46,7 +46,7 @@ export class DatabaseService {
             if (params.get('setName')) {
               this.selectedSet = params.get('setName');
               //this.selectedSet = "Begineer-1";
-              if (!this.allSelectedWordFiltered.length)
+              if (!this.allSelectedWordIdsFiltered.length)
                 //to make sure db doesn't change all the computed filters to default
                 this.getAllwordsOfSelectedSet();
             }
@@ -57,94 +57,13 @@ export class DatabaseService {
   }
 
 
-  sortAllWordsOfSelectedSet() {
-    // console.log(this.allSelectedWordIds);
-    let stringList: string[] = [];
-    for (var i = 0; i < this.allSelectedWordFiltered.length; i++) {
-      stringList.push(this.allWordsData[this.allSelectedWordFiltered[i]][1]);
-    }
-    stringList.sort(function (a, b) {
-      if (a > b) {
-        return 1;
-      }
-      if (a < b) {
-        return -1;
-      }
-      return 0;
-    })
-    // let sortedSelectedId: string[] = [];
-    this.allSelectedWordFiltered.splice(0, this.allSelectedWordFiltered.length);
-    for (let i = 0; i < stringList.length; i++) {
-      this.allSelectedWordFiltered.push(wordToIdMap[stringList[i]]);
-    }
-    // this.allSelectedWordIds = sortedSelectedId;
-    // return sortedSelectedId;
-
-  }
-
-  markedFilter() {
-
-    let idList: string[] = [];
-    for (var i = 0; i < this.allSelectedWordFiltered.length; i++) {
-      idList.push(this.allSelectedWordFiltered[i]);
-    }
-    this.allSelectedWordFiltered.splice(0, this.allSelectedWordIds.length);
-    for (var i = 0; i < idList.length; i++) {
-      if (this.wordsDynamicData[idList[i]].isMarked) {
-        this.allSelectedWordFiltered.push(idList[i]);
-      }
-    }
-
-  }
-
-  shuffleAllWordsOfSelectedSet() {
-    var currentIndex = this.allSelectedWordFiltered.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = this.allSelectedWordFiltered[currentIndex];
-      this.allSelectedWordFiltered[currentIndex] = this.allSelectedWordFiltered[randomIndex];
-      this.allSelectedWordFiltered[randomIndex] = temporaryValue;
-    }
-    // console.log(this.allSelectedWordIds);
-  }
-
-  viewedAllWordsOfSelectedSet() {
-    let idList: string[] = [];
-    for (let i = 0; i < this.allSelectedWordFiltered.length; i++) {
-      idList.push(this.allSelectedWordFiltered[i]);
-    }
-    this.allSelectedWordFiltered.splice(0, this.allSelectedWordFiltered.length);
-    for (let i = 0; i < idList.length; i++) {
-      if (this.wordsDynamicData[idList[i]].isSeen) {
-        this.allSelectedWordFiltered.push(idList[i]);
-      }
-    }
-  }
-
-
-  recoverValues() {
-    console.log("Recovered Service called");
-    this.allSelectedWordFiltered.splice(0, this.allSelectedWordFiltered.length);
-    for (var i = 0; i < this.allSelectedWordIds.length; i++) {
-      this.allSelectedWordFiltered.push(this.allSelectedWordIds[i]);
-    }
-  }
-
   getAllwordsOfSelectedSet() {
     // first process after all the data is laoded from the data base...
     if (this.allSetData) {
-      console.log("RESET WORDS")
       this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet];
       this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
       for (var i = 0; i < this.allSelectedWordIds.length; i++) {
-        this.allSelectedWordFiltered.push(this.allSelectedWordIds[i]);
+        this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
       }
       // this will save all the selected word IDs which will be displayed
     }
@@ -271,6 +190,87 @@ export class DatabaseService {
     })
 
   }
+
+
+  sortAllWordsOfSelectedSet() {
+    // console.log(this.allSelectedWordIds);
+    let stringList: string[] = [];
+    for (var i = 0; i < this.allSelectedWordIdsFiltered.length; i++) {
+      stringList.push(this.allWordsData[this.allSelectedWordIdsFiltered[i]][1]);
+    }
+    stringList.sort(function (a, b) {
+      if (a > b) {
+        return 1;
+      }
+      if (a < b) {
+        return -1;
+      }
+      return 0;
+    })
+    // let sortedSelectedId: string[] = [];
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+    for (let i = 0; i < stringList.length; i++) {
+      this.allSelectedWordIdsFiltered.push(wordToIdMap[stringList[i]]);
+    }
+    // this.allSelectedWordIds = sortedSelectedId;
+    // return sortedSelectedId;
+
+  }
+
+  filterMarkedWordIds() {
+
+    let idList: string[] = [];
+    for (var i = 0; i < this.allSelectedWordIdsFiltered.length; i++) {
+      idList.push(this.allSelectedWordIdsFiltered[i]);
+    }
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIds.length);
+    for (var i = 0; i < idList.length; i++) {
+      if (this.wordsDynamicData[idList[i]].isMarked) {
+        this.allSelectedWordIdsFiltered.push(idList[i]);
+      }
+    }
+
+  }
+
+  shuffleAllWordIdsOfSelectedSet() {
+    var currentIndex = this.allSelectedWordIdsFiltered.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = this.allSelectedWordIdsFiltered[currentIndex];
+      this.allSelectedWordIdsFiltered[currentIndex] = this.allSelectedWordIdsFiltered[randomIndex];
+      this.allSelectedWordIdsFiltered[randomIndex] = temporaryValue;
+    }
+    // console.log(this.allSelectedWordIds);
+  }
+
+  filterViewedWordIds() {
+    let idList: string[] = [];
+    for (let i = 0; i < this.allSelectedWordIdsFiltered.length; i++) {
+      idList.push(this.allSelectedWordIdsFiltered[i]);
+    }
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+    for (let i = 0; i < idList.length; i++) {
+      if (this.wordsDynamicData[idList[i]].isSeen) {
+        this.allSelectedWordIdsFiltered.push(idList[i]);
+      }
+    }
+  }
+
+
+  recoverValues() {
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+    for (var i = 0; i < this.allSelectedWordIds.length; i++) {
+      this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
+    }
+  }
+
 
 
   getData() {

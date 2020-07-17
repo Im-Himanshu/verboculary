@@ -37,7 +37,7 @@ export class PractiseComponent implements OnInit {
 
   constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public toastController: ToastController) {
 
-    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
+    this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs)
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;

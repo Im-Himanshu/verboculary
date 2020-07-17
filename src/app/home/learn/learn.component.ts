@@ -49,7 +49,7 @@ export class LearnComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
+    this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;
