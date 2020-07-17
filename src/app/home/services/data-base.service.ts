@@ -44,9 +44,9 @@ export class DatabaseService {
             if (params.get('setName')) {
               this.selectedSet = params.get('setName');
               //this.selectedSet = "Begineer-1";
-              if (!this.allSelectedWordIdsFiltered.length)
-                //to make sure db doesn't change all the computed filters to default
-                this.getAllwordsOfSelectedSet();
+              //if (!this.allSelectedWordIdsFiltered.length)
+              //to make sure db doesn't change all the computed filters to default
+              this.getAllwordsOfSelectedSet();
             }
           })
         }
@@ -60,6 +60,7 @@ export class DatabaseService {
     if (this.allSetData) {
       this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet];
       this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
+      this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
       for (var i = 0; i < this.allSelectedWordIds.length; i++) {
         this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
       }
@@ -428,33 +429,5 @@ export class DatabaseService {
     return array;
   }
 
-  public sortIdsAlphabetically(WordIds: string[]) {
-    if (!this.allWordsData) {
-      return; // will call again after the data is set
-    }
 
-    let FeedListtoSort = [];
-    for (let wordID of WordIds) {
-      let crntData = {};
-      crntData["word"] = this.allWordsData[wordID][1];
-      crntData["id"] = wordID;
-      FeedListtoSort.push(crntData);
-    }
-    FeedListtoSort.sort(this.compareForsortAlphabetically);
-    let index = 0;
-    for (let sortedList of FeedListtoSort) {
-      WordIds[index] = sortedList["id"]; // this will updated the current object without removing the object
-      index++;
-    }
-  }
-
-  compareForsortAlphabetically(wordsData1, wordsData2) {
-    if (wordsData1["word"] < wordsData2["word"]) {
-      return -1;
-    }
-    if (wordsData1["word"] > wordsData2["word"]) {
-      return 1;
-    }
-    return 0;
-  }
 }
