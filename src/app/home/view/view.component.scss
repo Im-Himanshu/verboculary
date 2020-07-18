@@ -21,7 +21,7 @@
 
 
 .parentBox{
-    display: flex;    
+    display: flex;
     flex-direction: column;
     width: 96%;
     height: 100%;
@@ -51,7 +51,7 @@
         font-weight: 500;
         font-size: 16px;
         line-height: 19px;
-        color: #6B6B6B;
+        color: var(--view-text-color);
     }
 }
 
@@ -95,7 +95,7 @@
             color: #61C688;
 
         }
-        
+
     }
 
 }
@@ -154,7 +154,7 @@
 //     width: 87%;
 //     height: 37px;
 //     margin-top: 12px;
-    
+
 // }
 
 
@@ -233,3 +233,9 @@
 // 	position: absolute;
 //     left: 50px;
 // }
+
+
+.name-item{
+    --background: var(--word-name-item-background-color);
+    --border-color: var(--word-border-bottom-color);
+}

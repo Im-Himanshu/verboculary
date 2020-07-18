@@ -31,7 +31,7 @@
       <!-- this part checks if the search query is empty -->
       <div *ngIf="!searchService.searchQuery">
         <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs">
-          <ion-item>
+          <ion-item class="name-item">
             <div class="parentBox">
 
               <div class="firstRow" (click)="onWordClickToggleit(oneWordId)">

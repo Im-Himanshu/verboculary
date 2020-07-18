@@ -67,14 +67,14 @@
           </div>
         </div>
         <div (click)="scrollToElement(transistional)" class="subLevel subFlexing2">
-          <div style="background-color: #fecc7b;" class="purple-square"></div>
+          <div style="background-color: var(--card-border-bottom);" class="purple-square"></div>
           <div class="connectingLine">
             <hr class="new1">
           </div>
         </div>
 
         <div (click)="scrollToElement(pro)" class="subLevel subFlexing2">
-          <div style="background-color: #fe805d;" class="purple-square"></div>
+          <div style="background-color: var(--level-icon-below);" class="purple-square"></div>
         </div>
 
       </div>
@@ -106,10 +106,10 @@
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #c0e8cf;">
+            <div class="progressBar" style="background-color: var(--progress-bar-green);">
               <div
                 [ngStyle]="{'width': ((crntSetProgressData['totalViewed']/crntSetProgressData['totalWords'])*100+3) + '%'}"
-                class="progressBarBackground" style="background-color: #62c589"></div>
+                class="progressBarBackground" style="background-color: var(--progress-green);"></div>
             </div>
             <div class="progresStats">
               <span>{{crntSetProgressData['totalViewed']}}/ {{crntSetProgressData['totalWords']+ " "}}
@@ -117,10 +117,10 @@
             </div>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #fde6c1;">
+            <div class="progressBar" style="background-color: var(--progress-bar-orange);">
               <div
                 [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
-                class="progressBarBackground" style="background-color: #ffbb4d"></div>
+                class="progressBarBackground" style="background-color: var(--progress-orange);"></div>
             </div>
             <div class="progresStats">
               <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}
@@ -131,7 +131,7 @@
         </div>
         <div class="navigationIcon">
 
-          <ion-icon style="width: 100%;height: 100%;color: #87768d;max-width: 36px;" name="arrow-forward"
+          <ion-icon style="width: 100%;height: 100%;color: var(--arrow-icon-color);max-width: 36px;" name="arrow-forward"
             routerLink="/mainmodule/base/wordSets/{{setName}}">
           </ion-icon>
 
@@ -150,7 +150,7 @@
 
     <div *ngFor="let one of repetitions" class="oneSet">
       <div class="oneSetData" *ngIf="allSelectedSet[7+one] as setName">
-        <div class="initialIcon" style="background-color: #fbecd3b0;">
+        <div class="initialIcon" style="background-color: var(--level-icon-background-transitional);">
           <div class="actualIcon">
             <svg-icon name='transistional'></svg-icon>
           </div>
@@ -161,10 +161,10 @@
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #c0e8cf;">
+            <div class="progressBar" style="background-color: var(--progress-bar-green);">
               <div
                 [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
-                class="progressBarBackground" style="background-color: #62c589"></div>
+                class="progressBarBackground" style="background-color: var(--progress-green);"></div>
             </div>
             <div class="progresStats">
               <span>{{crntSetProgressData['totalViewed']}}/ {{crntSetProgressData['totalWords']+ " "}}
@@ -172,10 +172,10 @@
             </div>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #fde6c1;">
+            <div class="progressBar" style="background-color: var(--progress-bar-orange);">
               <div
                 [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
-                class="progressBarBackground" style="background-color: #ffbb4d"></div>
+                class="progressBarBackground" style="background-color: var(--progress-orange);"></div>
             </div>
             <div class="progresStats">
               <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}
@@ -186,7 +186,7 @@
         </div>
         <div class="navigationIcon">
 
-          <ion-icon style="width: 100%;height: 100%;color: #87768d;max-width: 36px;" name="arrow-forward"
+          <ion-icon style="width: 100%;height: 100%;color: var(--arrow-icon-color);max-width: 36px;" name="arrow-forward"
             routerLink="/mainmodule/base/wordSets/{{setName}}">
           </ion-icon>
 
@@ -205,7 +205,7 @@
 
     <div *ngFor="let one of repetitions" class="oneSet">
       <div class="oneSetData" *ngIf="allSelectedSet[14+one] as setName ">
-        <div class="initialIcon" style="background-color: #fbd4ca85;">
+        <div class="initialIcon" style="background-color: var(--level-icon-background-pro);">
           <div class="actualIcon">
             <svg-icon name='proIcon'></svg-icon>
           </div>
@@ -216,10 +216,10 @@
             <span id="mainText">{{appNametoUINameMapping[setName]}}</span>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #c0e8cf;">
+            <div class="progressBar" style="background-color: var(--progress-bar-green);">
               <div
                 [ngStyle]="{'width': ((crntSetProgressData['totalViewed']/crntSetProgressData['totalWords'])*100+3) + '%'}"
-                class="progressBarBackground" style="background-color: #62c589"></div>
+                class="progressBarBackground" style="background-color: var(--progress-green);"></div>
             </div>
             <div class="progresStats">
               <span>{{crntSetProgressData['totalViewed']}}/ {{crntSetProgressData['totalWords']+ " "}}
@@ -227,10 +227,10 @@
             </div>
           </div>
           <div class="progressStatus">
-            <div class="progressBar" style="background-color: #fde6c1;">
+            <div class="progressBar" style="background-color: var(--progress-bar-orange);">
               <div
                 [ngStyle]="{'width': ((crntSetProgressData['totalLearned']/crntSetProgressData['totalWords'])*100+3) + '%'}"
-                class="progressBarBackground" style="background-color: #ffbb4d"></div>
+                class="progressBarBackground" style="background-color: var(--progress-orange);"></div>
             </div>
             <div class="progresStats">
               <span>{{crntSetProgressData['totalLearned']}}/ {{crntSetProgressData['totalWords']+ " "}}
@@ -241,7 +241,7 @@
         </div>
         <div class="navigationIcon">
 
-          <ion-icon style="width: 100%;height: 100%;color: #87768d;max-width: 36px;" name="arrow-forward"
+          <ion-icon style="width: 100%;height: 100%;color: var(--arrow-icon-color);max-width: 36px;" name="arrow-forward"
             routerLink="/mainmodule/base/wordSets/{{setName}}">
           </ion-icon>
 

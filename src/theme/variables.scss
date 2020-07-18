@@ -148,80 +148,80 @@
       --app-alert-background
     ); // this is to avoid the side blue color in popover element
   }
-  //   .darkTheme{
+    .darkTheme{
 
-  //     --primary-dark : #00000b;  //
-  //     --primary : #132332;  //#1f271f
-  //     --primary-light: #3b4b5b;
-  //     //--primary-lighter : #739699;
-  //     --primary-contrast : rgb(255, 255, 255); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
-  //     --primaryLight-contrast : #ffffff6e;     //#F5F5F6;
-  //     --secondary : #D85A5A;
+      --primary-dark : #00000b;  //
+      --primary : #132332;  //#1f271f
+      --primary-light: #3b4b5b;
+      //--primary-lighter : #739699;
+      --primary-contrast : rgb(255, 255, 255); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
+      --primaryLight-contrast : #ffffff6e;     //#F5F5F6;
+      --secondary : #D85A5A;
 
-  //     --appBackground : rgb(255, 255, 255);
-  //     --appTextColor : #3c3c3c;
-  //     --cardBackground : rgb(255, 255, 255);
+      --appBackground : rgb(255, 255, 255);
+      --appTextColor : #3c3c3c;
+      --cardBackground : rgb(255, 255, 255);
 
-  // //#F5F5F6 -- card background
-  // //#E1E2E1;
-  // //#cccccc -- selected White
-  //     --tertiary : #3d708b;
-  //     --tertiaryContrast : #fff;
+  //#F5F5F6 -- card background
+  //#E1E2E1;
+  //#cccccc -- selected White
+      --tertiary : #3d708b;
+      --tertiaryContrast : #fff;
 
-  //     --app-mainToolbar-background :var(--primary-dark);
-  //     --app-mainToolbar-color : var(--primary-contrast);
-  //     --app-navigatonMenubar-background :var(--primary);
-  //     --app-navigatonMenubar-color : var(--primary-contrast);
-  //     --app-navigatonMenubarSelectedTabs-color : var(--secondary);
-  //     //--app-selectedFilterTabbar-background :var(--ion-color-primary);
-  //     //--app-selectedFilterTabbar-color : #fff;
-  //     --app-selectedfilterToolbar-background :var(--appBackground);//var(--ion-color-primary);
-  //     --app-selectedfilterToolbar-color : var(--appTextColor);
-  //     //--app-sideMenu-background : #f04141; // useless as of now
-  //     --app-sideMenuHeader-background :var(--primary);
-  //     --app-sideMenuHeader-color : var(--appTextColor);
-  //     --app-sideMenuContent-background :var(--appBackground);
-  //     --app-sideMenuContent-color :var(--appTextColor);
-  //     --app-sideMenuFilterHeader-background : var(--cardBackground);
-  //     --app-sideMenuFilterBody-background :var(--appBackground);
+      --app-mainToolbar-background :var(--primary-dark);
+      --app-mainToolbar-color : var(--primary-contrast);
+      --app-navigatonMenubar-background :var(--primary);
+      --app-navigatonMenubar-color : var(--primary-contrast);
+      --app-navigatonMenubarSelectedTabs-color : var(--secondary);
+      //--app-selectedFilterTabbar-background :var(--ion-color-primary);
+      //--app-selectedFilterTabbar-color : #fff;
+      --app-selectedfilterToolbar-background :var(--appBackground);//var(--ion-color-primary);
+      --app-selectedfilterToolbar-color : var(--appTextColor);
+      //--app-sideMenu-background : #f04141; // useless as of now
+      --app-sideMenuHeader-background :var(--primary);
+      --app-sideMenuHeader-color : var(--appTextColor);
+      --app-sideMenuContent-background :var(--appBackground);
+      --app-sideMenuContent-color :var(--appTextColor);
+      --app-sideMenuFilterHeader-background : var(--cardBackground);
+      --app-sideMenuFilterBody-background :var(--appBackground);
 
-  //     --app-alWordsContent-background: var(--appBackground); // this has no background this color is used for foreground element
-  //     --app-alWordsContent-color: var(--appTextColor);
-  //     --app-alWordsborder-color: var(--primaryLight-contrast);
+      --app-alWordsContent-background: var(--appBackground); // this has no background this color is used for foreground element
+      --app-alWordsContent-color: var(--appTextColor);
+      --app-alWordsborder-color: var(--primaryLight-contrast);
 
-  //     --app-learnWordsContent-background : var(--appBackground);
-  //     --app-learnWordsContent-color : var(--appTextColor);
-  //     --app-learnWordsCard-background : var(--cardBackground);
-  //     --app-learnWordTogglehandle-background : var(--primary-contrast);
-  //     --app-learnWordToggleChecked-background :var(--appBackground);
-  //     --app-learnWordsChangeButton-background : var(--primary);
-  //     --app-learnWordsChangeButton-color : var(--appBackground);
+      --app-learnWordsContent-background : var(--appBackground);
+      --app-learnWordsContent-color : var(--appTextColor);
+      --app-learnWordsCard-background : var(--cardBackground);
+      --app-learnWordTogglehandle-background : var(--primary-contrast);
+      --app-learnWordToggleChecked-background :var(--appBackground);
+      --app-learnWordsChangeButton-background : var(--primary);
+      --app-learnWordsChangeButton-color : var(--appBackground);
 
-  //     --app-practiseContent-background : var(--appBackground);
-  //     //--app-practiseProgressBar-background : #ffd31a;
-  //     --app-practiseProgressBarbuffer-background : var(--primary-contrast);
-  //     --app-practiseCard-background : var(--primary);
-  //     --app-practiseCard-color : var(--primary-contrast);
+      --app-practiseContent-background : var(--appBackground);
+      //--app-practiseProgressBar-background : #ffd31a;
+      --app-practiseProgressBarbuffer-background : var(--primary-contrast);
+      --app-practiseCard-background : var(--primary);
+      --app-practiseCard-color : var(--primary-contrast);
 
-  //     --app-alert-background :var(--primary);
-  //     --app-alerttitle-color : var(--primary-contrast);
-  //     --app-alertmessage-color : var(--primary-contrast);
-  //     --app-alertButton-color : var(--primary-contrast);
-  //     --app-popover-background : var(--app-alert-background);
-  //     --app-popover-color : var(--app-alertmessage-color);
-  //     --app-popoverRadioSelect-color : var(--primary-contrast);
+      --app-alert-background :var(--primary);
+      --app-alerttitle-color : var(--primary-contrast);
+      --app-alertmessage-color : var(--primary-contrast);
+      --app-alertButton-color : var(--primary-contrast);
+      --app-popover-background : var(--app-alert-background);
+      --app-popover-color : var(--app-alertmessage-color);
+      --app-popoverRadioSelect-color : var(--primary-contrast);
 
-  //     --app-modalContent-color:var(--primary-contrast);
-  //     --app-modalContent-background: var(--primary-light);
-  //     --app-modalToolbar-background :var(--ion-color-primary); // have to be same as mainToolbar
-  //     --app-modalToolbar-color : var(--primary-light); // have to be same as main toolbar
+      --app-modalContent-color:var(--primary-contrast);
+      --app-modalContent-background: var(--primary-light);
+      --app-modalToolbar-background :var(--ion-color-primary); // have to be same as mainToolbar
+      --app-modalToolbar-color : var(--primary-light); // have to be same as main toolbar
 
-  //     --ion-overlay-background-color :var(--app-alert-background);
-  //     --ion-item-background : var(--app-alert-background); // this is to avoid the side blue color in popover element
-  //     //--app-practiseProgressBarprogress-background : #f7f6f4;
-  //     // -app-sideMenuContent-color : #f4f5f8; // use less as of now
+      --ion-overlay-background-color :var(--app-alert-background);
+      --ion-item-background : var(--app-alert-background); // this is to avoid the side blue color in popover element
+      //--app-practiseProgressBarprogress-background : #f7f6f4;
+      // -app-sideMenuContent-color : #f4f5f8; // use less as of now
 
-  // }
+  }
 
   .lightTheme {
     // have to be calculated
@@ -246,8 +246,6 @@
     --cardBackground: rgb(255, 255, 255);
     --ion-color-primary: #132332;
 
-    --app-mainToolbar-background: var(--primary-light);
-    --app-mainToolbar-color: var(--primarylight-contrast);
     --app-navigatonMenubar-background: var(
       --primary
     ); // this is the main focus so it is to be of darker than maintoolbar
@@ -292,13 +290,11 @@
       --nonImportantDarkColor
     ); // have to be same to give the inteline space feel and blend with background
 
-    --app-learnWordsContent-background: var(--appBackground);
+
     --app-learnWordsContent-color: var(--cardTextColor);
     --app-learnWordsCard-background: var(--cardBackground);
     --app-learnWordTogglehandle-background: var(--app-navigatonMenubar-color);
-    --app-learnWordToggleChecked-background: var(
-      --app-navigatonMenubar-background
-    );
+
     --app-learnWordsChangeButton-background: var(
       --app-navigatonMenubar-background
     );
@@ -306,10 +302,10 @@
     --app-learnWordsMatTab-background: var(--lightColorFocus);
     --app-learnWordsMatTab-color: var(--app-mainToolbar-background);
 
-    --app-practiseContent-background: var(--appBackground);
+
     --app-practiseProgressBarbuffer-background: var(--appTextColor);
     --app-practiseCard-background: var(--cardBackground);
-    --app-practiseCard-color: var(--appTextColor);
+
 
     --app-modalToolbar-background: var(
       --app-navigatonMenubar-background
@@ -335,8 +331,41 @@
 
     /// relations are as follows
 
-    //new colors
-
+    //new colors -- to be added in dark variants
+    --app-homepage-graph: #452b4f;
+    --card-border-bottom: #fecc7b;
+    --user-level: #F9FBFC;
+    --dashboard-text-color: #452b4f;
+    --viewed-card-color: #707070;
+    --app-mainToolbar-background: var(--primary-light);
+    --app-mainToolbar-color: var(--primarylight-contrast);
+    --progress-bar-green: #c0e8cf;
+    --progress-green: #62c589;
+    --progress-bar-orange: #fde6c1;
+    --progress-orange: #ffbb4d;
+    --progress-stat-text-color: #707070;
+    --arrow-icon-color: #87768d;
+    --level-name-color: #707070;
+    --level-status-color: #707070;
+    --dashboard-background-color: white;
+    --level-icon-background-beginner: #ecf8f1;
+    --level-icon-background-transitional: #fbecd3b0;
+    --level-icon-background-pro: #fbd4ca85;
+    --level-icon-below: #fe805d;
+    --view-text-color: #6B6B6B;
+    --word-name-item-text-color: white;
+    --word-name-item-background-color: white;
+    --word-border-bottom-color: #e0dcdc;
+    --learn-card-background: white;
+    --app-learnWordsContent-color: var(--cardTextColor);
+    --app-learnWordsChangeButton-background: var(
+      --app-navigatonMenubar-background
+    );
+    --app-practiseContent-background: var(--appBackground);
+    --test-swipable-card-background: white;
+    --test-swipe-button: white;
+    --app-practiseCard-color: var(--appTextColor);
+    --practise-card-border: #70757a21;
 
   }
 }

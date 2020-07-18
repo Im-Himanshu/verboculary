@@ -4,9 +4,9 @@
 }
 
 .learnWordsContent {
-  --background: var(--app-learnWordsContent-background);
+  --background: var(--learn-card-background);
   ion-card {
-    --background: var(--app-learnWordsCard-background);
+    --background: var(--learn-card-background);
     --color: var(--app-learnWordsContent-color);
 
     ion-toggle {
@@ -18,7 +18,7 @@
   }
 }
 .learnWordsChangeButton {
-  --background: var(--app-learnWordsContent-background);
+  --background: var(--learn-card-background);
   ion-button {
     --background: var(--app-learnWordsChangeButton-background);
     --color: var(--app-learnWordsChangeButton-color);

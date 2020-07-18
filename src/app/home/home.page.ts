@@ -10,6 +10,8 @@ import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
 import {SearchService} from './services/search.service'
+import {SharingServiceService} from './services/sharing-service.service'
+import { Router } from '@angular/router'
 import { wordToIdMap } from '../wordToId'
 
 @Component({
@@ -50,12 +52,11 @@ export class HomePage implements OnInit {
   masterCard = [1, 2, 3]
 
 
-  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService) {
+  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router,public sharingService: SharingServiceService) {
     this.cards = [];
 
   }
   ngOnInit() {
-
 
   }
 

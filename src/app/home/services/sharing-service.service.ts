@@ -11,7 +11,18 @@ export class SharingServiceService {
 
   //deeplinking call or create service
 
-  onShare(url: any) {
+
+  onShareApp() {
+    // console.log("App Share triggered");
+    this.socialSharing.share(
+      "Download the verboculary app for GRE preparation",
+      null,
+      [],
+      "https://verboculary.page.link/PZXe"
+    );
+  }
+
+  onShareImage(url: any) {
     this.socialSharing.share(
       "Join us at verboculary",
       null,
@@ -31,7 +42,7 @@ export class SharingServiceService {
       img.src = dataUrl;
       console.log(img);
 
-      this.onShare(img.src);
+      this.onShareImage(img.src);
 
       console.log("working");//remove this once checked on your terminal
     })

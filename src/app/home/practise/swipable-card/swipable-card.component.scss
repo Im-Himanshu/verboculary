@@ -7,7 +7,7 @@
     left: 0;
     top: 0;
   }
-  
+
   .tinder--status {
     position: absolute;
     top: 50%;
@@ -17,7 +17,7 @@
     text-align: center;
     pointer-events: none;
   }
-  
+
   .tinder--cards {
     text-align: center;
     display: flex;
@@ -30,12 +30,12 @@
     overflow: hidden;
     top: -13%
   }
-  
+
   .tinder--card {
     display: inline-block;
     width: 95%;
     // height: 70%;
-    background: var(--app-practiseCard-background);
+    background: var(--test-swipable-card-background);
     color : var(--app-practiseCard-color);
     padding-bottom: 30px;
     border-radius: 8px;
@@ -46,27 +46,27 @@
     cursor: -webkit-grab;
     cursor: -moz-grab;
     cursor: grab;
-    border: 2px outset #70757a21;
+    border: 2px outset var(--practise-card-border);
   }
-  
+
   .moving.tinder--card {
     transition: none;
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
     cursor: grabbing;
   }
-  
+
   .tinder--status > div {
     transition: all 0.3s ease-in-out;
   }
-  
+
   .tinder--status svg {
     transition: all 0.3s ease-in-out;
     position: absolute;
     width: 100px;
     margin-left: -50px;
   }
-  
+
   .tinder--card img {
     max-width: 100%;
     max-height: 75%;
@@ -74,21 +74,21 @@
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
-  
+
   .tinder--card h3 {
     margin-top: 16px;
     font-size: 24px;
     padding: 0 16px;
     pointer-events: none;
   }
-  
+
   .tinder--card p {
     margin-top: 24px;
     font-size: 16px;
     padding: 0 16px;
     pointer-events: none;
   }
-  
+
   .tinder--buttons {
     position: absolute;
     flex: 0 0 100px;
@@ -97,7 +97,7 @@
     left: 0;
     right: 0;
   }
-  
+
   .tinder--buttons button {
     border-radius: 50%;
     line-height: 50px;
@@ -111,7 +111,7 @@
     padding-top: 10px;
     margin: 0 12px;
   }
-  
+
   .tinder--buttons button:focus {
     outline: 0;
   }
@@ -144,7 +144,7 @@
   // color: #222428;
   padding-top: 8px;
   margin-bottom: 14px;
-  font-size: 15px;  
+  font-size: 15px;
   line-height: 1.2;
   text-align: left;
 

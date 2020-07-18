@@ -18,7 +18,7 @@
         <ion-label>How To Use?</ion-label>
       </ion-item>
 
-      <ion-item>
+      <ion-item (click)="sharingService.onShareApp()">
         <ion-icon name="share" slot="start"></ion-icon>
         <ion-label>Share app</ion-label>
       </ion-item>
@@ -65,6 +65,7 @@
         (ionFocus)="searchBarOnFocus($event)"
         [routerLink] = "['/mainmodule/base/wordSets/begineer-1']"
         (ionChange)="searchBarOnFocus($event)"
+        *ngIf="router.url === '/mainmodule/base/dashboard'"
         ></ion-searchbar>
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
