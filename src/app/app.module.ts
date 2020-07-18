@@ -28,6 +28,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SlidesComponent } from './home/POCs/slides/slides.component'
 import { Media } from "@ionic-native/media/ngx";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
+import { AppRate } from '@ionic-native/app-rate/ngx';
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -74,6 +75,7 @@ var firebaseConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
     Media,
+    AppRate
   ],
   bootstrap: [AppComponent],
 })

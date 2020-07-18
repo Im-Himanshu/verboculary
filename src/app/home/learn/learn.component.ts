@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
+import { SharingServiceService } from '../services/sharing-service.service'
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+
 import domtoimage from 'dom-to-image';
 @Component({
   selector: 'app-learn',
@@ -10,7 +12,7 @@ import domtoimage from 'dom-to-image';
 })
 export class LearnComponent implements OnInit {
 
-
+  @ViewChild("container", { static: false, read: ElementRef }) container: ElementRef;
 
 
   allSelectedWordIDs: number[];
@@ -26,7 +28,7 @@ export class LearnComponent implements OnInit {
   isToShowDetails: boolean = false;
   isSafeUrlReady: boolean = true;
   isAllWordMastered: boolean = false;
-  @ViewChild('container', { static: false }) container;
+
 
 
   tabBars: any = ["https://www.google.com/search?igu=1&ei=&q=define+",
@@ -40,7 +42,7 @@ export class LearnComponent implements OnInit {
 
 
 
-  constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer) {
+  constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService) {
 
   }
 
@@ -92,6 +94,7 @@ export class LearnComponent implements OnInit {
       .then(function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
+        console.log(dataUrl);
         document.body.appendChild(img);
       })
       .catch(function (error) {
@@ -99,6 +102,9 @@ export class LearnComponent implements OnInit {
       })
   }
 
+  socialShare(event){
+    this.shareService.shareImageViaScreenshot(this.container);
+  }
 
   onDynamicDataChange(setName?, wordId?, isToAdd?) {
     if (setName && wordId) {
