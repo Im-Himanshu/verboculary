@@ -41,7 +41,6 @@ export class SharingServiceService {
       var img = new Image();
       img.src = dataUrl;
       console.log(img);
-
       this.onShareImage(img.src);
 
       console.log("working");//remove this once checked on your terminal

@@ -10,7 +10,8 @@ import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
 import { SearchService } from './services/search.service'
-import { SharingServiceService } from './services/sharing-service.service'
+import { SharingServiceService } from './services/sharing-service.service';
+import { AppRateService } from './POCs/AppRate Service/app-rate.service';
 import { Router } from '@angular/router'
 import { wordToIdMap } from '../wordToId'
 
@@ -37,8 +38,7 @@ export class HomePage implements OnInit {
   prevDeltaX = 0;
   prevDeltaY = 0;
 
-  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router) {
-
+  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
 
