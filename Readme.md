@@ -129,7 +129,7 @@ What will be the release 2 :
 
 1. we can include the word cartoon to the list availaible here
    https://quizlet.com/Vince_Kotchian/folders/vince-kotchian-gre-preps-vocabulary-cartoons/sets
-2.
+2. 
 
 For Api End Point :
 https://sheety.co/projects/5e382126461ceb4b5f19eecf/endpoint/5e3822e5461ceb4b5f19eed2

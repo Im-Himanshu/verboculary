@@ -9,8 +9,8 @@ import { AlertController } from '@ionic/angular';
 import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
-import {SearchService} from './services/search.service'
-import {SharingServiceService} from './services/sharing-service.service'
+import { SearchService } from './services/search.service'
+import { SharingServiceService } from './services/sharing-service.service'
 import { Router } from '@angular/router'
 import { wordToIdMap } from '../wordToId'
 
@@ -31,6 +31,7 @@ export class HomePage implements OnInit {
   allSetOfcategory: any;
   allWordsOfSets;
   isDarkMode: boolean = false;
+  chartLabelsAndData = {};
 
 
   prevDeltaX = 0;
@@ -46,6 +47,8 @@ export class HomePage implements OnInit {
 
 
   }
+
+
 
 
 
@@ -150,73 +153,7 @@ export class HomePage implements OnInit {
 
 
 
-  handlePan(event) {
 
-    let absoluteY = event.center.y;
-    if (absoluteY < 30 || absoluteY > 500) { return; }
-    if (event.deltaX === 0 || (event.center.x === 0 && event.center.y === 0)) return;
-
-    //console.log(event.deltaX, event.deltaY)
-    let newDeltaX = event.deltaX - this.prevDeltaX; // the new delta
-    let newDeltaY = event.deltaY - this.prevDeltaY // the new delta more then the previous one
-    this.prevDeltaX = event.deltaX;
-    this.prevDeltaY = event.deltaY;
-    let rotate = newDeltaX * newDeltaY;
-    //console.log(newDeltaX, newDeltaY)
-
-    let move: any = event.deltaY;
-    if (event.deltaY >= 0) {
-      move = "+" + move; // assigning the sign to the positive numbers
-    }
-    let toMoveElement = document.getElementById("toMove");
-    let crntPosition: any = toMoveElement.style.top;
-    crntPosition = crntPosition.substring(0, crntPosition.length - 2)// -1 for 0 index and - 2 for removing px
-    crntPosition = parseInt(crntPosition);
-
-    let newPosition = crntPosition + newDeltaY;
-
-    if (absoluteY < 30 || newPosition > 700 || absoluteY > 430) { return; }
-    let newValue = "calc(" + + move + "px)";
-    toMoveElement.style.top = newPosition + "px"
-
-  }
-
-
-  handlePanEnd(event) {
-    //30 to 500 250
-
-    let toMoveElement = document.getElementById("toMove");
-
-    let absoluteY = event.center.y;
-
-    if (absoluteY > 200) {
-      toMoveElement.style.top = 430 + "px"
-    }
-    if (absoluteY <= 200) {
-      toMoveElement.style.top = 30 + "px"
-    }
-    this.prevDeltaX = 0;
-    this.prevDeltaY = 0;
-
-  }
-
-  swipeup(event) {
-    let toMoveElement = document.getElementById("toMove");
-
-    let absoluteY = event.center.y;
-
-    if (absoluteY > 200) {
-      toMoveElement.style.top = 430 + "px"
-    }
-    if (absoluteY <= 200) {
-      toMoveElement.style.top = 30 + "px"
-    }
-    this.prevDeltaX = 0;
-    this.prevDeltaY = 0;
-
-
-
-  }
 
 
 

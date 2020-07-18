@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { Color, Label, BaseChartDirective, } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 @Component({
@@ -10,14 +10,62 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 // note pan should always be subpart of the max-min of the range otherwise it behaves weirdly
 export class ProgressChartComponent implements AfterViewInit {
 
+  /*
+  feed it the array of 
+  {
+  "date" : {"viewed" : total # till Date, "learned" : total #till Date}
+  "date" : {"viewed" : total # till Date, "learned" : total #till Date}
+  }
+  */
+  @Input("chartLabelsAndData") chartLabelsAndData: any; // date to agregated progress data
+
   isProcessed: boolean = false;
-  chartOptions;
+  chartOptions; 2
   chartLabels: Date[]
 
+
+  fillPattern: any;
+
+
+  timeFormat = "MM/DD/YYYY HH:mm";
+
+  @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
+  chartData: ChartDataSets[] = [
+
+  ];
+  public lineChartColors;
+  constructor() { }
   ngAfterViewInit(): void {
-    this.chartLabels = [this.newDate(0), this.newDate(-1), this.newDate(-2), this.newDate(-3), this.newDate(-4), this.newDate(-5), this.newDate(-6)];
+    let allDates = Object.keys(this.chartLabelsAndData);
 
+    if (allDates.length == 0) {
+      console.error("No Data was parsed for the charting graph")
+      return;
+    }
+    allDates.sort();
+    let viewedSeries = [];
+    let learnedSeries = [];
+    this.chartLabels = [];
+    this.chartData = [];
+    let i = 0;
+    for (let oneDate of allDates) {
+      viewedSeries.push(this.chartLabelsAndData[oneDate]["viewed"])
+      learnedSeries.push(this.chartLabelsAndData[oneDate]["learned"])
+      this.chartLabels.push(new Date(oneDate)); // will convert the given date strign  to the date array 
+      i++;
+    }
 
+    let forViewed = {
+      data: viewedSeries, label: "Viewed"
+    }
+    let forLearned = {
+      data: learnedSeries, label: "Learned"
+    }
+    this.chartData.push(forViewed);
+    this.chartData.push(forLearned)
+    let lastDate = this.chartLabels[this.chartLabels.length - 1];
+    let firstDate = this.chartLabels[0]
+    // this.chartLabels = [this.newDate(-6), this.newDate(0), this.newDate(-1), this.newDate(-5), this.newDate(-2), this.newDate(-3), this.newDate(-4), this.newDate(-5)];
     let doc = document.getElementById("main");
     let height = doc.clientHeight;
     var canvas = <HTMLCanvasElement>document.getElementById('canvas')
@@ -71,17 +119,31 @@ export class ProgressChartComponent implements AfterViewInit {
     // 2. the range_min and range_mix will be decided based on the user data history
     // range_min = minimum date-2 days and range_max --> today+1 never below the actual limit 
     this.lineChartColors = [property, property2]; // both graph are of same design
-    let range_max: any = new Date();
-    range_max.setDate(new Date().getDate() + 1);
+    let range_max: any = lastDate
+    range_max.setDate(lastDate.getDate() + 1);
     let range_max2 = range_max.getTime()  // range of pan have to be greater then the range of min-max if it is less it doesn't work well..some logic get fucked up
-    range_max.setDate(new Date().getDate());
+    range_max.setDate(lastDate.getDate());
     range_max = range_max.getTime();
 
-    let range_min: any = new Date();
-    range_min.setDate(new Date().getDate() - 7);
+    let range_min: any = firstDate
+    range_min.setDate(firstDate.getDate() - 2);
     let range_min2 = range_min.getTime();
-    range_min.setDate(new Date().getDate() - 6);
+    range_min.setDate(firstDate.getDate());
     range_min = range_min.getTime();
+
+
+    // this.lineChartColors = [property, property2]; // both graph are of same design
+    // let range_max: any = new Date();
+    // range_max.setDate(new Date().getDate() + 1);
+    // let range_max2 = range_max.getTime()  // range of pan have to be greater then the range of min-max if it is less it doesn't work well..some logic get fucked up
+    // range_max.setDate(new Date().getDate());
+    // range_max = range_max.getTime();
+
+    // let range_min: any = new Date();
+    // range_min.setDate(new Date().getDate() - 8);
+    // let range_min2 = range_min.getTime();
+    // range_min.setDate(new Date().getDate() - 7);
+    // range_min = range_min.getTime();
     this.chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -166,24 +228,10 @@ export class ProgressChartComponent implements AfterViewInit {
   }
 
 
-  fillPattern: any;
-  constructor() {
-
-
-  }
-
-  timeFormat = "MM/DD/YYYY HH:mm";
-
-  @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
-  chartData: ChartDataSets[] = [
-    { data: [450, 400, 350, 300, 100, 80, 15,], label: 'Series A' },
-    { data: [400, 350, 300, 250, 150, 70, 10], label: 'Series B' }
-  ];
 
   dragOptions = {
     animationDuration: 1000
   };
-  public lineChartColors;
 
 
   onChartClick(event) {
@@ -197,7 +245,6 @@ export class ProgressChartComponent implements AfterViewInit {
 
   }
   resetZoom() {
-
     this.chart.chart.ctx.createLinearGradient(0, 0, 0, 400)
     this.chart.chart['resetZoom']();
     //window.myLine.resetZoom();
