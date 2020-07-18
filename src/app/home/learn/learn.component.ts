@@ -13,10 +13,10 @@ export class LearnComponent implements OnInit {
 
 
 
-  allSelectedWordIDs: string[];
+  allSelectedWordIDs: number[];
   public wordDynamicData: any; // this always need to in synced with the stored data;
   allWordsData: any;
-  selectedId = '3'; // randomly setting it to avoid error
+  selectedId: number = 3; // randomly setting it to avoid error
 
 
   allWordOfSets: any;
@@ -49,7 +49,7 @@ export class LearnComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
+    this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;
@@ -59,7 +59,12 @@ export class LearnComponent implements OnInit {
     }
     this.route.paramMap.subscribe(params => {
       if (params.get('wordId')) {
-        this.selectedId = params.get('wordId');
+        try {
+          this.selectedId = parseInt(params.get('wordId'))
+        }
+        catch (e) {
+          console.error(e)
+        }
       }
       else if (this.allSelectedWordIDs.length != 0) {
         this.selectedId = this.allSelectedWordIDs[0]; // starting with the first word if no wordid is given in url
@@ -121,6 +126,14 @@ export class LearnComponent implements OnInit {
 
   changeSeen(newMark, wordId) {
     this.wordDynamicData[wordId]["isSeen"] = newMark;
+    if (newMark && !this.wordDynamicData[wordId]['viewedDate']) {
+      // if the previous viewedDate doesn't exist then only edit it otherwise leave it
+      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toLocaleString();
+    }
+    else if (!newMark) {
+      this.wordDynamicData[wordId]['viewedDate'] = null; //if newmark is notSeen unset the viewedDate as well
+
+    }
     this.onDynamicDataChange("allViewed", wordId, newMark);
   }
 
@@ -141,14 +154,14 @@ export class LearnComponent implements OnInit {
 
   next() {
     this.previousWordsIds.push(this.selectedId);
-
+    let crntIndex = this.allSelectedWordIDs.indexOf(this.selectedId); // will be -1 if not availaible and move on to next
     if (this.nextWordsIds.length != 0) {
       this.selectedId = this.nextWordsIds[this.nextWordsIds.length - 1];
       this.nextWordsIds.splice(this.nextWordsIds.length - 1, 1);
 
     }
     else {
-      let nextIdIndex: number = this.getRndInteger(0, this.allSelectedWordIDs.length)
+      let nextIdIndex: number = crntIndex + 1// this.getRndInteger(0, this.allSelectedWordIDs.length)
       let selectedIdIndex = nextIdIndex;
       this.selectedId = this.allSelectedWordIDs[selectedIdIndex];
 

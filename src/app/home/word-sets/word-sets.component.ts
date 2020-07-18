@@ -18,6 +18,7 @@ export class WordSetsComponent implements OnInit {
   selectedWordId;
 
   isDataReady = false;
+  activeTabIndex = 0;
 
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
@@ -34,6 +35,7 @@ export class WordSetsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       if (params.get('viewType')) {
         this.viewType = params.get('viewType');
+        this.setSpecificView();
       }
       if (params.get('setName')) {
         this.selectedSet = params.get('setName');
@@ -44,18 +46,21 @@ export class WordSetsComponent implements OnInit {
 
     })
 
+  }
 
-
-
-
-
-
+  setSpecificView() {
+    if (this.viewType == 'view') {
+      this.activeTabIndex = 0;
+    }
+    if (this.viewType == 'learn') {
+      this.activeTabIndex = 1;
+    }
+    if (this.viewType == 'test') {
+      this.activeTabIndex = 2;
+    }
   }
 
   ngOnInit() {
-    //this.db.
-
-
   }
 
 }

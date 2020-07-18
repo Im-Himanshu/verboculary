@@ -22,7 +22,6 @@ export class PractiseComponent implements OnInit {
   masteredWordPoint;
   seenWordCount;
   nonMasteredWordIds = []; // list of Ids to be shown in the practise now.
-  selectedCategory;
   correctThreshold = 4;
   isAllWordMastered = false;
   flashCards = [];
@@ -37,20 +36,26 @@ export class PractiseComponent implements OnInit {
 
   constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public toastController: ToastController) {
 
-    this.allSelectedWordIDs = this.db.allSelectedWordFiltered;
-    // console.log(this.allSelectedWordIDs)
+    this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;
     this.processDynamicData();
   }
 
   ngOnInit() {
+    this.db.wordFilterChangeEvent.asObservable().subscribe(data => {
+      this.processDynamicData()
+    })
 
   }
 
   ngOnDestroy() {
     this.onDynamicDataChange();
   }
+
+
+
+
 
 
 
@@ -68,16 +73,17 @@ export class PractiseComponent implements OnInit {
     this.seenWordCount = 0;
     for (let onewordsID of this.allSelectedWordIDs) {
       let oneWordDynamicData = this.wordDynamicData[onewordsID];
-      if (oneWordDynamicData && oneWordDynamicData['isMastered']) { // to avoid error in case the category is null
+      if (oneWordDynamicData && oneWordDynamicData['isMastered']) {
+        // to avoid error in case the category is null
         this.masteredWordPoint = this.masteredWordPoint + this.correctThreshold;
       }
       else {
-        if (!oneWordDynamicData) {
-          this.wordDynamicData[onewordsID] = {}
-          oneWordDynamicData = this.wordDynamicData[onewordsID];
-          oneWordDynamicData['isMastered'] = false;
-          oneWordDynamicData['correctCount'] = 0;
-        }
+        // if (!oneWordDynamicData) {
+        //   this.wordDynamicData[onewordsID] = {}
+        //   oneWordDynamicData = this.wordDynamicData[onewordsID];
+        //   oneWordDynamicData['isMastered'] = false;
+        //   oneWordDynamicData['correctCount'] = 0;
+        // }
         this.nonMasteredWordIds.push(onewordsID);
       }
 
@@ -91,7 +97,7 @@ export class PractiseComponent implements OnInit {
       this.isAllWordMastered = true;
       return;
     }
-    this.onDynamicDataChange();
+    //this.onDynamicDataChange();
     this.getInitialWordList();
     //this.next();
   }
@@ -104,7 +110,7 @@ export class PractiseComponent implements OnInit {
     if (size < 2) size = 2;
     for (let i = 0; i < size; i++) {
       let next = this.next();
-      if (next) this.randomizedWordIDsList.push(next); // will come null if the word is mastered still a buffer of 5 will remain
+      if (next != null) this.randomizedWordIDsList.push(next); // will come null if the word is mastered still a buffer of 5 will remain
     }
     this.selectedId = this.randomizedWordIDsList[0]; // first element will be shown first
     this.isData1Ready = true;
@@ -136,6 +142,7 @@ export class PractiseComponent implements OnInit {
 
   onDynamicDataChange(setName?, wordId?) {
     if (setName && wordId) {
+      // setName will be given only if the word is marked as mastered
       this.db.editWordIdInDynamicSet(setName, wordId, true)
     }
     this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
@@ -151,10 +158,6 @@ export class PractiseComponent implements OnInit {
     this.isToShowMeaning = false;
     let nextIdIndex: number = this.getRndInteger(0, this.nonMasteredWordIds.length)
     this.selectedId = this.nonMasteredWordIds[nextIdIndex];
-    if (!this.selectedId) {
-      this.next(); // to send back if there is a null
-    }
-
     return this.nonMasteredWordIds[nextIdIndex];
 
 
@@ -182,11 +185,11 @@ export class PractiseComponent implements OnInit {
 
 
   userResponse(type: number, wordID?) {
-    if (wordID) {
+    if (wordID != null) {
       this.selectedId = wordID;
     }
 
-    if (!this.selectedId || !this.selectedCategory) {
+    if (this.selectedId == null) {
       this.next();
       return;
     }
@@ -216,19 +219,21 @@ export class PractiseComponent implements OnInit {
     if (oneWordDynamicData['correctCount'] >= this.correctThreshold) {
       oneWordDynamicData['isMastered'] = true;
       this.wordDynamicData[this.selectedId]['isMastered'] = true;
+      if (!this.wordDynamicData[this.selectedId]['masteredDate']) {
+        // if the previous viewedDate doesn't exist then only edit it otherwise leave it
+        this.wordDynamicData[this.selectedId]['masteredDate'] = (new Date()).toLocaleString();
+      }
       let index = this.nonMasteredWordIds.indexOf(this.selectedId);
       if (index || index == 0) {
         this.nonMasteredWordIds.splice(index, 1)
       }
       this.presentToast(this.allWordsData[this.selectedId][1])
+      this.onDynamicDataChange("allLearned", wordID);
     }
-
     if (oneWordDynamicData['correctCount'] < 0) {
       this.masteredWordPoint = this.masteredWordPoint + (0 - oneWordDynamicData['correctCount']);// increase by the same factor mijnus but count is negative
       oneWordDynamicData['correctCount'] = 0;
     }
-
-    this.onDynamicDataChange("allMastered", wordID);
     //this.next();
 
   }

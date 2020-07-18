@@ -1,24 +1,49 @@
-<div *ngIf="isDataReady">
+<div class="wordsetmain" *ngIf="isDataReady">
+  <!-- <div *ngIf="viewType === 'view'">
+      <app-view></app-view>
 
-  <div *ngIf="viewType === 'view'">
-    <app-view></app-view>
-
-  </div>
-
-
-  <div *ngIf="viewType === 'learn'">
-
-    <app-learn></app-learn>
-
-  </div>
-
-  <div *ngIf="viewType === 'test'">
-
-    <app-practise></app-practise>
-
-  </div>
+    </div>
 
 
+    <div *ngIf="viewType === 'learn'">
 
+      <app-learn></app-learn>
 
+    </div>
+
+    <div *ngIf="viewType === 'test'">
+
+      <app-practise></app-practise>
+
+    </div> -->
+  <super-tabs [(activeTabIndex)]="activeTabIndex" [config]="{
+      debug: true,
+      allowElementScroll: true,
+      nativeSmoothScroll: true,
+      avoidElements: true
+    }">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label>View</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Learn</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Test</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <super-tabs-container autoScrollTop class="superTabContainer">
+      <super-tab class="ion-padding superTabs">
+        <app-view></app-view>
+      </super-tab>
+      <super-tab class="superTabs">
+        <app-learn></app-learn>
+      </super-tab>
+      <super-tab class="superTabs" avoid-super-tabs>
+        <app-practise></app-practise>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
 </div>

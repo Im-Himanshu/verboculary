@@ -96,10 +96,28 @@
         <div class="allMasterCards">
 
           <div class="emptySides"></div>
-          <div *ngFor="let oneCard of masterCard" class="oneCard">
+          <div routerLink="/mainmodule/base/wordSets/allViewed" class="oneCard"
+            style="border-bottom: 6px solid #fecc7b;">
             <div class="subElement">
               <span>Viewed</span>
-              <span style="font-style:normal;font-weight:normal;font-size:25px;">43/1000</span>
+              <span
+                style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allViewed"].length}}/1080</span>
+            </div>
+          </div>
+          <div routerLink="/mainmodule/base/wordSets/allLearned" class="oneCard"
+            style="border-bottom: 6px solid #62c589;">
+            <div class="subElement">
+              <span>Learned</span>
+              <span
+                style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allLearned"].length}}/1080</span>
+            </div>
+          </div>
+          <div routerLink="/mainmodule/base/wordSets/allMarked" class="oneCard"
+            style="border-bottom: 6px solid #fe805d;">
+            <div class="subElement">
+              <span>Marked</span>
+              <span
+                style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allMarked"].length}}/1080</span>
             </div>
           </div>
           <div class="emptySides"></div>

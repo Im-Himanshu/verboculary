@@ -22,7 +22,7 @@ export class ProgressChartComponent implements AfterViewInit {
     let height = doc.clientHeight;
     var canvas = <HTMLCanvasElement>document.getElementById('canvas')
     var ctx = canvas.getContext("2d");
-    this.fillPattern = ctx.createLinearGradient(0, 0, 0, 100); //https://www.chartjs.org/docs/latest/general/colors.html
+    this.fillPattern = ctx.createLinearGradient(0, 0, 0, 100); //https://www.chartjq.org/docs/latest/general/colors.html
 
     var gradientFill = ctx.createLinearGradient(0, 0, 0, 600); // start from top left side and goes to the bottom right
     var gradientStroke = ctx.createLinearGradient(400, 0, 100, 0);

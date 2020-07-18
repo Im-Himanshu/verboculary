@@ -69,6 +69,10 @@ import { DatePipe } from "@angular/common";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
+//rate-App
+import { AppRate } from '@ionic-native/app-rate/ngx';
+import { AppRateComponent } from "./POCs/app-rate/app-rate.component";
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -116,6 +120,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     AdMobComponent,
     AudioComponent,
     SwiperComponent,
+    AppRateComponent,
   ],
   providers: [
     HammerGestureConfig,
@@ -131,6 +136,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     FileTransferObject,
     File,
     DatePipe,
+    AppRate
   ],
   entryComponents: [
     FilterPopOverComponent,

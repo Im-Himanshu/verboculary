@@ -1,0 +1,20 @@
+.wordsetmain {
+  height: 100%;
+  width: 100%;
+}
+
+super-tabs-toolbar {
+  background-color: white;
+}
+:host {
+  --st-indicator-color: #ffa500;
+  --st-indicator-height: 3px;
+}
+
+.superTabs{
+  max-width : 800px;
+}
+
+.superTabContainer{
+  max-width: 800px !important;
+}

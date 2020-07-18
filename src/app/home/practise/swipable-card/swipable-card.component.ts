@@ -44,6 +44,10 @@ export class SwipableCardComponent {
     });
   }
 
+  stopParentProp(event) {
+    event.stopPropagation();
+  }
+
   controlCardPopulation() {
     if (this.allCardsIDs.length > 6) {
       this.allCardsIDs.splice(6, this.allCardsIDs.length - 6); // from 5 till end

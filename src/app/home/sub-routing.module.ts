@@ -34,10 +34,7 @@ const routes: Routes = [
       { path: "dashboard", component: DashBoardComponent },
       { path: "wordSets/:setName", component: WordSetsComponent }, // defaul
       { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default
-      {
-        path: "wordSets/:setName/:viewType/:wordId",
-        component: WordSetsComponent,
-      }, // in case specifc view and specific word is to be loaded
+      { path: "wordSets/:setName/:viewType/:wordId", component: WordSetsComponent }, // in case specifc view and specific word is to be loaded
     ],
   },
   {

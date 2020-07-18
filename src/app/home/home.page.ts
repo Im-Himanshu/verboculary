@@ -22,123 +22,32 @@ import { wordToIdMap } from '../wordToId'
 export class HomePage implements OnInit {
 
   appTitle: string = "Verboculary"
-  default_category: number = 0;
-  default_set: number = 0;
   isProcessed: boolean = false;
-  isMultiple: boolean = true;
-  totalWordsCount: number = 0;
-  titleThreshold = 2;
 
 
-  selectedCategory: string;
-  selectedSet = [];
-  selectedFilter: string;
-  selectedSorting: String = 'shuffle';
   selectedTheme: string = 'Default'
   //selectedWords: any; not maintaining here as lots of hassle in updating it
   allSetData: processedDataSharing;
-  allCategoryType: any[];
   allSetOfcategory: any;
-  allWordOfSets: any;
-  cards;
-  willComeAgain: boolean = false;
-  appSessionData: appSessionData;
+  allWordsOfSets;
   isDarkMode: boolean = false;
-  searchQuery: string = 'Hey yo';
 
-  repetitions = [1, 2, 3, 4, 5, 6, 7];
+
   prevDeltaX = 0;
   prevDeltaY = 0;
-  masterCard = [1, 2, 3]
 
+  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router) {
 
-  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router,public sharingService: SharingServiceService) {
-    this.cards = [];
+    this.allSetData = this.db.allSetData;
+    this.allWordsOfSets = this.allSetData.allWordOfSets;
 
   }
   ngOnInit() {
 
-  }
-
-
-  //4
-  sortSelectedIds() {
-    if (!this.db.filteredSelectedWordIds) return;
-    if (this.selectedSorting === 'alphabetically') {
-      this.db.sortIdsAlphabetically(this.db.filteredSelectedWordIds);
-    }
-    else {
-      this.db.shuffle(this.db.filteredSelectedWordIds); // will shuffle the list IDs randomly
-    }
-    this.updateSessionData();
-    // no need of event because basic objects is remaining same
-  }
-
-  //5
-  updateSessionData() {
 
   }
 
 
-  filterWords(type: number, wordIDs: string[]) {
-    let dynamicData = this.db.wordsDynamicData;
-    let filteredIds = [];
-
-    for (let wordID of wordIDs) {
-      try {
-        let isWordMarked = dynamicData[Number(wordID)]['isMarked'];
-        if (type == 1 && isWordMarked) {
-          filteredIds.push(wordID);
-        }
-        if (type == 0 && !isWordMarked) {
-          filteredIds.push(wordID);
-        }
-
-      } catch (error) {
-        console.log(JSON.stringify(error)); // error occured still progressing for next loop
-
-      }
-    }
-    return filteredIds;
-
-  }
-
-  sortingChanged($event) {
-    this.sortSelectedIds();
-  }
-
-
-  removeSet(oneSet) {
-    // logic here is to remove the last set and keep all as the final case
-    let deleteCount = 1;
-    let startIndex = this.selectedSet.indexOf(oneSet);
-    if (this.selectedSet.length <= 1) {
-      if (this.selectedSet[0] && this.selectedSet[0] !== 'All') {
-        this.selectedSet = ['All']; // if the last element is not all then show all;
-        this.presentToast('Last Filter removed, All words are selected!!');
-        return;
-      }
-      this.presentToast('Select atleast one Set From SideMenu!!');
-      return;
-    }
-    if (oneSet == 'tails') {
-      startIndex = this.titleThreshold;
-      deleteCount = this.selectedSet.length - this.titleThreshold;
-
-    }
-    let deletedSet;
-    if (startIndex != -1) {
-      deletedSet = this.selectedSet.splice(startIndex, deleteCount);
-    }
-
-    this.presentToast('Removed ' + deleteCount + " Selected Sets : " + deletedSet)
-    this.selectedSet = [].concat(this.selectedSet); // to trigger the setChnaged Event
-  }
-
-  removeFilter() {
-    this.presentToast('Filtered Removed: ' + this.selectedFilter)
-    this.selectedFilter = 'all';
-  }
 
 
   async presentAlertConfirm() {

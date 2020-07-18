@@ -4,6 +4,8 @@ export interface wordAppData {
     isMarked: boolean;
     isSeen: boolean;
     isMastered: boolean;
+    masteredDate: String;
+    viewedDate: String;
     correctCount: number
 }
 
