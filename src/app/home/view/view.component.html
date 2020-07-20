@@ -28,8 +28,7 @@
     </div> -->
 </div>
 <div>
-
-  <ion-content #ion_content style="--background: #fff8dc00;height: 57vh" forceOverscroll="true">
+  <ion-content #ion_content class="ioncontentheight" style="--background: #fff8dc00" forceOverscroll="true">
     <!-- this part checks if the search query is empty -->
     <div *ngIf="!searchService.searchQuery">
       <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs">
@@ -106,6 +105,9 @@
         </ion-item>
 
       </ion-item-sliding>
+      <ion-item class="name-item">
+        <!-- <empty end> -->
+      </ion-item>
     </div>
 
     <!-- here we decide what to show and how to show if search query has elements -->
@@ -116,13 +118,13 @@
       <ion-item-sliding *ngFor="let word of wordArray | filter:searchService.searchQuery">
         <ion-item>
           <div class="parentBox">
-            <div class="firstRow" (click)="onWordClickToggleit(word.id)">
+            <div class="firstRow ripple" (click)="onWordClickToggleit(word.id)">
               <div class="iconBox">
                 <div id="iconsGroup">
                   <svg-icon name='beginner'></svg-icon>
                 </div>
               </div>
-              <div class="word"> {{word.name}}</div>
+              <div class="word"> {{word.name | uppercase}}</div>
               <div class="iconBox2" (click)="toggleBookMark($event, word.id)">
                 <div id="iconsGroup">
                   <svg-icon *ngIf="wordsDynamicData[word.id]['isMarked']" name='fill-bookmark'></svg-icon>
