@@ -242,3 +242,34 @@
     --background: var(--word-name-item-background-color);
     --border-color: var(--word-border-bottom-color);
 }
+
+.iconDiv{
+    padding-right: 3% ;
+}
+
+.shuffleButton{
+    background-color: none;
+}
+
+.filter{
+    height: 100px;
+    width: 100px;
+    font-size: 1.9em;
+}
+.siconsGroup{
+    width:20px;
+    height: 100%;
+    position: relative;
+}
+.alphabetical{
+    // position: absolute;
+    color: #ffa500;
+}
+
+.shuffled{
+    color: #ffa500;
+    height: 100%;
+    width: 20px;
+    font-size: 1.7em;
+    position: relative;
+}

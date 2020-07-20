@@ -16,6 +16,25 @@
       <app-practise></app-practise>
 
     </div> -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <!-- <div id="iconsGroup"> -->
+      <!-- <svg-icon name="alphabetsort"></svg-icon> -->
+      <ion-icon name="star"></ion-icon>
+      <!-- </div> -->
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="filterButton('all')" data-desc="All">
+        <ion-icon name="star"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('viewed')" data-desc="Viewed">
+        <ion-icon name="eye"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('marked')" data-desc="Marked">
+        <ion-icon name="bookmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <super-tabs [(activeTabIndex)]="activeTabIndex" [config]="{
       debug: true,
       allowElementScroll: true,
