@@ -20,12 +20,11 @@
   <ion-content class="learnWordsContent ionContentHeight" *ngIf="!isAllWordMastered">
     <span *ngIf="allWordsData[selectedId] as crntWordAppData">
 
-      <ion-card *ngIf="wordDynamicData[selectedId] as crntWordDynamicData" [ngClass]="{ alignMiddle: !isToShowDetails }">
+      <ion-card *ngIf="wordDynamicData[selectedId] as crntWordDynamicData"
+        [ngClass]="{ alignMiddle: !isToShowDetails }">
         <ion-card-content class="ion-activatable ion-card-image">
 
-          <img
-        src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg"
-      />
+          <img src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" />
           <ion-buttons class="detailsToggleButton">
             <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
           </ion-buttons>
@@ -53,6 +52,9 @@
                   | highlightText: crntWordAppData[1]
               }}"></div>
             </em>
+          </p>
+          <p class="synonyms"><strong>Synonyms : </strong>
+            <span *ngFor='let syn of crntWordAppData[5]'> {{syn}} </span>
           </p>
           <ion-ripple-effect type="unbounded"></ion-ripple-effect>
 
@@ -90,7 +92,8 @@
   </ion-content>
   <section>
     <ion-toolbar class="learnWordsChangeButton">
-      <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="previous()">Previous</ion-button>
+      <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="previous()">Previous
+      </ion-button>
       <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="next()">Next</ion-button>
     </ion-toolbar>
   </section>

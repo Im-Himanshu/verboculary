@@ -48,6 +48,11 @@ export class WordSetsComponent implements OnInit {
 
   }
 
+  filterButton(filterType) {
+    console.log(filterType);
+    this.db.filterSelectedIDBasedOnGivenCriterion(filterType);
+  }
+
   setSpecificView() {
     if (this.viewType == 'view') {
       this.activeTabIndex = 0;

@@ -23,6 +23,7 @@ export class ViewComponent implements OnInit {
   wordArray: any[];
   sortedAllSelectedWordIds: string[] = [];
   selectedSet;
+  shuffleIt = true;
 
   sortingTypes = [
     { value: 'shuffel', viewValue: 'Shuffeled' }, // default state
@@ -60,6 +61,11 @@ export class ViewComponent implements OnInit {
     this.db.filterSelectedIDBasedOnGivenCriterion(event.value);
     this.selectedSorting = "shuffel";
   }
+
+  shuffleButton(event) {
+    this.shuffleIt = !this.shuffleIt;
+    this.db.changeSortingOfIds(event.currentTarget.attributes.value.nodeValue);
+  }
   changeSorting(event) {
     this.db.changeSortingOfIds(event.value)
   }
@@ -87,7 +93,7 @@ export class ViewComponent implements OnInit {
     this.saveDynamicData();
   }
 
-  start(wordId,playNext){
-    this.db.startPodcast(wordId,playNext);
+  start(wordId, playNext) {
+    this.db.startPodcast(wordId, playNext);
   }
 }
