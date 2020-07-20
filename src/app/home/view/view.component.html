@@ -123,13 +123,13 @@
         <ion-item-sliding *ngFor="let word of wordArray | filter:searchService.searchQuery">
           <ion-item>
             <div class="parentBox">
-              <div class="firstRow" (click)="onWordClickToggleit(word.id)">
+              <div class="firstRow ripple" (click)="onWordClickToggleit(word.id)">
                 <div class="iconBox">
                   <div id="iconsGroup">
                     <svg-icon name='beginner'></svg-icon>
                   </div>
                 </div>
-                <div class="word"> {{word.name}}</div>
+                <div class="word"> {{word.name  | uppercase}}</div>
                 <div class="iconBox2" (click)="toggleBookMark($event, word.id)">
                   <div id="iconsGroup">
                     <svg-icon *ngIf="wordsDynamicData[word.id]['isMarked']" name='fill-bookmark'></svg-icon>

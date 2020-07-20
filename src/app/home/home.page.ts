@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
   prevDeltaX = 0;
   prevDeltaY = 0;
 
-  @ViewChild('range', { static: false }) range : IonRange;
+  @ViewChild('range', { static: false }) range: IonRange;
 
   constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService) {
     this.allSetData = this.db.allSetData;
@@ -47,6 +47,12 @@ export class HomePage implements OnInit {
   }
   ngOnInit() {
 
+
+  }
+
+
+  goToUrl(url) {
+    this.router.navigate([url]);
 
   }
 
@@ -173,23 +179,23 @@ export class HomePage implements OnInit {
 
   }
 
-  prev(){
+  prev() {
     this.db.prev();
   }
 
-  next(){
+  next() {
     this.db.next();
   }
 
-  tooglePlayer(pause){
+  tooglePlayer(pause) {
     this.db.tooglePlayer(pause);
   }
 
-  seek(){
+  seek() {
     this.db.seek(this.range);
   }
 
-  close(){
+  close() {
     this.db.closePodcast();
   }
 }
