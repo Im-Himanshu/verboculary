@@ -22,21 +22,24 @@
     <div class="allMasterCards">
 
       <div class="emptySides"></div>
-      <div routerLink="/mainmodule/base/wordSets/allViewed" class="oneCard" style="border-bottom: 6px solid #fecc7b;">
+      <div (click)="goToUrl('/mainmodule/base/wordSets/allViewed')" class="oneCard ripple"
+        style="border-bottom: 6px solid #fecc7b;">
         <div class="subElement">
           <span>Viewed</span>
           <span
             style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allViewed"].length}}/1080</span>
         </div>
       </div>
-      <div routerLink="/mainmodule/base/wordSets/allLearned" class="oneCard" style="border-bottom: 6px solid #62c589;">
+      <div (click)="goToUrl('/mainmodule/base/wordSets/allLearned')" class="oneCard ripple"
+        style="border-bottom: 6px solid #62c589;">
         <div class="subElement">
           <span>Learned</span>
           <span
             style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allLearned"].length}}/1080</span>
         </div>
       </div>
-      <div routerLink="/mainmodule/base/wordSets/allMarked" class="oneCard" style="border-bottom: 6px solid #fe805d;">
+      <div (click)="goToUrl('/mainmodule/base/wordSets/allMarked')" class="oneCard ripple"
+        style="border-bottom: 6px solid #fe805d;">
         <div class="subElement">
           <span>Marked</span>
           <span
@@ -150,7 +153,8 @@
 
           </div>
           <div *ngFor="let one of repetitions" class="oneSet">
-            <div class="oneSetData" *ngIf="allSelectedSet[one] as setName">
+            <div class="oneSetData ripple" *ngIf="allSelectedSet[one] as setName"
+              (click)="goToUrl('/mainmodule/base/wordSets/'+setName)">
               <div class="initialIcon">
                 <div class="actualIcon">
                   <svg-icon name='beginner'></svg-icon>
@@ -188,7 +192,7 @@
               <div class="navigationIcon">
 
                 <ion-icon style="width: 100%;height: 100%;color: var(--arrow-icon-color);max-width: 36px;"
-                  name="arrow-forward" routerLink="/mainmodule/base/wordSets/{{setName}}">
+                  name="arrow-forward">
                 </ion-icon>
 
               </div>
@@ -205,7 +209,8 @@
           </div>
 
           <div *ngFor="let one of repetitions" class="oneSet">
-            <div class="oneSetData" *ngIf="allSelectedSet[7+one] as setName">
+            <div class="oneSetData ripple" *ngIf="allSelectedSet[7+one] as setName"
+              (click)="goToUrl('/mainmodule/base/wordSets/'+setName)">
               <div class="initialIcon" style="background-color: var(--level-icon-background-transitional);">
                 <div class="actualIcon">
                   <svg-icon name='transistional'></svg-icon>
@@ -243,7 +248,7 @@
               <div class="navigationIcon">
 
                 <ion-icon style="width: 100%;height: 100%;color: var(--arrow-icon-color);max-width: 36px;"
-                  name="arrow-forward" routerLink="/mainmodule/base/wordSets/{{setName}}">
+                  name="arrow-forward">
                 </ion-icon>
 
               </div>
@@ -260,7 +265,8 @@
           </div>
 
           <div *ngFor="let one of repetitions" class="oneSet">
-            <div class="oneSetData" *ngIf="allSelectedSet[14+one] as setName ">
+            <div class="oneSetData ripple" *ngIf="allSelectedSet[14+one] as setName "
+              (click)="goToUrl('/mainmodule/base/wordSets/'+setName)">
               <div class="initialIcon" style="background-color: var(--level-icon-background-pro);">
                 <div class="actualIcon">
                   <svg-icon name='proIcon'></svg-icon>
@@ -298,7 +304,7 @@
               <div class="navigationIcon">
 
                 <ion-icon style="width: 100%;height: 100%;color: var(--arrow-icon-color);max-width: 36px;"
-                  name="arrow-forward" routerLink="/mainmodule/base/wordSets/{{setName}}">
+                  name="arrow-forward">
                 </ion-icon>
 
               </div>

@@ -3,6 +3,7 @@ import { IonContent } from '@ionic/angular'
 import { DatabaseService } from "../services/data-base.service"
 import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
 import { processedDataSharing } from '../interfaces/dropdown.interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -27,7 +28,7 @@ export class DashBoardComponent implements OnInit {
   isDarkMode: boolean = false;
   chartLabelsAndData = {};
 
-  constructor(private renderer: Renderer2, private db: DatabaseService) {
+  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router) {
     this.allSelectedSet = this.db.allSetinSelectedCategory;
     this.allSetProgressData = this.db.allSetData.setLevelProgressData;
     this.processTotalSetData();
@@ -43,6 +44,12 @@ export class DashBoardComponent implements OnInit {
   setChartResult() {
     let allDayProgress = this.db.allSetData.dateWiseTotalProgressReport;
     this.chartLabelsAndData = allDayProgress;
+  }
+
+
+  goToUrl(url) {
+    this.router.navigate([url]);
+
   }
 
   processTotalSetData() {

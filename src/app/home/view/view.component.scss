@@ -2,13 +2,16 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    padding-top: 28px;
+    // padding-top: 28px;
 }
 
 .dropdownDiv{
     width: 32%;
     padding-right: 11px;
     justify-content:flex-end;
+}
+.ioncontentheight{
+    height:  74vh;
 }
 
 ::ng-deep .mat-form-field-infix{
