@@ -73,6 +73,9 @@ import { SuperTabsModule } from "@ionic-super-tabs/angular";
 import { AppRate } from '@ionic-native/app-rate/ngx';
 import { AppRateComponent } from "./POCs/app-rate/app-rate.component";
 
+//podcast
+import{ MusicControls } from "@ionic-native/music-controls/ngx";
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -136,7 +139,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     FileTransferObject,
     File,
     DatePipe,
-    AppRate
+    MusicControls,
+    AppRate,
   ],
   entryComponents: [
     FilterPopOverComponent,

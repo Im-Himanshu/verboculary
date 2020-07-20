@@ -1,5 +1,11 @@
 <div>
   <div class="parentDropDown">
+
+    
+  <ion-button fill="clear" slot="end" (click)="start(allSelectedWordIDs[0],true)">
+    <ion-icon name="radio"></ion-icon>
+  </ion-button>
+
     <div class="dropdownDiv">
 
       <mat-form-field appearance="fill" style="width:100%">
@@ -66,6 +72,18 @@
                   </div>
 
                 </div>
+
+                <div class="iconBox" (click)="start(oneWordId,false)">
+                  <div class="icon">
+                    <div id="iconsGroup">
+                      <ion-icon name="play-circle-outline"></ion-icon>
+                    </div>
+                  </div>
+                  <div class="text">
+                    Podcast
+                  </div>
+                </div>
+
                 <div class="iconBox" routerLink="/mainmodule/base/wordSets/{{selectedSet}}/learn/{{oneWordId}}">
                   <div class="text">
                     Explore

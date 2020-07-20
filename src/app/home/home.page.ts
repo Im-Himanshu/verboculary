@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { dropdownData, processedDataSharing } from './interfaces/dropdown.interface';
 import { DatabaseService } from './services/data-base.service'
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonRange } from '@ionic/angular';
 import { AboutDeveloperComponent } from './about-developer/about-developer.component';
 import { FilterPopOverComponent } from './filter-pop-over/filter-pop-over.component'
 import { ToastController } from '@ionic/angular';
@@ -12,8 +12,8 @@ import { ThemeChangeService } from './services/theme-change.service'
 import { SearchService } from './services/search.service'
 import { SharingServiceService } from './services/sharing-service.service';
 import { AppRateService } from './POCs/AppRate Service/app-rate.service';
-import { Router } from '@angular/router'
-import { wordToIdMap } from '../wordToId'
+import { Router } from '@angular/router';
+import { wordToIdMap } from '../wordToId';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +38,9 @@ export class HomePage implements OnInit {
   prevDeltaX = 0;
   prevDeltaY = 0;
 
-  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService) {
+  @ViewChild('range', { static: false }) range : IonRange;
+
+  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
 
@@ -171,4 +173,23 @@ export class HomePage implements OnInit {
 
   }
 
+  prev(){
+    this.db.prev();
+  }
+
+  next(){
+    this.db.next();
+  }
+
+  tooglePlayer(pause){
+    this.db.tooglePlayer(pause);
+  }
+
+  seek(){
+    this.db.seek(this.range);
+  }
+
+  close(){
+    this.db.closePodcast();
+  }
 }

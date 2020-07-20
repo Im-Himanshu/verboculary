@@ -72,4 +72,44 @@
     <ion-router-outlet>
     </ion-router-outlet>
   </ion-content>
+
+  <ion-footer class="no-padding" [hidden]="!this.db.miniPlayerVisible" size="fixed">
+    <ion-toolbar color="dark">
+      <ion-row>
+        <!-- <ion-col> -->
+          <ion-button fill="clear" (click)="close()" color="light">
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        <!-- </ion-col> -->
+        <!-- <ion-col size="12" class="ion-text-center"> -->
+        <h3>{{ this.db.currWord }}</h3>
+        <!-- </ion-col> -->
+
+        <ion-col>
+        <!-- <ion-col size="12" class="ion-text-center"> -->
+          <ion-range #range [(ngModel)]="this.db.progress" max="100" color="success" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+        <!-- </ion-col> -->
+  
+        <!-- <ion-col size="12" class="ion-text-center"> -->
+  
+          <ion-button fill="clear" (click)="prev()" color="light">
+            <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+          </ion-button>
+  
+          <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.db.isPlaying" color="light">
+            <ion-icon slot="icon-only" name="play"></ion-icon>
+          </ion-button>
+  
+          <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.db.isPlaying" color="light">
+            <ion-icon slot="icon-only" name="pause"></ion-icon>
+          </ion-button>
+  
+          <ion-button fill="clear" (click)="next()" color="light">
+            <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <!-- </ion-col> -->
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>
 </div>

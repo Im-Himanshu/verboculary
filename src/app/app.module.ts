@@ -30,6 +30,8 @@ import { Media } from "@ionic-native/media/ngx";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 import { AppRate } from '@ionic-native/app-rate/ngx';
 
+import{ MusicControls } from "@ionic-native/music-controls/ngx";
+
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
   authDomain: "verboculary.firebaseapp.com",
@@ -75,7 +77,8 @@ var firebaseConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
     Media,
-    AppRate
+    AppRate,
+    MusicControls
   ],
   bootstrap: [AppComponent],
 })

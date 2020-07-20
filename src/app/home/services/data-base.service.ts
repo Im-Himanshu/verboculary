@@ -8,6 +8,8 @@ import { Subject, forkJoin, Observable } from "rxjs";
 import { appSessionData } from "../appSessionData.interface";
 import { ToastController } from "@ionic/angular";
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
+import { Howl } from 'howler';
+import { MusicControls } from '@ionic-native/music-controls/ngx';
 
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
@@ -29,12 +31,21 @@ export class DatabaseService {
   public allSetinSelectedCategory;
   public wordFilterChangeEvent: Subject<any> = new Subject();
 
+  currId;
+  player : Howl = null;
+  isPlaying = false;
+  miniPlayerVisible = false;
+  currWord;
+  currMeaning;
+  progress = 0;
+
   constructor(
     public storage: Storage,
     public http: HttpClient,
     public toastController: ToastController,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public musicControls: MusicControls
   ) {
     router.events.forEach((event: NavigationEvent) => {
       //After Navigation, because firstchild are populated only till navigation ends
@@ -428,6 +439,166 @@ export class DatabaseService {
 
     return array;
   }
+
+  startPodcast(wordId,playNext){
+    this.currId = wordId; 
+    if(this.player){
+      this.player.stop();
+    }
+
+    this.player = new Howl({
+      src: [this.allWordsData[wordId][5]],
+      html5 : true,
+      onplay: () => {
+        console.log("onPlay");
+        this.isPlaying = true;
+        this.miniPlayerVisible = true;
+        this.currWord = this.allWordsData[wordId][1];
+        this.currMeaning = this.allWordsData[wordId][2];
+        this.currId = wordId;
+        this.updateProgress();
+      },
+      onend: () => {
+        console.log('onEnd');
+        if(playNext){
+          this.next();
+        } else{
+          this.miniPlayerVisible = false;
+        }
+      }
+    });
+    this.player.play();
+    this.currWord = this.allWordsData[wordId][1];
+    console.log(this.currWord);
+    this.createNotification();
+  }
+
+  prev(){
+    let index = this.allSelectedWordIds.indexOf(this.currId);
+    if(index>0){
+      this.startPodcast(this.allSelectedWordIds[index - 1],true);
+    } else {
+      this.startPodcast(this.currId,true);
+    }
+  }
+
+  next(){
+    
+      let index = this.allSelectedWordIds.indexOf(this.currId);
+      
+      if(index != this.allSelectedWordIds.length - 1){
+        this.startPodcast(this.allSelectedWordIds[index + 1],true);
+      } else {
+        this.startPodcast(this.allSelectedWordIds[0],true);
+      }
+    
+  }
+
+  play(){
+    this.player.play();
+  }
+
+  pause(){
+    this.player.pause();
+  }
+
+  tooglePlayer(pause){
+    this.isPlaying = !pause;
+    if(pause){
+      this.player.pause();
+    } else {
+      this.player.play();
+    }
+  }
+
+  seek(range){
+    let newValue = +range.value;
+    let duration = this.player.duration();
+    this.player.seek(duration * (newValue / 100));
+  }
+
+  updateProgress(){
+    let seek = this.player.seek();
+    this.progress = (seek / this.player.duration()) * 100 || 0;
+    setTimeout(() => {
+      this.updateProgress();
+    }, 100)
+  }
+
+  closePodcast(){
+    this.player.stop();
+    this.miniPlayerVisible = false;
+    this.isPlaying = false;
+  }
+
+  createNotification(){
+    this.musicControls.destroy();
+    this.musicControls.create({
+      track: this.currWord,
+      artist: this.currMeaning,
+      cover: "/assets/appIcon.png",
+      isPlaying: true,
+      dismissable: false,
+      hasPrev: true,
+      hasNext: true,
+      hasSkipForward: false,
+      hasSkipBackward: false,
+      skipForwardInterval: 0,
+      skipBackwardInterval: 0,
+      hasClose: false,
+      album: "",
+      duration: 0,
+      elapsed: 0,
+      ticker: this.currWord,
+    });
+    console.log("Notification started");
+
+    this.musicControls.subscribe().subscribe(action => {
+      console.log(action);
+      
+      const message = JSON.parse(action).message;
+
+      switch(message){
+        case 'music-controls-next':
+          this.next();
+          break;
+        
+        case 'music-controls-previous':
+          this.prev();
+          break;
+        case 'music-controls-pause':
+          if(this.isPlaying)
+          {this.pause();
+            this.musicControls.updateIsPlaying(false);
+            console.log("music pause");
+          }
+          else
+          {this.play();
+            this.musicControls.updateIsPlaying(true);
+          }
+          break;
+          case 'music-controls-play':
+            // Do something
+            if(!this.isPlaying){
+            console.log('music play');
+            this.play();
+            this.musicControls.updateIsPlaying(true);
+            }
+            else
+            {console.log("music pause");
+              this.pause();
+              this.musicControls.updateIsPlaying(false);
+            }
+            break;
+          default:
+            break;
+          }
+      
+    })
+    this.musicControls.listen();
+  }
+
+  
 
 
 }

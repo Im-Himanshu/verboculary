@@ -87,4 +87,7 @@ export class ViewComponent implements OnInit {
     this.saveDynamicData();
   }
 
+  start(wordId,playNext){
+    this.db.startPodcast(wordId,playNext);
+  }
 }
