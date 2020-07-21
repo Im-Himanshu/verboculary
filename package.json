@@ -30,6 +30,7 @@
     "@ionic-native/deeplinks": "^5.27.0",
     "@ionic-native/file": "^5.27.0",
     "@ionic-native/file-transfer": "^5.27.0",
+    "@ionic-native/local-notifications": "^5.27.0",
     "@ionic-native/media": "^5.27.0",
     "@ionic-native/music-controls": "^5.27.0",
     "@ionic-native/social-sharing": "^5.27.0",
@@ -51,8 +52,10 @@
     "cordova-browser": "^6.0.0",
     "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-apprate": "^1.5.0",
+    "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-transfer": "^1.7.1",
+    "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-music-controls": "^2.2.0",
     "cordova-plugin-x-socialsharing": "^5.6.8",
@@ -144,7 +147,8 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
       "cordova-plugin-apprate": {},
-      "cordova-plugin-music-controls": {}
+      "cordova-plugin-music-controls": {},
+      "cordova-plugin-local-notification": {}
     },
     "platforms": [
       "android",

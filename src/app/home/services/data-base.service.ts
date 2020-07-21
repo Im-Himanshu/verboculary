@@ -10,6 +10,7 @@ import { ToastController } from "@ionic/angular";
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { Howl } from 'howler';
 import { MusicControls } from '@ionic-native/music-controls/ngx';
+import { AdmobSerService } from './admob-ser.service';
 
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
@@ -45,7 +46,8 @@ export class DatabaseService {
     public toastController: ToastController,
     private route: ActivatedRoute,
     private router: Router,
-    public musicControls: MusicControls
+    public musicControls: MusicControls,
+    public admob : AdmobSerService,
   ) {
     router.events.forEach((event: NavigationEvent) => {
       //After Navigation, because firstchild are populated only till navigation ends
@@ -325,6 +327,10 @@ export class DatabaseService {
 
   saveCurrentStateofDynamicData() {
     this.setSetDatainStorage(this.allSetData)
+    let x = (this.allSetData.allWordOfSets["allViewed"].length+1) % 50;
+    if(x == 0){
+      this.admob.showInterstitialAds();
+    }
     return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
 
   }

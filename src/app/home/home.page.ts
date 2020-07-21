@@ -11,9 +11,12 @@ import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
 import { SearchService } from './services/search.service'
 import { SharingServiceService } from './services/sharing-service.service';
-import { AppRateService } from './POCs/AppRate Service/app-rate.service';
 import { Router } from '@angular/router';
 import { wordToIdMap } from '../wordToId';
+import { AppRateService } from './services/app-rate.service';
+
+import { AdmobSerService } from './services/admob-ser.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -40,9 +43,10 @@ export class HomePage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService) {
+  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob : AdmobSerService,private storage : Storage) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
+    this.showFullscreenAdd();
 
   }
   ngOnInit() {
@@ -197,5 +201,19 @@ export class HomePage implements OnInit {
 
   close() {
     this.db.closePodcast();
+  }
+
+  rateapp() {
+    this.appRateService.triggerRateApp();
+  }
+
+  showFullscreenAdd() {
+    this.storage.get("loginCount").then(data => {
+      let x = data % 5;
+      if(x == 0){
+        this.admob.showInterstitialAds();
+        console.log("Add shown");
+      }
+    })
   }
 }

@@ -31,6 +31,8 @@ import { SuperTabsModule } from "@ionic-super-tabs/angular";
 import { AppRate } from '@ionic-native/app-rate/ngx';
 
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
+import { AdMobFree } from "@ionic-native/admob-free/ngx";
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -78,7 +80,9 @@ var firebaseConfig = {
     SocialSharing,
     Media,
     AppRate,
-    MusicControls
+    MusicControls,
+    AdMobFree,
+    LocalNotifications
   ],
   bootstrap: [AppComponent],
 })
