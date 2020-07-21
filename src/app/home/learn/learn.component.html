@@ -72,7 +72,7 @@
     </span>
     <!-- <ion-button (click)="shareButtonClone()">Image</ion-button> -->
     <ion-content class="learnWordsContent ionContentHeight" *ngIf="isToShowDetails">
-      <ion-card>
+      <ion-card style="height: 61vh;">
         <mat-tab-group backgroundColor="primary" (selectedTabChange)="onTabChanged($event)" [selectedIndex]="activeURL">
           <mat-tab *ngFor="let thisTab of tabBarsKeys" [label]="thisTab">
             <ng-template matTabContent>
