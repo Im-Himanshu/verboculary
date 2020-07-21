@@ -36,8 +36,6 @@ export class DatabaseService {
   player : Howl = null;
   isPlaying = false;
   miniPlayerVisible = false;
-  currWord;
-  currMeaning;
   progress = 0;
 
   constructor(
@@ -470,8 +468,6 @@ export class DatabaseService {
         console.log("onPlay");
         this.isPlaying = true;
         this.miniPlayerVisible = true;
-        this.currWord = this.allWordsData[wordId][1];
-        this.currMeaning = this.allWordsData[wordId][2];
         this.currId = wordId;
         this.updateProgress();
       },
@@ -485,8 +481,6 @@ export class DatabaseService {
       }
     });
     this.player.play();
-    this.currWord = this.allWordsData[wordId][1];
-    console.log(this.currWord);
     this.createNotification();
   }
 
@@ -551,8 +545,8 @@ export class DatabaseService {
   createNotification(){
     this.musicControls.destroy();
     this.musicControls.create({
-      track: this.currWord,
-      artist: this.currMeaning,
+      track: this.allWordsData[this.currId][1],
+      artist: this.allWordsData[this.currId][2],
       cover: "/assets/appIcon.png",
       isPlaying: true,
       dismissable: false,
@@ -566,7 +560,7 @@ export class DatabaseService {
       album: "",
       duration: 0,
       elapsed: 0,
-      ticker: this.currWord,
+      ticker: this.allWordsData[this.currId][1],
     });
     console.log("Notification started");
 
