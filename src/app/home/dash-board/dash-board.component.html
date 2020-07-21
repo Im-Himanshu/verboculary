@@ -2,12 +2,6 @@
   <div class="chartArea">
     <app-progress-chart [chartLabelsAndData]="chartLabelsAndData">
 
-      <!-- this will be adjusting its view based a service event where we will publish on what it need to see
-        have to see if chart can load data dynamically or not...
-
-
-      -->
-
     </app-progress-chart>
 
     <div id="overChartText">
@@ -17,7 +11,7 @@
     </div>
   </div>
 
-  <div class="masterFilter">
+  <div id="masterFilter" class="masterFilter">
 
     <div class="allMasterCards">
 
@@ -51,12 +45,12 @@
     </div>
 
   </div>
-  <div #mainDiv class="full" style="top:430px;" id="toMove">
+  <div #mainDiv class="full" style="top:46%" id="toMove">
 
-    <div #parent class="parentBox" (swipe)="swipeup($event)" (pandown)="handlePan($event)" (panup)="handlePan($event)"
-      (panend)="handlePanEnd($event)">
+    <div #parent class="parentBox">
 
-      <div class="fixHeader">
+      <div class="fixHeader" (touchstart)="touchStarted($event)" (touchend)="handleTouchEnd($event)"
+        (touchmove)="handleTouch($event)">
         <div class="handle">
           <div class="handleBox"></div>
 
