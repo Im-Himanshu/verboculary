@@ -24,7 +24,12 @@
         [ngClass]="{ alignMiddle: !isToShowDetails }">
         <ion-card-content class="ion-activatable ion-card-image">
 
-          <img src="https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg" />
+          <ion-slides (touchstart)="stopParentProp($event)" (touchmove)="stopParentProp($event)" pager="true"
+            style="background: black;" loop="true" zoom="true">
+            <ion-slide *ngFor="let imgsrc of img">
+              <img class="wordImage" src="{{ imgsrc }}" class="slide-img" />
+            </ion-slide>
+          </ion-slides>
           <ion-buttons class="detailsToggleButton">
             <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
           </ion-buttons>
@@ -54,7 +59,11 @@
             </em>
           </p>
           <p class="synonyms"><strong>Synonyms : </strong>
-            <span *ngFor='let syn of crntWordAppData[6]'> {{syn}} </span>
+            <span *ngFor='let syn of crntWordAppData[6]'>
+              <span *ngIf="foundIDMapping[syn]" style="color:#ffa500" (click)="goToUrl(syn)"> {{syn}} </span>
+              <span *ngIf="!foundIDMapping[syn]"> {{syn}} </span>
+
+            </span>
           </p>
           <ion-ripple-effect type="unbounded"></ion-ripple-effect>
 

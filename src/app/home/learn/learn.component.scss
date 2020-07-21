@@ -1,5 +1,5 @@
 .ioncontentheight {
-  height: 74vh;
+  height: 75vh;
   // width: 100%;
 }
 
@@ -141,4 +141,13 @@
 .synonyms{
   margin-top: 3%;
   font-size: 15px;
+}
+
+ion-slides {
+  --bullet-background: white;
+  --bullet-background-active: #ffa500;
+}
+
+.slide-img{
+  height: 300px;
 }
