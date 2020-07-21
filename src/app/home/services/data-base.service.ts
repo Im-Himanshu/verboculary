@@ -183,6 +183,7 @@ export class DatabaseService {
               let setProgress = {} as setLevelProgress;
               setProgress.totalLearned = 0;
               setProgress.totalViewed = 0;
+              setProgress.isAdShown = false;
               setProgress.totalWords = allSets[set].length
               setLevelProgressData[set] = setProgress;
             }
@@ -331,6 +332,16 @@ export class DatabaseService {
     if(x == 0){
       this.admob.showInterstitialAds();
     }
+    this.getSetDataFromStorage().then(data => {
+      let adTrigger = data.setLevelProgressData;
+      if(!(adTrigger[this.selectedSet]["isAdShown"])) {
+        if (adTrigger[this.selectedSet]["totalViewed"] == adTrigger[this.selectedSet]["totalWords"]){
+          this.admob.showAdMobFreeRewardVideoAds();
+          data.setLevelProgressData[this.selectedSet]["isAdShown"] = true;
+          console.log("Reward Video Ad is Shown");
+        }
+      }
+    })
     return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
 
   }
@@ -603,8 +614,5 @@ export class DatabaseService {
     })
     this.musicControls.listen();
   }
-
-  
-
 
 }

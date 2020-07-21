@@ -19,4 +19,5 @@ export interface setLevelProgress {
     totalLearned: number;
     totalViewed: number;
     totalWords: number;
+    isAdShown: any;
 }
