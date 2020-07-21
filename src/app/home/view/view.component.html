@@ -2,7 +2,22 @@
 
 
   <ion-button fill="clear" slot="end" (click)="start(allSelectedWordIDs[0],true)">
-    <ion-icon name="radio"></ion-icon>
+    <ion-icon name="radio" style="color: #ffa500; font-size: 3em;" *ngIf="!isPlaying"></ion-icon>
+    <ion-icon name="pause" style="color: #ffa500; font-size: 3em;" *ngIf="!isPlaying"></ion-icon>
+    <div class="iconsGroup" *ngIf="!isPlaying">
+      <svg-icon name="newradio"></svg-icon>
+    </div>
+    <div class="iconsGroup" *ngIf="!isPlaying">
+      <svg-icon name="music-symbol"></svg-icon>
+    </div>
+    <div class="iconsGroup" *ngIf="!isPlaying">
+      <svg-icon name="play-outline"></svg-icon>
+    </div>
+    <div class="iconsGroup" *ngIf="!isPlaying">
+      <svg-icon name="play-circle"></svg-icon>
+    </div>
+    <ion-icon name="pause" *ngIf="isPlaying"></ion-icon>
+
   </ion-button>
 
   <div class="iconDiv">

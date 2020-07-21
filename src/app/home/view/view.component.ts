@@ -24,6 +24,7 @@ export class ViewComponent implements OnInit {
   sortedAllSelectedWordIds: string[] = [];
   selectedSet;
   shuffleIt = true;
+  isPlaying = this.db.isPlaying
 
   sortingTypes = [
     { value: 'shuffel', viewValue: 'Shuffeled' }, // default state
@@ -94,6 +95,11 @@ export class ViewComponent implements OnInit {
   }
 
   start(wordId, playNext) {
-    this.db.startPodcast(wordId, playNext);
+    if (!this.db.isPlaying) {
+      this.db.startPodcast(wordId, playNext);
+    }
+    else {
+      this.db.pause()
+    }
   }
 }
