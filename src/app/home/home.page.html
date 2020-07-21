@@ -60,6 +60,7 @@
       <img slot="start" src="assets/logo.png" height="63px" />
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
       <ion-title class="titleicon">{{appTitle}}</ion-title>
+      <ion-button (click) = "themeService.toggleMode()">DarkMode</ion-button>
       <ion-buttons slot="secondary">
         <ion-searchbar [(ngModel)] = "searchService.searchQuery"
         (ionFocus)="searchBarOnFocus($event)"
