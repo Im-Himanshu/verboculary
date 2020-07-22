@@ -36,6 +36,8 @@ export class DatabaseService {
   player : Howl = null;
   isPlaying = false;
   miniPlayerVisible = false;
+  currWord;
+  currMeaning;
   progress = 0;
 
   constructor(
@@ -474,6 +476,8 @@ export class DatabaseService {
         this.isPlaying = true;
         this.miniPlayerVisible = true;
         this.currId = wordId;
+        this.currWord = this.allWordsData[this.currId][1];
+        this.currMeaning = this.allWordsData[this.currId][2];
         this.updateProgress();
       },
       onend: () => {

@@ -20,6 +20,12 @@ export class WordSetsComponent implements OnInit {
   isDataReady = false;
   activeTabIndex = 0;
 
+  currentPosition;
+  height;
+  minimumThreshold;
+  startPosition;
+  isOpen = false;
+
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
 
@@ -137,6 +143,54 @@ export class WordSetsComponent implements OnInit {
 
 
 
+  }
+
+  open(){
+    if (this.isOpen == false){
+      (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
+      (<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
+      this.isOpen = true;
+    } else {
+      this.close();
+    }
+  }
+
+  close(){
+    this.currentPosition = 0;
+    this.startPosition = 0;
+
+    (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "-1000px";
+    (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.transform = "translate3d(0px,0px,0px)";
+
+    (<HTMLStyleElement>document.querySelector(".bg")).style.display = "none";
+    this.isOpen = false;
+  }
+
+  touchMove(evt : TouchEvent){
+
+    if(this.startPosition == 0){
+      this.startPosition = evt.touches[0].clientY;
+    }
+
+    this.height = document.querySelector(".bottomSheet").clientHeight;
+
+    var y = evt.touches[0].clientY;
+    this.currentPosition = y - this.startPosition;
+
+    if(this.currentPosition > 0 && this.startPosition > 0){
+      (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.transform = "translate3d(0px," + this.currentPosition + "px,0px)";
+    }
+  }
+
+  touchEnd(){
+    this.minimumThreshold = this.height - 130;
+
+    if (this.currentPosition < this.minimumThreshold) {
+      (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.transform = "translate3d(0px,0px,0px)";
+    }
+    else {
+      this.close();
+    }
   }
 
 }
