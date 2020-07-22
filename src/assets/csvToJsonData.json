@@ -865,7 +865,7 @@
         ],
         [
             "/assets/img/WordImages/acumen/pixinary.jpg",
-            "/assets/img/WordImages/acumen/topGreWords.png"
+            "/assets/img/WordImages/acumen/topGrewords.JPG"
         ]
     ],
     "53": [
@@ -2526,7 +2526,8 @@
             "slack off"
         ],
         [
-            "/assets/img/WordImages/abate/pixinary.jpg"
+            "/assets/img/WordImages/abate/pixinary.jpg",
+            "/assets/img/WordImages/abate/topGrewords.JPG"
         ]
     ],
     "148": [
@@ -2541,7 +2542,8 @@
             "abnormal"
         ],
         [
-            "/assets/img/WordImages/aberrant/pixinary.jpg"
+            "/assets/img/WordImages/aberrant/pixinary.jpg",
+            "/assets/img/WordImages/aberrant/topGrewords.JPG"
         ]
     ],
     "149": [
@@ -4673,6 +4675,10 @@
             "partisan",
             "partizan",
             "tendencious"
+        ],
+        [
+            "/assets/img/WordImages/tendentious/istockphoto.jpg",
+            "/assets/img/WordImages/tendentious/English_sikho.jpg"
         ]
     ],
     "273": [
@@ -4923,7 +4929,8 @@
         [
             "/assets/img/WordImages/acme/pixinary.jpg",
             "/assets/img/WordImages/acme/istockphoto0.jpg",
-            "/assets/img/WordImages/acme/istockphoto1.jpg"
+            "/assets/img/WordImages/acme/istockphoto1.jpg",
+            "/assets/img/WordImages/acme/topGrewords.JPG"
         ]
     ],
     "288": [
@@ -7121,6 +7128,11 @@
         "",
         [
             "discerning"
+        ],
+        [
+            "/assets/img/WordImages/prescient/bookworm.jpg",
+            "/assets/img/WordImages/prescient/istockphoto.jpg",
+            "/assets/img/WordImages/prescient/istockphoto0.jpg"
         ]
     ],
     "418": [
@@ -7138,6 +7150,11 @@
             "diffuse",
             "tedious",
             "verbose"
+        ],
+        [
+            "/assets/img/WordImages/prolix/istockphoto0.jpg",
+            "/assets/img/WordImages/prolix/fiverr.jpg",
+            "/assets/img/WordImages/prolix/istockphoto1.jpg"
         ]
     ],
     "419": [
@@ -7986,7 +8003,8 @@
         [
             "/assets/img/WordImages/abeyance/pixinary.jpg",
             "/assets/img/WordImages/abeyance/istockphoto0.jpg",
-            "/assets/img/WordImages/abeyance/istockphoto1.jpg"
+            "/assets/img/WordImages/abeyance/istockphoto1.jpg",
+            "/assets/img/WordImages/abeyance/topGrewords.JPG"
         ]
     ],
     "467": [
@@ -8015,7 +8033,8 @@
         "https://rss.art19.com/episodes/b0175b9c-380a-4129-96c1-469926b9767d.mp3",
         [],
         [
-            "/assets/img/WordImages/abrogate/pixinary.jpg"
+            "/assets/img/WordImages/abrogate/pixinary.jpg",
+            "/assets/img/WordImages/abrogate/topGrewords.JPG"
         ]
     ],
     "469": [
@@ -8051,7 +8070,8 @@
         [
             "/assets/img/WordImages/abscond/pixinary.jpg",
             "/assets/img/WordImages/abscond/istockphoto0.jpg",
-            "/assets/img/WordImages/abscond/istockphoto1.jpg"
+            "/assets/img/WordImages/abscond/istockphoto1.jpg",
+            "/assets/img/WordImages/abscond/topGrewords.JPG"
         ]
     ],
     "471": [
@@ -8067,7 +8087,8 @@
             "recondite"
         ],
         [
-            "/assets/img/WordImages/abstruse/pixinary.jpg"
+            "/assets/img/WordImages/abstruse/pixinary.jpg",
+            "/assets/img/WordImages/abstruse/topGrewords.JPG"
         ]
     ],
     "472": [
@@ -8084,7 +8105,8 @@
             "unmeasurable"
         ],
         [
-            "/assets/img/WordImages/abysmal/pixinary.jpg"
+            "/assets/img/WordImages/abysmal/pixinary.jpg",
+            "/assets/img/WordImages/abysmal/topGrewords.JPG"
         ]
     ],
     "473": [
@@ -8101,7 +8123,8 @@
             "laurels"
         ],
         [
-            "/assets/img/WordImages/accolade/pixinary.jpg"
+            "/assets/img/WordImages/accolade/pixinary.jpg",
+            "/assets/img/WordImages/accolade/topGrewords.JPG"
         ]
     ],
     "474": [
@@ -10241,6 +10264,10 @@
         "",
         [
             "unorthodox"
+        ],
+        [
+            "/assets/img/WordImages/iconoclastic/istockphoto.jpg",
+            "/assets/img/WordImages/iconoclastic/istockphotoo.jpg"
         ]
     ],
     "599": [
@@ -11206,7 +11233,11 @@
         null,
         "",
         "",
-        []
+        [],
+        [
+            "/assets/img/WordImages/na\u00efve/naiive.jpg",
+            "/assets/img/WordImages/na\u00efve/istockphoto.jpg"
+        ]
     ],
     "655": [
         655,
@@ -12503,7 +12534,11 @@
             "the patient presented with a case of recrudescent gastralgia"
         ],
         "",
-        []
+        [],
+        [
+            "/assets/img/WordImages/recrudescent/istockphoto.jpg",
+            "/assets/img/WordImages/recrudescent/istockphotooo.jpg"
+        ]
     ],
     "727": [
         727,
@@ -13832,7 +13867,8 @@
             "abominate"
         ],
         [
-            "/assets/img/WordImages/abhor/pixinary.jpg"
+            "/assets/img/WordImages/abhor/pixinary.jpg",
+            "/assets/img/WordImages/abhor/topGrewords.JPG"
         ]
     ],
     "803": [
@@ -14404,6 +14440,10 @@
         [
             "commensurate",
             "coextensive"
+        ],
+        [
+            "/assets/img/WordImages/coterminous/google.jpg",
+            "/assets/img/WordImages/coterminous/istockphoto.jpg"
         ]
     ],
     "837": [
@@ -16329,7 +16369,8 @@
             "/assets/img/WordImages/adherent/istockphoto8.jpg",
             "/assets/img/WordImages/adherent/istockphoto0.jpg",
             "/assets/img/WordImages/adherent/istockphoto1.jpg",
-            "/assets/img/WordImages/adherent/istockphoto2.jpg"
+            "/assets/img/WordImages/adherent/istockphoto2.jpg",
+            "/assets/img/WordImages/adherent/topGrewords.JPG"
         ]
     ],
     "949": [
@@ -16566,7 +16607,11 @@
         null,
         "",
         "",
-        []
+        [],
+        [
+            "/assets/img/WordImages/blas\u00e9/istockphoto.jpg",
+            "/assets/img/WordImages/blas\u00e9/pixnary.jpg"
+        ]
     ],
     "962": [
         962,
@@ -17210,6 +17255,11 @@
             "innocent",
             "vindicated",
             "exonerated"
+        ],
+        [
+            "/assets/img/WordImages/exculpated/istockphoto00.jpg",
+            "/assets/img/WordImages/exculpated/istockphoto.jpg",
+            "/assets/img/WordImages/exculpated/topGrewords.JPG"
         ]
     ],
     "1000": [
@@ -17598,7 +17648,11 @@
             "biblical inerrancy"
         ],
         "",
-        []
+        [],
+        [
+            "/assets/img/WordImages/inerrancy/istockphoto.jpg",
+            "/assets/img/WordImages/inerrancy/istockphoto0000.jpg"
+        ]
     ],
     "1025": [
         1025,
@@ -19514,6 +19568,10 @@
         "",
         [
             "exculpatory"
+        ],
+        [
+            "/assets/img/WordImages/extenuating/istockphoto00.jpg",
+            "/assets/img/WordImages/extenuating/istockphoto.jpg"
         ]
     ],
     "1139": [
