@@ -76,6 +76,8 @@ import { AppRateComponent } from "./POCs/app-rate/app-rate.component";
 //podcast
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
 
+import { DrawerComponent } from "./POCs/drawer/drawer.component";
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -124,6 +126,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     AudioComponent,
     SwiperComponent,
     AppRateComponent,
+    DrawerComponent,
   ],
   providers: [
     HammerGestureConfig,
