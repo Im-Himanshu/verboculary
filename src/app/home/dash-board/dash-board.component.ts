@@ -4,6 +4,7 @@ import { DatabaseService } from "../services/data-base.service"
 import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
 import { processedDataSharing } from '../interfaces/dropdown.interface';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -27,8 +28,12 @@ export class DashBoardComponent implements OnInit {
   allWordsOfSets;
   isDarkMode: boolean = false;
   chartLabelsAndData = {};
+  totalScreenHeight;
+  heightFromTop
 
-  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router) {
+  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform) {
+    this.totalScreenHeight = this.platform.height();
+    console.log("screen Height :", this.totalScreenHeight);
     this.allSelectedSet = this.db.allSetinSelectedCategory;
     this.allSetProgressData = this.db.allSetData.setLevelProgressData;
     this.processTotalSetData();
@@ -37,9 +42,20 @@ export class DashBoardComponent implements OnInit {
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.setChartResult();
 
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
+
+
+    let masterFilter = document.getElementById("masterFilter");
+    this.heightFromTop = masterFilter.offsetTop + masterFilter.offsetHeight + 20; // place where slider need to be fit in
+
+  }
 
   setChartResult() {
     let allDayProgress = this.db.allSetData.dateWiseTotalProgressReport;
@@ -93,24 +109,34 @@ export class DashBoardComponent implements OnInit {
 
   }
 
-  handlePan(event) {
+  touchStarted(event: TouchEvent) {
+    this.prevDeltaY = event.touches[0].clientY;
+    let toMoveElement = document.getElementById("toMove");
+    let newPosition = toMoveElement.offsetTop;
+    toMoveElement.style.top = newPosition + "px"
+    //console.log("touch started :", event.touches[0])
 
-    let absoluteY = event.center.y;
-    if (absoluteY < 30 || absoluteY > 500) { return; }
-    if (event.deltaX === 0 || (event.center.x === 0 && event.center.y === 0)) return;
+  }
 
-    //console.log(event.deltaX, event.deltaY)
-    let newDeltaX = event.deltaX - this.prevDeltaX; // the new delta
-    let newDeltaY = event.deltaY - this.prevDeltaY // the new delta more then the previous one
-    this.prevDeltaX = event.deltaX;
-    this.prevDeltaY = event.deltaY;
-    let rotate = newDeltaX * newDeltaY;
-    //console.log(newDeltaX, newDeltaY)
+  touchEnded(event: TouchEvent) {
+    this.prevDeltaY = 0;
+    //this.handlePanEnd();
+    //console.log("touch ended :", event.touches[0])
+  }
 
-    let move: any = event.deltaY;
-    if (event.deltaY >= 0) {
-      move = "+" + move; // assigning the sign to the positive numbers
+  handleTouch(event: TouchEvent) {
+    //console.log("touch running :", event.touches[0])
+    this.totalScreenHeight = this.platform.height();
+
+    let absoluteY = event.touches[0].clientY;
+    if (absoluteY < 78 || absoluteY > (this.totalScreenHeight - 40)) {
+      // if the touch goes above a certain range stop doing anything in this case
+      // if the touch goes in range of headear and >500 is for screen width
+      //console.log("from starting", absoluteY);
+      return;
     }
+    let newDeltaY = event.touches[0].clientY - this.prevDeltaY // the new delta more then the previous one
+    this.prevDeltaY = event.touches[0].clientY
     let toMoveElement = document.getElementById("toMove");
     let crntPosition: any = toMoveElement.style.top;
     crntPosition = crntPosition.substring(0, crntPosition.length - 2)// -1 for 0 index and - 2 for removing px
@@ -118,50 +144,34 @@ export class DashBoardComponent implements OnInit {
 
     let newPosition = crntPosition + newDeltaY;
 
-    if (absoluteY < 30 || newPosition > 700 || absoluteY > 430) { return; }
-    let newValue = "calc(" + + move + "px)";
+    if (absoluteY < 30 || newPosition > (this.totalScreenHeight - 100) || absoluteY > this.totalScreenHeight) {
+      // never executed
+      //console.log(absoluteY, newPosition);
+      return;
+    }
     toMoveElement.style.top = newPosition + "px"
 
   }
 
 
-  handlePanEnd(event) {
-    //30 to 500 250
-
+  handleTouchEnd(event: TouchEvent) {
+    let masterFilter = document.getElementById("masterFilter");
+    let offSetTop = masterFilter.offsetTop + masterFilter.offsetHeight + 20; // place where slider need to be fit in
     let toMoveElement = document.getElementById("toMove");
-
-    let absoluteY = event.center.y;
-
-    if (absoluteY > 200) {
-      toMoveElement.style.top = 430 + "px"
+    let absoluteY = event.changedTouches[0].clientY;
+    //let twoThird = offSetTop
+    if (absoluteY > (offSetTop)) {
+      // more then 180 down from top take it down
+      toMoveElement.style.top = offSetTop + "px"
     }
-    if (absoluteY <= 200) {
-      toMoveElement.style.top = 30 + "px"
+    if (absoluteY <= (offSetTop)) { // if greater than 2 rd tha
+      //if less 180 down take it up
+      toMoveElement.style.top = 10 + "px"
     }
     this.prevDeltaX = 0;
     this.prevDeltaY = 0;
 
   }
-
-  swipeup(event) {
-    let toMoveElement = document.getElementById("toMove");
-
-    let absoluteY = event.center.y;
-
-    if (absoluteY > 200) {
-      toMoveElement.style.top = 430 + "px"
-    }
-    if (absoluteY <= 200) {
-      toMoveElement.style.top = 30 + "px"
-    }
-    this.prevDeltaX = 0;
-    this.prevDeltaY = 0;
-
-
-
-  }
-
-
   scrollParentToChild($child) {
     this.ionScroll.scrollToPoint(0, $child.offsetTop, 500)
   }

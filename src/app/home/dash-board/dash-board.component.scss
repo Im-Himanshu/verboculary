@@ -94,13 +94,51 @@ flex-direction: column;
     left: 50%;
 }
 
+.iconBox{
+  position: absolute;
+  // top: 9px;
+  width: 100%;
+  height: 100%;
+  // left: 21%;
+}
+
+#iconsGroupsFortotal{
+  width: 85%;
+    height: 80%;
+    position: relative;
+    left: 61px;
+    top: -2px;
+
+}
+.mainFilterHeader{
+  /* Viewed */
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 16px;
+  color: #8D8D8D;
+}
+
+.mainFiltersubtext{
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 30px;
+  color: #707070;
+}
+
 
 #iconsGroup {
     width: 20%;
     height: 41%;
     position: relative;
 }
-
+.topIcons{
+  width: 100%;
+  height: 100%;
+}
 #LevelName {
     white-space: nowrap;
     text-align: left;
@@ -470,6 +508,7 @@ flex-direction: column;
     background-color: var(--dashboard-parent-box-color);
     }
 
+
     .full{
     position: absolute;
     left: 0%;
@@ -479,6 +518,8 @@ flex-direction: column;
     box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.549);
     border-radius: 20px;
     background-color: var(--dashboard-background-color);
+
+    transition: 0.1s;
 
     }
 
@@ -550,6 +591,7 @@ flex-direction: column;
       }
     .oneCard{
       width: 170px;
+      position: relative;
         border-radius: 10px;
         background-color: var(--cardBackground);
         height: 95%;
@@ -588,4 +630,7 @@ flex-direction: column;
         font-size: 16px;
         margin-left :12px;
         margin-top: 22px;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
     }

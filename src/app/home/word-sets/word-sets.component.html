@@ -18,10 +18,10 @@
     </div> -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
-      <!-- <div id="iconsGroup"> -->
-      <!-- <svg-icon name="alphabetsort"></svg-icon> -->
-      <ion-icon name="star"></ion-icon>
-      <!-- </div> -->
+      <div class="filtericon">
+        <svg-icon name="filter"></svg-icon>
+        <!-- <ion-icon name=""></ion-icon> -->
+      </div>
     </ion-fab-button>
     <ion-fab-list side="top">
       <ion-fab-button (click)="filterButton('all')" data-desc="All">
@@ -58,7 +58,7 @@
         <app-view></app-view>
       </super-tab>
       <super-tab class="superTabs">
-        <app-learn></app-learn>
+        <app-learn [selectedSet]="selectedSet"></app-learn>
       </super-tab>
       <super-tab class="superTabs" avoid-super-tabs>
         <app-practise></app-practise>

@@ -1,10 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
 import { SharingServiceService } from '../services/sharing-service.service'
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { wordToIdMap } from '../../wordToId'
+import { Router } from '@angular/router';
+
 
 import domtoimage from 'dom-to-image';
+import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 @Component({
   selector: 'app-learn',
   templateUrl: './learn.component.html',
@@ -13,14 +17,12 @@ import domtoimage from 'dom-to-image';
 export class LearnComponent implements OnInit {
 
   @ViewChild("container", { static: false, read: ElementRef }) container: ElementRef;
-
+  @Input() selectedSet: string;
 
   allSelectedWordIDs: number[];
   public wordDynamicData: any; // this always need to in synced with the stored data;
   allWordsData: any;
   selectedId: number = 3; // randomly setting it to avoid error
-
-
   allWordOfSets: any;
   selectedIDsDynamicData: any; // of type wordAppData
   url: any = {};
@@ -28,8 +30,7 @@ export class LearnComponent implements OnInit {
   isToShowDetails: boolean = false;
   isSafeUrlReady: boolean = true;
   isAllWordMastered: boolean = false;
-
-
+  foundIDMapping = {};
 
   tabBars: any = ["https://www.google.com/search?igu=1&ei=&q=define+",
     "https://www.merriam-webster.com/dictionary/",
@@ -40,9 +41,12 @@ export class LearnComponent implements OnInit {
   previousWordsIds = [];
   nextWordsIds = [] // this will be used when user go tp previous and click next
 
+  img = [];
+  images: any;
 
 
-  constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService) {
+
+  constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
 
   }
 
@@ -73,12 +77,41 @@ export class LearnComponent implements OnInit {
       }
       this.afterWordAppear();
       this.getSafeUrl();
+      this.getIDMapping()
+      this.getallImg();
     });
     // console.log(this.allWordsData[this.selectedId],this.wordDynamicData[this.selectedId]);
 
   }
+  stopParentProp(event) {
+    event.stopPropagation();
+  }
+
+  getallImg() {
+    this.img = [];
+    this.images = this.db.allWordsData[this.selectedId][7];
+    this.images.forEach((url) => {
+      this.img.push(url);
+    });
+  }
 
 
+  goToUrl(syn) {
+    this.router.navigate(['/mainmodule/base/wordSets/' + this.selectedSet + '/learn/' + wordToIdMap[syn]]);
+    // console.log('/mainmodule/base/wordSets/' + this.viewType + '/' + wordToIdMap[syn])
+  }
+
+  getIDMapping() {
+    this.foundIDMapping = {}
+    this.allWordsData[this.selectedId][6].forEach(element => {
+      if (element in wordToIdMap) {
+        this.foundIDMapping[element] = true
+      }
+      else {
+        this.foundIDMapping[element] = false
+      }
+    });
+  }
 
   getSafeUrl(type?) {
 
@@ -157,6 +190,8 @@ export class LearnComponent implements OnInit {
     let Idtrimmed = this.previousWordsIds.splice(this.previousWordsIds.length - 1, 1);
     this.getSafeUrl();
     this.afterWordAppear();
+    this.getIDMapping();
+    this.getallImg();
   }
 
 
@@ -177,6 +212,8 @@ export class LearnComponent implements OnInit {
 
     this.getSafeUrl();
     this.afterWordAppear();
+    this.getIDMapping();
+    this.getallImg();
   }
 
   // Rang = [min, max)

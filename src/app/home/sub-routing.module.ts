@@ -18,6 +18,7 @@ import { SlidesComponent } from "./POCs/slides/slides.component";
 import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
 import { AudioComponent } from "./POCs/audio/audio.component";
 import { SwiperComponent } from "./POCs/swiper/swiper.component";
+import { DrawerComponent } from "./POCs/drawer/drawer.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "base", pathMatch: "full" },
@@ -52,6 +53,7 @@ const routes: Routes = [
       { path: "share", component: ShareComponent },
       { path: "audio", component: AudioComponent },
       { path: "swiper", component: SwiperComponent },
+      { path: "drawer", component: DrawerComponent },
     ],
   },
 ];

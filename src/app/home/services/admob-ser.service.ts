@@ -6,40 +6,45 @@ import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeRewardVideoConfig } from '@i
 })
 export class AdmobSerService {
 
-  constructor(public admob: AdMobFree) {
+  AdStatus = true;
 
-   }
+  constructor(public admob: AdMobFree) {}
 
    showInterstitialAds(){
-    const bannerConfig: AdMobFreeBannerConfig = {
-      // id:'ca-app-pub-4352525331879046/7332741441',
-      autoShow: true,
-      isTesting: true,
+     if (this.AdStatus){
+      const bannerConfig: AdMobFreeBannerConfig = {
+        // id:'ca-app-pub-4352525331879046/7332741441',
+        autoShow: true,
+        isTesting: true,
 
+      }
+
+      this.admob.interstitial.config(bannerConfig);
+      this.admob.interstitial.prepare().then(() =>
+      {
+        console.log("SUCCESSFUL");
+      }).then(e => console.log(e));
+      }
     }
-
-    this.admob.interstitial.config(bannerConfig);
-    this.admob.interstitial.prepare().then(() =>
-    {
-      console.log("SUCCESSFUL");
-    }).then(e => console.log(e));
-  }
 
   showAdMobFreeRewardVideoAds(){
-    const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
-      // id:'ca-app-pub-4352525331879046/2656763057',
-      autoShow: true,
-      isTesting: true,
+    if (this.AdStatus){
+      const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
+        // id:'ca-app-pub-4352525331879046/2656763057',
+        autoShow: true,
+        isTesting: true,
+      }
+
+      this.admob.rewardVideo.config(rewardVideoConfig);
+      this.admob.rewardVideo.prepare().then(() =>
+      {
+
+      }).then(e => console.log(e));
     }
-
-    this.admob.rewardVideo.config(rewardVideoConfig);
-    this.admob.rewardVideo.prepare().then(() =>
-    {
-
-    }).then(e => console.log(e));
   }
 
   showBannerAdd(){
+    if (this.AdStatus){
 
       const bannerConfig: AdMobFreeBannerConfig = {
         // id : 'ca-app-pub-4352525331879046/7332741441',
@@ -53,6 +58,7 @@ export class AdmobSerService {
       {
 
       }).then(e => console.log(e));
+    }
   }
 
 }

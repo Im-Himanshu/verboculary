@@ -2,12 +2,6 @@
   <div class="chartArea">
     <app-progress-chart [chartLabelsAndData]="chartLabelsAndData">
 
-      <!-- this will be adjusting its view based a service event where we will publish on what it need to see
-        have to see if chart can load data dynamically or not...
-
-
-      -->
-
     </app-progress-chart>
 
     <div id="overChartText">
@@ -17,33 +11,48 @@
     </div>
   </div>
 
-  <div class="masterFilter">
+  <div id="masterFilter" class="masterFilter">
 
     <div class="allMasterCards">
 
       <div class="emptySides"></div>
       <div (click)="goToUrl('/mainmodule/base/wordSets/allViewed')" class="oneCard ripple"
         style="border-bottom: 6px solid var(--card-border-bottom);">
+        <div class="iconBox">
+          <div id="iconsGroupsFortotal">
+            <ion-icon class="topIcons" name="eye" style="color:#ECF8F1;"></ion-icon>
+          </div>
+        </div>
         <div class="subElement">
-          <span>Viewed</span>
-          <span
-            style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allViewed"].length}}/1080</span>
+          <span class="mainFilterHeader">Viewed</span>
+          <span class="mainFiltersubtext">{{allWordsOfSets["allViewed"].length}}/1080</span>
         </div>
       </div>
       <div (click)="goToUrl('/mainmodule/base/wordSets/allLearned')" class="oneCard ripple"
         style="border-bottom: 6px solid var(--progress-green);">
+
+        <div class="iconBox">
+          <div id="iconsGroupsFortotal">
+            <ion-icon class="topIcons" name="paper-plane" style="color:#FBECD3;"></ion-icon>
+            <!-- <svg-icon name='plane'></svg-icon> -->
+          </div>
+        </div>
         <div class="subElement">
-          <span>Learned</span>
-          <span
-            style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allLearned"].length}}/1080</span>
+          <span class="mainFilterHeader">Learned</span>
+          <span class="mainFiltersubtext">{{allWordsOfSets["allLearned"].length}}/1080</span>
         </div>
       </div>
       <div (click)="goToUrl('/mainmodule/base/wordSets/allMarked')" class="oneCard ripple"
         style="border-bottom: 6px solid var(--level-icon-below);">
+        <div class="iconBox">
+          <div id="iconsGroupsFortotal">
+            <ion-icon class="topIcons" name="bookmark" style="color:#FBD4C9;"></ion-icon>
+            <!-- <svg-icon name='marked'></svg-icon> -->
+          </div>
+        </div>
         <div class="subElement">
-          <span>Marked</span>
-          <span
-            style="font-style:normal;font-weight:normal;font-size:25px;">{{allWordsOfSets["allMarked"].length}}/1080</span>
+          <span class="mainFilterHeader">Marked</span>
+          <span class="mainFiltersubtext">{{allWordsOfSets["allMarked"].length}}/1080</span>
         </div>
       </div>
       <div class="emptySides"></div>
@@ -51,12 +60,14 @@
     </div>
 
   </div>
-  <div #mainDiv class="full" style="top:430px;" id="toMove">
+  <div #mainDiv class="full" style="top:46%" id="toMove">
 
-    <div #parent class="parentBox" (swipe)="swipeup($event)" (pandown)="handlePan($event)" (panup)="handlePan($event)"
-      (panend)="handlePanEnd($event)">
+    <div #parent class="parentBox">
 
-      <div class="fixHeader" style="background: var(--dashboard-fixed-header)">
+      <div class="fixHeader" (touchstart)="touchStarted($event)" (touchend)="handleTouchEnd($event)"
+        (touchmove)="handleTouch($event)"
+        style="background: var(--dashboard-fixed-header)"
+        >
         <div class="handle">
           <div class="handleBox"></div>
 
