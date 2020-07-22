@@ -1,21 +1,5 @@
-<div class="wordsetmain" *ngIf="isDataReady">
-  <!-- <div *ngIf="viewType === 'view'">
-      <app-view></app-view>
+<div class="wordsetmain">
 
-    </div>
-
-
-    <div *ngIf="viewType === 'learn'">
-
-      <app-learn></app-learn>
-
-    </div>
-
-    <div *ngIf="viewType === 'test'">
-
-      <app-practise></app-practise>
-
-    </div> -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <div class="filtericon">
@@ -62,7 +46,7 @@
         <app-view></app-view>
       </super-tab>
       <super-tab class="superTabs">
-        <app-learn [selectedSet]="selectedSet"></app-learn>
+        <app-learn></app-learn>
       </super-tab>
       <super-tab class="superTabs" avoid-super-tabs>
         <app-practise></app-practise>
@@ -79,6 +63,13 @@
 
   <div class="content ion-padding">
     <h1>HELLO</h1>
-    <p>Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph</p>
+    <p>Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is
+      a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and
+      coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of
+      sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not
+      determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly
+      journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of
+      sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it
+      controls what happens in the rest of the paragraph</p>
   </div>
 </div>

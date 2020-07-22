@@ -65,9 +65,10 @@
     <div #parent class="parentBox">
 
       <div class="fixHeader" (touchstart)="touchStarted($event)" (touchend)="handleTouchEnd($event)"
-        (touchmove)="handleTouch($event)"
-        style="background: var(--dashboard-fixed-header)"
-        >
+        (touchmove)="handleTouch($event)">
+
+        <!-- style="background: var(--dashboard-fixed-header)"
+        deletign this as this hides the complete header -->
         <div class="handle">
           <div class="handleBox"></div>
 

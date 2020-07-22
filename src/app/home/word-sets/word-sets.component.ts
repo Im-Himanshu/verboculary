@@ -17,7 +17,6 @@ export class WordSetsComponent implements OnInit {
   selectedSet;
   selectedWordId;
 
-  isDataReady = false;
   activeTabIndex = 0;
 
   currentPosition;
@@ -28,16 +27,6 @@ export class WordSetsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
-
-    router.events.forEach((event: NavigationEvent) => {
-      //After Navigation, because firstchild are populated only till navigation ends
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => {
-          this.isDataReady = true; // let the service fetch the set data
-        }, 500)
-      }
-    });
-
     this.route.paramMap.subscribe(params => {
       if (params.get('viewType')) {
         this.viewType = params.get('viewType');
@@ -81,6 +70,8 @@ export class WordSetsComponent implements OnInit {
 
   ngOnDestroy() {
     this.db.selectedSet = "allWords";
+    this.db.isToRemoveCompleteSearch = false; // reset this one
+    this.db.isToShowSearchBar = false;
   }
 
 
@@ -145,8 +136,8 @@ export class WordSetsComponent implements OnInit {
 
   }
 
-  open(){
-    if (this.isOpen == false){
+  open() {
+    if (this.isOpen == false) {
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
       (<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
       this.isOpen = true;
@@ -155,7 +146,7 @@ export class WordSetsComponent implements OnInit {
     }
   }
 
-  close(){
+  close() {
     this.currentPosition = 0;
     this.startPosition = 0;
 
@@ -166,9 +157,9 @@ export class WordSetsComponent implements OnInit {
     this.isOpen = false;
   }
 
-  touchMove(evt : TouchEvent){
+  touchMove(evt: TouchEvent) {
 
-    if(this.startPosition == 0){
+    if (this.startPosition == 0) {
       this.startPosition = evt.touches[0].clientY;
     }
 
@@ -177,12 +168,12 @@ export class WordSetsComponent implements OnInit {
     var y = evt.touches[0].clientY;
     this.currentPosition = y - this.startPosition;
 
-    if(this.currentPosition > 0 && this.startPosition > 0){
+    if (this.currentPosition > 0 && this.startPosition > 0) {
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.transform = "translate3d(0px," + this.currentPosition + "px,0px)";
     }
   }
 
-  touchEnd(){
+  touchEnd() {
     this.minimumThreshold = this.height - 130;
 
     if (this.currentPosition < this.minimumThreshold) {

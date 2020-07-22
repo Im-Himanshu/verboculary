@@ -17,7 +17,7 @@ import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_c
 export class LearnComponent implements OnInit {
 
   @ViewChild("container", { static: false, read: ElementRef }) container: ElementRef;
-  @Input() selectedSet: string;
+  selectedSet: string;
 
   allSelectedWordIDs: number[];
   public wordDynamicData: any; // this always need to in synced with the stored data;
@@ -47,6 +47,8 @@ export class LearnComponent implements OnInit {
 
 
   constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
+
+    this.selectedSet = this.db.selectedSet;
 
   }
 
@@ -90,6 +92,7 @@ export class LearnComponent implements OnInit {
   getallImg() {
     this.img = [];
     this.images = this.db.allWordsData[this.selectedId][7];
+    //   this.img = this.images; --- why not this 
     this.images.forEach((url) => {
       this.img.push(url);
     });
