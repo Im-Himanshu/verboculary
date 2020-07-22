@@ -71,6 +71,8 @@ export class LearnComponent implements OnInit {
       else if (this.allSelectedWordIDs.length != 0) {
         this.selectedId = this.allSelectedWordIDs[0]; // starting with the first word if no wordid is given in url
       }
+      this.afterWordAppear();
+      this.getSafeUrl();
     });
     // console.log(this.allWordsData[this.selectedId],this.wordDynamicData[this.selectedId]);
 
@@ -102,7 +104,7 @@ export class LearnComponent implements OnInit {
       })
   }
 
-  socialShare(event){
+  socialShare(event) {
     this.shareService.shareImageViaScreenshot(this.container);
   }
 

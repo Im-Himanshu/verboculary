@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
 import { SearchService } from '../services/search.service'
 import { wordToIdMap } from '../../wordToId';
+import { AppRateService } from '../services/app-rate.service';
+import { AdmobSerService } from '../services/admob-ser.service';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class ViewComponent implements OnInit {
   wordArray: any[];
   sortedAllSelectedWordIds: string[] = [];
   selectedSet;
+  shuffleIt = true;
 
   sortingTypes = [
     { value: 'shuffel', viewValue: 'Shuffeled' }, // default state
@@ -33,13 +36,15 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(private db: DatabaseService, public searchService: SearchService) {
+  constructor(private db: DatabaseService, public searchService: SearchService,private apprate : AppRateService,private admob : AdmobSerService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
 
     this.selectedSet = this.db.selectedSet;
+    this.admob.showBannerAdd();
+    this.apprate.showAppRate();
   }
 
   ngOnInit() {
@@ -59,6 +64,11 @@ export class ViewComponent implements OnInit {
   changeFilter(event) {
     this.db.filterSelectedIDBasedOnGivenCriterion(event.value);
     this.selectedSorting = "shuffel";
+  }
+
+  shuffleButton(event) {
+    this.shuffleIt = !this.shuffleIt;
+    this.db.changeSortingOfIds(event.currentTarget.attributes.value.nodeValue);
   }
   changeSorting(event) {
     this.db.changeSortingOfIds(event.value)
@@ -87,4 +97,7 @@ export class ViewComponent implements OnInit {
     this.saveDynamicData();
   }
 
+  start(wordId, playNext) {
+    this.db.startPodcast(wordId, playNext);
+  }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { dropdownData, processedDataSharing } from './interfaces/dropdown.interface';
 import { DatabaseService } from './services/data-base.service'
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonRange } from '@ionic/angular';
 import { AboutDeveloperComponent } from './about-developer/about-developer.component';
 import { FilterPopOverComponent } from './filter-pop-over/filter-pop-over.component'
 import { ToastController } from '@ionic/angular';
@@ -9,11 +9,14 @@ import { AlertController } from '@ionic/angular';
 import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
-import {SearchService} from './services/search.service'
-import {SharingServiceService} from './services/sharing-service.service';
-import { AppRateService } from './POCs/AppRate Service/app-rate.service';
-import { Router } from '@angular/router'
-import { wordToIdMap } from '../wordToId'
+import { SearchService } from './services/search.service'
+import { SharingServiceService } from './services/sharing-service.service';
+import { Router } from '@angular/router';
+import { wordToIdMap } from '../wordToId';
+import { AppRateService } from './services/app-rate.service';
+
+import { AdmobSerService } from './services/admob-ser.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -32,20 +35,32 @@ export class HomePage implements OnInit {
   allSetOfcategory: any;
   allWordsOfSets;
   isDarkMode: boolean = false;
+  chartLabelsAndData = {};
 
 
   prevDeltaX = 0;
   prevDeltaY = 0;
 
-  constructor(public searchService: SearchService, private db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService) {
+  @ViewChild('range', { static: false }) range: IonRange;
+
+  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob : AdmobSerService,private storage : Storage) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
+    this.showFullscreenAdd();
 
   }
   ngOnInit() {
 
 
   }
+
+
+  goToUrl(url) {
+    this.router.navigate([url]);
+
+  }
+
+
 
 
 
@@ -150,73 +165,7 @@ export class HomePage implements OnInit {
 
 
 
-  handlePan(event) {
 
-    let absoluteY = event.center.y;
-    if (absoluteY < 30 || absoluteY > 500) { return; }
-    if (event.deltaX === 0 || (event.center.x === 0 && event.center.y === 0)) return;
-
-    //console.log(event.deltaX, event.deltaY)
-    let newDeltaX = event.deltaX - this.prevDeltaX; // the new delta
-    let newDeltaY = event.deltaY - this.prevDeltaY // the new delta more then the previous one
-    this.prevDeltaX = event.deltaX;
-    this.prevDeltaY = event.deltaY;
-    let rotate = newDeltaX * newDeltaY;
-    //console.log(newDeltaX, newDeltaY)
-
-    let move: any = event.deltaY;
-    if (event.deltaY >= 0) {
-      move = "+" + move; // assigning the sign to the positive numbers
-    }
-    let toMoveElement = document.getElementById("toMove");
-    let crntPosition: any = toMoveElement.style.top;
-    crntPosition = crntPosition.substring(0, crntPosition.length - 2)// -1 for 0 index and - 2 for removing px
-    crntPosition = parseInt(crntPosition);
-
-    let newPosition = crntPosition + newDeltaY;
-
-    if (absoluteY < 30 || newPosition > 700 || absoluteY > 430) { return; }
-    let newValue = "calc(" + + move + "px)";
-    toMoveElement.style.top = newPosition + "px"
-
-  }
-
-
-  handlePanEnd(event) {
-    //30 to 500 250
-
-    let toMoveElement = document.getElementById("toMove");
-
-    let absoluteY = event.center.y;
-
-    if (absoluteY > 200) {
-      toMoveElement.style.top = 430 + "px"
-    }
-    if (absoluteY <= 200) {
-      toMoveElement.style.top = 30 + "px"
-    }
-    this.prevDeltaX = 0;
-    this.prevDeltaY = 0;
-
-  }
-
-  swipeup(event) {
-    let toMoveElement = document.getElementById("toMove");
-
-    let absoluteY = event.center.y;
-
-    if (absoluteY > 200) {
-      toMoveElement.style.top = 430 + "px"
-    }
-    if (absoluteY <= 200) {
-      toMoveElement.style.top = 30 + "px"
-    }
-    this.prevDeltaX = 0;
-    this.prevDeltaY = 0;
-
-
-
-  }
 
 
 
@@ -234,4 +183,37 @@ export class HomePage implements OnInit {
 
   }
 
+  prev() {
+    this.db.prev();
+  }
+
+  next() {
+    this.db.next();
+  }
+
+  tooglePlayer(pause) {
+    this.db.tooglePlayer(pause);
+  }
+
+  seek() {
+    this.db.seek(this.range);
+  }
+
+  close() {
+    this.db.closePodcast();
+  }
+
+  rateapp() {
+    this.appRateService.triggerRateApp();
+  }
+
+  showFullscreenAdd() {
+    this.storage.get("loginCount").then(data => {
+      let x = data % 5;
+      if(x == 0){
+        this.admob.showInterstitialAds();
+        console.log("Add shown");
+      }
+    })
+  }
 }

@@ -4,7 +4,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DatabaseService } from './home/services/data-base.service'
 import { Router } from '@angular/router';
-import { Deeplinks } from '@ionic-native/deeplinks/ngx'
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { Storage } from '@ionic/storage';
+import { InappNotificationService } from './home/services/inapp-notification.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -22,10 +24,14 @@ export class AppComponent {
     private statusBar: StatusBar,
     private db: DatabaseService,
     private router: Router,
-    private deepLinks: Deeplinks
+    private deepLinks: Deeplinks,
+    private storage : Storage,
+    private notification: InappNotificationService,
   ) {
     this.initializeApp();
     this.isTheUserNew();
+    this.loginCount();
+    this.notification.dailyNotification();
   }
 
   initializeApp() {
@@ -87,6 +93,23 @@ export class AppComponent {
 
   }
 
+  getLoginCount(){
+    return this.storage.get("loginCount");
+  }
 
+  setLoginCount(x){
+    this.storage.set("loginCount",x);
+  }
+
+  loginCount(){
+    this.getLoginCount().then(data => {
+      if(data){
+        data = data + 1;
+        this.setLoginCount(data);
+      } else {
+        this.setLoginCount(1);
+      }
+    })
+}
 
 }

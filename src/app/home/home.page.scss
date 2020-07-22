@@ -1,3 +1,48 @@
+:host ::ng-deep .ripple {
+  background-position: center;
+  transition: background 0.4s;
+}
+:host ::ng-deep .ripple:hover {
+  background: #ffffff radial-gradient(circle, transparent 1%, #f5f5f5 1%) center/15000%;
+}
+:host ::ng-deep .ripple:active {
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.mainPlayer{
+  display: flex;
+  flex-direction: column;
+}
+.rangeSlider{
+  height: 39px;
+  margin-top: -20px;
+
+  // height: 13px;
+}
+
+.controlButton{
+  display:  flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.wordDescription{
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep .range-slider{
+  height:5px !important;
+}
+
+.playerControl{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 .mainToolbar {
   --background: var(--app-mainToolbar-background);
   --color: var(--app-mainToolbar-color);

@@ -12,7 +12,7 @@
 <ion-progress-bar class="progressBar" color="primary" style="top:2%;z-index: 1;"
   *ngIf="isData1Ready && !isAllWordMastered" [value]="(masteredWordPoint/totalWordPoint)"
   [buffer]="seenWordCount/(allSelectedWordIDs.length)"></ion-progress-bar>
-<ion-content class="practiseContent alignMiddle" *ngIf="!isAllWordMastered" overflow-scroll="false">
+<ion-content class="practiseContent alignMiddle ioncontentheight" *ngIf="!isAllWordMastered" overflow-scroll="false">
 
   <app-swipable-card *ngIf="isData1Ready" [cards]="randomizedWordIDsList" [selectedIDsDynamicData]="wordDynamicData"
     [allWordsDetails]="allWordsData" (choiceMade)="userResponse2($event)" (changeMarkEvent)="changeMark($event)">

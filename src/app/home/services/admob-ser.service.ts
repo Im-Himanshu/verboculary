@@ -8,19 +8,6 @@ export class AdmobSerService {
 
   constructor(public admob: AdMobFree) {
 
-    const bannerConfig: AdMobFreeBannerConfig = {
-      // id = '',
-      autoShow: true,
-      isTesting: true,
-      bannerAtTop: false,
-      overlap: true
-    }
-    this.admob.banner.config(bannerConfig);
-    this.admob.banner.prepare().then(() => 
-    {
-
-    });
-
    }
 
    showInterstitialAds(){
@@ -40,7 +27,7 @@ export class AdmobSerService {
 
   showAdMobFreeRewardVideoAds(){
     const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
-      // id:'',
+      // id:'ca-app-pub-4352525331879046/2656763057',
       autoShow: true,
       isTesting: true,
     }
@@ -51,4 +38,21 @@ export class AdmobSerService {
 
     }).then(e => console.log(e));
   }
+
+  showBannerAdd(){
+
+      const bannerConfig: AdMobFreeBannerConfig = {
+        // id : 'ca-app-pub-4352525331879046/7332741441',
+        autoShow: true,
+        isTesting: true,
+        bannerAtTop: false,
+        overlap: false,
+      }
+      this.admob.banner.config(bannerConfig);
+      this.admob.banner.prepare().then(() => 
+      {
+
+      }).then(e => console.log(e));
+  }
+
 }

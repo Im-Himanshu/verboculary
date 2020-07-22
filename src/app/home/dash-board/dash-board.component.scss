@@ -1,9 +1,8 @@
 
 .fixHeader{
     height: 164px;
-
+    background: var(--dashboard-fix-header);
 }
-
 
 .handle{
     display: flex;
@@ -26,8 +25,6 @@
     }
 
 }
-
-
 
 .userLevels{
 position: absolute;
@@ -176,7 +173,7 @@ flex-direction: column;
 
 }
 .oneSet:hover{
-    background-color: #f9fbfc !important;
+    background-color: var(--dasboard-card-hover-background) !important;
     transform: scale(1.03);
 }
 
@@ -265,3 +262,330 @@ flex-direction: column;
     height: 1.5px;
     margin-top: 16px;
 }
+
+
+.mainToolbar {
+    --background: var(--app-mainToolbar-background);
+    --color: var(--app-mainToolbar-color);
+  }
+
+  .navigatonMenubar {
+    --background: var(--app-mainToolbar-color);
+    --color: var(--app-mainToolbar-background);
+    --color-selected: var(--app-navigatonMenubarSelectedTabs-color);
+    // --background-focused: #e0e0e0;
+    // --border: 1px solid var(--ion-tab-bar-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.07))));
+    // --height: 56px;
+
+    ion-tab-button {
+      ion-badge {
+        --color-selected: var(--app-navigatonMenubarSelectedTabs-color);
+        --color: var(--app-navigatonMenubar-color);
+        --background: var(--app-navigatonMenubarSelectedTabs-color);
+      }
+    }
+  }
+
+  .selectedFilterTabbar {
+    // --background: var(--app-selectedFilterTabbar-background);
+    // --color: #ffffff;
+    --border-color: var(--app-selectedFilterTabbar-color);
+    // --padding-top: 0;
+    // --padding-bottom: 0;
+    // --padding-start: 0;
+    // --padding-end: 0;
+    // --min-height: 0px;
+    // height : 30px
+    .selectedfilterToolbar {
+      --background: var(--app-selectedfilterToolbar-background);
+      --color: var(--app-selectedfilterToolbar-color);
+      // --border-color: var(--ion-toolbar-border-color,var(--ion-border-color,var(--ion-color-step-150,#c1c4cd)));
+      //   --padding-top: 0;
+      //   --padding-bottom: 0;
+      //   --padding-start: 0;
+      //   --padding-end: 0;
+      //   --min-height: 0px;
+      // height : 30px
+    }
+  }
+
+  .sideMenu {
+    // --background : var(--app-sideMenuContent-background);
+
+    ion-header {
+      //--background : var(--app-sideMenuHeader-background);
+      ion-toolbar {
+        --background: var(--app-sideMenuHeader-background);
+        --color: var(--app-sideMenuHeader-color);
+      }
+    }
+
+    ion-content {
+      --background: var(--app-sideMenuContent-background);
+      // --color:var(--app-sideMenuContent-color);
+      // --padding-top: 0px;
+      // --padding-bottom: 0px;
+      // --padding-start: 0px;
+      // --padding-end: 0px;
+      // --keyboard-offset: 0px;
+      // --offset-top: 0px;
+      // --offset-bottom: 0px;
+      // --overflow: auto;
+      ion-list {
+        --background: var(--app-sideMenuContent-background);
+        --ion-item-background: var(--app-sideMenuContent-background);
+        ion-item {
+          --background: var(--app-sideMenuContent-background);
+          --color: var(--app-sideMenuContent-color);
+          ion-icon {
+            color: var(--app-sideMenuContent-color);
+          }
+          .headerColor {
+            color: var(--app-sideMenuFilterHeader-color) !important;
+          }
+
+          .filterItem {
+            --background: var(--app-sideMenuFilterBody-background);
+            --ion-item-background: var(--app-sideMenuFilterBody-background);
+            margin-top: 0;
+            margin-bottom: -1px;
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 8px;
+            padding-bottom: 0px;
+            ion-item {
+              --background: var(--app-sideMenuFilterBody-background);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .filterChip {
+    background-color: #3880ff !important;
+  }
+  .setChip {
+    background-color: #424242bf; //#75e900
+  }
+  .categoryChip {
+    background-color: var(--primary);
+  }
+
+  ::ng-deep .alert-title.sc-ion-alert-md {
+    color: var(--app-alerttitle-color);
+  }
+  ::ng-deep .alert-message.sc-ion-alert-md {
+    color: var(--app-alertmessage-color);
+  }
+
+  ::ng-deep .alert-button.sc-ion-alert-md {
+    color: var(--app-alertButton-color);
+  }
+
+  .tabs {
+    position: relative;
+  }
+  ::ng-deep .ion-page {
+    /* styles here */
+    justify-content: flex-start;
+  }
+
+  .filterTabs {
+    height: 43px;
+  }
+
+  .example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+  .mat-standard-chip {
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    padding: 1px 4px;
+    border-radius: 10px;
+    align-items: center;
+    cursor: default;
+    min-height: 20px;
+    height: 1px;
+    margin: 1px !important;
+  }
+
+  .mat-chip-list-wrapper {
+    flex-wrap: nowrap !important;
+  }
+  ::ng-deep .mat-expansion-panel {
+    width: 100%;
+    background: #42424200;
+  }
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 !important;
+    width: 100%;
+  }
+
+  .mat-expansion-panel-header {
+    background: var(--app-sideMenuFilterHeader-background) !important;
+    height: 48px !important;
+  }
+
+  .mat-expansion-panel-header-title {
+    margin-left: 13%;
+    color: var(--app-sideMenuFilterHeader-color);
+  }
+
+  .example-headers-align .mat-expansion-panel-header-title,
+  .example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  mat-form-field {
+    margin-right: 12px;
+  }
+
+  .listIcon {
+    top: 1px;
+    position: absolute;
+    z-index: 2;
+    // color: white;
+  }
+
+
+
+
+  .parentBox{
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    width: 100%;
+    //bottom: -69.06%; wil be undefined
+
+    bottom: -10%;
+
+    background-color: var(--dashboard-parent-box-color);
+    }
+
+    .full{
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    width: 100%;
+    bottom: -4%;
+    box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.549);
+    border-radius: 20px;
+    background-color: var(--dashboard-background-color);
+
+    }
+
+
+    #overChartText{
+      white-space: nowrap;
+        text-align: left;
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 20px;
+      color: var(--home-name-text-color);
+      width: 126px;
+      position: absolute;
+      top: 24%;
+        left: 10%;
+    }
+
+    .backgroundGraph{
+      background-color: var(--app-homepage-graph);
+      height: 100%;
+    }
+
+    .chartArea{
+      position: absolute;
+      top: 0px;
+      left:0px;
+      width: 100%;
+      height: 30%;
+    }
+
+    .message{
+      white-space: nowrap;
+        text-align: left;
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 16px;
+        color:#ccc;
+    }
+
+    .bottomSheet{
+      --fiv-background:white;
+      --fiv-border-radius:20px;
+    }
+
+    .masterFilter{
+      height: 13%;
+        top: 30%;
+        width: 100%;
+        position: absolute;
+        background-color: #ffebcd00 ;
+    }
+
+    .allMasterCards{
+      display: -webkit-box;
+        display: flex;
+        height: 100%;
+        /* justify-content: space-around; */
+        -webkit-box-align: center;
+        align-items: center;
+        /* overflow: scroll; */
+      overflow-x: auto;
+      justify-content: space-between;
+    }
+
+    .allMasterCards::-webkit-scrollbar {
+      display: none;
+      }
+    .oneCard{
+      width: 170px;
+        border-radius: 10px;
+        background-color: var(--cardBackground);
+        height: 95%;
+        margin-left: 7px;
+        margin-right: 7px;
+        min-width: 160px;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        align-items: center;
+        border-bottom: 6px solid var(--card-border-bottom);
+        // &:hover{
+        //     background-color: yellow;
+        // }
+    }
+    .emptySides{
+      min-width : 13px; // for the sides
+      height: 100%;
+      border-radius: 15px;
+    }
+
+    .subElement{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 9px;
+        color: var(--viewed-card-color);
+        white-space: nowrap;
+        text-align: left;
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        margin-left :12px;
+        margin-top: 22px;
+    }

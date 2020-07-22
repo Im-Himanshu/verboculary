@@ -11,7 +11,7 @@ import { Router, NavigationStart, NavigationEnd, Event as NavigationEvent } from
 export class WordSetsComponent implements OnInit {
 
 
-  // here we will implement slides and 
+  // here we will implement slides and
 
   viewType = "view"//0, 1, 2 view, learn, test; // default is set to view
   selectedSet;
@@ -27,7 +27,7 @@ export class WordSetsComponent implements OnInit {
       //After Navigation, because firstchild are populated only till navigation ends
       if (event instanceof NavigationEnd) {
         setTimeout(() => {
-          this.isDataReady = true; // let the service fetch the set data 
+          this.isDataReady = true; // let the service fetch the set data
         }, 500)
       }
     });
@@ -48,19 +48,95 @@ export class WordSetsComponent implements OnInit {
 
   }
 
+  filterButton(filterType) {
+    console.log(filterType);
+    this.db.filterSelectedIDBasedOnGivenCriterion(filterType);
+  }
+
   setSpecificView() {
     if (this.viewType == 'view') {
+      //search icon
       this.activeTabIndex = 0;
     }
     if (this.viewType == 'learn') {
+      //search icon shrink
       this.activeTabIndex = 1;
     }
     if (this.viewType == 'test') {
+      //search icon shrink
       this.activeTabIndex = 2;
     }
   }
 
   ngOnInit() {
+    console.log("demo")
+    this.processChartData();
+  }
+
+  ngOnDestroy() {
+    this.db.selectedSet = "allWords";
+  }
+
+
+
+  processChartData() {
+    let allSelectedWordsId = this.db.allSetData.allWordOfSets[this.selectedSet];
+    let individualViewedDate = []
+    let individualLearnedDate = []
+    for (let oneId of allSelectedWordsId) {
+      let oneWordDynamicData = this.db.wordsDynamicData[oneId];
+      if (oneWordDynamicData["viewedDate"] != null) {
+        individualViewedDate.push(oneWordDynamicData["viewedDate"])
+      }
+      if (oneWordDynamicData["learnedDate"] != null) {
+        individualLearnedDate.push(oneWordDynamicData["learnedDate"])
+      }
+    }
+    individualLearnedDate.sort();
+    individualViewedDate.sort();
+    let totalLearningOnDate = {}
+    let totalViewedOnDate = {}
+    let i = 1;
+    for (let oneDate of individualViewedDate) {
+      totalViewedOnDate[oneDate] = i;
+      i++
+    }
+    let j = 1;
+    for (let oneDate of individualLearnedDate) {
+      totalLearningOnDate[oneDate] = j;
+      j++
+    }
+
+    let allDates = individualLearnedDate.concat(individualViewedDate)
+    allDates.sort();
+
+    let lastViewedCount = 0
+    let lastLearnedCount = 0;
+
+    let chartLabelsAndData = {}
+    for (let oneDate of allDates) {
+      let oneDataPoint = {}
+
+      if (totalViewedOnDate[oneDate] != null) {
+        oneDataPoint["viewed"] = totalViewedOnDate[oneDate];
+        lastViewedCount = totalViewedOnDate[oneDate];
+      }
+      else {
+        oneDataPoint["viewed"] = lastViewedCount;
+      }
+      if (totalLearningOnDate[oneDate] != null) {
+        oneDataPoint["learned"] = totalLearningOnDate[oneDate];
+        lastLearnedCount = totalLearningOnDate[oneDate];
+      }
+      else {
+        oneDataPoint["learned"] = lastLearnedCount;
+      }
+
+      chartLabelsAndData[oneDate] = oneDataPoint;
+    }
+
+
+
   }
 
 }

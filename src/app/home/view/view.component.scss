@@ -2,13 +2,16 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    padding-top: 28px;
+    // padding-top: 28px;
 }
 
 .dropdownDiv{
     width: 32%;
     padding-right: 11px;
     justify-content:flex-end;
+}
+.ioncontentheight{
+    height:  74vh;
 }
 
 ::ng-deep .mat-form-field-infix{
@@ -68,6 +71,7 @@
         font-weight: normal;
         font-size: 12px;
         line-height: 14px;
+        color: var(--meaning-text-color);
 
     }
 }
@@ -238,4 +242,35 @@
 .name-item{
     --background: var(--word-name-item-background-color);
     --border-color: var(--word-border-bottom-color);
+}
+
+.iconDiv{
+    padding-right: 3% ;
+}
+
+.shuffleButton{
+    background-color: none;
+}
+
+.filter{
+    height: 100px;
+    width: 100px;
+    font-size: 1.9em;
+}
+.siconsGroup{
+    width:20px;
+    height: 100%;
+    position: relative;
+}
+.alphabetical{
+    // position: absolute;
+    color: #ffa500;
+}
+
+.shuffled{
+    color: #ffa500;
+    height: 100%;
+    width: 20px;
+    font-size: 1.7em;
+    position: relative;
 }

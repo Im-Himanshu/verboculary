@@ -32,6 +32,7 @@ const routes: Routes = [
       { path: "learn/:wordId", component: LearnComponent },
       { path: "learn", component: LearnComponent },
       { path: "dashboard", component: DashBoardComponent },
+      {path: "allwords", component: WordSetsComponent},
       { path: "wordSets/:setName", component: WordSetsComponent }, // defaul
       { path: "wordSets/:setName/:viewType", component: WordSetsComponent }, // default
       { path: "wordSets/:setName/:viewType/:wordId", component: WordSetsComponent }, // in case specifc view and specific word is to be loaded

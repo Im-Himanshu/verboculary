@@ -221,7 +221,58 @@
       //--app-practiseProgressBarprogress-background : #f7f6f4;
       // -app-sideMenuContent-color : #f4f5f8; // use less as of now
 
-      --app-homepage-graph: black;
+
+      //new colors for dark mode
+      --home-name-text-color: #bdbdbd;
+      --dashboard-content: #1e1e30;
+      --cardBackground: #1e1e30;
+      --app-homepage-graph: #161625;
+      --card-border-bottom: #fecc7b;
+      --user-level: #161625;
+      --dashboard-fixed-header: #1e1e30;
+      --dashboard-text-color: #bdbdbd;
+      --viewed-card-color: #bdbdbd;
+      --app-mainToolbar-background: black;
+      --app-mainToolbar-color: var(--primarylight-contrast);
+      --progress-bar-green: rgba(40,167,69,0.125);
+      --progress-green: #62c589;
+      --progress-bar-orange: #5C4836   ;
+      --progress-orange: #ffbb4d;
+      --progress-stat-text-color: #707070;
+      --arrow-icon-color: #87768d;
+      --level-name-color: #bdbdbd;
+      --level-status-color: #707070;
+      --dashboard-background-color: white;
+      --level-icon-background-beginner: #c8fdde;
+      --level-icon-background-transitional: #FF9E49;
+      --level-icon-background-pro: rgba(255,7,58,0.125);
+      --level-icon-below: #fe805d;
+      --view-text-color: #bdbdbd;
+      --word-name-item-text-color: white;
+      --word-name-item-background-color: #161625;
+      --word-border-bottom-color: #e0dcdc;
+      --learn-card-background: #161625;
+      --app-learnWordsContent-color: #bdbdbd;
+      --app-learnWordsChangeButton-background: var(
+        --app-navigatonMenubar-background
+      );
+      --app-practiseContent-background: #161625;
+      --test-swipable-card-background: #161625;
+      --test-swipe-button: #161625;
+      --app-practiseCard-color: #bdbdbd;
+      --practise-card-border: #bdbdbd;
+      --dasboard-card-hover-background: #161625;
+      --dashboard-parent-box-color: transparent;
+      --app-modalToolbar-background: var(
+      --app-navigatonMenubar-background
+    ); // have to be same as mainToolbar
+    --app-modalToolbar-color: var(
+      --app-navigatonMenubar-color
+    );
+    --wordset-background: #161625;
+    --slide-bar-text-color: #bdbdbd;
+    --meaning-text-color: #bdbdbd;
+
 
 
   }
@@ -356,9 +407,9 @@
     --level-icon-background-pro: #fbd4ca85;
     --level-icon-below: #fe805d;
     --view-text-color: #6B6B6B;
-    --word-name-item-text-color: white;
+    --word-name-item-text-color: #bdbdbd;
     --word-name-item-background-color: white;
-    --word-border-bottom-color: #e0dcdc;
+    --word-border-bottom-color: #bdbdbd;
     --learn-card-background: white;
     --app-learnWordsContent-color: var(--cardTextColor);
     --app-learnWordsChangeButton-background: var(
@@ -369,6 +420,15 @@
     --test-swipe-button: white;
     --app-practiseCard-color: var(--appTextColor);
     --practise-card-border: #70757a21;
+    --dasboard-card-hover-background: #f9fbfc;
+    --dashboard-parent-box-color: transparent;
+    --dashboard-fixed-header: white;
+    --dashboard-content: white;
+    --home-name-text-color: white;
+    --wordset-background: white;
+    --slide-bar-text-color: black;
+    --meaning-text-color: black;
+
 
   }
 }
