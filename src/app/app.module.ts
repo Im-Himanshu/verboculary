@@ -33,7 +33,7 @@ import { AppRate } from '@ionic-native/app-rate/ngx';
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
 import { AdMobFree } from "@ionic-native/admob-free/ngx";
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-
+import { SuperTabs } from '@ionic-super-tabs/angular'
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
   authDomain: "verboculary.firebaseapp.com",
@@ -69,6 +69,7 @@ var firebaseConfig = {
     HttpClientModule,
     Ng2SearchPipeModule,
     SuperTabsModule.forRoot(),
+    // SuperTabs
   ],
   providers: [
     DatabaseService,
@@ -82,7 +83,7 @@ var firebaseConfig = {
     AppRate,
     MusicControls,
     AdMobFree,
-    LocalNotifications
+    LocalNotifications,
   ],
   bootstrap: [AppComponent],
 })

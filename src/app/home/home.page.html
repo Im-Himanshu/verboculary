@@ -65,6 +65,11 @@
         <ion-searchbar [(ngModel)]="searchService.searchQuery" (ionFocus)="searchBarOnFocus($event)"
            (ionChange)="searchBarOnFocus($event)"
           ></ion-searchbar>
+          <!-- <ion-searchbar [(ngModel)]="db.searchQuery" (ionFocus)="searchBarOnFocus($event)"
+          (ionChange)="searchBarOnChange($event)"
+          *ngIf="db.isSearchBarVisible && router.url!=='/mainmodule/base/dashboard'"
+         ></ion-searchbar>
+         <ion-icon name="search" *ngIf="!db.isSearchBarVisible || router.url == '/mainmodule/base/dashboard'" (click)="searchIconClick($event)"></ion-icon> -->
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>

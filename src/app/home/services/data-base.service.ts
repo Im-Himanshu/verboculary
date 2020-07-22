@@ -11,7 +11,6 @@ import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router
 import { Howl } from 'howler';
 import { MusicControls } from '@ionic-native/music-controls/ngx';
 import { AdmobSerService } from './admob-ser.service';
-
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -31,6 +30,9 @@ export class DatabaseService {
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
   public allSetinSelectedCategory;
   public wordFilterChangeEvent: Subject<any> = new Subject();
+  public searchQuery: string = '';
+  public activeTabIndex: number = 0;
+  public isSearchBarVisible: boolean = false;
 
   currId;
   player : Howl = null;
@@ -67,6 +69,46 @@ export class DatabaseService {
       }
     });
   }
+
+  resetSearch(){
+    this.searchQuery = '';
+  }
+
+  onSearchQueryChange(){
+    console.log(this.searchQuery);
+    this.allSelectedWordIdsFiltered.splice(0,this.allSelectedWordIdsFiltered.length);
+    for(var i = 0; i<this.allSelectedWordIds.length; i++){
+        if(this.allWordsData[this.allSelectedWordIds[i]][1].indexOf(this.searchQuery)!=-1){
+          this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
+        }
+    }
+  }
+
+  searchIconClick(){
+    this.isSearchBarVisible = true;
+    this.activeTabIndex = 0;
+  }
+
+  tabChange(tab: number){
+    this.activeTabIndex = tab;
+
+    if(this.activeTabIndex!==0){
+      console.log("called")
+      this.isSearchBarVisible = false;
+    }
+  }
+  checkSearchBarVisibility(){
+
+
+    console.log("Tab Index Visibility: " + this.activeTabIndex);
+    if(this.activeTabIndex === 0){
+      this.isSearchBarVisible = true;
+    }
+    else{
+      this.isSearchBarVisible = false;
+    }
+  }
+
 
 
   getAllwordsOfSelectedSet() {
@@ -193,6 +235,10 @@ export class DatabaseService {
         }
 
         this.allSetData = output;
+        for(var i = 0; i<=1210; i++){
+          this.allSetData.allWordOfSets["allWords"].push(i);
+        }
+
         this.setSetDatainStorage(output);
         resolve("reset all the set Data");
       });
