@@ -24,6 +24,8 @@ export class WordSetsComponent implements OnInit {
   minimumThreshold;
   startPosition;
   isOpen = false;
+  chartLabelsAndData = null;
+  isChartDataReady = false;
 
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
@@ -77,63 +79,76 @@ export class WordSetsComponent implements OnInit {
 
 
   processChartData() {
-    let allSelectedWordsId = this.db.allSetData.allWordOfSets[this.selectedSet];
-    let individualViewedDate = []
-    let individualLearnedDate = []
-    for (let oneId of allSelectedWordsId) {
-      let oneWordDynamicData = this.db.wordsDynamicData[oneId];
-      if (oneWordDynamicData["viewedDate"] != null) {
-        individualViewedDate.push(oneWordDynamicData["viewedDate"])
-      }
-      if (oneWordDynamicData["learnedDate"] != null) {
-        individualLearnedDate.push(oneWordDynamicData["learnedDate"])
-      }
-    }
-    individualLearnedDate.sort();
-    individualViewedDate.sort();
-    let totalLearningOnDate = {}
-    let totalViewedOnDate = {}
-    let i = 1;
-    for (let oneDate of individualViewedDate) {
-      totalViewedOnDate[oneDate] = i;
-      i++
-    }
-    let j = 1;
-    for (let oneDate of individualLearnedDate) {
-      totalLearningOnDate[oneDate] = j;
-      j++
-    }
 
-    let allDates = individualLearnedDate.concat(individualViewedDate)
-    allDates.sort();
+    return new Promise((resolve, reject) => {
 
-    let lastViewedCount = 0
-    let lastLearnedCount = 0;
-
-    let chartLabelsAndData = {}
-    for (let oneDate of allDates) {
-      let oneDataPoint = {}
-
-      if (totalViewedOnDate[oneDate] != null) {
-        oneDataPoint["viewed"] = totalViewedOnDate[oneDate];
-        lastViewedCount = totalViewedOnDate[oneDate];
-      }
-      else {
-        oneDataPoint["viewed"] = lastViewedCount;
-      }
-      if (totalLearningOnDate[oneDate] != null) {
-        oneDataPoint["learned"] = totalLearningOnDate[oneDate];
-        lastLearnedCount = totalLearningOnDate[oneDate];
-      }
-      else {
-        oneDataPoint["learned"] = lastLearnedCount;
+      if (this.chartLabelsAndData != null) {
+        resolve(true);
+        this.isChartDataReady = true;
+        return;
       }
 
-      chartLabelsAndData[oneDate] = oneDataPoint;
-    }
+      let allSelectedWordsId = this.db.allSetData.allWordOfSets[this.selectedSet];
+      let individualViewedDate = []
+      let individualLearnedDate = []
+      for (let oneId of allSelectedWordsId) {
+        let oneWordDynamicData = this.db.wordsDynamicData[oneId];
+        if (oneWordDynamicData["viewedDate"] != null) {
+          individualViewedDate.push(oneWordDynamicData["viewedDate"])
+        }
+        if (oneWordDynamicData["learnedDate"] != null) {
+          individualLearnedDate.push(oneWordDynamicData["learnedDate"])
+        }
+      }
+      individualLearnedDate.sort();
+      individualViewedDate.sort();
+      let totalLearningOnDate = {}
+      let totalViewedOnDate = {}
+      let i = 1;
+      for (let oneDate of individualViewedDate) {
+        totalViewedOnDate[oneDate] = i;
+        i++
+      }
+      let j = 1;
+      for (let oneDate of individualLearnedDate) {
+        totalLearningOnDate[oneDate] = j;
+        j++
+      }
+
+      let allDates = individualLearnedDate.concat(individualViewedDate)
+      allDates.sort();
+
+      let lastViewedCount = 0
+      let lastLearnedCount = 0;
+      this.chartLabelsAndData = {};
+      let chartLabelsAndData = this.chartLabelsAndData;
+      for (let oneDate of allDates) {
+        let oneDataPoint = {}
+
+        if (totalViewedOnDate[oneDate] != null) {
+          oneDataPoint["viewed"] = totalViewedOnDate[oneDate];
+          lastViewedCount = totalViewedOnDate[oneDate];
+        }
+        else {
+          oneDataPoint["viewed"] = lastViewedCount;
+        }
+        if (totalLearningOnDate[oneDate] != null) {
+          oneDataPoint["learned"] = totalLearningOnDate[oneDate];
+          lastLearnedCount = totalLearningOnDate[oneDate];
+        }
+        else {
+          oneDataPoint["learned"] = lastLearnedCount;
+        }
+
+        chartLabelsAndData[oneDate] = oneDataPoint;
+      }
+
+      resolve(true);
+      this.isChartDataReady = true;
 
 
 
+    })
   }
 
   open() {
@@ -141,6 +156,7 @@ export class WordSetsComponent implements OnInit {
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
       (<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
       this.isOpen = true;
+      this.processChartData();
     } else {
       this.close();
     }
