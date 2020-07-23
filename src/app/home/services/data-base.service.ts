@@ -11,6 +11,7 @@ import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router
 import { Howl } from 'howler';
 import { MusicControls } from '@ionic-native/music-controls/ngx';
 import { AdmobSerService } from './admob-ser.service';
+import { analytics } from 'firebase';
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -33,9 +34,11 @@ export class DatabaseService {
   public searchQuery: string = '';
   public activeTabIndex: number = 0;
   public isSearchBarVisible: boolean = false;
+  public isToShowSearchBar = false;
+  public isToRemoveCompleteSearch = false;
 
   currId;
-  player : Howl = null;
+  player: Howl = null;
   isPlaying = false;
   miniPlayerVisible = false;
   currWord;
@@ -49,7 +52,7 @@ export class DatabaseService {
     private route: ActivatedRoute,
     private router: Router,
     public musicControls: MusicControls,
-    public admob : AdmobSerService,
+    public admob: AdmobSerService,
   ) {
     router.events.forEach((event: NavigationEvent) => {
       //After Navigation, because firstchild are populated only till navigation ends
@@ -58,56 +61,38 @@ export class DatabaseService {
           this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
             if (params.get('setName')) {
               this.selectedSet = params.get('setName');
-              //this.selectedSet = "Begineer-1";
-              //if (!this.allSelectedWordIdsFiltered.length)
-              //to make sure db doesn't change all the computed filters to default
               this.getAllwordsOfSelectedSet();
+              if ((this.selectedSet !== "allWords")) {
+                this.isToRemoveCompleteSearch = true;
+              }
+              else {
+                this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+              }
             }
           })
-        }
-        if(event.urlAfterRedirects.startsWith("/mainmodule/base/allwords")){
-          console.log("COMES HERE");
         }
       }
     });
   }
 
-  resetSearch(){
-    this.searchQuery = '';
-  }
-
-  onSearchQueryChange(){
-    console.log(this.searchQuery);
-    this.allSelectedWordIdsFiltered.splice(0,this.allSelectedWordIdsFiltered.length);
-    for(var i = 0; i<this.allSelectedWordIds.length; i++){
-        if(this.allWordsData[this.allSelectedWordIds[i]][1].indexOf(this.searchQuery)!=-1){
-          this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
-        }
+  onSearchQueryChange(searchQuery: string) {
+    if (!this.isToShowSearchBar) {
+      return; // not do anything if it is not shown
     }
-  }
-
-  searchIconClick(){
-    this.isSearchBarVisible = true;
-    this.activeTabIndex = 0;
-  }
-
-  tabChange(tab: number){
-    this.activeTabIndex = tab;
-
-    if(this.activeTabIndex!==0){
-      console.log("called")
-      this.isSearchBarVisible = false;
+    if (searchQuery.length <= 0) {
+      return;
     }
-  }
-  checkSearchBarVisibility(){
-
-
-    console.log("Tab Index Visibility: " + this.activeTabIndex);
-    if(this.activeTabIndex === 0){
-      this.isSearchBarVisible = true;
-    }
-    else{
-      this.isSearchBarVisible = false;
+    //console.log(searchQuery);
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+    let count = 0;
+    for (var i = 0; i < this.allSelectedWordIds.length; i++) {
+      if (this.allWordsData[this.allSelectedWordIds[i]][1].indexOf(searchQuery) != -1) {
+        this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
+        count++
+      }
+      if (count > 10) {
+        break; // showing max of 10
+      }
     }
   }
 
@@ -153,7 +138,6 @@ export class DatabaseService {
           });
         } else {
           this.allSetData = data;
-          this.generateTotalProgressReportTillToday()
           resolve2(true);
         }
       });
@@ -169,6 +153,7 @@ export class DatabaseService {
 
 
   generateTotalProgressReportTillToday() {
+    // be very careful in triggering this function as this sets all the other 
 
     // this function will run through all the sets progress and calculate progress report till today
 
@@ -209,7 +194,7 @@ export class DatabaseService {
       let allSetOfcategory = {};
       let allWordOfSets = {};
       let setLevelProgressData = {}
-      let todaysDate = new Date().toDateString();
+      let todaysDate = new Date().toLocaleDateString();
       let dateWiseTotalProgressReport = {} // "date" :  #number of wordsword maping
       dateWiseTotalProgressReport[todaysDate] = { "viewed": 0, "learned": 0 };
       output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
@@ -233,14 +218,12 @@ export class DatabaseService {
               setLevelProgressData[set] = setProgress;
             }
           }
-
+        }
+        for (let i = 0; i < 1209; i++) {
+          allWordOfSets["allWords"].push(i);
         }
 
         this.allSetData = output;
-        for(var i = 0; i<=1210; i++){
-          this.allSetData.allWordOfSets["allWords"].push(i);
-        }
-
         this.setSetDatainStorage(output);
         resolve("reset all the set Data");
       });
@@ -360,39 +343,22 @@ export class DatabaseService {
     return this.http.get("assets/setDivision.json");
   }
 
-  getOneWordState(wordId) {
-    // getting it from the RAM data only
-    let oneWordData: wordAppData = this.wordsDynamicData[wordId];
-    return oneWordData;
-  }
-  getMultipleWordsState(wordIds: string[]) {
-    let allWordData = {};
-    if (!wordIds || wordIds.length == 0) {
-      return {};
-    }
-    for (let wordId of wordIds) {
-      let oneWordData: wordAppData = this.wordsDynamicData[wordId];
-      allWordData[wordId] = oneWordData;
-    }
-    return this.wordsDynamicData; // giving it all it causing un-necassary trouble
-  }
-
   saveCurrentStateofDynamicData() {
-    this.setSetDatainStorage(this.allSetData)
-    let x = (this.allSetData.allWordOfSets["allViewed"].length+1) % 50;
-    if(x == 0){
+    let x = (this.allSetData.allWordOfSets["allViewed"].length + 1) % 50;
+    if (x == 0) {
       this.admob.showInterstitialAds();
     }
-    this.getSetDataFromStorage().then(data => {
-      let adTrigger = data.setLevelProgressData;
-      if(!(adTrigger[this.selectedSet]["isAdShown"])) {
-        if (adTrigger[this.selectedSet]["totalViewed"] == adTrigger[this.selectedSet]["totalWords"]){
-          this.admob.showAdMobFreeRewardVideoAds();
-          data.setLevelProgressData[this.selectedSet]["isAdShown"] = true;
-          console.log("Reward Video Ad is Shown");
-        }
+    let data = this.allSetData;
+    let adTrigger = data.setLevelProgressData;
+    if (!(adTrigger[this.selectedSet]["isAdShown"])) {
+      if (adTrigger[this.selectedSet]["totalViewed"] >= adTrigger[this.selectedSet]["totalWords"]) {
+        this.admob.showAdMobFreeRewardVideoAds();
+        data.setLevelProgressData[this.selectedSet]["isAdShown"] = true;
+        console.log("Reward Video Ad is Shown");
       }
-    })
+    }
+
+    this.setSetDatainStorage(this.allSetData)
     return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
 
   }
@@ -508,15 +474,15 @@ export class DatabaseService {
     return array;
   }
 
-  startPodcast(wordId,playNext){
+  startPodcast(wordId, playNext) {
     this.currId = wordId;
-    if(this.player){
+    if (this.player) {
       this.player.stop();
     }
 
     this.player = new Howl({
       src: [this.allWordsData[wordId][5]],
-      html5 : true,
+      html5: true,
       onplay: () => {
         console.log("onPlay");
         this.isPlaying = true;
@@ -528,9 +494,9 @@ export class DatabaseService {
       },
       onend: () => {
         console.log('onEnd');
-        if(playNext){
+        if (playNext) {
           this.next();
-        } else{
+        } else {
           this.miniPlayerVisible = false;
         }
       }
@@ -539,51 +505,51 @@ export class DatabaseService {
     this.createNotification();
   }
 
-  prev(){
+  prev() {
     let index = this.allSelectedWordIds.indexOf(this.currId);
-    if(index>0){
-      this.startPodcast(this.allSelectedWordIds[index - 1],true);
+    if (index > 0) {
+      this.startPodcast(this.allSelectedWordIds[index - 1], true);
     } else {
-      this.startPodcast(this.currId,true);
+      this.startPodcast(this.currId, true);
     }
   }
 
-  next(){
+  next() {
 
-      let index = this.allSelectedWordIds.indexOf(this.currId);
+    let index = this.allSelectedWordIds.indexOf(this.currId);
 
-      if(index != this.allSelectedWordIds.length - 1){
-        this.startPodcast(this.allSelectedWordIds[index + 1],true);
-      } else {
-        this.startPodcast(this.allSelectedWordIds[0],true);
-      }
+    if (index != this.allSelectedWordIds.length - 1) {
+      this.startPodcast(this.allSelectedWordIds[index + 1], true);
+    } else {
+      this.startPodcast(this.allSelectedWordIds[0], true);
+    }
 
   }
 
-  play(){
+  play() {
     this.player.play();
   }
 
-  pause(){
+  pause() {
     this.player.pause();
   }
 
-  tooglePlayer(pause){
+  tooglePlayer(pause) {
     this.isPlaying = !pause;
-    if(pause){
+    if (pause) {
       this.player.pause();
     } else {
       this.player.play();
     }
   }
 
-  seek(range){
+  seek(range) {
     let newValue = +range.value;
     let duration = this.player.duration();
     this.player.seek(duration * (newValue / 100));
   }
 
-  updateProgress(){
+  updateProgress() {
     let seek = this.player.seek();
     this.progress = (seek / this.player.duration()) * 100 || 0;
     setTimeout(() => {
@@ -591,13 +557,13 @@ export class DatabaseService {
     }, 100)
   }
 
-  closePodcast(){
+  closePodcast() {
     this.player.stop();
     this.miniPlayerVisible = false;
     this.isPlaying = false;
   }
 
-  createNotification(){
+  createNotification() {
     this.musicControls.destroy();
     this.musicControls.create({
       track: this.allWordsData[this.currId][1],
@@ -624,7 +590,7 @@ export class DatabaseService {
 
       const message = JSON.parse(action).message;
 
-      switch(message){
+      switch (message) {
         case 'music-controls-next':
           this.next();
           break;
@@ -633,38 +599,35 @@ export class DatabaseService {
           this.prev();
           break;
         case 'music-controls-pause':
-          if(this.isPlaying)
-          {this.pause();
+          if (this.isPlaying) {
+            this.pause();
             this.musicControls.updateIsPlaying(false);
             console.log("music pause");
           }
-          else
-          {this.play();
+          else {
+            this.play();
             this.musicControls.updateIsPlaying(true);
           }
           break;
-          case 'music-controls-play':
-            // Do something
-            if(!this.isPlaying){
+        case 'music-controls-play':
+          // Do something
+          if (!this.isPlaying) {
             console.log('music play');
             this.play();
             this.musicControls.updateIsPlaying(true);
-            }
-            else
-            {console.log("music pause");
-              this.pause();
-              this.musicControls.updateIsPlaying(false);
-            }
-            break;
-          default:
-            break;
           }
+          else {
+            console.log("music pause");
+            this.pause();
+            this.musicControls.updateIsPlaying(false);
+          }
+          break;
+        default:
+          break;
+      }
 
     })
     this.musicControls.listen();
   }
-
-
-
 
 }

@@ -25,7 +25,7 @@ export class AppComponent {
     private db: DatabaseService,
     private router: Router,
     private deepLinks: Deeplinks,
-    private storage : Storage,
+    private storage: Storage,
     private notification: InappNotificationService,
   ) {
     this.initializeApp();
@@ -56,11 +56,13 @@ export class AppComponent {
       console.log(data)
 
       // if the first promise return false then show slides
-      if (!data[0]) {
+      if (!(data[0] && data[1])) {
         this.router.navigate(['/slides']);
       }
       this.isAppReady = true;
       this.db.getAllwordsOfSelectedSet();
+      this.db.generateTotalProgressReportTillToday()
+
     })
 
 
@@ -93,23 +95,23 @@ export class AppComponent {
 
   }
 
-  getLoginCount(){
+  getLoginCount() {
     return this.storage.get("loginCount");
   }
 
-  setLoginCount(x){
-    this.storage.set("loginCount",x);
+  setLoginCount(x) {
+    this.storage.set("loginCount", x);
   }
 
-  loginCount(){
+  loginCount() {
     this.getLoginCount().then(data => {
-      if(data){
+      if (data) {
         data = data + 1;
         this.setLoginCount(data);
       } else {
         this.setLoginCount(1);
       }
     })
-}
+  }
 
 }

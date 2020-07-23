@@ -66,14 +66,12 @@
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
       <ion-title class="titleicon">{{appTitle}}</ion-title>
       <ion-buttons slot="secondary">
-        <ion-searchbar [(ngModel)]="searchService.searchQuery" (ionFocus)="searchBarOnFocus($event)"
-           (ionChange)="searchBarOnFocus($event)"
-          ></ion-searchbar>
-          <!-- <ion-searchbar [(ngModel)]="db.searchQuery" (ionFocus)="searchBarOnFocus($event)"
-          (ionChange)="searchBarOnChange($event)"
-          *ngIf="db.isSearchBarVisible && router.url!=='/mainmodule/base/dashboard'"
-         ></ion-searchbar>
-         <ion-icon name="search" *ngIf="!db.isSearchBarVisible || router.url == '/mainmodule/base/dashboard'" (click)="searchIconClick($event)"></ion-icon> -->
+        <ion-searchbar id="searchBar" *ngIf="this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" inputmode="text"
+          placeholder="Enter Word to search" showCancelButton="always"
+          (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())">
+        </ion-searchbar>
+        <ion-icon *ngIf="!this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" (click)="searchIconClicked()"
+          slot="start" name="search"></ion-icon>
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
@@ -100,7 +98,7 @@
             </ion-button>
           </div>
           <div style="width: 88%;" class="wordDescription"
-            (click)="goToUrl('/mainmodule/base/learn/' + this.db.currId)">
+            (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/'+this.db.currId)">
             <div style="font-size: 26px;">
               <span>{{ this.db.currWord | titlecase}}</span>
             </div>

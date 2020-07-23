@@ -17,7 +17,6 @@ export class WordSetsComponent implements OnInit {
   selectedSet;
   selectedWordId;
 
-  isDataReady = false;
   activeTabIndex = 0;
 
   currentPosition;
@@ -25,19 +24,11 @@ export class WordSetsComponent implements OnInit {
   minimumThreshold;
   startPosition;
   isOpen = false;
+  chartLabelsAndData = null;
+  isChartDataReady = false;
 
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
-
-    router.events.forEach((event: NavigationEvent) => {
-      //After Navigation, because firstchild are populated only till navigation ends
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => {
-          this.isDataReady = true; // let the service fetch the set data
-        }, 500)
-      }
-    });
-
     this.route.paramMap.subscribe(params => {
       if (params.get('viewType')) {
         this.viewType = params.get('viewType');
@@ -81,81 +72,97 @@ export class WordSetsComponent implements OnInit {
 
   ngOnDestroy() {
     this.db.selectedSet = "allWords";
+    this.db.isToRemoveCompleteSearch = false; // reset this one
+    this.db.isToShowSearchBar = false;
   }
 
 
 
   processChartData() {
-    let allSelectedWordsId = this.db.allSetData.allWordOfSets[this.selectedSet];
-    let individualViewedDate = []
-    let individualLearnedDate = []
-    for (let oneId of allSelectedWordsId) {
-      let oneWordDynamicData = this.db.wordsDynamicData[oneId];
-      if (oneWordDynamicData["viewedDate"] != null) {
-        individualViewedDate.push(oneWordDynamicData["viewedDate"])
-      }
-      if (oneWordDynamicData["learnedDate"] != null) {
-        individualLearnedDate.push(oneWordDynamicData["learnedDate"])
-      }
-    }
-    individualLearnedDate.sort();
-    individualViewedDate.sort();
-    let totalLearningOnDate = {}
-    let totalViewedOnDate = {}
-    let i = 1;
-    for (let oneDate of individualViewedDate) {
-      totalViewedOnDate[oneDate] = i;
-      i++
-    }
-    let j = 1;
-    for (let oneDate of individualLearnedDate) {
-      totalLearningOnDate[oneDate] = j;
-      j++
-    }
 
-    let allDates = individualLearnedDate.concat(individualViewedDate)
-    allDates.sort();
+    return new Promise((resolve, reject) => {
 
-    let lastViewedCount = 0
-    let lastLearnedCount = 0;
-
-    let chartLabelsAndData = {}
-    for (let oneDate of allDates) {
-      let oneDataPoint = {}
-
-      if (totalViewedOnDate[oneDate] != null) {
-        oneDataPoint["viewed"] = totalViewedOnDate[oneDate];
-        lastViewedCount = totalViewedOnDate[oneDate];
-      }
-      else {
-        oneDataPoint["viewed"] = lastViewedCount;
-      }
-      if (totalLearningOnDate[oneDate] != null) {
-        oneDataPoint["learned"] = totalLearningOnDate[oneDate];
-        lastLearnedCount = totalLearningOnDate[oneDate];
-      }
-      else {
-        oneDataPoint["learned"] = lastLearnedCount;
+      if (this.chartLabelsAndData != null) {
+        resolve(true);
+        this.isChartDataReady = true;
+        return;
       }
 
-      chartLabelsAndData[oneDate] = oneDataPoint;
-    }
+      let allSelectedWordsId = this.db.allSetData.allWordOfSets[this.selectedSet];
+      let individualViewedDate = []
+      let individualLearnedDate = []
+      for (let oneId of allSelectedWordsId) {
+        let oneWordDynamicData = this.db.wordsDynamicData[oneId];
+        if (oneWordDynamicData["viewedDate"] != null) {
+          individualViewedDate.push(oneWordDynamicData["viewedDate"])
+        }
+        if (oneWordDynamicData["learnedDate"] != null) {
+          individualLearnedDate.push(oneWordDynamicData["learnedDate"])
+        }
+      }
+      individualLearnedDate.sort();
+      individualViewedDate.sort();
+      let totalLearningOnDate = {}
+      let totalViewedOnDate = {}
+      let i = 1;
+      for (let oneDate of individualViewedDate) {
+        totalViewedOnDate[oneDate] = i;
+        i++
+      }
+      let j = 1;
+      for (let oneDate of individualLearnedDate) {
+        totalLearningOnDate[oneDate] = j;
+        j++
+      }
+
+      let allDates = individualLearnedDate.concat(individualViewedDate)
+      allDates.sort();
+
+      let lastViewedCount = 0
+      let lastLearnedCount = 0;
+      this.chartLabelsAndData = {};
+      let chartLabelsAndData = this.chartLabelsAndData;
+      for (let oneDate of allDates) {
+        let oneDataPoint = {}
+
+        if (totalViewedOnDate[oneDate] != null) {
+          oneDataPoint["viewed"] = totalViewedOnDate[oneDate];
+          lastViewedCount = totalViewedOnDate[oneDate];
+        }
+        else {
+          oneDataPoint["viewed"] = lastViewedCount;
+        }
+        if (totalLearningOnDate[oneDate] != null) {
+          oneDataPoint["learned"] = totalLearningOnDate[oneDate];
+          lastLearnedCount = totalLearningOnDate[oneDate];
+        }
+        else {
+          oneDataPoint["learned"] = lastLearnedCount;
+        }
+
+        chartLabelsAndData[oneDate] = oneDataPoint;
+      }
+
+      resolve(true);
+      this.isChartDataReady = true;
 
 
 
+    })
   }
 
-  open(){
-    if (this.isOpen == false){
+  open() {
+    if (this.isOpen == false) {
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
       (<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
       this.isOpen = true;
+      this.processChartData();
     } else {
       this.close();
     }
   }
 
-  close(){
+  close() {
     this.currentPosition = 0;
     this.startPosition = 0;
 
@@ -166,9 +173,9 @@ export class WordSetsComponent implements OnInit {
     this.isOpen = false;
   }
 
-  touchMove(evt : TouchEvent){
+  touchMove(evt: TouchEvent) {
 
-    if(this.startPosition == 0){
+    if (this.startPosition == 0) {
       this.startPosition = evt.touches[0].clientY;
     }
 
@@ -177,12 +184,12 @@ export class WordSetsComponent implements OnInit {
     var y = evt.touches[0].clientY;
     this.currentPosition = y - this.startPosition;
 
-    if(this.currentPosition > 0 && this.startPosition > 0){
+    if (this.currentPosition > 0 && this.startPosition > 0) {
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.transform = "translate3d(0px," + this.currentPosition + "px,0px)";
     }
   }
 
-  touchEnd(){
+  touchEnd() {
     this.minimumThreshold = this.height - 130;
 
     if (this.currentPosition < this.minimumThreshold) {
