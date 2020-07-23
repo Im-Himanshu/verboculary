@@ -15,5 +15,8 @@ export class SvgDefinitionsComponent implements OnInit {
 
   /// node svg-converter.js
 
+  beginnerOuter = "#62C58A";
+  beginnerInner = "#FECC7B";
+
 
 }

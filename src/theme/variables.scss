@@ -250,17 +250,17 @@
       --view-text-color: #bdbdbd;
       --word-name-item-text-color: white;
       --word-name-item-background-color: #161625;
-      --word-border-bottom-color: #e0dcdc;
-      --learn-card-background: #161625;
+      --word-border-bottom-color: #7E7E7E;
+      --learn-card-background: #1e1e30;
       --app-learnWordsContent-color: #bdbdbd;
       --app-learnWordsChangeButton-background: var(
         --app-navigatonMenubar-background
       );
       --app-practiseContent-background: #161625;
       --test-swipable-card-background: #1e1e30;
-      --test-swipe-button: #161625;
+      --test-swipe-button: #1e1e30;
       --app-practiseCard-color: #6c757d;
-      --practise-card-border: #bdbdbd;
+      --practise-card-border: #161625;
       --dasboard-card-hover-background: #161625;
       --dashboard-parent-box-color: transparent;
       --app-modalToolbar-background: var(
@@ -278,6 +278,18 @@
     --dotted-line-color: #bdbdbd;
     --app-sideMenuContent-background: #161625;
     --app-sideMenu-text-color: #bdbdbd;
+    --view-icon-color: #ECF8F1;
+
+
+    //new icon colors to be changed and tested for dark theme
+
+    --beginner-outer-color: #62C58A;
+    --beginner-inner-color: #61C688;
+    --transitional-outer-color: #FECC7B;
+    --transitional-inner-color: #FECC7B;
+    --pro-outer-color: #FE805D;
+    --pro-inner-color: #FE805D;
+    --book-mark-color: #61C688;
 
 
 
@@ -439,6 +451,16 @@
     --app-mainToolbar-color: var(--ion-color-primary-contrast);
     --dotted-line-color: #e7e7e7;
     --app-sideMenu-text-color: black;
+
+    //new icon colors
+
+    --beginner-outer-color: #62C58A;
+    --beginner-inner-color: #61C688;
+    --transitional-outer-color: #FECC7B;
+    --transitional-inner-color: #FECC7B;
+    --pro-outer-color: #FE805D;
+    --pro-inner-color: #FE805D;
+    --book-mark-color: #61C688;
 
   }
 }
