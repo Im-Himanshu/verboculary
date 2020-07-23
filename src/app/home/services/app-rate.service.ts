@@ -12,20 +12,21 @@ export class AppRateService {
   triggerRateApp(){
     console.log("App Rating triggered");
     this.appRate.preferences.storeAppURL = {
-      android: "https://google.com",
-      ios: "https://google.com",
+      android: "market://details?id=com.GRE.verboculary",
+      // ios: "https://google.com",
     }
     this.appRate.promptForRating(true);
   }
 
   showAppRate(){
     this.appRate.preferences = {
+      ...this.appRate.preferences,
         displayAppName: 'Verboculary',
-        usesUntilPrompt: 10,
+        // usesUntilPrompt: 10,
         promptAgainForEachNewVersion: true,
         storeAppURL : {
-          ios: '',
-          android: '',
+          // ios: '',
+          android: 'market://details?id=com.GRE.verboculary',
         },
         customLocale: {
           title: 'Do you enjoy using verboculary?',
@@ -44,6 +45,6 @@ export class AppRateService {
         }
           
     }
-    this.appRate.promptForRating(false);
+    this.appRate.promptForRating(true);
   }
 }
