@@ -64,8 +64,8 @@
   <div class="content ion-padding">
     <span *ngIf="!isChartDataReady">Loading Progrees chart....</span>
     <div class="backgroundGraph">
-      <div class="chartArea">
-        <app-progress-chart *ngIf="isChartDataReady" [chartLabelsAndData]="chartLabelsAndData">
+      <div *ngIf="isChartDataReady" class="chartArea">
+        <app-progress-chart [(chartLabelsAndData)]="chartLabelsAndData">
 
         </app-progress-chart>
       </div>
