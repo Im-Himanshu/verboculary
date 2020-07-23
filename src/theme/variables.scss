@@ -178,10 +178,10 @@
       --app-selectedfilterToolbar-background :var(--appBackground);//var(--ion-color-primary);
       --app-selectedfilterToolbar-color : var(--appTextColor);
       //--app-sideMenu-background : #f04141; // useless as of now
-      --app-sideMenuHeader-background :var(--primary);
-      --app-sideMenuHeader-color : var(--appTextColor);
+      --app-sideMenuHeader-background :#1e1e30;
+      --app-sideMenuHeader-color : #bdbdbd;
       --app-sideMenuContent-background :var(--appBackground);
-      --app-sideMenuContent-color :var(--appTextColor);
+      --app-sideMenuContent-color : #6c757d;
       --app-sideMenuFilterHeader-background : var(--cardBackground);
       --app-sideMenuFilterBody-background :var(--appBackground);
 
@@ -257,9 +257,9 @@
         --app-navigatonMenubar-background
       );
       --app-practiseContent-background: #161625;
-      --test-swipable-card-background: #161625;
+      --test-swipable-card-background: #1e1e30;
       --test-swipe-button: #161625;
-      --app-practiseCard-color: #bdbdbd;
+      --app-practiseCard-color: #6c757d;
       --practise-card-border: #bdbdbd;
       --dasboard-card-hover-background: #161625;
       --dashboard-parent-box-color: transparent;
@@ -272,6 +272,12 @@
     --wordset-background: #161625;
     --slide-bar-text-color: #bdbdbd;
     --meaning-text-color: #bdbdbd;
+    --card-hover: #161625;
+    --app-mainToolbar-background: #1e1e30;
+    --app-mainToolbar-color: #bdbdbd;
+    --dotted-line-color: #bdbdbd;
+    --app-sideMenuContent-background: #161625;
+    --app-sideMenu-text-color: #bdbdbd;
 
 
 
@@ -391,8 +397,8 @@
     --user-level: #F9FBFC;
     --dashboard-text-color: #452b4f;
     --viewed-card-color: #707070;
-    --app-mainToolbar-background: var(--primary-light);
-    --app-mainToolbar-color: var(--primarylight-contrast);
+    // --app-mainToolbar-background: var(--primary-light);
+    // --app-mainToolbar-color: var(--primarylight-contrast);
     --progress-bar-green: #c0e8cf;
     --progress-green: #62c589;
     --progress-bar-orange: #fde6c1;
@@ -428,7 +434,11 @@
     --wordset-background: white;
     --slide-bar-text-color: black;
     --meaning-text-color: black;
-
+    --card-hover: white;
+    --app-mainToolbar-background: #132332;
+    --app-mainToolbar-color: var(--ion-color-primary-contrast);
+    --dotted-line-color: #e7e7e7;
+    --app-sideMenu-text-color: black;
 
   }
 }

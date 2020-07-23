@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input, ElementRef } from '@angular/core';
 import { Color, Label, BaseChartDirective, } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
+import { SharingServiceService } from '../services/sharing-service.service'
+import {Html2canvasService} from '../services/html2canvas.service'
+
 @Component({
   selector: 'app-progress-chart',
   templateUrl: './progress-chart.component.html',
@@ -11,18 +14,18 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 export class ProgressChartComponent implements AfterViewInit {
 
   /*
-  feed it the array of 
+  feed it the array of
   {
   "date" : {"viewed" : total # till Date, "learned" : total #till Date}
   "date" : {"viewed" : total # till Date, "learned" : total #till Date}
   }
   */
   @Input("chartLabelsAndData") chartLabelsAndData: any; // date to agregated progress data
-
+  @ViewChild("container4", { static: false, read: ElementRef }) container4: ElementRef;
   isProcessed: boolean = false;
   chartOptions; 2
   chartLabels: Date[]
-
+  img;
 
   fillPattern: any;
 
@@ -34,7 +37,24 @@ export class ProgressChartComponent implements AfterViewInit {
 
   ];
   public lineChartColors;
-  constructor() { }
+  constructor(private shareService: SharingServiceService, private html2canvas: Html2canvasService) { }
+
+  shareScreen(){
+    const element = document.getElementById('html2canvas');
+  const targetElement = document.getElementById('target').cloneNode(true);
+  element.appendChild(targetElement);
+  this.html2canvas.html2canvas(element.firstChild).then((img) => {
+    this.img = img;
+    console.log(this.img);
+    element.firstChild.remove();
+}).catch((res) => {
+    console.log(res);
+});
+  }
+
+    // this.shareService.shareImageViaScreenshot(this.container4);
+
+
   ngAfterViewInit(): void {
     let allDates = Object.keys(this.chartLabelsAndData);
 
@@ -51,9 +71,10 @@ export class ProgressChartComponent implements AfterViewInit {
     for (let oneDate of allDates) {
       viewedSeries.push(this.chartLabelsAndData[oneDate]["viewed"])
       learnedSeries.push(this.chartLabelsAndData[oneDate]["learned"])
-      this.chartLabels.push(new Date(oneDate)); // will convert the given date strign  to the date array 
+      this.chartLabels.push(new Date(oneDate)); // will convert the given date strign  to the date array
       i++;
     }
+
 
     let forViewed = {
       data: viewedSeries, label: "Viewed"
@@ -80,7 +101,7 @@ export class ProgressChartComponent implements AfterViewInit {
     // gradientStroke.addColorStop(0.5, "#fad874");
     // gradientStroke.addColorStop(1, "#f49080");
     gradientStroke.addColorStop(0, '#80b6f4');
-    gradientStroke.addColorStop(1, '#f49080'); //at 100 
+    gradientStroke.addColorStop(1, '#f49080'); //at 100
     gradientFill.addColorStop(0, "rgba(254, 254, 254, 0.8)");
     gradientFill.addColorStop(1, "rgba(254, 254, 254, 0.5)");
 
@@ -117,7 +138,7 @@ export class ProgressChartComponent implements AfterViewInit {
     // the final logic will be :
     // 1. the min and max of range will decide the landing view of the user -6, +1 || -7, +0
     // 2. the range_min and range_mix will be decided based on the user data history
-    // range_min = minimum date-2 days and range_max --> today+1 never below the actual limit 
+    // range_min = minimum date-2 days and range_max --> today+1 never below the actual limit
     this.lineChartColors = [property, property2]; // both graph are of same design
     let range_max: any = lastDate
     range_max.setDate(lastDate.getDate() + 1);
@@ -192,7 +213,7 @@ export class ProgressChartComponent implements AfterViewInit {
             enabled: true,
             sensitivity: 0.3,
 
-            // Panning directions. Remove the appropriate direction to disable 
+            // Panning directions. Remove the appropriate direction to disable
             // Eg. 'y' would only allow panning in the y direction
             mode: 'x',
             rangeMin: {
@@ -208,7 +229,7 @@ export class ProgressChartComponent implements AfterViewInit {
             // Boolean to enable zooming
             enabled: true,
 
-            // Zooming directions. Remove the appropriate direction to disable 
+            // Zooming directions. Remove the appropriate direction to disable
             // Eg. 'y' would only allow zooming in the y direction
             mode: 'x',
             rangeMin: {
@@ -226,6 +247,7 @@ export class ProgressChartComponent implements AfterViewInit {
     this.isProcessed = true;
 
   }
+
 
 
 

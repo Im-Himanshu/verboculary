@@ -176,7 +176,7 @@ flex-direction: column;
     height: 1px;
     /* border-width: 0; */
     box-sizing: content-box;
-    border-top: 4px dotted #e7e7e7;
+    border-top: 4px dotted var(--dotted-line-color);
   }
 
 
@@ -208,6 +208,9 @@ flex-direction: column;
     height: 76px;
     justify-content: space-between;
     align-items: stretch;
+    &:hover{
+        background: var(--card-hover);
+    }
 
 }
 .oneSet:hover{
@@ -605,9 +608,9 @@ flex-direction: column;
         -webkit-box-align: center;
         align-items: center;
         border-bottom: 6px solid var(--card-border-bottom);
-        // &:hover{
-        //     background-color: yellow;
-        // }
+        &:hover{
+            background-color: var(--card-hover);
+        }
     }
     .emptySides{
       min-width : 13px; // for the sides

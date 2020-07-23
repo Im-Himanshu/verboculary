@@ -34,6 +34,7 @@ import{ MusicControls } from "@ionic-native/music-controls/ngx";
 import { AdMobFree } from "@ionic-native/admob-free/ngx";
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { SuperTabs } from '@ionic-super-tabs/angular'
+import { Html2canvasService } from './home/services/html2canvas.service';
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
   authDomain: "verboculary.firebaseapp.com",
@@ -73,6 +74,7 @@ var firebaseConfig = {
   ],
   providers: [
     DatabaseService,
+    Html2canvasService,
     StatusBar,
     SplashScreen,
     AuthService,

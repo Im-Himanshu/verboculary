@@ -40,7 +40,7 @@ export class SharingServiceService {
     .then((dataUrl)=>{
       var img = new Image();
       img.src = dataUrl;
-      console.log(img);
+      console.log(img.src);
       this.onShareImage(img.src);
 
       console.log("working");//remove this once checked on your terminal

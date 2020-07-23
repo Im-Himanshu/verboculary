@@ -36,7 +36,8 @@ export class HomePage implements OnInit {
   allWordsOfSets;
   isDarkMode: boolean = false;
   chartLabelsAndData = {};
-
+  modeValue: boolean = true;
+  themeValue: 'Light Theme' | 'Dark Theme' = 'Light Theme';
 
   prevDeltaX = 0;
   prevDeltaY = 0;
@@ -164,7 +165,17 @@ export class HomePage implements OnInit {
 
 
 
+  toggleMode(e){
+    console.log(e);
+    this.themeService.toggleMode();
+    if(this.themeValue == 'Dark Theme'){
+      this.themeValue = 'Light Theme'
+    }
+    else{
+      this.themeValue = 'Dark Theme';
+    }
 
+  }
 
 
 
