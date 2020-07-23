@@ -55,7 +55,7 @@
   </super-tabs>
 </div>
 
-<div class="bg" (click)="close()"></div>
+<div *ngIf="isOpen" class="bg" (click)="close()"></div>
 
 <div class="bottomSheet" (touchmove)="touchMove($event)" (touchend)="touchEnd()">
 

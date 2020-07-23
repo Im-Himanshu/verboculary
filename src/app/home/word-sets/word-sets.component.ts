@@ -16,9 +16,7 @@ export class WordSetsComponent implements OnInit {
   viewType = "view"//0, 1, 2 view, learn, test; // default is set to view
   selectedSet;
   selectedWordId;
-
   activeTabIndex = 0;
-
   currentPosition;
   height;
   minimumThreshold;
@@ -26,9 +24,12 @@ export class WordSetsComponent implements OnInit {
   isOpen = false;
   chartLabelsAndData = null;
   isChartDataReady = false;
+  selectedFilter = 'all'
 
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
+
+    this.selectedFilter = this.db.selectedFilter;
     this.route.paramMap.subscribe(params => {
       if (params.get('viewType')) {
         this.viewType = params.get('viewType');
@@ -46,7 +47,8 @@ export class WordSetsComponent implements OnInit {
   }
 
   filterButton(filterType) {
-    console.log(filterType);
+    //console.log(filterType);
+    this.db.selectedFilter = filterType;
     this.db.filterSelectedIDBasedOnGivenCriterion(filterType);
   }
 
@@ -74,6 +76,7 @@ export class WordSetsComponent implements OnInit {
     this.db.selectedSet = "allWords";
     this.db.isToRemoveCompleteSearch = false; // reset this one
     this.db.isToShowSearchBar = false;
+    //this.db.selectedFilter = 'all'
   }
 
 
@@ -163,9 +166,9 @@ export class WordSetsComponent implements OnInit {
 
   open() {
     if (this.isOpen == false) {
+      this.isOpen = true;
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
       (<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
-      this.isOpen = true;
       this.processChartData();
     } else {
       this.close();

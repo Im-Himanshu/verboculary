@@ -36,6 +36,7 @@ export class DatabaseService {
   public isSearchBarVisible: boolean = false;
   public isToShowSearchBar = false;
   public isToRemoveCompleteSearch = false;
+  public selectedFilter = 'all';
 
   currId;
   player: Howl = null;
@@ -57,6 +58,10 @@ export class DatabaseService {
     router.events.forEach((event: NavigationEvent) => {
       //After Navigation, because firstchild are populated only till navigation ends
       if (event instanceof NavigationEnd) {
+        if (event.urlAfterRedirects.startsWith("/mainmodule/base/dashboard")) {
+          this.selectedFilter = 'all'
+
+        }
         if (event.urlAfterRedirects.startsWith("/mainmodule/base/wordSets")) {
           this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
             if (params.get('setName')) {
@@ -107,6 +112,7 @@ export class DatabaseService {
       for (var i = 0; i < this.allSelectedWordIds.length; i++) {
         this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
       }
+      this.filterSelectedIDBasedOnGivenCriterion(this.selectedFilter); // when routing is reverted then reset this
       // this will save all the selected word IDs which will be displayed
     }
   }
