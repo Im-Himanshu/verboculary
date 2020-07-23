@@ -172,7 +172,7 @@ export class LearnComponent implements OnInit {
     this.wordDynamicData[wordId]["isSeen"] = newMark;
     if (newMark && !this.wordDynamicData[wordId]['viewedDate']) {
       // if the previous viewedDate doesn't exist then only edit it otherwise leave it
-      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toLocaleString();
+      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toUTCString(); // utc will be in 24 hour format to avoid sorting issue like 00:00 of afternoon was coming before the 10:00 in morning so to avoid that.... 
     }
     else if (!newMark) {
       this.wordDynamicData[wordId]['viewedDate'] = null; //if newmark is notSeen unset the viewedDate as well

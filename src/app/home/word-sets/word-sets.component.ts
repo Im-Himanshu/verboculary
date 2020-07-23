@@ -96,8 +96,8 @@ export class WordSetsComponent implements OnInit {
         if (oneWordDynamicData["viewedDate"] != null) {
           individualViewedDate.push(oneWordDynamicData["viewedDate"])
         }
-        if (oneWordDynamicData["learnedDate"] != null) {
-          individualLearnedDate.push(oneWordDynamicData["learnedDate"])
+        if (oneWordDynamicData["masteredDate"] != null) {
+          individualLearnedDate.push(oneWordDynamicData["masteredDate"])
         }
       }
       individualLearnedDate.sort();
@@ -122,6 +122,7 @@ export class WordSetsComponent implements OnInit {
       let lastLearnedCount = 0;
       this.chartLabelsAndData = {};
       let chartLabelsAndData = this.chartLabelsAndData;
+      let existingDatewithoutSecond = {}
       for (let oneDate of allDates) {
         let oneDataPoint = {}
 
@@ -140,6 +141,15 @@ export class WordSetsComponent implements OnInit {
           oneDataPoint["learned"] = lastLearnedCount;
         }
 
+        // because oneDate will be in increasing order so will be keeping only the latest one if seconds is the only difference
+        //let oneDate : string
+        let date = new Date(oneDate);
+        let hours: string = "" + date.getHours();
+        if (hours.length <= 1) {
+          hours = "0" + hours; // adding a trailing zero for single digit as it is causing shorting issues 
+        }
+        let minutes = date.getMinutes();
+        oneDate = date.toLocaleDateString() + ", " + hours + ":" + minutes;
         chartLabelsAndData[oneDate] = oneDataPoint;
       }
 

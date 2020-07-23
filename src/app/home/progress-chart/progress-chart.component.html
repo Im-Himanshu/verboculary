@@ -1,13 +1,17 @@
-  <div id="main">
-    <div class="graphDiv" *ngIf="isProcessed">
+<div id="main">
+  <div class="graphDiv" *ngIf="isProcessed">
 
-      <ion-icon class="reSetIcon" (click)="resetZoom()" name="refresh-circle"></ion-icon>
-      <canvas #chart baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
-        [colors]="lineChartColors" [legend]="true" (chartClick)="onChartClick($event)">
-      </canvas>
-    </div>
-
-    <canvas id="canvas">
+    <ion-icon class="reSetIcon" (click)="resetZoom()" name="refresh-circle"></ion-icon>
+    <canvas #chart baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+      [colors]="lineChartColors" [legend]="true" (chartClick)="onChartClick($event)">
     </canvas>
-
   </div>
+
+  <canvas id="canvas">
+  </canvas>
+
+  <div *ngIf="noDataParsed">
+    Your Progress will appear here, let's get started
+  </div>
+
+</div>

@@ -406,18 +406,7 @@ export class DatabaseService {
 
   }
 
-  setOneWordState(wordData: wordAppData) {
-    return this.getAllWordsStateFromStorage().then(result => {
-      if (result) {
-        let id = wordData.id;
-        result[id] = wordData; // update the word in the dynamic data;
-        return this.setAllWordsStateinStorage(result);
-      } else {
-        this.reStartWordDynamicData();
-        return this.setOneWordState(wordData);
-      }
-    });
-  }
+
 
   public reSetApp() {
     this.storage.clear().then(data => {

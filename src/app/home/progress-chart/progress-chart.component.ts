@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, Input, ElementRef } from '
 import { Color, Label, BaseChartDirective, } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { SharingServiceService } from '../services/sharing-service.service'
-import {Html2canvasService} from '../services/html2canvas.service'
+import { Html2canvasService } from '../services/html2canvas.service'
 
 @Component({
   selector: 'app-progress-chart',
@@ -26,6 +26,7 @@ export class ProgressChartComponent implements AfterViewInit {
   chartOptions; 2
   chartLabels: Date[]
   img;
+  noDataParsed: boolean = false;
 
   fillPattern: any;
 
@@ -39,20 +40,20 @@ export class ProgressChartComponent implements AfterViewInit {
   public lineChartColors;
   constructor(private shareService: SharingServiceService, private html2canvas: Html2canvasService) { }
 
-  shareScreen(){
+  shareScreen() {
     const element = document.getElementById('html2canvas');
-  const targetElement = document.getElementById('target').cloneNode(true);
-  element.appendChild(targetElement);
-  this.html2canvas.html2canvas(element.firstChild).then((img) => {
-    this.img = img;
-    console.log(this.img);
-    element.firstChild.remove();
-}).catch((res) => {
-    console.log(res);
-});
+    const targetElement = document.getElementById('target').cloneNode(true);
+    element.appendChild(targetElement);
+    this.html2canvas.html2canvas(element.firstChild).then((img) => {
+      this.img = img;
+      console.log(this.img);
+      element.firstChild.remove();
+    }).catch((res) => {
+      console.log(res);
+    });
   }
 
-    // this.shareService.shareImageViaScreenshot(this.container4);
+  // this.shareService.shareImageViaScreenshot(this.container4);
 
 
   ngAfterViewInit(): void {
@@ -60,6 +61,7 @@ export class ProgressChartComponent implements AfterViewInit {
 
     if (allDates.length == 0) {
       console.error("No Data was parsed for the charting graph")
+      this.noDataParsed = true;
       return;
     }
     allDates.sort();

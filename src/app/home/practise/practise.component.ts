@@ -221,7 +221,7 @@ export class PractiseComponent implements OnInit {
       this.wordDynamicData[this.selectedId]['isMastered'] = true;
       if (!this.wordDynamicData[this.selectedId]['masteredDate']) {
         // if the previous viewedDate doesn't exist then only edit it otherwise leave it
-        this.wordDynamicData[this.selectedId]['masteredDate'] = (new Date()).toLocaleString();
+        this.wordDynamicData[this.selectedId]['masteredDate'] = (new Date()).toUTCString();
       }
       let index = this.nonMasteredWordIds.indexOf(this.selectedId);
       if (index || index == 0) {
