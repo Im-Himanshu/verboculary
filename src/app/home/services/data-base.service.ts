@@ -329,8 +329,28 @@ export class DatabaseService {
           this.allSelectedWordIdsFiltered.push(crntId)
         }
       }
+      else if (filterName == 'notViewed') {
+        if (!this.wordsDynamicData[crntId].isSeen) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
       if (filterName == 'marked') {
         if (this.wordsDynamicData[crntId].isMarked) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      else if (filterName == 'notMarked') {
+        if (!this.wordsDynamicData[crntId].isMarked) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      if (filterName == 'learned') {
+        if (this.wordsDynamicData[crntId].isMastered) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      else if (filterName == 'notLearned') {
+        if (!this.wordsDynamicData[crntId].isMastered) {
           this.allSelectedWordIdsFiltered.push(crntId)
         }
       }

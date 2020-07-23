@@ -4,7 +4,7 @@
     <ion-fab-button>
       <div class="filtericon">
         <svg-icon name="filter"></svg-icon>
-        <!-- <ion-icon name=""></ion-icon> -->
+        <ion-badge *ngIf="this.db.selectedFilter !== 'all'" class="selectedBadge" slot="end">*</ion-badge>
       </div>
     </ion-fab-button>
     <ion-fab-list side="top">
@@ -14,8 +14,20 @@
       <ion-fab-button (click)="filterButton('viewed')" data-desc="Viewed">
         <ion-icon name="eye"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button (click)="filterButton('notViewed')" data-desc="Not Viewed">
+        <ion-icon name="eye-off"></ion-icon>
+      </ion-fab-button>
       <ion-fab-button (click)="filterButton('marked')" data-desc="Marked">
-        <ion-icon name="bookmark"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('notMarked')" data-desc="Not Marked">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('learned')" data-desc="Learned">
+        <ion-icon name="battery-full"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('notLearned')" data-desc="Not Learned">
+        <ion-icon name="battery-dead"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
