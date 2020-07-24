@@ -7,8 +7,10 @@ import { wordToIdMap } from '../../wordToId'
 import { Router } from '@angular/router';
 
 
+
 import domtoimage from 'dom-to-image';
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
 @Component({
   selector: 'app-learn',
   templateUrl: './learn.component.html',
@@ -46,7 +48,7 @@ export class LearnComponent implements OnInit {
 
 
 
-  constructor(private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
+  constructor(private screenshot: Screenshot,private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
 
     this.selectedSet = this.db.selectedSet;
 
@@ -89,10 +91,19 @@ export class LearnComponent implements OnInit {
     event.stopPropagation();
   }
 
+  onScreenShot(event){
+    console.log(this.screenshot)
+    this.screenshot.URI(80).then(res=>{
+      // console.log(res.URI);
+      //only works on android
+      this.shareService.onShareImage(res.URI);
+    })
+  }
+
   getallImg() {
     this.img = [];
     this.images = this.db.allWordsData[this.selectedId][7];
-    //   this.img = this.images; --- why not this 
+    //   this.img = this.images; --- why not this
     this.images.forEach((url) => {
       this.img.push(url);
     });
@@ -172,7 +183,7 @@ export class LearnComponent implements OnInit {
     this.wordDynamicData[wordId]["isSeen"] = newMark;
     if (newMark && !this.wordDynamicData[wordId]['viewedDate']) {
       // if the previous viewedDate doesn't exist then only edit it otherwise leave it
-      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toUTCString(); // utc will be in 24 hour format to avoid sorting issue like 00:00 of afternoon was coming before the 10:00 in morning so to avoid that.... 
+      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toUTCString(); // utc will be in 24 hour format to avoid sorting issue like 00:00 of afternoon was coming before the 10:00 in morning so to avoid that....
     }
     else if (!newMark) {
       this.wordDynamicData[wordId]['viewedDate'] = null; //if newmark is notSeen unset the viewedDate as well

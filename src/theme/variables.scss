@@ -236,21 +236,21 @@
       --app-mainToolbar-color: var(--primarylight-contrast);
       --progress-bar-green: rgba(40,167,69,0.125);
       --progress-green: #62c589;
-      --progress-bar-orange: #5C4836   ;
+      --progress-bar-orange: #634a37;
       --progress-orange: #ffbb4d;
       --progress-stat-text-color: #707070;
       --arrow-icon-color: #87768d;
       --level-name-color: #bdbdbd;
       --level-status-color: #707070;
       --dashboard-background-color: white;
-      --level-icon-background-beginner: #c8fdde;
-      --level-icon-background-transitional: #FF9E49;
+      --level-icon-background-beginner: #2f5f438c;
+      --level-icon-background-transitional: #af5403a1;
       --level-icon-background-pro: rgba(255,7,58,0.125);
       --level-icon-below: #fe805d;
       --view-text-color: #bdbdbd;
       --word-name-item-text-color: white;
       --word-name-item-background-color: #161625;
-      --word-border-bottom-color: #7E7E7E;
+      --word-border-bottom-color: #3a3939;
       --learn-card-background: #1e1e30;
       --app-learnWordsContent-color: #bdbdbd;
       --app-learnWordsChangeButton-background: var(
@@ -263,6 +263,7 @@
       --practise-card-border: #161625;
       --dasboard-card-hover-background: #161625;
       --dashboard-parent-box-color: transparent;
+      --fab-button-background: #1e1e30;
       --app-modalToolbar-background: var(
       --app-navigatonMenubar-background
     ); // have to be same as mainToolbar
@@ -279,6 +280,16 @@
     --app-sideMenuContent-background: #161625;
     --app-sideMenu-text-color: #bdbdbd;
     --view-icon-color: #ECF8F1;
+    --learn-background-color: #161625;
+
+    --ripple-color-1: #000000;
+    --ripple-color-2: #000000;
+    --learn-button: #161625;
+    --learn-icon-fill: rgb(255, 165, 0);
+    --box-shadow: 10px 2px 99px 0px rgba(0,0,0,0.99);
+    --search-bar-color: #161625;
+    --search-bar-text-color: #bdbdbd;
+
 
 
     //new icon colors to be changed and tested for dark theme
@@ -451,6 +462,14 @@
     --app-mainToolbar-color: var(--ion-color-primary-contrast);
     --dotted-line-color: #e7e7e7;
     --app-sideMenu-text-color: black;
+    --ripple-color-1: #ffffff;
+    --ripple-color-2: #f5f5f5;
+    --learn-background-color: white;
+    --fab-button-background: black;
+    --learn-button: #452b4f;
+    --box-shadow: 0 1px 1px -2px rgba(0,0,0,.2), 0 0px 0px 0 rgba(0,0,0,.14), 6px 10px 11px 0 rgba(0,0,0,.12);
+    --search-bar-color: white;
+    --search-bar-text-color: black;
 
     //new icon colors
 

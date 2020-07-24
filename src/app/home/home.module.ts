@@ -79,6 +79,7 @@ import{ MusicControls } from "@ionic-native/music-controls/ngx";
 import { DrawerComponent } from "./POCs/drawer/drawer.component";
 import { SuperTabs } from '@ionic-super-tabs/angular'
 import { Html2canvasService } from './services/html2canvas.service';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -147,6 +148,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     DatePipe,
     MusicControls,
     AppRate,
+    Screenshot,
   ],
   entryComponents: [
     FilterPopOverComponent,

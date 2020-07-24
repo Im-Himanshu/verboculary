@@ -33,6 +33,7 @@
     "@ionic-native/local-notifications": "^5.27.0",
     "@ionic-native/media": "^5.27.0",
     "@ionic-native/music-controls": "^5.27.0",
+    "@ionic-native/screenshot": "^5.27.0",
     "@ionic-native/social-sharing": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/sqlite": "^5.19.1",
@@ -48,6 +49,7 @@
     "animejs": "^3.1.0",
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.5",
+    "com.darktalker.cordova.screenshot": "^0.1.6",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-admob-free": "^0.27.0",
@@ -149,7 +151,8 @@
       "cordova-plugin-file": {},
       "cordova-plugin-apprate": {},
       "cordova-plugin-music-controls": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "com.darktalker.cordova.screenshot": {}
     },
     "platforms": [
       "android",

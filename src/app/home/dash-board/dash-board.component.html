@@ -62,10 +62,10 @@
   </div>
   <div #mainDiv class="full" style="top:46%" id="toMove">
 
-    <div #parent class="parentBox">
+    <div #parent class="parentBox"  style="background: var(--dashboard-fixed-header);">
 
       <div class="fixHeader" (touchstart)="touchStarted($event)" (touchend)="handleTouchEnd($event)"
-        (touchmove)="handleTouch($event)" style="background: var(--dashboard-fixed-header);">
+        (touchmove)="handleTouch($event)">
 
         <!-- style="background: var(--dashboard-fixed-header)"
         deletign this as this hides the complete header -->

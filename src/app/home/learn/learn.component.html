@@ -38,7 +38,7 @@
             </ion-icon>
             <ion-icon (click)="changeMark(1, selectedId)" *ngIf="!crntWordDynamicData['isMarked']" name="star-outline">
             </ion-icon>
-            <ion-icon name="arrow-forward" class="shareArrow" (click)="socialShare($event)"></ion-icon>
+            <ion-icon name="arrow-forward" class="shareArrow" (click)="onScreenShot($event)"></ion-icon>
           </ion-buttons>
           <h1 class="wordStyle">
             {{ crntWordAppData[1] }}
@@ -103,9 +103,9 @@
   </ion-content>
   <section>
     <ion-toolbar class="learnWordsChangeButton">
-      <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="previous()">Previous
+      <ion-button style="width: 48%;--background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round" (click)="previous()">Previous
       </ion-button>
-      <ion-button style="width: 48%;" *ngIf="!isAllWordMastered" shape="round" (click)="next()">Next</ion-button>
+      <ion-button style="width: 48%; --background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round" (click)="next()">Next</ion-button>
     </ion-toolbar>
   </section>
 </span>

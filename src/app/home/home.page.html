@@ -68,7 +68,9 @@
       <ion-buttons slot="secondary">
         <ion-searchbar id="searchBar" *ngIf="this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" inputmode="text"
           placeholder="Enter Word to search" showCancelButton="always"
-          (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())">
+          (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())"
+          style="--background: var(--search-bar-color); --color: var(--search-bar-text-color); --cancel-button-color: var(--search-bar-text-color); --clear-button-color: var(--search-bar-text-color);"
+          >
         </ion-searchbar>
         <ion-icon *ngIf="!this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" (click)="searchIconClicked()"
           slot="start" name="search"></ion-icon>
