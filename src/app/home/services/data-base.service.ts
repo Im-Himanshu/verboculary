@@ -12,6 +12,7 @@ import { Howl } from 'howler';
 import { MusicControls } from '@ionic-native/music-controls/ngx';
 import { AdmobSerService } from './admob-ser.service';
 import { analytics } from 'firebase';
+import { FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -41,6 +42,7 @@ export class DatabaseService {
   currId;
   player: Howl = null;
   isPlaying = false;
+  onPause = true;
   miniPlayerVisible = false;
   currWord;
   currMeaning;
@@ -491,6 +493,10 @@ export class DatabaseService {
 
   startPodcast(wordId, playNext) {
     this.currId = wordId;
+    if (!this.allWordsData[wordId][5]) {
+      this.next()
+      return
+    }
     if (this.player) {
       this.player.stop();
     }
@@ -501,6 +507,7 @@ export class DatabaseService {
       onplay: () => {
         console.log("onPlay");
         this.isPlaying = true;
+        this.onPause = false;
         this.miniPlayerVisible = true;
         this.currId = wordId;
         this.currWord = this.allWordsData[this.currId][1];
@@ -546,11 +553,13 @@ export class DatabaseService {
   }
 
   pause() {
+    this.onPause = true;
     this.player.pause();
   }
 
   tooglePlayer(pause) {
     this.isPlaying = !pause;
+    this.onPause = pause;
     if (pause) {
       this.player.pause();
     } else {
@@ -576,6 +585,7 @@ export class DatabaseService {
     this.player.stop();
     this.miniPlayerVisible = false;
     this.isPlaying = false;
+    this.onPause = true;
   }
 
   createNotification() {
@@ -616,11 +626,13 @@ export class DatabaseService {
         case 'music-controls-pause':
           if (this.isPlaying) {
             this.pause();
+            this.onPause = true;
             this.musicControls.updateIsPlaying(false);
             console.log("music pause");
           }
           else {
             this.play();
+            this.onPause = false;
             this.musicControls.updateIsPlaying(true);
           }
           break;
@@ -629,11 +641,13 @@ export class DatabaseService {
           if (!this.isPlaying) {
             console.log('music play');
             this.play();
+            this.onPause = false;
             this.musicControls.updateIsPlaying(true);
           }
           else {
             console.log("music pause");
             this.pause();
+            this.onPause = true;
             this.musicControls.updateIsPlaying(false);
           }
           break;
