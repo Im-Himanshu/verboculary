@@ -31,13 +31,13 @@ export class AppComponent {
     this.initializeApp();
     this.isTheUserNew();
     this.loginCount();
-    this.notification.dailyNotification();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.notification.dailyNotification();
       this.reScaleScreen();
       this.deepLinks.route({
 
