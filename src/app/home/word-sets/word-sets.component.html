@@ -33,6 +33,9 @@
   </ion-fab>
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button (click)="open()">
+      <div class="filtericon">
+        <svg-icon name="bar-chart"></svg-icon>
+      </div>
     </ion-fab-button>
   </ion-fab>
   <super-tabs [(activeTabIndex)]="activeTabIndex" [config]="{
