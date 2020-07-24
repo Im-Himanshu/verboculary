@@ -26,7 +26,6 @@ export class ViewComponent implements OnInit {
   sortedAllSelectedWordIds: string[] = [];
   selectedSet;
   shuffleIt = true;
-  isPlaying = this.db.isPlaying
 
   sortingTypes = [
     { value: 'shuffel', viewValue: 'Shuffeled' }, // default state
@@ -37,7 +36,7 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(private db: DatabaseService, public searchService: SearchService,private apprate : AppRateService,private admob : AdmobSerService) {
+  constructor(public db: DatabaseService, public searchService: SearchService, private apprate: AppRateService, private admob: AdmobSerService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
@@ -51,7 +50,6 @@ export class ViewComponent implements OnInit {
   ngOnInit() {
     this.wordArray = this.searchService.convertWordMapToArray();
     //this.db.changeSortingOfIds("alpha")
-
   }
 
   ngOnDestroy() {
@@ -99,7 +97,10 @@ export class ViewComponent implements OnInit {
   }
 
   start(wordId, playNext) {
-    if (!this.db.isPlaying) {
+    if (this.db.player) {
+      this.db.tooglePlayer(!this.db.onPause)
+    }
+    else if (!this.db.isPlaying) {
       this.db.startPodcast(wordId, playNext);
     }
     else {

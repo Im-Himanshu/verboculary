@@ -2,10 +2,10 @@
 
 
   <ion-button fill="clear" slot="end" (click)="start(allSelectedWordIDs[0],true)">
-    <div class="iconsGroup" *ngIf="!isPlaying">
+    <div class="iconsGroup" *ngIf="db.onPause">
       <svg-icon name="play-circle"></svg-icon>
     </div>
-    <div class="iconsGroup" *ngIf="isPlaying">
+    <div class="iconsGroup" *ngIf="!db.onPause">
       <svg-icon name="pause-circle"></svg-icon>
     </div>
 
