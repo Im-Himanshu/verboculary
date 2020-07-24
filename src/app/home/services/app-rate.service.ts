@@ -20,9 +20,8 @@ export class AppRateService {
 
   showAppRate(){
     this.appRate.preferences = {
-      ...this.appRate.preferences,
         displayAppName: 'Verboculary',
-        // usesUntilPrompt: 10,
+        usesUntilPrompt: 10,
         promptAgainForEachNewVersion: true,
         storeAppURL : {
           // ios: '',
@@ -45,6 +44,6 @@ export class AppRateService {
         }
           
     }
-    this.appRate.promptForRating(true);
+    this.appRate.promptForRating(false);
   }
 }

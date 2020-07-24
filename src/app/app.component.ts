@@ -31,7 +31,6 @@ export class AppComponent {
     this.initializeApp();
     this.isTheUserNew();
     this.loginCount();
-    this.notification.dailyNotification();
   }
 
   initializeApp() {
@@ -39,6 +38,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.reScaleScreen();
+      this.notification.dailyNotification();
       this.deepLinks.route({
 
       }).subscribe((match) => {
