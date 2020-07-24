@@ -18,7 +18,7 @@ export class SharingServiceService {
       "Download the verboculary app for GRE preparation",
       null,
       [],
-      "https://verboculary.page.link/PZXe"
+      "https://verboculary.page.link/Download"
     );
   }
 
@@ -27,7 +27,7 @@ export class SharingServiceService {
       "Join us at verboculary",
       null,
       [url],
-      "https://verboculary.page.link/PZXe",
+      "https://verboculary.page.link/Download",
       //deeplinking part here only
     );
   }

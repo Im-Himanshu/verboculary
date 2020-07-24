@@ -242,4 +242,8 @@ export class HomePage implements OnInit {
       }
     })
   }
+
+  rate(){
+    window.location.href = "market://details?id=com.GRE.verboculary";
+  }
 }
