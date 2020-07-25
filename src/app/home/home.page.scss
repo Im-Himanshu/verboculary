@@ -95,7 +95,7 @@
     //--background : var(--app-sideMenuHeader-background);
     ion-toolbar {
       --background: var(--app-sideMenuHeader-background);
-      --color: var(--app-sideMenuHeader-color);
+      --color: var(--app-sideMenu-text-color);
     }
   }
 
@@ -369,4 +369,14 @@ mat-form-field {
 
   .side-menu-label{
     color: var(--app-sideMenu-text-color);
+  }
+
+  .ionicAlert {
+    color: var(--app-sideMenu-text-color);
+    background: var(--app-sideMenuHeader-background);
+  }
+
+  .alert-wrapper.sc-ion-alert-md {
+    color: var(--app-sideMenu-text-color);
+    background: var(--app-sideMenuHeader-background);
   }

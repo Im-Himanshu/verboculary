@@ -60,9 +60,9 @@
     </div>
 
   </div>
-  <div #mainDiv class="full" style="top:46%" id="toMove" style="background: var(--dashboard-fixed-header);">
+  <div #mainDiv class="full" style="top:46%; background: var(--dashboard-fixed-header);" id="toMove">
 
-    <div #parent class="parentBox"  >
+    <div #parent class="parentBox" >
 
       <div class="fixHeader" (touchstart)="touchStarted($event)" (touchend)="handleTouchEnd($event)"
         (touchmove)="handleTouch($event)">

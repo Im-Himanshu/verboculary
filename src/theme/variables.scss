@@ -151,7 +151,7 @@
     .darkTheme{
 
       --primary-dark : #00000b;  //
-      --primary : #132332;  //#1f271f
+      --primary :#1e1e30;  //#1f271f
       --primary-light: #3b4b5b;
       //--primary-lighter : #739699;
       --primary-contrast : rgb(255, 255, 255); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
@@ -244,7 +244,7 @@
       --level-status-color: #707070;
       --dashboard-background-color: white;
       --level-icon-background-beginner: #2f5f438c;
-      --level-icon-background-transitional: #af5403a1;
+      --level-icon-background-transitional: #af5403a1; //#ff815b8c
       --level-icon-background-pro: rgba(255,7,58,0.125);
       --level-icon-below: #fe805d;
       --view-text-color: #bdbdbd;
@@ -259,7 +259,7 @@
       --app-practiseContent-background: #161625;
       --test-swipable-card-background: #1e1e30;
       --test-swipe-button: #1e1e30;
-      --app-practiseCard-color: #6c757d;
+      --app-practiseCard-color: #bdbdbd;
       --practise-card-border: #161625;
       --dasboard-card-hover-background: #161625;
       --dashboard-parent-box-color: transparent;
@@ -289,6 +289,9 @@
     --box-shadow: 10px 2px 99px 0px rgba(0,0,0,0.99);
     --search-bar-color: #161625;
     --search-bar-text-color: #bdbdbd;
+    --mat-tab-background: #1e1e30;
+
+    --app-learnWordsMatTab-color: rgb(255, 165, 0);
 
 
 
@@ -311,14 +314,14 @@
 
     //Note line color in between item of list should match the background it give the feel of space rather than line
     // in this list some portion of the background should be visible.
-    --primary: #132332;
+    --primary:#452b4f;
     --primary-contrast: rgb(
       255,
       255,
       255
     ); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
 
-    --primary-light: #132332;
+    --primary-light:#452b4f;
     --primarylight-contrast: rgb(255, 255, 255); //#F5F5F6;
     --primary-dark: #00000b; //
 
@@ -327,7 +330,7 @@
     --appBackground: rgb(255, 255, 255);
     --appTextColor: #3c3c3c;
     --cardBackground: rgb(255, 255, 255);
-    --ion-color-primary: #132332;
+    --ion-color-primary:#452b4f;
 
     --app-navigatonMenubar-background: var(
       --primary
@@ -359,9 +362,7 @@
     ); // like a card in the menu
     --app-sideMenuFilterHeader-color: var(--app-mainToolbar-color);
     --app-sideMenuFilterBody-background: var(--lightColorFocus);
-    --app-sideMenuHeader-background: var(
-      --app-navigatonMenubar-background
-    ); // have to be same to the main header
+     // have to be same to the main header
     --app-sideMenuHeader-color: var(
       --app-navigatonMenubar-color
     ); // have to be same as of the main color
@@ -445,6 +446,7 @@
       --app-navigatonMenubar-background
     );
     --app-practiseContent-background: var(--appBackground);
+    --mat-tab-background: var(--appBackground);
     --test-swipable-card-background: white;
     --test-swipe-button: white;
     --app-practiseCard-color: var(--appTextColor);
@@ -458,8 +460,8 @@
     --slide-bar-text-color: black;
     --meaning-text-color: black;
     --card-hover: white;
-    --app-mainToolbar-background: #132332;
-    --app-mainToolbar-color: var(--ion-color-primary-contrast);
+    --app-mainToolbar-background: #452b4f;
+    --app-mainToolbar-color: white;
     --dotted-line-color: #e7e7e7;
     --app-sideMenu-text-color: black;
     --ripple-color-1: #ffffff;
@@ -470,7 +472,9 @@
     --box-shadow: 0 1px 1px -2px rgba(0,0,0,.2), 0 0px 0px 0 rgba(0,0,0,.14), 6px 10px 11px 0 rgba(0,0,0,.12);
     --search-bar-color: white;
     --search-bar-text-color: black;
-
+    --dashboard-fixed-header: white;
+    --app-sideMenuHeader-background: #452b4f;
+    --background: #452b4f;
     //new icon colors
 
     --beginner-outer-color: #62C58A;

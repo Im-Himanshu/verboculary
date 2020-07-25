@@ -53,7 +53,10 @@ export class HomePage implements OnInit {
 
   }
   ngOnInit() {
-
+    console.log(this.themeService.mode);
+    // this.themeService.setMode(this.themeService.mode);
+    this.themeService.setThemeValue(this.themeService.mode);
+    console.log(this.themeService.checked);
   }
 
 
@@ -184,16 +187,7 @@ export class HomePage implements OnInit {
 
 
   toggleMode(e){
-    console.log(e);
-    this.modeValue = !this.modeValue;
     this.themeService.toggleMode();
-    if(this.themeValue == 'Dark Theme'){
-      this.themeValue = 'Light Theme'
-    }
-    else{
-      this.themeValue = 'Dark Theme';
-    }
-
   }
 
 
