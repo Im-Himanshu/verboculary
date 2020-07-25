@@ -587,6 +587,7 @@ export class DatabaseService {
 
   closePodcast() {
     this.player.stop();
+    this.musicControls.destroy();
     this.miniPlayerVisible = false;
     this.isPlaying = false;
     this.onPause = true;
@@ -606,7 +607,7 @@ export class DatabaseService {
       hasSkipBackward: false,
       skipForwardInterval: 0,
       skipBackwardInterval: 0,
-      hasClose: false,
+      hasClose: true,
       album: "",
       duration: 0,
       elapsed: 0,
@@ -659,6 +660,10 @@ export class DatabaseService {
             this.musicControls.updateDismissable(true);
           }
           break;
+        case 'music-controls-destroy':
+            // Do something
+          this.closePodcast();
+        break;
         default:
           break;
       }

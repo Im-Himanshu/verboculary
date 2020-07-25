@@ -233,4 +233,16 @@ export class LearnComponent implements OnInit {
     if (docs) docs.style.display = 'none';
   }
 
+  start(wordId, playNext) {
+    if (this.db.player) {
+      this.db.tooglePlayer(!this.db.onPause)
+    }
+    else if (!this.db.isPlaying) {
+      this.db.startPodcast(wordId, playNext);
+    }
+    else {
+      this.db.pause()
+    }
+  }
+
 }
