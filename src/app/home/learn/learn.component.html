@@ -59,9 +59,11 @@
             </em>
           </p>
           <p class="synonyms"><strong>Synonyms : </strong>
-            <span *ngFor='let syn of crntWordAppData[6]'>
-              <span *ngIf="foundIDMapping[syn]" style="color:#ffa500" (click)="goToUrl(syn)"> {{syn}} </span>
-              <span *ngIf="!foundIDMapping[syn]"> {{syn}} </span>
+            <span *ngFor='let syn of crntWordAppData[6];let isLast=last'>
+              <span *ngIf="foundIDMapping[syn]" style="color:#ffa500" (click)="goToUrl(syn)"> {{syn}}
+              </span>
+              <span *ngIf="!foundIDMapping[syn]"> {{syn}}</span>
+              {{isLast ? '' : ', '}}
 
             </span>
           </p>

@@ -32,7 +32,10 @@
     </ion-fab-list>
   </ion-fab>
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button (click)="open()">
+    <ion-fab-button (click)="open()" *ngIf="this.FabButtonVisible">
+      <div class="filtericon">
+        <svg-icon name="bar-chart"></svg-icon>
+      </div>
     </ion-fab-button>
   </ion-fab>
   <super-tabs [(activeTabIndex)]="activeTabIndex" [config]="{
@@ -40,7 +43,7 @@
       allowElementScroll: true,
       nativeSmoothScroll: true,
       avoidElements: true
-    }">
+    }" (tabChange)="onTabChange($event)">
     <super-tabs-toolbar slot="top">
       <super-tab-button>
         <ion-label style="color: var(--slide-bar-text-color)">View</ion-label>

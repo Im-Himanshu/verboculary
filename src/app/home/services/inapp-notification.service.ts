@@ -31,5 +31,6 @@ export class InappNotificationService {
       text: "Get Back To Practise",
       trigger: {in: 1,unit: ELocalNotificationTriggerUnit.DAY},
     })
+    console.log("LOCAL NOTIFICATION SCHEDULED");
   }
 }
