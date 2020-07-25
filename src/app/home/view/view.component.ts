@@ -96,17 +96,17 @@ export class ViewComponent implements OnInit {
     this.saveDynamicData();
   }
 
-  // start(wordId, playNext) {
-  //   if (this.db.player) {
-  //     this.db.tooglePlayer(!this.db.onPause)
-  //   }
-  //   else if (!this.db.isPlaying) {
-  //     this.db.startPodcast(wordId, playNext);
-  //   }
-  //   else {
-  //     this.db.pause()
-  //   }
-  // }
+  start(wordId, playNext) {
+    if (this.db.player) {
+      this.db.tooglePlayer(!this.db.onPause)
+    }
+    else if (!this.db.isPlaying) {
+      this.db.startPodcast(wordId, playNext);
+    }
+    else {
+      this.db.pause()
+    }
+  }
 
   startP(wordId, playNext) {
     if(!this.db.isPlaying){
