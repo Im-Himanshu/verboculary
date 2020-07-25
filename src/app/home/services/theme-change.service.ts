@@ -9,7 +9,7 @@ export class ThemeChangeService {
   renderer : Renderer2;
   crntClass : string;
   mode: string;
-  checked: boolean = false;
+  checked: boolean = true;
   value: string = 'Light Theme';
   constructor(private renderedFactory : RendererFactory2, @Inject(DOCUMENT) private document : Document, private storage: Storage) {
     this.renderer = this.renderedFactory.createRenderer(null,null);
@@ -54,7 +54,7 @@ export class ThemeChangeService {
       this.mode = "darkTheme";
       this.setThemeValue('darkTheme');
       this.value = 'Dark Theme'
-      this.checked = true;
+      this.checked = false;
     }
     else{
       this.renderer.removeClass(this.document.body,"darkTheme");
@@ -62,7 +62,7 @@ export class ThemeChangeService {
       this.mode = "lightTheme";
       this.value = 'Light Theme';
       this.setThemeValue('lightTheme');
-      this.checked = false;
+      this.checked = true;
     }
   }
 

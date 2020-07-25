@@ -40,7 +40,7 @@
       </ion-item>
       <ion-item>
         <ion-label>{{themeService.value}}</ion-label>
-        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle>
+        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" [(checked)]="themeService.checked"></ion-toggle>
         <!-- <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle> -->
       </ion-item>
 
