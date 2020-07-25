@@ -153,6 +153,8 @@ export class ProgressChartComponent implements AfterViewInit {
     let range_min2 = range_min.getTime();
     range_min.setDate(firstDate.getDate());
     range_min = range_min.getTime();
+    var style = getComputedStyle(document.body);
+    console.log(style.getPropertyValue('--color-font-general'));
 
 
     // this.lineChartColors = [property, property2]; // both graph are of same design
