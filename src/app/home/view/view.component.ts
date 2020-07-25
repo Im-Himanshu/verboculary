@@ -107,4 +107,13 @@ export class ViewComponent implements OnInit {
       this.db.pause()
     }
   }
+
+  startP(wordId, playNext) {
+    if(!this.db.isPlaying){
+      this.db.startPodcast(wordId,playNext)
+    } else {
+      this.db.closePodcast();
+      this.db.startPodcast(wordId, playNext);
+    }
+  }
 }

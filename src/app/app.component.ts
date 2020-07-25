@@ -73,6 +73,7 @@ export class AppComponent {
   reScaleScreen() {
     let element = document.getElementById("toScale");
     let screen = window.screen;
+    console.log(screen.availWidth, screen.availHeight);
     console.log("just a buffer")
     let parentElement = document.getElementById("parentdiv");
     if (screen.availWidth < element.clientWidth) {

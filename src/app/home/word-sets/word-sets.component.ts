@@ -24,7 +24,8 @@ export class WordSetsComponent implements OnInit {
   isOpen = false;
   chartLabelsAndData = null;
   isChartDataReady = false;
-  selectedFilter = 'all'
+  selectedFilter = 'all';
+  FabButtonVisible: boolean = true;
 
   constructor(private route: ActivatedRoute, private db: DatabaseService,
     private router: Router) {
@@ -167,9 +168,10 @@ export class WordSetsComponent implements OnInit {
   open() {
     if (this.isOpen == false) {
       this.isOpen = true;
-      (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
-      (<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
       this.processChartData();
+      (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
+      //(<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
+
     } else {
       this.close();
     }
@@ -210,6 +212,14 @@ export class WordSetsComponent implements OnInit {
     }
     else {
       this.close();
+    }
+  }
+
+  onTabChange(ev: any) {
+    if (ev.detail.index == 0) {
+      this.FabButtonVisible = true;
+    } else {
+      this.FabButtonVisible = false;
     }
   }
 

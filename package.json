@@ -51,6 +51,7 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.5",
     "com.darktalker.cordova.screenshot": "^0.1.6",
+    "cordova-admob-sdk": "^0.24.1",
     "cordova-android": "^8.1.0",
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
@@ -61,13 +62,16 @@
     "cordova-plugin-androidx-adapter": "^1.1.1",
     "cordova-plugin-apprate": "^1.5.0",
     "cordova-plugin-badge": "^0.8.8",
+    "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-fcm-with-dependecy-updated": "^7.0.9",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-music-controls": "^2.2.0",
+    "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-x-socialsharing": "^5.6.8",
+    "cordova-promise-polyfill": "0.0.2",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
     "dom-to-image": "^2.6.0",
@@ -131,7 +135,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "uk.co.workingedge.cordova.plugin.sqliteporter": {},
-      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "verboculary",
         "DEEPLINK_SCHEME": "https",
@@ -151,7 +157,7 @@
         "DEEPLINK_5_HOST": " "
       },
       "cordova-plugin-admob-free": {
-        "ADMOB_APP_ID": "ca-app-pub-4352525331879046~1258287684"
+        "ADMOB_APP_ID": "ca-app-pub-4352525331879046~7060596827"
       },
       "cordova-plugin-media": {},
       "cordova-plugin-file-transfer": {},
@@ -247,13 +253,18 @@
         "FIREBASE-DATABASE": "18.0.0",
         "FIREBASE-CONFIG": "18.0.0"
       },
-      "cordova-plugin-fcm-with-dependecy-updated": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {
+        "ANDROID_FCM_VERSION": "19.0.0",
+        "ANDROID_GRADLE_TOOLS_VERSION": "3.5.3",
+        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.3",
+        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
+      },
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
