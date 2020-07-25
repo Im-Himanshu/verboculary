@@ -1,7 +1,7 @@
 <div class="parentDropDown">
 
 
-  <ion-button fill="clear" slot="end" (click)="start(allSelectedWordIDs[0],true)">
+  <ion-button fill="clear" slot="end" (click)="startP(allSelectedWordIDs[0],true)">
     <div class="iconsGroup" *ngIf="db.onPause">
       <svg-icon name="play-circle"></svg-icon>
     </div>
@@ -74,7 +74,7 @@
 
               </div>
 
-              <div class="iconBox" *ngIf="allWordsData[oneWordId][5]" (click)="start(oneWordId,false)">
+              <div class="iconBox" *ngIf="allWordsData[oneWordId][5]" (click)="startP(oneWordId,false)">
                 <div class="icon">
                   <div id="iconsGroup">
                     <svg-icon name="play-outline"></svg-icon>
