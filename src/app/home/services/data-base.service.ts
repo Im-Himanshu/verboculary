@@ -562,8 +562,12 @@ export class DatabaseService {
     this.onPause = pause;
     if (pause) {
       this.player.pause();
+      this.musicControls.updateIsPlaying(false);
+      this.musicControls.updateDismissable(true);
     } else {
       this.player.play();
+      this.musicControls.updateIsPlaying(true);
+      this.musicControls.updateDismissable(false);
     }
   }
 
@@ -625,30 +629,34 @@ export class DatabaseService {
           break;
         case 'music-controls-pause':
           if (this.isPlaying) {
-            this.pause();
+            this.tooglePlayer(true);
             this.onPause = true;
             this.musicControls.updateIsPlaying(false);
+            this.musicControls.updateDismissable(true);
             console.log("music pause");
           }
           else {
-            this.play();
+            this.tooglePlayer(false)
             this.onPause = false;
             this.musicControls.updateIsPlaying(true);
+            this.musicControls.updateDismissable(false);
           }
           break;
         case 'music-controls-play':
           // Do something
           if (!this.isPlaying) {
             console.log('music play');
-            this.play();
+            this.tooglePlayer(false);
             this.onPause = false;
             this.musicControls.updateIsPlaying(true);
+            this.musicControls.updateDismissable(false);
           }
           else {
             console.log("music pause");
-            this.pause();
+            this.tooglePlayer(true);
             this.onPause = true;
             this.musicControls.updateIsPlaying(false);
+            this.musicControls.updateDismissable(true);
           }
           break;
         default:
