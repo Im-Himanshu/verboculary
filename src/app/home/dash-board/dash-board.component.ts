@@ -52,8 +52,10 @@ export class DashBoardComponent implements OnInit {
   ngAfterViewInit() {
 
 
-    let masterFilter = document.getElementById("masterFilter");
-    this.heightFromTop = masterFilter.offsetTop + masterFilter.offsetHeight + 20; // place where slider need to be fit in
+    // let masterFilter = document.getElementById("masterFilter");
+    // this.heightFromTop = masterFilter.offsetTop + masterFilter.offsetHeight + 100; // place where slider need to be fit in
+    // let toMoveElement = document.getElementById("toMove");
+    // toMoveElement.style.top = this.heightFromTop + "px"
 
   }
 
@@ -156,7 +158,7 @@ export class DashBoardComponent implements OnInit {
 
   handleTouchEnd(event: TouchEvent) {
     let masterFilter = document.getElementById("masterFilter");
-    let offSetTop = masterFilter.offsetTop + masterFilter.offsetHeight + 20; // place where slider need to be fit in
+    let offSetTop = masterFilter.offsetTop + masterFilter.offsetHeight + 100; // place where slider need to be fit in
     let toMoveElement = document.getElementById("toMove");
     let absoluteY = event.changedTouches[0].clientY;
     //let twoThird = offSetTop

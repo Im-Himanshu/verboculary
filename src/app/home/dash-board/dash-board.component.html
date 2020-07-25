@@ -6,7 +6,7 @@
 
     <div id="overChartText">
       <span>Hello,</span><br>
-      <span style="font-style:normal;font-weight:normal;font-size:30px;">Rishabh!</span><br>
+      <span style="font-style:normal;font-weight:normal;font-size:30px;">There!</span><br>
       <span class="message">Track the progress.</span>
     </div>
   </div>
@@ -17,10 +17,10 @@
 
       <div class="emptySides"></div>
       <div (click)="goToUrl('/mainmodule/base/wordSets/allViewed')" class="oneCard ripple"
-        style="border-bottom: 6px solid var(--card-border-bottom);">
+        style="border-bottom: 6px solid var(--progress-green);">
         <div class="iconBox">
           <div id="iconsGroupsFortotal">
-            <ion-icon class="topIcons" name="eye" style="color:#ECF8F1;"></ion-icon>
+            <ion-icon class="topIcons" name="eye" style="color:#61c68842;"></ion-icon>
           </div>
         </div>
         <div class="subElement">
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div (click)="goToUrl('/mainmodule/base/wordSets/allLearned')" class="oneCard ripple"
-        style="border-bottom: 6px solid var(--progress-green);">
+        style="border-bottom: 6px solid var(--card-border-bottom);">
 
         <div class="iconBox">
           <div id="iconsGroupsFortotal">
@@ -46,7 +46,7 @@
         style="border-bottom: 6px solid var(--level-icon-below);">
         <div class="iconBox">
           <div id="iconsGroupsFortotal">
-            <ion-icon class="topIcons" name="bookmark" style="color:#FBD4C9;"></ion-icon>
+            <ion-icon class="topIcons" name="bookmark" style="color:#fc7f5c47;"></ion-icon>
             <!-- <svg-icon name='marked'></svg-icon> -->
           </div>
         </div>
@@ -60,9 +60,9 @@
     </div>
 
   </div>
-  <div #mainDiv class="full" style="top:46%; background: var(--dashboard-fixed-header);" id="toMove">
+  <div #mainDiv class="full" style="top:52%; background: var(--dashboard-fixed-header);" id="toMove">
 
-    <div #parent class="parentBox" >
+    <div #parent class="parentBox">
 
       <div class="fixHeader" (touchstart)="touchStarted($event)" (touchend)="handleTouchEnd($event)"
         (touchmove)="handleTouch($event)">

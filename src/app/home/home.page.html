@@ -1,11 +1,11 @@
-<ion-menu class="sideMenu" side="end" swipe-gesture="true" menuId="first" contentId="mainContent">
+<ion-menu class="sideMenu" side="start" swipe-gesture="true" menuId="first" contentId="mainContent">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
 
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Verboculary</ion-title>
+      <ion-title routerLink="/mainmodule/base/dashboard">Verboculary</ion-title>
 
       <img slot="secondary" src="assets/logo.png" height="58px" />
     </ion-toolbar>
@@ -40,7 +40,8 @@
       </ion-item>
       <ion-item>
         <ion-label>{{themeService.value}}</ion-label>
-        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" [(checked)]="themeService.checked"></ion-toggle>
+        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)"
+          [(checked)]="themeService.checked"></ion-toggle>
         <!-- <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle> -->
       </ion-item>
 
@@ -63,19 +64,25 @@
 <div class="ion-page" id="mainContent" main>
   <ion-header translucent>
     <ion-toolbar class="mainToolbar">
-      <img slot="start" src="assets/logo.png" height="63px" />
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <!-- <img slot="start" src="assets/logo.png" height="63px" /> -->
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
       <ion-title class="titleicon">{{appTitle}}</ion-title>
       <ion-buttons slot="secondary">
+        <!-- <ion-searchbar id="searchBar"
+          [ngStyle]="{'visibility': (this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch) ? 'visible' : 'hidden'}"
+          inputmode="text" placeholder="Enter Word to search" showCancelButton="always"
+          (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())">
+        </ion-searchbar> -->
         <ion-searchbar id="searchBar" *ngIf="this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" inputmode="text"
           placeholder="Enter Word to search" showCancelButton="always"
           (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())"
-          style="--background: var(--search-bar-color); --color: var(--search-bar-text-color); --cancel-button-color: var(--search-bar-text-color); --clear-button-color: var(--search-bar-text-color);"
-          >
+          style="--background: var(--search-bar-color); --color: var(--search-bar-text-color); --cancel-button-color: var(--search-bar-text-color); --clear-button-color: var(--search-bar-text-color);">
         </ion-searchbar>
         <ion-icon *ngIf="!this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" (click)="searchIconClicked()"
           slot="start" name="search"></ion-icon>
-        <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>

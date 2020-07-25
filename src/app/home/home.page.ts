@@ -69,13 +69,9 @@ export class HomePage implements OnInit {
     //this.ionSearchBar.setFocus();
     this.goToUrl('/mainmodule/base/wordSets/allWords')
     this.db.isToShowSearchBar = true;
-    setInterval(() => {
-      let searchBar = document.getElementById("searchBar")
-      searchBar.focus();
-      //this.ionSearchBar.setFocus();
-
-
-    }, 3000);
+    let searchBar = document.getElementById("searchBar")
+    searchBar.focus();
+    //this.ionSearchBar.setFocus();
     //this.db.allSelectedWordIdsFiltered.splice(0, this.db.allSelectedWordIdsFiltered.length); // deleting all the
 
 
@@ -186,7 +182,7 @@ export class HomePage implements OnInit {
 
 
 
-  toggleMode(e){
+  toggleMode(e) {
     this.themeService.toggleMode();
   }
 
@@ -238,7 +234,7 @@ export class HomePage implements OnInit {
     })
   }
 
-  rate(){
+  rate() {
     window.location.href = "market://details?id=com.GRE.verboculary";
   }
 }

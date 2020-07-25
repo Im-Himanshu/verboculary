@@ -1,4 +1,3 @@
-
 <ion-content>
   <ion-slides mode="md" #slides [options]="slideOpts">
 
@@ -8,7 +7,7 @@
           <ion-col>
             <ion-text>
               <h1 id="heading">Mark & Note Down</h1>
-              <p>Mark down the learning & takereal-time short</p>
+              <p>Mark down the learning & take real-time short Notes for every words</p>
             </ion-text>
           </ion-col>
         </ion-row>
@@ -19,7 +18,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-row  class="btn" >
+            <ion-row class="btn">
               <ion-col>
                 <ion-button shape="round" (click)="next()" style="--background:indigo">NEXT
                   <ion-icon name="arrow-forward" style="padding-left: 10px;"></ion-icon>
@@ -42,13 +41,20 @@
           <ion-col>
             <ion-text>
               <h1>Prepare Verbal Better</h1>
-              <p>An App designed to help you out with verbal</p>
+              <p style="text-align: left;margin-left: 4%;"> with Feature like:
+                <br>&nbsp;&nbsp; Multiple Dictionary support in-built
+                <br>&nbsp;&nbsp; Images depicting the meaning of the word
+                <br>&nbsp;&nbsp; Advanced charting to track your progress
+                <br>&nbsp;&nbsp; Flashcards
+                <br>&nbsp;&nbsp; Listen podcasts on the Go and prepare</p>
+
+
             </ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-row  class="btn2" >
+            <ion-row class="btn2">
               <ion-col>
                 <ion-button shape="round" (click)="prev()" style="--background:indigo">
                   <ion-icon name="arrow-back" style="padding-right: 10px;"></ion-icon>
@@ -72,14 +78,14 @@
           <ion-col>
             <ion-text>
               <h1>Track The Progress</h1>
-              <p>Learn,test and track the knowledge</p>
+              <p>Learn, Test and Track the knowledge</p>
             </ion-text>
             <ion-img src="./assets/charts.svg"> </ion-img>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-row  class="btn3" >
+            <ion-row class="btn3">
               <ion-col>
                 <ion-button shape="round" (click)="prev()" style="--background:indigo">
                   <ion-icon name="arrow-back" style="padding-right: 10px;"></ion-icon>
@@ -87,7 +93,8 @@
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button shape="round" style="--background:indigo" (click)='slidesDestroy()' [routerLink]="['/mainmodule/base/dashboard']">GET STARTED
+                <ion-button shape="round" style="--background:indigo" (click)='slidesDestroy()'
+                  [routerLink]="['/mainmodule/base/dashboard']">GET STARTED
                   <ion-icon name="arrow-forward" style="padding-left: 10px;"></ion-icon>
                 </ion-button>
               </ion-col>

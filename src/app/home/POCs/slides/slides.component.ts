@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { IonSlides} from '@ionic/angular'
-import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-slides',
@@ -12,30 +10,25 @@ import { Router } from '@angular/router';
 export class SlidesComponent implements OnInit {
 
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 300,
     effect: 'Cube',
   }
 
-  @ViewChild('slides',{ static: true}) slides:IonSlides;
+  @ViewChild('slides', { static: true }) slides: IonSlides;
 
-  constructor(public storage : Storage, private router: Router) { }
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 
-  next(){
+  next() {
     this.slides.slideNext();
   }
 
-  prev(){
+  prev() {
     this.slides.slidePrev();
   }
 
-  slidesDestroy(){
-    this.storage.set('slidesStatus',"false");
-    console.log(this.storage.get('slidesStatus'));
-    // this.router.navigate(['/']);  //why was this line being used
-  }
 
 }
