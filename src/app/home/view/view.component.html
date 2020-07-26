@@ -17,21 +17,7 @@
     </div>
     <ion-icon name="shuffle" *ngIf="shuffleIt" class="shuffled" value="alpha" (click)="shuffleButton($event)">
     </ion-icon>
-    <!-- <ion-icon name="star" *ngIf="!shuffleIt" class="alphabetical"></ion-icon> -->
   </div>
-
-  <!-- <div class="dropdownDiv">
-      <mat-form-field appearance="fill" style="width:100%">
-        <mat-label>
-          Filter words
-        </mat-label>
-        <mat-select (selectionChange)="changeFilter($event)" [(ngModel)]="selectedFilter" name="filter">
-          <mat-option *ngFor="let type of filterTypes" [value]="type.value">
-            {{type.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div> -->
 </div>
 <div>
   <ion-content #ion_content class="ioncontentheight" style="--background: #fff8dc00" forceOverscroll="true">
