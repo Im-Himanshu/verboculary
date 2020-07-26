@@ -154,7 +154,10 @@ export class WordSetsComponent implements OnInit {
         if (hours.length <= 1) {
           hours = "0" + hours; // adding a trailing zero for single digit as it is causing shorting issues 
         }
-        let minutes = date.getMinutes();
+        let minutes = "" + date.getMinutes();
+        if (minutes.length <= 1) {
+          minutes = "0" + minutes;
+        }
         oneDate = date.toLocaleDateString() + ", " + hours + ":" + minutes;
         chartLabelsAndData[oneDate] = oneDataPoint;
       }
