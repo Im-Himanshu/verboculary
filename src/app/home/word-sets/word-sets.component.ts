@@ -74,7 +74,7 @@ export class WordSetsComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.db.selectedSet = "allWords";
+    //this.db.selectedSet = "allWords"; // doing this cause a major descpripency as the 
     this.db.isToRemoveCompleteSearch = false; // reset this one
     this.db.isToShowSearchBar = false;
     this.db.runSyncOperationForSetLevelOperation(); // this will generate the report after the view ends for the selected set

@@ -111,7 +111,7 @@ export class LearnComponent implements OnInit {
 
 
   goToUrl(syn) {
-    this.router.navigate(['/mainmodule/base/wordSets/' + this.selectedSet + '/learn/' + wordToIdMap[syn]]);
+    this.router.navigate(['/mainmodule/base/wordSets/' + this.db.selectedSet + '/learn/' + wordToIdMap[syn]]);
     // console.log('/mainmodule/base/wordSets/' + this.viewType + '/' + wordToIdMap[syn])
   }
 
