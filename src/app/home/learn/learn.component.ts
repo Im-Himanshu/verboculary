@@ -33,6 +33,7 @@ export class LearnComponent implements OnInit {
   isSafeUrlReady: boolean = true;
   isAllWordMastered: boolean = false;
   foundIDMapping = {};
+  wordToIdMap: any = wordToIdMap;
 
   tabBars: any = ["https://www.google.com/search?igu=1&ei=&q=define+",
     "https://www.merriam-webster.com/dictionary/",
@@ -81,8 +82,6 @@ export class LearnComponent implements OnInit {
       }
       this.afterWordAppear();
       this.getSafeUrl();
-      this.getIDMapping()
-      this.getallImg();
     });
     // console.log(this.allWordsData[this.selectedId],this.wordDynamicData[this.selectedId]);
 
@@ -100,32 +99,23 @@ export class LearnComponent implements OnInit {
     })
   }
 
-  getallImg() {
-    this.img = [];
-    this.images = this.db.allWordsData[this.selectedId][7];
-    //   this.img = this.images; --- why not this
-    this.images.forEach((url) => {
-      this.img.push(url);
-    });
+  selectId(syn) {
+    let crntIndex = this.allSelectedWordIDs.indexOf(this.selectedId); // will be -1 if not availaible and move on to next
+    if (crntIndex != -1) {
+      this.previousWordsIds.push(this.selectedId);
+    }
+    this.selectedId = this.wordToIdMap[syn];
   }
 
-
   goToUrl(syn) {
-    this.router.navigate(['/mainmodule/base/wordSets/' + this.db.selectedSet + '/learn/' + wordToIdMap[syn]]);
+
+    this.selectedId = this.wordToIdMap[syn]
+
+    //this.router.navigate(['/mainmodule/base/wordSets/' + this.db.selectedSet + '/learn/' + this.wordToIdMap[syn]]);
     // console.log('/mainmodule/base/wordSets/' + this.viewType + '/' + wordToIdMap[syn])
   }
 
-  getIDMapping() {
-    this.foundIDMapping = {}
-    this.allWordsData[this.selectedId][6].forEach(element => {
-      if (element in wordToIdMap) {
-        this.foundIDMapping[element] = true
-      }
-      else {
-        this.foundIDMapping[element] = false
-      }
-    });
-  }
+
 
   getSafeUrl(type?) {
 
@@ -185,14 +175,20 @@ export class LearnComponent implements OnInit {
     let Idtrimmed = this.previousWordsIds.splice(this.previousWordsIds.length - 1, 1);
     this.getSafeUrl();
     this.afterWordAppear();
-    this.getIDMapping();
-    this.getallImg();
   }
 
 
   next() {
-    this.previousWordsIds.push(this.selectedId);
     let crntIndex = this.allSelectedWordIDs.indexOf(this.selectedId); // will be -1 if not availaible and move on to next
+    if (crntIndex != -1) {
+      this.previousWordsIds.push(this.selectedId);
+    }
+    else if (this.selectedId != null) {
+      if (this.previousWordsIds.length != 0) {
+        crntIndex = this.previousWordsIds[this.previousWordsIds.length - 1]; // select the second last from the set
+        // because it was starting from beginning everytime their is a synonyms checked
+      }
+    }
     if (this.nextWordsIds.length != 0) {
       this.selectedId = this.nextWordsIds[this.nextWordsIds.length - 1];
       this.nextWordsIds.splice(this.nextWordsIds.length - 1, 1);
@@ -200,6 +196,9 @@ export class LearnComponent implements OnInit {
     }
     else {
       let nextIdIndex: number = crntIndex + 1// this.getRndInteger(0, this.allSelectedWordIDs.length)
+      if (nextIdIndex > this.allSelectedWordIDs.length) {
+        console.log("word list completed, click next to go through it again")
+      }
       let selectedIdIndex = nextIdIndex;
       this.selectedId = this.allSelectedWordIDs[selectedIdIndex];
 
@@ -207,8 +206,6 @@ export class LearnComponent implements OnInit {
 
     this.getSafeUrl();
     this.afterWordAppear();
-    this.getIDMapping();
-    this.getallImg();
   }
 
   // Rang = [min, max)

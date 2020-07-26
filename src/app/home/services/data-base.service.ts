@@ -63,6 +63,7 @@ export class DatabaseService {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects.startsWith("/mainmodule/base/dashboard")) {
           this.selectedFilter = 'all'
+          this.selectedSet = "allWords" // resetting this here as in ngOndestroy it was causing bugs
 
         }
         if (event.urlAfterRedirects.startsWith("/mainmodule/base/wordSets")) {
