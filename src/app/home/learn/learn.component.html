@@ -72,9 +72,9 @@
 
           <h1>
             <ion-buttons class="seenButton">
-              <ion-icon (click)="changeSeen(0, selectedId)" *ngIf="crntWordDynamicData['isSeen']" name="done-all">
+              <ion-icon (click)="changeSeen(false, selectedId)" *ngIf="crntWordDynamicData['isViewed']" name="done-all">
               </ion-icon>
-              <ion-icon (click)="changeSeen(1, selectedId)" *ngIf="!crntWordDynamicData['isSeen']" name="checkmark">
+              <ion-icon (click)="changeSeen(true, selectedId)" *ngIf="!crntWordDynamicData['isViewed']" name="checkmark">
               </ion-icon>
             </ion-buttons>
           </h1>

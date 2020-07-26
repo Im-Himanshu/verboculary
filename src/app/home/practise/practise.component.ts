@@ -50,15 +50,8 @@ export class PractiseComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.onDynamicDataChange();
+    this.db.saveCurrentStateofDynamicData();
   }
-
-
-
-
-
-
-
 
   processDynamicData() {
     if (!this.allSelectedWordIDs || this.allSelectedWordIDs.length == 0) {
@@ -73,22 +66,14 @@ export class PractiseComponent implements OnInit {
     this.seenWordCount = 0;
     for (let onewordsID of this.allSelectedWordIDs) {
       let oneWordDynamicData = this.wordDynamicData[onewordsID];
-      if (oneWordDynamicData && oneWordDynamicData['isMastered']) {
+      if (oneWordDynamicData && oneWordDynamicData['isLearned']) {
         // to avoid error in case the category is null
         this.masteredWordPoint = this.masteredWordPoint + this.correctThreshold;
       }
       else {
-        // if (!oneWordDynamicData) {
-        //   this.wordDynamicData[onewordsID] = {}
-        //   oneWordDynamicData = this.wordDynamicData[onewordsID];
-        //   oneWordDynamicData['isMastered'] = false;
-        //   oneWordDynamicData['correctCount'] = 0;
-        // }
         this.nonMasteredWordIds.push(onewordsID);
       }
-
-
-      if (this.wordDynamicData[onewordsID]['isSeen']) {
+      if (this.wordDynamicData[onewordsID]['isViewed']) {
         this.seenWordCount++;
 
       }
@@ -129,26 +114,8 @@ export class PractiseComponent implements OnInit {
     let newMark = event.newMark;
     let wordId = event.wordId;
     this.toggleMeaning();
-    if (newMark) {
-
-      this.wordDynamicData[wordId]["isMarked"] = true;
-    }
-    else {
-
-      this.wordDynamicData[wordId]["isMarked"] = false;
-    }
-    this.onDynamicDataChange("allMarked", wordId);
+    this.db.changeWordIdState(wordId, 'isMarked', newMark);
   }
-
-  onDynamicDataChange(setName?, wordId?) {
-    if (setName && wordId) {
-      // setName will be given only if the word is marked as mastered
-      this.db.editWordIdInDynamicSet(setName, wordId, true)
-    }
-    this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
-  }
-
-
 
   next() {
     if (this.nonMasteredWordIds.length == 0) {
@@ -217,18 +184,12 @@ export class PractiseComponent implements OnInit {
     /// let's sanitize the result
 
     if (oneWordDynamicData['correctCount'] >= this.correctThreshold) {
-      oneWordDynamicData['isMastered'] = true;
-      this.wordDynamicData[this.selectedId]['isMastered'] = true;
-      if (!this.wordDynamicData[this.selectedId]['masteredDate']) {
-        // if the previous viewedDate doesn't exist then only edit it otherwise leave it
-        this.wordDynamicData[this.selectedId]['masteredDate'] = (new Date()).toUTCString();
-      }
+      this.db.changeWordIdState(this.selectedId, "isLearned", true);
       let index = this.nonMasteredWordIds.indexOf(this.selectedId);
       if (index || index == 0) {
         this.nonMasteredWordIds.splice(index, 1)
       }
       this.presentToast(this.allWordsData[this.selectedId][1])
-      this.onDynamicDataChange("allLearned", wordID);
     }
     if (oneWordDynamicData['correctCount'] < 0) {
       this.masteredWordPoint = this.masteredWordPoint + (0 - oneWordDynamicData['correctCount']);// increase by the same factor mijnus but count is negative

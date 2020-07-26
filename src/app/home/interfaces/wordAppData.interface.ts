@@ -2,9 +2,9 @@ export interface wordAppData {
     id: string;
     word: string;
     isMarked: boolean;
-    isSeen: boolean;
-    isMastered: boolean;
-    masteredDate: String;
+    isViewed: boolean;
+    isLearned: boolean;
+    learnedDate: String;
     viewedDate: String;
     correctCount: number
 }

@@ -53,12 +53,10 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.saveDynamicData();
+    //this.saveDynamicData();
   }
 
-  saveDynamicData() {
-    this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
-  }
+
 
   changeFilter(event) {
     this.db.filterSelectedIDBasedOnGivenCriterion(event.value);
@@ -90,10 +88,9 @@ export class ViewComponent implements OnInit {
   }
 
   toggleBookMark(event, wordId: any) {
-    this.wordsDynamicData[wordId]['isMarked'] = !this.wordsDynamicData[wordId]['isMarked'];
-    this.db.editWordIdInDynamicSet("allMarked", wordId, this.wordsDynamicData[wordId]['isMarked']);
+    // this function will handle all the complexity inside this
+    this.db.changeWordIdState(wordId, 'isMarked', !this.wordsDynamicData[wordId]['isMarked']);
     event.stopPropagation();
-    this.saveDynamicData();
   }
 
   start(wordId, playNext) {
@@ -109,8 +106,8 @@ export class ViewComponent implements OnInit {
   }
 
   startP(wordId, playNext) {
-    if(!this.db.isPlaying){
-      this.db.startPodcast(wordId,playNext)
+    if (!this.db.isPlaying) {
+      this.db.startPodcast(wordId, playNext)
     } else {
       this.db.closePodcast();
       this.db.startPodcast(wordId, playNext);

@@ -77,6 +77,8 @@ export class WordSetsComponent implements OnInit {
     this.db.selectedSet = "allWords";
     this.db.isToRemoveCompleteSearch = false; // reset this one
     this.db.isToShowSearchBar = false;
+    this.db.runSyncOperationForSetLevelOperation(); // this will generate the report after the view ends for the selected set
+    this.db.saveCurrentStateofDynamicData()
     //this.db.selectedFilter = 'all'
   }
 
@@ -100,8 +102,8 @@ export class WordSetsComponent implements OnInit {
         if (oneWordDynamicData["viewedDate"] != null) {
           individualViewedDate.push(oneWordDynamicData["viewedDate"])
         }
-        if (oneWordDynamicData["masteredDate"] != null) {
-          individualLearnedDate.push(oneWordDynamicData["masteredDate"])
+        if (oneWordDynamicData["learnedDate"] != null) {
+          individualLearnedDate.push(oneWordDynamicData["learnedDate"])
         }
       }
       individualLearnedDate.sort();

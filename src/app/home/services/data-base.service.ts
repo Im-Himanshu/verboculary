@@ -38,6 +38,7 @@ export class DatabaseService {
   public isToShowSearchBar = false;
   public isToRemoveCompleteSearch = false;
   public selectedFilter = 'all';
+  public deleteMe;
 
   currId;
   player: Howl = null;
@@ -256,10 +257,10 @@ export class DatabaseService {
             wordData.id = key;
             wordData.word = val[1];
             wordData.isMarked = false;
-            wordData.isSeen = false;
-            wordData.isMastered = false;
+            wordData.isViewed = false;
+            wordData.isLearned = false;
             wordData.correctCount = 0;
-            wordData.masteredDate = null;
+            wordData.learnedDate = null;
             wordData.viewedDate = null;
           }
         }
@@ -327,12 +328,12 @@ export class DatabaseService {
         this.allSelectedWordIdsFiltered.push(crntId);
       }
       if (filterName == 'viewed') {
-        if (this.wordsDynamicData[crntId].isSeen) {
+        if (this.wordsDynamicData[crntId].isViewed) {
           this.allSelectedWordIdsFiltered.push(crntId)
         }
       }
       else if (filterName == 'notViewed') {
-        if (!this.wordsDynamicData[crntId].isSeen) {
+        if (!this.wordsDynamicData[crntId].isViewed) {
           this.allSelectedWordIdsFiltered.push(crntId)
         }
       }
@@ -347,12 +348,12 @@ export class DatabaseService {
         }
       }
       if (filterName == 'learned') {
-        if (this.wordsDynamicData[crntId].isMastered) {
+        if (this.wordsDynamicData[crntId].isLearned) {
           this.allSelectedWordIdsFiltered.push(crntId)
         }
       }
       else if (filterName == 'notLearned') {
-        if (!this.wordsDynamicData[crntId].isMastered) {
+        if (!this.wordsDynamicData[crntId].isLearned) {
           this.allSelectedWordIdsFiltered.push(crntId)
         }
       }
@@ -371,7 +372,7 @@ export class DatabaseService {
     return this.http.get("assets/setDivision.json");
   }
 
-  saveCurrentStateofDynamicData() {
+  checkForAdvertisement() {
     let x = (this.allSetData.allWordOfSets["allViewed"].length + 1) % 50;
     if (x == 0) {
       this.admob.showInterstitialAds();
@@ -386,55 +387,119 @@ export class DatabaseService {
       }
     }
 
+  }
+
+  saveCurrentStateofDynamicData() {
+    this.checkForAdvertisement(); // to check if a video or banner add can be shown to the user or not
     this.setSetDatainStorage(this.allSetData)
     return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
 
   }
 
-
-  // these are the set created dynamically for keeping only either viewed/learned/marked words
-  editWordIdInDynamicSet(setName, wordID, isToAdd: boolean) {
-    // first check if it already exist or not...
-    let oneSetData = this.allSetData.allWordOfSets[setName];
-    if (!oneSetData) {
-      oneSetData = [];
-      this.allSetData.allWordOfSets[setName] = oneSetData;
+  // all the process for syncing in this just pass the new state and property
+  changeWordIdState(wordId, stateToEdit, newState: boolean) {
+    // this function will sync all the task need to be done for any change...
+    this.deleteMe = this.allSetData.setLevelProgressData[this.selectedSet];
+    if (stateToEdit == 'isViewed') {
+      this.updateSetLevelProgressCount(wordId, 'isViewed', newState);
+      this.editDateinWordDynamicData(wordId, "viewedDate", newState); // data-1 is in sync till now
+      this.updateDynamicSet(wordId, "allViewed", newState); // add/remove the id from the dynamic set
     }
-    if (!oneSetData.includes(wordID) && isToAdd) {
+    if (stateToEdit == 'isLearned') {
+      this.updateSetLevelProgressCount(wordId, 'isLearned', newState);
+      this.editDateinWordDynamicData(wordId, "learnedDate", newState)
+      this.updateDynamicSet(wordId, "allLearned", newState);
+    }
+    if (stateToEdit == 'isMarked') {
+      this.updateSetLevelProgressCount(wordId, 'isMarked', newState);
+      //this.editDateinWordDynamicData(wordId, "markedDate", newState)
+      this.updateDynamicSet(wordId, "allMarked", newState);
+    }
+    this.saveCurrentStateofDynamicData(); // this will save whatever be the state of progress
+
+  }
+  private updateSetLevelProgressCount(wordId, stateToEdit, newState) {
+    let statName;
+    if (stateToEdit == "isViewed") {
+      statName = "totalViewed"
+    }
+    else if (stateToEdit == "isLearned") {
+      statName = "totalLearned"
+    }
+    else {
+      this.wordsDynamicData[wordId][stateToEdit] = newState;
+      return; // for other cases returning for // "isMarked case"
+    }
+    if (stateToEdit != "isMarked") {
+
+      // here this.selectedSet need to changed because sometime word is opened outside of its sets as well like in allWords.
+      let setToBeUpdated = this.selectedSet; // have to change this afterwards for more accuracy
+      let setProgressData = this.allSetData.setLevelProgressData[setToBeUpdated] as setLevelProgress;
+      if (!this.wordsDynamicData[wordId][stateToEdit] && newState) {
+        // if word is not viewed and newstate is true then update count;
+        setProgressData[statName] = setProgressData[statName] + 1
+      }
+      else if (this.wordsDynamicData[wordId][stateToEdit] && !newState) {
+        // if word is not viewed and newstate is true then update count;
+        setProgressData[statName] = setProgressData[statName] - 1 // if removing 
+      }
+      else {
+        console.log("no state was updated!! as it was already there")
+      }
+    }
+
+    this.wordsDynamicData[wordId][stateToEdit] = newState; // now update the wordDynamic data
+
+  }
+
+  runSyncOperationForSetLevelOperation() {
+    let allWordIds = this.allSetData.allWordOfSets[this.selectedSet];
+    let setLevelProgress = this.allSetData.setLevelProgressData[this.selectedSet];
+    let totalViewed = 0;
+    let totalLearned = 0;
+    for (let oneId of allWordIds) {
+      let oneWordData = this.wordsDynamicData[oneId];
+      if (oneWordData["isViewed"]) {
+        totalViewed++;
+      }
+      if (oneWordData["isLearned"]) {
+        totalLearned++;
+      }
+    }
+    setLevelProgress["totalViewed"] = totalViewed;
+    setLevelProgress["totalLearned"] = totalLearned;
+  }
+
+  private editDateinWordDynamicData(wordId, dateTitle, newState) {
+    // only update date if it is not availaible previously or has been unmarked -- null, and then marked 
+    if ((!this.wordsDynamicData[wordId][dateTitle]) && newState) {
+      // if date is empty and newState is true edit the date
+      this.wordsDynamicData[wordId][dateTitle] = (new Date()).toUTCString();
+    }
+    else {
+      // if date is there or newState is false;
+      this.wordsDynamicData[wordId][dateTitle] = null;
+    }
+  }
+
+  private updateDynamicSet(wordID, dynamicSetName, isToAdd: boolean) {
+    // first check if it already exist or not...
+    let oneSetData = this.allSetData.allWordOfSets[dynamicSetName];
+    if (!oneSetData) {
+      // boundary cases
+      oneSetData = [];
+      this.allSetData.allWordOfSets[dynamicSetName] = oneSetData;
+    }
+    if (!(oneSetData.includes(wordID)) && isToAdd) {
       oneSetData.push(wordID);
-      this.editSetLevelProgress(setName, isToAdd) // increase only when it was not already availaible
     }
     else if (!isToAdd) {
       const index = oneSetData.indexOf(wordID);
       if (index > -1) {
         oneSetData.splice(index, 1);
-        this.editSetLevelProgress(setName, isToAdd) // decrease count only when it was in the learned list
       }
     }
-
   }
-
-  editSetLevelProgress(setName, isToAdd) {
-
-    let setProgressData = this.allSetData.setLevelProgressData[this.selectedSet] as setLevelProgress;
-    let statName;
-    if (setName == "allViewed") {
-      statName = "totalViewed"
-    }
-    else if (setName == "allLearned") {
-      statName = "totalLearned"
-    }
-    else return;
-    if (isToAdd) {
-      setProgressData[statName] = setProgressData[statName] + 1
-    }
-    else {
-      setProgressData[statName] = setProgressData[statName] - 1
-    }
-
-  }
-
-
 
   public reSetApp() {
     this.storage.clear().then(data => {
@@ -537,9 +602,7 @@ export class DatabaseService {
   }
 
   next() {
-
     let index = this.allSelectedWordIds.indexOf(this.currId);
-
     if (index != this.allSelectedWordIds.length - 1) {
       this.startPodcast(this.allSelectedWordIds[index + 1], true);
     } else {
@@ -661,9 +724,9 @@ export class DatabaseService {
           }
           break;
         case 'music-controls-destroy':
-            // Do something
+          // Do something
           this.closePodcast();
-        break;
+          break;
         default:
           break;
       }

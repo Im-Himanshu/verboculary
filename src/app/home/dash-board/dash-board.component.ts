@@ -98,12 +98,12 @@ export class DashBoardComponent implements OnInit {
     for (let one of this.repetitions) {
       this.collectiveProgress['transitional']['totalLearned'] += this.allSetProgressData[this.allSelectedSet[one + 7]]['totalLearned'];
       this.collectiveProgress['transitional']['totalWords'] += this.allSetProgressData[this.allSelectedSet[one + 7]]['totalWords'];
-      this.collectiveProgress['transitional']['totalViewed'] += this.allSetProgressData[this.allSelectedSet[one]]['totalViewed'];
+      this.collectiveProgress['transitional']['totalViewed'] += this.allSetProgressData[this.allSelectedSet[one + 7]]['totalViewed'];
     }
     for (let one of this.repetitions) {
       this.collectiveProgress['pro']['totalLearned'] += this.allSetProgressData[this.allSelectedSet[one + 14]]['totalLearned'];
       this.collectiveProgress['pro']['totalWords'] += this.allSetProgressData[this.allSelectedSet[one + 14]]['totalWords'];
-      this.collectiveProgress['pro']['totalViewed'] += this.allSetProgressData[this.allSelectedSet[one]]['totalViewed'];
+      this.collectiveProgress['pro']['totalViewed'] += this.allSetProgressData[this.allSelectedSet[one + 14]]['totalViewed'];
     }
 
 

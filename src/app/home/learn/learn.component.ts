@@ -48,7 +48,7 @@ export class LearnComponent implements OnInit {
 
 
 
-  constructor(private screenshot: Screenshot,private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
+  constructor(private screenshot: Screenshot, private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
 
     this.selectedSet = this.db.selectedSet;
 
@@ -91,9 +91,9 @@ export class LearnComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onScreenShot(event){
+  onScreenShot(event) {
     console.log(this.screenshot)
-    this.screenshot.URI(80).then(res=>{
+    this.screenshot.URI(80).then(res => {
       // console.log(res.URI);
       //only works on android
       this.shareService.onShareImage(res.URI);
@@ -155,17 +155,9 @@ export class LearnComponent implements OnInit {
     this.shareService.shareImageViaScreenshot(this.container);
   }
 
-  onDynamicDataChange(setName?, wordId?, isToAdd?) {
-    if (setName && wordId) {
-      this.db.editWordIdInDynamicSet(setName, wordId, isToAdd);
-    }
-    this.db.saveCurrentStateofDynamicData(); // the data is directly access from the service so only need to be saved in localstorage
-  }
-
-
   async afterWordAppear() {
     await new Promise(resolve => setTimeout(resolve, 2 * 1000));
-    this.changeSeen(1, this.selectedId);
+    this.changeSeen(true, this.selectedId);
   }
 
   async afterFrameAppear() {
@@ -174,24 +166,13 @@ export class LearnComponent implements OnInit {
   }
 
 
-  changeMark(newMark, wordId) {
-    this.wordDynamicData[wordId]["isMarked"] = newMark
-    this.onDynamicDataChange("allMarked", wordId, newMark);
+  changeMark(newState, wordId) {
+    this.db.changeWordIdState(wordId, 'isMarked', newState);
   }
 
-  changeSeen(newMark, wordId) {
-    this.wordDynamicData[wordId]["isSeen"] = newMark;
-    if (newMark && !this.wordDynamicData[wordId]['viewedDate']) {
-      // if the previous viewedDate doesn't exist then only edit it otherwise leave it
-      this.wordDynamicData[wordId]['viewedDate'] = (new Date()).toUTCString(); // utc will be in 24 hour format to avoid sorting issue like 00:00 of afternoon was coming before the 10:00 in morning so to avoid that....
-    }
-    else if (!newMark) {
-      this.wordDynamicData[wordId]['viewedDate'] = null; //if newmark is notSeen unset the viewedDate as well
-
-    }
-    this.onDynamicDataChange("allViewed", wordId, newMark);
+  changeSeen(newState: boolean, wordId) {
+    this.db.changeWordIdState(wordId, 'isViewed', newState)
   }
-
 
   previous() {
     if (this.previousWordsIds.length == 0) {
@@ -245,8 +226,8 @@ export class LearnComponent implements OnInit {
   }
 
   startP(wordId, playNext) {
-    if(!this.db.isPlaying){
-      this.db.startPodcast(wordId,playNext)
+    if (!this.db.isPlaying) {
+      this.db.startPodcast(wordId, playNext)
     } else {
       this.db.closePodcast();
       this.db.startPodcast(wordId, playNext);
