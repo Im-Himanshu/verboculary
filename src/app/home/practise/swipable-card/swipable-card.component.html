@@ -57,10 +57,11 @@
                 <h3>{{ card.title }}</h3>
                 <p>{{ card.description }}</p>
                 <ng-content></ng-content> -->
+      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
       <div (click)="toggleMeaning()">
         <div *ngIf="!isToShowMeaning || i != 0">
           <br />
-          <h1 class="wordStyle">{{ allWordDetails[selectedId][1] }}</h1>
+          <h1 class="wordStyle">{{ allWordDetails[selectedId][1] | titlecase}}</h1>
           <!-- <p *ngIf = "isToShowMeaning">{{allWordDetails[selectedId][2]}}</p> -->
           <br />
         </div>

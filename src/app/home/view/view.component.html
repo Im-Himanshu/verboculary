@@ -47,7 +47,7 @@
                   <svg-icon name='beginner'></svg-icon>
                 </div>
               </div>
-              <div class="word"> {{allWordsData[oneWordId][1]}}</div>
+              <div class="word"> {{allWordsData[oneWordId][1] | titlecase}}</div>
               <div class="iconBox2" (click)="toggleBookMark($event, oneWordId)">
                 <div id="iconsGroup">
                   <svg-icon *ngIf="wordsDynamicData[oneWordId]['isMarked']" name='fill-bookmark'></svg-icon>

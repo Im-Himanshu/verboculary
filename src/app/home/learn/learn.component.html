@@ -42,7 +42,7 @@
             <ion-icon name="share" class="shareArrow" (click)="onScreenShot($event)"></ion-icon>
           </ion-buttons>
           <h1 class="wordStyle">
-            {{ crntWordAppData[1] }}
+            {{ crntWordAppData[1] | titlecase}}
             <small style="font-size: 54%;">{{
             "  (" + crntWordAppData[3].substring(0, 4) + ") "
           }}</small>
@@ -61,9 +61,9 @@
           </p>
           <p class="synonyms"><strong>Synonyms : </strong>
             <span *ngFor='let syn of crntWordAppData[6];let isLast=last'>
-              <span *ngIf="foundIDMapping[syn]" style="color:#ffa500" (click)="goToUrl(syn)"> {{syn}}
+              <span *ngIf="foundIDMapping[syn]" style="color:#ffa500" (click)="goToUrl(syn)"> {{syn|titlecase}}
               </span>
-              <span *ngIf="!foundIDMapping[syn]"> {{syn}}</span>
+              <span *ngIf="!foundIDMapping[syn]"> {{syn|titlecase}}</span>
               {{isLast ? '' : ', '}}
 
             </span>

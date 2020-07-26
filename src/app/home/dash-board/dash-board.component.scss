@@ -3,7 +3,7 @@
   height: 152px;
     background: var(--dashboard-fix-header);
     /* box-shadow: 0 1px 3px 0px rgb(255 255 255 / 16%); */
-    margin-bottom: 4px;
+    margin-bottom: 23px;
     box-shadow: 0 2px 3px 0px #00000040;
 }
 
@@ -514,8 +514,7 @@ mat-form-field {
   width: 100%;
   //bottom: -69.06%; wil be undefined
 
-  bottom: -10%;
-
+  bottom: 82px;
   background-color: var(--dashboard-parent-box-color);
   }
 
@@ -618,6 +617,7 @@ mat-form-field {
       -webkit-box-align: center;
       align-items: center;
       border-bottom: 6px solid var(--card-border-bottom);
+      box-shadow: 2px 7px 8px 2px #0000004a;
       &:hover{
           background-color: var(--card-hover);
       }
