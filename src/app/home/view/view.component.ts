@@ -38,7 +38,6 @@ export class ViewComponent implements OnInit {
   ]
   constructor(public db: DatabaseService, private apprate: AppRateService, private admob: AdmobSerService, public podcast : PodcastService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
-    // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
 

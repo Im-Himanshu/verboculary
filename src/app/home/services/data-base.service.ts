@@ -5,14 +5,9 @@ import { Storage } from "@ionic/storage";
 import { wordAppData } from "../interfaces/wordAppData.interface";
 import { processedDataSharing, setLevelProgress } from "../interfaces/dropdown.interface";
 import { Subject, forkJoin, Observable } from "rxjs";
-import { appSessionData } from "../appSessionData.interface";
 import { ToastController } from "@ionic/angular";
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
-// import { Howl } from 'howler';
-// import { MusicControls } from '@ionic-native/music-controls/ngx';
 import { AdmobSerService } from './admob-ser.service';
-import { analytics } from 'firebase';
-import { FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -32,7 +27,6 @@ export class DatabaseService {
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
   public allSetinSelectedCategory;
   public wordFilterChangeEvent: Subject<any> = new Subject();
-  public searchQuery: string = '';
   public activeTabIndex: number = 0;
   public isSearchBarVisible: boolean = false;
   public isToShowSearchBar = false;
@@ -84,6 +78,7 @@ export class DatabaseService {
     });
   }
 
+
   onSearchQueryChange(searchQuery: string) {
     if (!this.isToShowSearchBar) {
       return; // not do anything if it is not shown
@@ -104,8 +99,6 @@ export class DatabaseService {
       }
     }
   }
-
-
 
   getAllwordsOfSelectedSet() {
     // first process after all the data is laoded from the data base...
@@ -163,7 +156,7 @@ export class DatabaseService {
 
 
   generateTotalProgressReportTillToday() {
-    // be very careful in triggering this function as this sets all the other 
+    // be very careful in triggering this function as this sets all the other
 
     // this function will run through all the sets progress and calculate progress report till today
 
@@ -442,7 +435,7 @@ export class DatabaseService {
       }
       else if (this.wordsDynamicData[wordId][stateToEdit] && !newState) {
         // if word is not viewed and newstate is true then update count;
-        setProgressData[statName] = setProgressData[statName] - 1 // if removing 
+        setProgressData[statName] = setProgressData[statName] - 1 // if removing
       }
       else {
         console.log("no state was updated!! as it was already there")
@@ -472,7 +465,7 @@ export class DatabaseService {
   }
 
   private editDateinWordDynamicData(wordId, dateTitle, newState) {
-    // only update date if it is not availaible previously or has been unmarked -- null, and then marked 
+    // only update date if it is not availaible previously or has been unmarked -- null, and then marked
     if ((!this.wordsDynamicData[wordId][dateTitle]) && newState) {
       // if date is empty and newState is true edit the date
       this.wordsDynamicData[wordId][dateTitle] = (new Date()).toUTCString();

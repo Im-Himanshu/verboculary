@@ -50,10 +50,8 @@ export class HomePage implements OnInit {
 
   }
   ngOnInit() {
-    console.log(this.themeService.mode);
     // this.themeService.setMode(this.themeService.mode);
     this.themeService.setThemeValue(this.themeService.mode);
-    console.log(this.themeService.checked);
   }
 
 

@@ -53,7 +53,7 @@ export class AppComponent {
 
   isTheUserNew() {
     this.db.isTheUserNew().subscribe(data => {
-      console.log(data)
+
 
       // if the first promise return false then show slides
       if (!(data[0] && data[1])) {
@@ -73,8 +73,6 @@ export class AppComponent {
   reScaleScreen() {
     let element = document.getElementById("toScale");
     let screen = window.screen;
-    console.log(screen.availWidth, screen.availHeight);
-    console.log("just a buffer")
     let parentElement = document.getElementById("parentdiv");
     if (screen.availWidth < element.clientWidth) {
       //client-width is set to minimum of 400 is it goes below that the screen will scale to always show 400 px else the default view is shown
