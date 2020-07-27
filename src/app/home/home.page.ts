@@ -17,6 +17,7 @@ import { AppRateService } from './services/app-rate.service';
 
 import { AdmobSerService } from './services/admob-ser.service';
 import { Storage } from '@ionic/storage';
+import { PodcastService } from './services/podcast.service';
 
 @Component({
   selector: 'app-home',
@@ -46,7 +47,7 @@ export class HomePage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage) {
+  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage,public podcast: PodcastService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.showFullscreenAdd();
@@ -201,23 +202,23 @@ export class HomePage implements OnInit {
 
 
   prev() {
-    this.db.prev();
+    this.podcast.prev();
   }
 
   next() {
-    this.db.next();
+    this.podcast.next();
   }
 
   tooglePlayer(pause) {
-    this.db.tooglePlayer(pause);
+    this.podcast.tooglePlayer(pause);
   }
 
   seek() {
-    this.db.seek(this.range);
+    this.podcast.seek(this.range);
   }
 
   close() {
-    this.db.closePodcast();
+    this.podcast.closePodcast();
   }
 
   rateapp() {

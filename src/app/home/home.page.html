@@ -91,12 +91,12 @@
     </ion-router-outlet>
   </ion-content>
 
-  <ion-footer class="no-padding" [hidden]="!this.db.miniPlayerVisible" size="fixed">
+  <ion-footer class="no-padding" [hidden]="!this.podcast.miniPlayerVisible" size="fixed">
     <ion-toolbar color="dark">
 
       <div class="mainPlayer">
         <div class="rangeSlider">
-          <ion-range #range [(ngModel)]="this.db.progress" max="100" color="success" (touchend)="seek()"
+          <ion-range #range [(ngModel)]="this.podcast.progress" max="100" color="success" (touchend)="seek()"
             (mouseup)="seek()"></ion-range>
 
         </div>
@@ -108,13 +108,13 @@
             </ion-button>
           </div>
           <div style="width: 88%;" class="wordDescription"
-            (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.db.currId)">
+            (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.podcast.currId)">
             <div style="font-size: 26px;">
-              <span>{{ this.db.currWord | titlecase}}</span>
+              <span>{{ this.podcast.currWord | titlecase}}</span>
             </div>
             <div style="font-size: 12px;">
               <div behavior="" direction="left">
-                {{ this.db.currMeaning }}
+                {{ this.podcast.currMeaning }}
               </div>
 
             </div>
@@ -124,11 +124,11 @@
               <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.db.isPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.podcast.isPlaying" color="light">
               <ion-icon slot="icon-only" name="play"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.db.isPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.podcast.isPlaying" color="light">
               <ion-icon slot="icon-only" name="pause"></ion-icon>
             </ion-button>
 

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { wordToIdMap } from '../../wordToId'
 import { Router } from '@angular/router';
+import { PodcastService } from '../services/podcast.service';
 
 
 
@@ -49,7 +50,7 @@ export class LearnComponent implements OnInit {
 
 
 
-  constructor(private screenshot: Screenshot, private db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router) {
+  constructor(private screenshot: Screenshot, public db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router, private podcast : PodcastService) {
 
     this.selectedSet = this.db.selectedSet;
 
@@ -223,11 +224,11 @@ export class LearnComponent implements OnInit {
   }
 
   startP(wordId, playNext) {
-    if (!this.db.isPlaying) {
-      this.db.startPodcast(wordId, playNext)
+    if (!this.podcast.isPlaying) {
+      this.podcast.startPodcast(wordId, playNext)
     } else {
-      this.db.closePodcast();
-      this.db.startPodcast(wordId, playNext);
+      this.podcast.closePodcast();
+      this.podcast.startPodcast(wordId, playNext);
     }
   }
 
