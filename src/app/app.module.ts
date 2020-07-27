@@ -24,7 +24,6 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { SvgDefinitionsComponent } from "./components/svg-definitions/svg-definitions.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SlidesComponent } from './home/POCs/slides/slides.component'
 import { Media } from "@ionic-native/media/ngx";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
@@ -33,8 +32,6 @@ import { AppRate } from '@ionic-native/app-rate/ngx';
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
 import { AdMobFree } from "@ionic-native/admob-free/ngx";
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { SuperTabs } from '@ionic-super-tabs/angular'
-import { Html2canvasService } from './home/services/html2canvas.service';
 import {Screenshot} from '@ionic-native/screenshot/ngx'
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
@@ -69,13 +66,11 @@ var firebaseConfig = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     HttpClientModule,
-    Ng2SearchPipeModule,
     SuperTabsModule.forRoot(),
     // SuperTabs
   ],
   providers: [
     DatabaseService,
-    Html2canvasService,
     StatusBar,
     SplashScreen,
     AuthService,

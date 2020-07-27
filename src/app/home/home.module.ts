@@ -66,7 +66,6 @@ import {
   FileTransferObject,
 } from "@ionic-native/file-transfer/ngx";
 import { DatePipe } from "@angular/common";
-import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 //rate-App
@@ -77,8 +76,6 @@ import { AppRateComponent } from "./POCs/app-rate/app-rate.component";
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
 
 import { DrawerComponent } from "./POCs/drawer/drawer.component";
-import { SuperTabs } from '@ionic-super-tabs/angular'
-import { Html2canvasService } from './services/html2canvas.service';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -101,7 +98,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     FivBottomSheetModule,
     ChartModule,
     ChartsModule,
-    Ng2SearchPipeModule,
     SuperTabsModule,
     // SuperTabs,
   ],
@@ -134,7 +130,6 @@ export class MyHammerConfig extends HammerGestureConfig {
   providers: [
     HammerGestureConfig,
     ThemeChangeService,
-    Html2canvasService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,

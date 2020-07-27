@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input, ElementRef } from '@angular/core';
-import { Color, Label, BaseChartDirective, } from 'ng2-charts';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Component, ViewChild, AfterViewInit, Input} from '@angular/core';
+import { BaseChartDirective, } from 'ng2-charts';
+import { ChartDataSets } from 'chart.js';
 import { SharingServiceService } from '../services/sharing-service.service'
-import { Html2canvasService } from '../services/html2canvas.service'
+import { Screenshot } from '@ionic-native/screenshot';
 
 @Component({
   selector: 'app-progress-chart',
@@ -21,7 +21,7 @@ export class ProgressChartComponent implements AfterViewInit {
   }
   */
   @Input("chartLabelsAndData") chartLabelsAndData: any; // date to agregated progress data
-  @ViewChild("container4", { static: false, read: ElementRef }) container4: ElementRef;
+
   isProcessed: boolean = false;
   chartOptions; 2
   chartLabels: Date[]
@@ -38,21 +38,14 @@ export class ProgressChartComponent implements AfterViewInit {
 
   ];
   public lineChartColors;
-  constructor(private shareService: SharingServiceService, private html2canvas: Html2canvasService) { }
+  private screenshot: Screenshot;
+  constructor(private shareService: SharingServiceService) { }
 
-  shareScreen() {
-    const element = document.getElementById('html2canvas');
-    const targetElement = document.getElementById('target').cloneNode(true);
-    element.appendChild(targetElement);
-    this.html2canvas.html2canvas(element.firstChild).then((img) => {
-      this.img = img;
-      console.log(this.img);
-      element.firstChild.remove();
-    }).catch((res) => {
-      console.log(res);
-    });
+  onScreenshot(event){
+    this.screenshot.URI(80).then(res=> {
+      this.shareService.onShareImage(res.URI);
+    })
   }
-
   // this.shareService.shareImageViaScreenshot(this.container4);
 
 

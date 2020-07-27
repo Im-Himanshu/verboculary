@@ -2,9 +2,13 @@
   <div class="graphDiv" *ngIf="isProcessed">
 
     <ion-icon class="reSetIcon" (click)="resetZoom()" name="refresh-circle"></ion-icon>
+    <div style="color: white" class="share-chart">
+      <ion-icon name="share" (click)="onScreenshot($event)"></ion-icon>
+    </div>
     <canvas #chart baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
       [colors]="lineChartColors" [legend]="true" (chartClick)="onChartClick($event)">
     </canvas>
+
   </div>
 
   <canvas id="canvas">

@@ -9,7 +9,6 @@ import { AlertController } from '@ionic/angular';
 import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
-import { SearchService } from './services/search.service'
 import { SharingServiceService } from './services/sharing-service.service';
 import { Router } from '@angular/router';
 import { wordToIdMap } from '../wordToId';
@@ -46,7 +45,7 @@ export class HomePage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage) {
+  constructor( public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.showFullscreenAdd();

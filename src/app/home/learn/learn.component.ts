@@ -5,11 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { wordToIdMap } from '../../wordToId'
 import { Router } from '@angular/router';
-
-
-
 import domtoimage from 'dom-to-image';
-import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
 @Component({
   selector: 'app-learn',
@@ -91,7 +87,7 @@ export class LearnComponent implements OnInit {
   }
 
   onScreenShot(event) {
-    console.log(this.screenshot)
+    // console.log(this.screenshot)
     this.screenshot.URI(80).then(res => {
       // console.log(res.URI);
       //only works on android
