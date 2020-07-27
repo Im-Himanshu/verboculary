@@ -5,7 +5,7 @@
 
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title (click) = "goToUrl('/mainmodule/base/dashboard') " >Verboculary</ion-title>
+      <ion-title (click)="goToUrl('/mainmodule/base/dashboard') ">Verboculary</ion-title>
 
       <img slot="secondary" src="assets/logo.png" height="58px" />
     </ion-toolbar>
@@ -69,7 +69,7 @@
       </ion-buttons>
       <!-- <img slot="start" src="assets/logo.png" height="63px" /> -->
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
-      <ion-title (click) = "goToUrl('/mainmodule/base/dashboard') " class="titleicon">{{appTitle}}</ion-title>
+      <ion-title (click)="goToUrl('/mainmodule/base/dashboard') " class="titleicon">{{appTitle}}</ion-title>
       <ion-buttons slot="secondary">
         <!-- <ion-searchbar id="searchBar"
           [ngStyle]="{'visibility': (this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch) ? 'visible' : 'hidden'}"
@@ -91,7 +91,7 @@
     </ion-router-outlet>
   </ion-content>
 
-  <ion-footer class="no-padding" [hidden]="!this.podcast.miniPlayerVisible" size="fixed">
+  <ion-footer class="no-padding" [hidden]="!this.podcast.isPlaying" size="fixed">
     <ion-toolbar color="dark">
 
       <div class="mainPlayer">
@@ -110,11 +110,11 @@
           <div style="width: 88%;" class="wordDescription"
             (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.podcast.currId)">
             <div style="font-size: 26px;">
-              <span>{{ this.podcast.currWord | titlecase}}</span>
+              <span>{{ this.db.allWordsData[this.podcast.currId][1] | titlecase}}</span>
             </div>
             <div style="font-size: 12px;">
               <div behavior="" direction="left">
-                {{ this.podcast.currMeaning }}
+                {{ this.db.allWordsData[this.podcast.currId][2]  }}
               </div>
 
             </div>

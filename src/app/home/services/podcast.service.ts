@@ -8,49 +8,73 @@ import { DatabaseService } from './data-base.service';
 })
 export class PodcastService {
 
-  currId;
+  currId = 5;
   player: Howl = null;
-  isPlaying = false;
-  onPause = true;
-  miniPlayerVisible = false;
-  currWord;
-  currMeaning;
+  isPlayerActive: boolean = false; // is playeractive means whether to show the below popup or not 
+  isPlayerPlaying = false;// means whether to show the below 
   progress = 0;
+  continousPlayer: boolean = false;
+  srcAdress = []
 
-  constructor(public musicControls: MusicControls,private db: DatabaseService) { }
+  constructor(public musicControls: MusicControls, private db: DatabaseService) {
+    this.srcAdress.push(this.db.allWordsData[this.currId][5])
 
-  startPodcast(wordId, playNext) {
+    this.player = new Howl({
+      src: this.srcAdress,
+      html5: true,
+      onplay: () => {
+        console.log("onPlay");
+        this.isPlayerActive = true;
+        this.isPlayerPlaying = false;
+        this.updateProgress();
+      },
+      onend: () => {
+        // this will get triggered when the current podcast ends
+        console.log('onEnd');
+        if (this.continousPlayer) {
+          this.next();
+        }
+      }
+    });
+
+  }
+
+  playGivenId(wordId, isToPlayAll) {
     this.currId = wordId;
     if (!this.db.allWordsData[wordId][5]) {
       this.next()
       return
     }
-    if (this.player) {
-      this.player.stop();
+
+    this.srcAdress = [this.db.allWordsData[this.currId][5]]
+    this.changeSource();
+    // write code to change src here..
+    this.player.play();
+    this.createNotification();
+
+
+  }
+
+  changeSource() {
+    let self = this.player;
+    this.player.unload();
+    this.player._src = this.srcAdress;
+    this.player.load();
+
+  }
+
+
+
+  changePodcastWord(wordId, playNext) {
+    this.currId = wordId;
+    if (!this.db.allWordsData[wordId][5]) {
+      this.next()
+      return
     }
 
-    this.player = new Howl({
-      src: [this.db.allWordsData[wordId][5]],
-      html5: true,
-      onplay: () => {
-        console.log("onPlay");
-        this.isPlaying = true;
-        this.onPause = false;
-        this.miniPlayerVisible = true;
-        this.currId = wordId;
-        this.currWord = this.db.allWordsData[this.currId][1];
-        this.currMeaning = this.db.allWordsData[this.currId][2];
-        this.updateProgress();
-      },
-      onend: () => {
-        console.log('onEnd');
-        if (playNext) {
-          this.next();
-        } else {
-          this.miniPlayerVisible = false;
-        }
-      }
-    });
+    this.srcAdress = [this.db.allWordsData[this.currId][5]]
+    this.changeSource();
+    // write code to change src here..
     this.player.play();
     this.createNotification();
   }
@@ -58,34 +82,35 @@ export class PodcastService {
   prev() {
     let index = this.db.allSelectedWordIds.indexOf(this.currId);
     if (index > 0) {
-      this.startPodcast(this.db.allSelectedWordIds[index - 1], true);
+      this.changePodcastWord(this.db.allSelectedWordIds[index - 1], true);
     } else {
-      this.startPodcast(this.currId, true);
+      this.changePodcastWord(this.db.allSelectedWordIds[0], true);
     }
   }
 
   next() {
     let index = this.db.allSelectedWordIds.indexOf(this.currId);
-    if (index != this.db.allSelectedWordIds.length - 1) {
-      this.startPodcast(this.db.allSelectedWordIds[index + 1], true);
+    if (index < this.db.allSelectedWordIds.length) {
+      this.changePodcastWord(this.db.allSelectedWordIds[index + 1], true);
     } else {
-      this.startPodcast(this.db.allSelectedWordIds[0], true);
+      this.changePodcastWord(this.db.allSelectedWordIds[0], true);
     }
 
   }
 
   play() {
     this.player.play();
+    this.isPlayerActive = true;
   }
 
   pause() {
-    this.onPause = true;
+    this.isPlayerPlaying = false;
     this.player.pause();
   }
 
   tooglePlayer(pause) {
-    this.isPlaying = !pause;
-    this.onPause = pause;
+    this.isPlayerActive = !pause;
+    this.isPlayerPlaying = pause;
     if (pause) {
       this.player.pause();
       this.musicControls.updateIsPlaying(false);
@@ -114,9 +139,8 @@ export class PodcastService {
   closePodcast() {
     this.player.stop();
     this.musicControls.destroy();
-    this.miniPlayerVisible = false;
-    this.isPlaying = false;
-    this.onPause = true;
+    this.isPlayerActive = false;
+    this.isPlayerPlaying = true;
   }
 
   createNotification() {
@@ -155,33 +179,33 @@ export class PodcastService {
           this.prev();
           break;
         case 'music-controls-pause':
-          if (this.isPlaying) {
+          if (this.isPlayerActive) {
             this.tooglePlayer(true);
-            this.onPause = true;
+            this.isPlayerPlaying = true;
             this.musicControls.updateIsPlaying(false);
             this.musicControls.updateDismissable(true);
             console.log("music pause");
           }
           else {
             this.tooglePlayer(false)
-            this.onPause = false;
+            this.isPlayerPlaying = false;
             this.musicControls.updateIsPlaying(true);
             this.musicControls.updateDismissable(false);
           }
           break;
         case 'music-controls-play':
           // Do something
-          if (!this.isPlaying) {
+          if (!this.isPlayerActive) {
             console.log('music play');
             this.tooglePlayer(false);
-            this.onPause = false;
+            this.isPlayerPlaying = false;
             this.musicControls.updateIsPlaying(true);
             this.musicControls.updateDismissable(false);
           }
           else {
             console.log("music pause");
             this.tooglePlayer(true);
-            this.onPause = true;
+            this.isPlayerPlaying = true;
             this.musicControls.updateIsPlaying(false);
             this.musicControls.updateDismissable(true);
           }

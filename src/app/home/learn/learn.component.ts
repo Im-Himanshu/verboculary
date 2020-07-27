@@ -50,7 +50,7 @@ export class LearnComponent implements OnInit {
 
 
 
-  constructor(private screenshot: Screenshot, public db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router, private podcast : PodcastService) {
+  constructor(private screenshot: Screenshot, public db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router, private podcast: PodcastService) {
 
     this.selectedSet = this.db.selectedSet;
 
@@ -224,11 +224,11 @@ export class LearnComponent implements OnInit {
   }
 
   startP(wordId, playNext) {
-    if (!this.podcast.isPlaying) {
-      this.podcast.startPodcast(wordId, playNext)
+    if (!this.podcast.isPlayerPlaying) {
+      this.podcast.changePodcastWord(wordId, playNext)
     } else {
       this.podcast.closePodcast();
-      this.podcast.startPodcast(wordId, playNext);
+      this.podcast.changePodcastWord(wordId, playNext);
     }
   }
 

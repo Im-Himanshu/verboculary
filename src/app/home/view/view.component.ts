@@ -37,7 +37,7 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(public db: DatabaseService, public searchService: SearchService, private apprate: AppRateService, private admob: AdmobSerService, public podcast : PodcastService) {
+  constructor(public db: DatabaseService, public searchService: SearchService, private apprate: AppRateService, private admob: AdmobSerService, public podcast: PodcastService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
@@ -94,28 +94,9 @@ export class ViewComponent implements OnInit {
     event.stopPropagation();
   }
 
-  start(wordId, playNext) {
-    if (this.podcast.player) {
-      this.podcast.tooglePlayer(!this.podcast.onPause)
-    }
-    else if (!this.podcast.isPlaying) {
-      this.podcast.startPodcast(wordId, playNext);
-    }
-    else {
-      this.podcast.pause()
-    }
+  start(wordId, isToPlayAll) {
+    this.podcast.playGivenId(wordId, isToPlayAll)
   }
 
-  startP(wordId, playNext) {
-    if (!this.podcast.player) {
-      this.podcast.startPodcast(wordId, playNext);
-    } else if (this.podcast.currId == wordId){
-      this.podcast.tooglePlayer(!this.podcast.onPause);
-    } else if(this.podcast.currId != wordId){
-      this.podcast.player.stop();
-      this.podcast.startPodcast(wordId, playNext);
-    } else {
-      this.podcast.closePodcast();
-    }
-  }
+
 }
