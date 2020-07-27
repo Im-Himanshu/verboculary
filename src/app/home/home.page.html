@@ -36,12 +36,18 @@
       </ion-item>
       <ion-item>
         <ion-icon name="settings" slot="start"></ion-icon>
-        <ion-label>Settings</ion-label>
+        <ion-label class="side-menu-label">Settings</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>{{themeService.value}}</ion-label>
-        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)"
-          [(checked)]="themeService.checked"></ion-toggle>
+        <ion-label class="side-menu-label">{{themeService.value}}</ion-label>
+        <ion-toggle
+        slot="start"
+        name="blackberry"
+        color="light"
+        (click)="toggleMode($event)"
+        [(checked)]="themeService.checked"
+        style="--handle-background: var(--toggle-button-color);"
+        ></ion-toggle>
         <!-- <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle> -->
       </ion-item>
 

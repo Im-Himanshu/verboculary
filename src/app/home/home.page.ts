@@ -1,18 +1,14 @@
 import { Component, OnInit, ViewChild, ViewChildren, ElementRef } from '@angular/core';
-import { dropdownData, processedDataSharing } from './interfaces/dropdown.interface';
+import { processedDataSharing } from './interfaces/dropdown.interface';
 import { DatabaseService } from './services/data-base.service'
 import { ModalController, IonRange, IonSearchbar } from '@ionic/angular';
 import { AboutDeveloperComponent } from './about-developer/about-developer.component';
-import { FilterPopOverComponent } from './filter-pop-over/filter-pop-over.component'
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { HowToUseComponent } from './how-to-use/how-to-use.component'
-import { appSessionData } from './appSessionData.interface'
 import { ThemeChangeService } from './services/theme-change.service'
-import { SearchService } from './services/search.service'
 import { SharingServiceService } from './services/sharing-service.service';
 import { Router } from '@angular/router';
-import { wordToIdMap } from '../wordToId';
 import { AppRateService } from './services/app-rate.service';
 
 import { AdmobSerService } from './services/admob-ser.service';
@@ -47,17 +43,15 @@ export class HomePage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor(public searchService: SearchService, public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage,public podcast: PodcastService) {
+  constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage,public podcast: PodcastService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.showFullscreenAdd();
 
   }
   ngOnInit() {
-    console.log(this.themeService.mode);
     // this.themeService.setMode(this.themeService.mode);
     this.themeService.setThemeValue(this.themeService.mode);
-    console.log(this.themeService.checked);
   }
 
 

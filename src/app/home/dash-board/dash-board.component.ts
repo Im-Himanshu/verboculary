@@ -116,14 +116,11 @@ export class DashBoardComponent implements OnInit {
     let toMoveElement = document.getElementById("toMove");
     let newPosition = toMoveElement.offsetTop;
     toMoveElement.style.top = newPosition + "px"
-    //console.log("touch started :", event.touches[0])
 
   }
 
   touchEnded(event: TouchEvent) {
     this.prevDeltaY = 0;
-    //this.handlePanEnd();
-    //console.log("touch ended :", event.touches[0])
   }
 
   handleTouch(event: TouchEvent) {
@@ -134,7 +131,6 @@ export class DashBoardComponent implements OnInit {
     if (absoluteY < 78 || absoluteY > (this.totalScreenHeight - 40)) {
       // if the touch goes above a certain range stop doing anything in this case
       // if the touch goes in range of headear and >500 is for screen width
-      //console.log("from starting", absoluteY);
       return;
     }
     let newDeltaY = event.touches[0].clientY - this.prevDeltaY // the new delta more then the previous one
@@ -148,7 +144,6 @@ export class DashBoardComponent implements OnInit {
 
     if (absoluteY < 30 || newPosition > (this.totalScreenHeight - 100) || absoluteY > this.totalScreenHeight) {
       // never executed
-      //console.log(absoluteY, newPosition);
       return;
     }
     toMoveElement.style.top = newPosition + "px"

@@ -6,11 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { wordToIdMap } from '../../wordToId'
 import { Router } from '@angular/router';
 import { PodcastService } from '../services/podcast.service';
-
-
-
 import domtoimage from 'dom-to-image';
-import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
 @Component({
   selector: 'app-learn',
@@ -62,7 +58,6 @@ export class LearnComponent implements OnInit {
   ngOnInit() {
 
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
-    // console.log(this.allSelectedWordIDs);
     this.wordDynamicData = this.db.wordsDynamicData;
     this.allWordsData = this.db.allWordsData;
 
@@ -84,7 +79,6 @@ export class LearnComponent implements OnInit {
       this.afterWordAppear();
       this.getSafeUrl();
     });
-    // console.log(this.allWordsData[this.selectedId],this.wordDynamicData[this.selectedId]);
 
   }
   stopParentProp(event) {
@@ -92,9 +86,7 @@ export class LearnComponent implements OnInit {
   }
 
   onScreenShot(event) {
-    console.log(this.screenshot)
     this.screenshot.URI(80).then(res => {
-      // console.log(res.URI);
       //only works on android
       this.shareService.onShareImage(res.URI);
     })
@@ -111,9 +103,7 @@ export class LearnComponent implements OnInit {
   goToUrl(syn) {
 
     this.selectedId = this.wordToIdMap[syn]
-
     //this.router.navigate(['/mainmodule/base/wordSets/' + this.db.selectedSet + '/learn/' + this.wordToIdMap[syn]]);
-    // console.log('/mainmodule/base/wordSets/' + this.viewType + '/' + wordToIdMap[syn])
   }
 
 

@@ -38,7 +38,6 @@ export class ThemeChangeService {
   }
 
   toggleMode(){
-    console.log(this.mode);
     if(this.mode == 'lightTheme'){
       this.setMode('darkTheme');
     }

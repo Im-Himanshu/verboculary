@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
-import { SearchService } from '../services/search.service'
 import { wordToIdMap } from '../../wordToId';
 import { AppRateService } from '../services/app-rate.service';
 import { AdmobSerService } from '../services/admob-ser.service';
@@ -37,9 +36,8 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(public db: DatabaseService, public searchService: SearchService, private apprate: AppRateService, private admob: AdmobSerService, public podcast: PodcastService) {
+  constructor(public db: DatabaseService, private apprate: AppRateService, private admob: AdmobSerService, public podcast: PodcastService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
-    // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
 
@@ -49,7 +47,7 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.wordArray = this.searchService.convertWordMapToArray();
+
     //this.db.changeSortingOfIds("alpha")
   }
 

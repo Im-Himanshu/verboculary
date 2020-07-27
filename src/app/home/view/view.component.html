@@ -22,7 +22,7 @@
 <div>
   <ion-content #ion_content class="ioncontentheight" style="--background: #fff8dc00" forceOverscroll="true">
     <!-- this part checks if the search query is empty -->
-    <div *ngIf="!searchService.searchQuery">
+    <div>
       <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs">
         <ion-item class="name-item">
           <div class="parentBox">
@@ -109,72 +109,5 @@
     </div>
 
     <!-- here we decide what to show and how to show if search query has elements -->
-    <div *ngIf="searchService.searchQuery">
-      <!-- <div *ngFor="let word of wordArray | filter:searchService.searchQuery">
-          {{word.name}}
-        </div> -->
-      <ion-item-sliding *ngFor="let word of wordArray | filter:searchService.searchQuery">
-        <ion-item>
-          <div class="parentBox">
-            <div class="firstRow ripple" (click)="onWordClickToggleit(word.id)">
-              <div class="iconBox">
-                <div id="iconsGroup">
-                  <svg-icon name='beginner'></svg-icon>
-                </div>
-              </div>
-              <div class="word"> {{word.name | uppercase}}</div>
-              <div class="iconBox2" (click)="toggleBookMark($event, word.id)">
-                <div id="iconsGroup">
-                  <svg-icon *ngIf="wordsDynamicData[word.id]['isMarked']" name='fill-bookmark'></svg-icon>
-                  <svg-icon *ngIf="!wordsDynamicData[word.id]['isMarked']" name='bookMark'></svg-icon>
-                </div>
-              </div>
-            </div>
-
-            <div *ngIf="isWordopen[word.id]" class="secondRow" (click)="onWordClickToggleit(word.id)">
-              <div class="meaningtextStyle">{{allWordsData[word.id][2]}} </div>
-
-            </div>
-
-            <div *ngIf="isWordopen[word.id]" class="thirdRow">
-              <div class="iconBox" (click)="takeNoteToggle($event, word.id)">
-                <div class="icon">
-                  <div id="iconsGroup">
-                    <svg-icon name='noteIcon'></svg-icon>
-                  </div>
-                </div>
-                <div class="text">
-                  Note
-                </div>
-
-              </div>
-              <div class="iconBox" routerLink="/mainmodule/base/learn/{{word.id}}">
-                <div class="text">
-                  Explore
-                </div>
-                <div class="icon">
-                  <div id="iconsGroup">
-                    <svg-icon name='leftAngleIcon'></svg-icon>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div *ngIf="(isWordopen[word.id]) && (isToTakeNote[word.id] || wordsDynamicData[word.id][notes])"
-              class="fourthRow">
-              <textarea [(ngModel)]="wordsDynamicData[word.id]['Notes']" class="textArea" rows="4" cols="50"
-                placeholder="Make a Note to remember this word"></textarea>
-
-            </div>
-
-          </div>
-
-        </ion-item>
-
-      </ion-item-sliding>
-    </div>
-
-  </ion-content>
-</div>
+   </ion-content>
+   </div>
