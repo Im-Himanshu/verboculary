@@ -1,7 +1,7 @@
 <div class="parentDropDown">
 
 
-  <ion-button fill="clear" slot="end" (click)="start(allSelectedWordIDs[0],true)">
+  <ion-button fill="clear" slot="end" (click)="togglePlaying(allSelectedWordIDs[0],true)">
     <div class="iconsGroup" *ngIf="(this.podcast.isPlayerPlaying)">
       <svg-icon name="play-circle"></svg-icon>
     </div>
@@ -60,12 +60,14 @@
 
               </div>
 
-              <div class="iconBox" *ngIf="allWordsData[oneWordId][5]" (click)="start(oneWordId,false)">
+              <div class="iconBox" *ngIf="allWordsData[oneWordId][5]" (click)="togglePlaying(oneWordId,false)">
                 <div class="icon">
                   <div class="iconsGroup" *ngIf="podcast.isPlayerPlaying && (oneWordId == podcast.currId)">
+                    <!-- will pause this id -->
                     <svg-icon name="play-circle"></svg-icon>
                   </div>
-                  <div class="iconsGroup" *ngIf="!podcast.isPlayerPlaying || (oneWordId != podcast.currId) ">
+                  <div class="iconsGroup" *ngIf="!podcast.isPlayerPlaying || (oneWordId != podcast.currId)">
+                    <!-- will play this id -->
                     <svg-icon name="pause-circle"></svg-icon>
                   </div>
 
@@ -109,5 +111,5 @@
     </div>
 
     <!-- here we decide what to show and how to show if search query has elements -->
-   </ion-content>
-   </div>
+  </ion-content>
+</div>

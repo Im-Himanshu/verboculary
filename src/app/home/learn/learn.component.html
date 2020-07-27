@@ -1,5 +1,6 @@
 <span #container>
-  <ion-content *ngIf="isAllWordMastered" class="alignMiddle ionContentHeight" style="--background: var(--app-homepage-graph);">
+  <ion-content *ngIf="isAllWordMastered" class="alignMiddle ionContentHeight"
+    style="--background: var(--app-homepage-graph);">
     <ion-card>
       <ion-card-content class="ion-activatable">
         <p class="wordMeaning">
@@ -34,7 +35,8 @@
             <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
           </ion-buttons>
           <ion-buttons class="starbutton">
-            <ion-icon name="microphone" (click)="startP(selectedId, false)" *ngIf="allWordsData[selectedId][5]"></ion-icon>
+            <ion-icon name="microphone" (click)="togglePlaying(selectedId, false)" *ngIf="allWordsData[selectedId][5]">
+            </ion-icon>
             <ion-icon (click)="changeMark(0, selectedId)" *ngIf="crntWordDynamicData['isMarked']" name="star">
             </ion-icon>
             <ion-icon (click)="changeMark(1, selectedId)" *ngIf="!crntWordDynamicData['isMarked']" name="star-outline">
@@ -61,7 +63,8 @@
           </p>
           <p class="synonyms"><strong>Synonyms : </strong>
             <span *ngFor='let syn of crntWordAppData[6];let isLast=last'>
-              <span *ngIf="this.wordToIdMap[syn] != null" style="color:#ffa500" (click)="selectId(syn)"> {{syn|titlecase}}
+              <span *ngIf="this.wordToIdMap[syn] != null" style="color:#ffa500" (click)="selectId(syn)">
+                {{syn|titlecase}}
               </span>
               <span *ngIf="this.wordToIdMap[syn] == null"> {{syn|titlecase}}</span>
               {{isLast ? '' : ', '}}
@@ -74,7 +77,8 @@
             <ion-buttons class="seenButton">
               <ion-icon (click)="changeSeen(false, selectedId)" *ngIf="crntWordDynamicData['isViewed']" name="done-all">
               </ion-icon>
-              <ion-icon (click)="changeSeen(true, selectedId)" *ngIf="!crntWordDynamicData['isViewed']" name="checkmark">
+              <ion-icon (click)="changeSeen(true, selectedId)" *ngIf="!crntWordDynamicData['isViewed']"
+                name="checkmark">
               </ion-icon>
             </ion-buttons>
           </h1>
@@ -104,9 +108,11 @@
   </ion-content>
   <section>
     <ion-toolbar class="learnWordsChangeButton">
-      <ion-button style="width: 48%;--background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round" (click)="previous()">Previous
+      <ion-button style="width: 48%;--background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round"
+        (click)="previous()">Previous
       </ion-button>
-      <ion-button style="width: 48%; --background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round" (click)="next()">Next</ion-button>
+      <ion-button style="width: 48%; --background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round"
+        (click)="next()">Next</ion-button>
     </ion-toolbar>
   </section>
 </span>

@@ -213,12 +213,19 @@ export class LearnComponent implements OnInit {
     if (docs) docs.style.display = 'none';
   }
 
-  startP(wordId, playNext) {
-    if (!this.podcast.isPlayerPlaying) {
-      this.podcast.changePodcastWord(wordId, playNext)
-    } else {
-      this.podcast.closePodcast();
-      this.podcast.changePodcastWord(wordId, playNext);
+  togglePlaying(wordId, isToPlayAll?) {
+    if (this.podcast.isPlayerPlaying) {
+      if (this.podcast.currId == wordId) {
+        this.podcast.playPauseGivenId(wordId, false, false)
+      }
+      else {
+        // will play a given new word...
+        this.podcast.playPauseGivenId(wordId, true, false)
+      }
+    }
+    else {
+      // if player is not playing then play it
+      this.podcast.playPauseGivenId(wordId, true, false)
     }
   }
 

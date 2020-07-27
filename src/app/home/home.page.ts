@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage,public podcast: PodcastService) {
+  constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage, public podcast: PodcastService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.showFullscreenAdd();
@@ -203,8 +203,8 @@ export class HomePage implements OnInit {
     this.podcast.next();
   }
 
-  tooglePlayer(pause) {
-    this.podcast.tooglePlayer(pause);
+  tooglePlayer(newState) {
+    this.podcast.tooglePlayer();
   }
 
   seek() {

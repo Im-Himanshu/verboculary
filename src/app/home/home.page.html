@@ -40,14 +40,8 @@
       </ion-item>
       <ion-item>
         <ion-label class="side-menu-label">{{themeService.value}}</ion-label>
-        <ion-toggle
-        slot="start"
-        name="blackberry"
-        color="light"
-        (click)="toggleMode($event)"
-        [(checked)]="themeService.checked"
-        style="--handle-background: var(--toggle-button-color);"
-        ></ion-toggle>
+        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)"
+          [(checked)]="themeService.checked" style="--handle-background: var(--toggle-button-color);"></ion-toggle>
         <!-- <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle> -->
       </ion-item>
 
@@ -97,7 +91,7 @@
     </ion-router-outlet>
   </ion-content>
 
-  <ion-footer class="no-padding" [hidden]="!this.podcast.isPlaying" size="fixed">
+  <ion-footer class="no-padding" [hidden]="!this.podcast.isPlayerActive" size="fixed">
     <ion-toolbar color="dark">
 
       <div class="mainPlayer">
@@ -130,13 +124,14 @@
               <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.podcast.isPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.podcast.isPlayerPlaying" color="light">
               <ion-icon slot="icon-only" name="play"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.podcast.isPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.podcast.isPlayerPlaying" color="light">
               <ion-icon slot="icon-only" name="pause"></ion-icon>
             </ion-button>
+            <ion-spinner name="lines-small" *ngIf="this.podcast.isInTransition"></ion-spinner>
 
             <ion-button fill="clear" (click)="next()" color="light">
               <ion-icon slot="icon-only" name="skip-forward"></ion-icon>

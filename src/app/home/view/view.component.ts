@@ -92,8 +92,20 @@ export class ViewComponent implements OnInit {
     event.stopPropagation();
   }
 
-  start(wordId, isToPlayAll) {
-    this.podcast.playGivenId(wordId, isToPlayAll)
+  togglePlaying(wordId, isToPlayAll?) {
+    if (this.podcast.isPlayerPlaying) {
+      if (this.podcast.currId == wordId) {
+        this.podcast.playPauseGivenId(wordId, false, isToPlayAll)
+      }
+      else {
+        // will play a given new word...
+        this.podcast.playPauseGivenId(wordId, true, isToPlayAll)
+      }
+    }
+    else {
+      // if player is not playing then play it
+      this.podcast.playPauseGivenId(wordId, true, isToPlayAll)
+    }
   }
 
 
