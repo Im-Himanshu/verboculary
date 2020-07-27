@@ -52,7 +52,6 @@ import { ShareComponent } from "./POCs/share/share.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
 //slides
-import { SlidesComponent } from "./POCs/slides/slides.component";
 import { AdMobComponent } from "./POCs/ad-mob/ad-mob.component";
 import { Media } from "@ionic-native/media/ngx";
 

@@ -3,6 +3,7 @@ import { DatabaseService } from '../services/data-base.service';
 import { wordToIdMap } from '../../wordToId';
 import { AppRateService } from '../services/app-rate.service';
 import { AdmobSerService } from '../services/admob-ser.service';
+import { PodcastService } from '../services/podcast.service'
 
 
 @Component({
@@ -35,7 +36,7 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(public db: DatabaseService, private apprate: AppRateService, private admob: AdmobSerService) {
+  constructor(public db: DatabaseService, private apprate: AppRateService, private admob: AdmobSerService, public podcast : PodcastService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     // console.log(this.allSelectedWordIDs);
     this.allWordsData = this.db.allWordsData;
@@ -93,23 +94,27 @@ export class ViewComponent implements OnInit {
   }
 
   start(wordId, playNext) {
-    if (this.db.player) {
-      this.db.tooglePlayer(!this.db.onPause)
+    if (this.podcast.player) {
+      this.podcast.tooglePlayer(!this.podcast.onPause)
     }
-    else if (!this.db.isPlaying) {
-      this.db.startPodcast(wordId, playNext);
+    else if (!this.podcast.isPlaying) {
+      this.podcast.startPodcast(wordId, playNext);
     }
     else {
-      this.db.pause()
+      this.podcast.pause()
     }
   }
 
   startP(wordId, playNext) {
-    if (!this.db.isPlaying) {
-      this.db.startPodcast(wordId, playNext)
+    if (!this.podcast.player) {
+      this.podcast.startPodcast(wordId, playNext);
+    } else if (this.podcast.currId == wordId){
+      this.podcast.tooglePlayer(!this.podcast.onPause);
+    } else if(this.podcast.currId != wordId){
+      this.podcast.player.stop();
+      this.podcast.startPodcast(wordId, playNext);
     } else {
-      this.db.closePodcast();
-      this.db.startPodcast(wordId, playNext);
+      this.podcast.closePodcast();
     }
   }
 }
