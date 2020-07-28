@@ -35,7 +35,9 @@
             <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
           </ion-buttons>
           <ion-buttons class="starbutton">
-            <ion-icon name="microphone" (click)="togglePlaying(selectedId, false)" *ngIf="allWordsData[selectedId][5]">
+            <ion-icon name="play" (click)="togglePlaying(selectedId, false)" *ngIf="allWordsData[selectedId][5] && (!podcast.isPlayerPlaying || (selectedId != podcast.currId))">
+            </ion-icon>
+            <ion-icon name="pause" (click)="togglePlaying(selectedId, true)" *ngIf="allWordsData[selectedId][5] && (podcast.isPlayerPlaying && (selectedId == podcast.currId))">
             </ion-icon>
             <ion-icon (click)="changeMark(0, selectedId)" *ngIf="crntWordDynamicData['isMarked']" name="star">
             </ion-icon>

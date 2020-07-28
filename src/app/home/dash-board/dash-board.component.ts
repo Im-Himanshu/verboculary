@@ -1,10 +1,12 @@
 import { Component, OnInit, Renderer2, ViewChildren, ElementRef, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular'
 import { DatabaseService } from "../services/data-base.service"
+import { SharingServiceService } from "../services/sharing-service.service"
 import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
 import { processedDataSharing } from '../interfaces/dropdown.interface';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { Screenshot } from '@ionic-native/screenshot/ngx'
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -31,7 +33,7 @@ export class DashBoardComponent implements OnInit {
   totalScreenHeight;
   heightFromTop
 
-  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform) {
+  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService) {
     this.totalScreenHeight = this.platform.height();
     console.log("screen Height :", this.totalScreenHeight);
     this.allSelectedSet = this.db.allSetinSelectedCategory;
@@ -57,6 +59,12 @@ export class DashBoardComponent implements OnInit {
     // let toMoveElement = document.getElementById("toMove");
     // toMoveElement.style.top = this.heightFromTop + "px"
 
+  }
+
+  onScreenshot(event){
+    this.screenshot.URI(80).then(res=> {
+      this.shareService.onShareImage(res.URI);
+    })
   }
 
   setChartResult() {

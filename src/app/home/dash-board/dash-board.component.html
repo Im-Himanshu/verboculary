@@ -1,5 +1,8 @@
 <div class="backgroundGraph">
   <div class="chartArea">
+    <div class="share-button-container">
+      <ion-icon name="share" (click)="onScreenshot($event)"></ion-icon>
+    </div>
     <app-progress-chart [chartLabelsAndData]="chartLabelsAndData">
 
     </app-progress-chart>
@@ -268,7 +271,7 @@
             <div class="sepratingLine">
               <svg-icon name='sepratingLine'></svg-icon>
             </div>
-            
+
 
 
           </div>

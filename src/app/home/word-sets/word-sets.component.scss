@@ -39,6 +39,24 @@ super-tabs-toolbar {
   background: var(--wordset-background);
 }
 
+
+.fab-button-top{
+  bottom: 30%;
+  margin-right: 2%;
+  ion-icon{
+    color: #ffa500 ;
+  }
+}
+
+.fab-button-bottom{
+  bottom: 20%;
+  margin-right: 2%;
+  ion-icon{
+    color: #ffa500 ;
+  }
+}
+
+
 ion-fab{
   bottom: 20%;
   margin-right: 2%;

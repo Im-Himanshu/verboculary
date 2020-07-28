@@ -39,7 +39,7 @@ export class ProgressChartComponent implements AfterViewInit {
   ];
   public lineChartColors;
   private screenshot: Screenshot;
-  constructor(private shareService: SharingServiceService) { }
+  constructor(private shareService: SharingServiceService ) { }
 
   onScreenshot(event){
     this.screenshot.URI(80).then(res=> {
