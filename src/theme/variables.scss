@@ -256,6 +256,7 @@
       --app-learnWordsChangeButton-background: var(
         --cardBackground
       );
+      --app-podcast-background : var(--app-mainToolbar-background);
       --app-practiseContent-background: #161625;
       --test-swipable-card-background: #1e1e30;
       --test-swipe-button: #1e1e30;
@@ -418,7 +419,7 @@
     /// relations are as follows
 
     //new colors -- to be added in dark variants
-    --app-homepage-graph: #452b4f;
+    --app-homepage-graph: #4c3156;
     --card-border-bottom: #fecc7b;
     --user-level: #F9FBFC;
     --dashboard-text-color: #452b4f;
@@ -456,6 +457,7 @@
     --dasboard-card-hover-background: #f9fbfc;
     --dashboard-parent-box-color: transparent;
     --toggle-button-color: white;
+    --app-podcast-background : #28192e;
 
     --dashboard-content: white;
     --home-name-text-color: white;

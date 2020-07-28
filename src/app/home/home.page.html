@@ -100,7 +100,7 @@
       <div class="mainPlayer">
         <div class="rangeSlider">
           <ion-range #range [(ngModel)]="this.podcast.progress" max="100" color="success" (touchend)="seek()"
-            (mouseup)="seek()"></ion-range>
+            style="height: 16px;" (mouseup)="seek()"></ion-range>
 
         </div>
         <div class="playerControl">
@@ -112,11 +112,13 @@
           </div>
           <div style="width: 88%;" class="wordDescription"
             (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.podcast.currId)">
-            <div style="font-size: 26px;">
+            <div style="font-size: 20px;">
               <span>{{ this.db.allWordsData[this.podcast.currId][1] | titlecase}}</span>
             </div>
             <div style="font-size: 12px;">
-              <div behavior="" direction="left">
+              <div behavior="" direction="left" style="overflow: hidden;
+              height: 12px;
+              text-overflow: ellipsis;">
                 {{ this.db.allWordsData[this.podcast.currId][2]  }}
               </div>
 

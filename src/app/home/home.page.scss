@@ -13,10 +13,11 @@
 .mainPlayer{
   display: flex;
   flex-direction: column;
+  background:var(--app-podcast-background)
 }
 .rangeSlider{
-  height: 39px;
-  margin-top: -20px;
+  // height: 39px;
+  // margin-top: -20px;
 
   // height: 13px;
 }
@@ -42,6 +43,8 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 3px;
+  margin-top: -6px;
 }
 .mainToolbar {
   --background: var(--app-mainToolbar-background);
