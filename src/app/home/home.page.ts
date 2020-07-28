@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
   @ViewChildren('searchBar', { read: ElementRef }) ionSearchBar: IonSearchbar;
 
   //@ViewChild("container", { static: false, read: ElementRef }) container: ElementRef;
-  appTitle: string = "Verboculary"
+  appTitle: string = "GRE Ninja"
   isProcessed: boolean = false;
 
 
