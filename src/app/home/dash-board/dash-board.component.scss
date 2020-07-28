@@ -578,8 +578,8 @@ mat-form-field {
   }
 
   .masterFilter{
-    height: 13%;
-      top: 30%;
+      height: 100px;
+      top: 32%;
       width: 100%;
       position: absolute;
       background-color: #ffebcd00 ;
@@ -609,7 +609,7 @@ mat-form-field {
       //background: element();
       margin-left: 7px;
       margin-right: 7px;
-      min-width: 160px;
+      min-width: 155px;
       display: -webkit-box;
       display: flex;
       -webkit-box-pack: start;
