@@ -4,6 +4,7 @@ import { wordToIdMap } from '../../wordToId';
 import { AppRateService } from '../services/app-rate.service';
 import { AdmobSerService } from '../services/admob-ser.service';
 import { PodcastService } from '../services/podcast.service'
+import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
 
 
 @Component({
@@ -26,6 +27,8 @@ export class ViewComponent implements OnInit {
   sortedAllSelectedWordIds: string[] = [];
   selectedSet;
   shuffleIt = true;
+  appNametoUINameMapping = new appNameToUINameMapping().appNametoUINamemapping;
+
 
   sortingTypes = [
     { value: 'shuffel', viewValue: 'Shuffeled' }, // default state

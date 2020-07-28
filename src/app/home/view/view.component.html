@@ -1,22 +1,25 @@
-<div class="parentDropDown">
+<div class="header">
+  <span class="selectedset">{{appNametoUINameMapping[db.selectedSet]}}</span>
+  <div class="parentDropDown">
 
 
-  <ion-button fill="clear" slot="end" (click)="togglePlaying(allSelectedWordIDs[0],true)">
-    <div class="iconsGroup" *ngIf="(this.podcast.isPlayerPlaying)">
-      <svg-icon name="play-circle"></svg-icon>
+    <ion-button fill="clear" slot="end" (click)="togglePlaying(allSelectedWordIDs[0],true)">
+      <div class="iconsGroup" *ngIf="(this.podcast.isPlayerPlaying)">
+        <svg-icon name="play-circle"></svg-icon>
+      </div>
+      <div class="iconsGroup" *ngIf="(!this.podcast.isPlayerPlaying)">
+        <svg-icon name="pause-circle"></svg-icon>
+      </div>
+
+    </ion-button>
+
+    <div class="iconDiv">
+      <div class="siconsGroup" *ngIf="!shuffleIt" value="shuffle" (click)="shuffleButton($event)">
+        <svg-icon name="alphabeticalsort" class="alphabetical"></svg-icon>
+      </div>
+      <ion-icon name="shuffle" *ngIf="shuffleIt" class="shuffled" value="alpha" (click)="shuffleButton($event)">
+      </ion-icon>
     </div>
-    <div class="iconsGroup" *ngIf="(!this.podcast.isPlayerPlaying)">
-      <svg-icon name="pause-circle"></svg-icon>
-    </div>
-
-  </ion-button>
-
-  <div class="iconDiv">
-    <div class="siconsGroup" *ngIf="!shuffleIt" value="shuffle" (click)="shuffleButton($event)">
-      <svg-icon name="alphabeticalsort" class="alphabetical"></svg-icon>
-    </div>
-    <ion-icon name="shuffle" *ngIf="shuffleIt" class="shuffled" value="alpha" (click)="shuffleButton($event)">
-    </ion-icon>
   </div>
 </div>
 <div>
