@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeRewardVideoConfig } from '@ionic-native/admob-free/ngx';
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeRewardVideoConfig,AdMobFreeInterstitialConfig } from '@ionic-native/admob-free/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,17 @@ export class AdmobSerService {
 
    showInterstitialAds(){
      if (this.AdStatus){
-      const bannerConfig: AdMobFreeBannerConfig = {
-        id:'ca-app-pub-4352525331879046/4981228398',
+      const interstitialConfig: AdMobFreeInterstitialConfig = {
+        id:'ca-app-pub-7438833190046160/2766623438',
         autoShow: true,
         isTesting: false,
 
       }
 
-      this.admob.interstitial.config(bannerConfig);
+      this.admob.interstitial.config(interstitialConfig);
       this.admob.interstitial.prepare().then(() =>
       {
         console.log("SUCCESSFUL");
-        this.admob.interstitial.show();
       }).then(e => console.log(e));
       }
     }
@@ -31,7 +30,7 @@ export class AdmobSerService {
   showAdMobFreeRewardVideoAds(){
     if (this.AdStatus){
       const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
-        id:'ca-app-pub-4352525331879046/6222157877',
+        id:'ca-app-pub-7438833190046160/3137609783',
         autoShow: true,
         isTesting: false,
       }
@@ -39,7 +38,7 @@ export class AdmobSerService {
       this.admob.rewardVideo.config(rewardVideoConfig);
       this.admob.rewardVideo.prepare().then(() =>
       {
-        this.admob.rewardVideo.show();
+        
       }).then(e => console.log(e));
     }
   }
@@ -48,7 +47,7 @@ export class AdmobSerService {
     if (this.AdStatus){
 
       const bannerConfig: AdMobFreeBannerConfig = {
-        id : 'ca-app-pub-4352525331879046/5172800085',
+        id : 'ca-app-pub-7438833190046160/3972604334',
         autoShow: true,
         isTesting: false,
         bannerAtTop: false,
@@ -57,7 +56,7 @@ export class AdmobSerService {
       this.admob.banner.config(bannerConfig);
       this.admob.banner.prepare().then(() => 
       {  
-        this.admob.banner.show();
+
       }).then(e => console.log(e));
     }
   }

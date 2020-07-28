@@ -51,13 +51,13 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.5",
     "com.darktalker.cordova.screenshot": "^0.1.6",
-    "cordova-admob-sdk": "^0.24.1",
+    "cordova-admob-sdk": "0.24.1",
     "cordova-android": "^8.1.0",
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-play-services-version-adapter": "^1.1.0",
-    "cordova-plugin-admob-free": "^0.27.0",
+    "cordova-plugin-admob-free": "0.27.0",
     "cordova-plugin-androidx": "^2.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.1",
     "cordova-plugin-apprate": "^1.5.0",
@@ -153,9 +153,6 @@
         "DEEPLINK_4_HOST": " ",
         "DEEPLINK_5_SCHEME": " ",
         "DEEPLINK_5_HOST": " "
-      },
-      "cordova-plugin-admob-free": {
-        "ADMOB_APP_ID": "ca-app-pub-4352525331879046~7060596827"
       },
       "cordova-plugin-media": {},
       "cordova-plugin-file-transfer": {},
@@ -258,7 +255,10 @@
         "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
       },
       "cordova-plugin-androidx": {},
-      "cordova-plugin-androidx-adapter": {}
+      "cordova-plugin-androidx-adapter": {},
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-7438833190046160~7459998173"
+      }
     },
     "platforms": [
       "browser",
