@@ -5,7 +5,7 @@
 
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title (click)="goToUrl('/mainmodule/base/dashboard') ">Verboculary</ion-title>
+      <ion-title (click)="goToUrl('/mainmodule/base/dashboard') " class="titleicon">GRE Ninja</ion-title>
 
       <img slot="secondary" src="assets/logo.png" height="58px" />
     </ion-toolbar>
@@ -59,6 +59,9 @@
             </ion-item> -->
     </ion-list>
   </ion-content>
+  <ion-footer class="copyright">
+    Copyright © GRE Ninja 2020 All Rights Reserved
+  </ion-footer>
 </ion-menu>
 
 <div class="ion-page" id="mainContent" main>
@@ -67,7 +70,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <!-- <img slot="start" src="assets/logo.png" height="63px" /> -->
+      <img slot="start" src="assets/logo.png" height="50px" />
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
       <ion-title (click)="goToUrl('/mainmodule/base/dashboard') " class="titleicon">{{appTitle}}</ion-title>
       <ion-buttons slot="secondary">
@@ -81,7 +84,7 @@
           (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())"
           style="--background: var(--search-bar-color); --color: var(--search-bar-text-color); --cancel-button-color: var(--search-bar-text-color); --clear-button-color: var(--search-bar-text-color);">
         </ion-searchbar>
-        <ion-icon *ngIf="!this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" (click)="searchIconClicked()"
+        <ion-icon *ngIf="((!this.db.isToShowSearchBar) && !db.isToRemoveCompleteSearch)" (click)="searchIconClicked()"
           slot="start" name="search"></ion-icon>
       </ion-buttons>
     </ion-toolbar>
@@ -97,7 +100,7 @@
       <div class="mainPlayer">
         <div class="rangeSlider">
           <ion-range #range [(ngModel)]="this.podcast.progress" max="100" color="success" (touchend)="seek()"
-            (mouseup)="seek()"></ion-range>
+            style="height: 16px;" (mouseup)="seek()"></ion-range>
 
         </div>
         <div class="playerControl">
@@ -109,11 +112,13 @@
           </div>
           <div style="width: 88%;" class="wordDescription"
             (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.podcast.currId)">
-            <div style="font-size: 26px;">
+            <div style="font-size: 20px;">
               <span>{{ this.db.allWordsData[this.podcast.currId][1] | titlecase}}</span>
             </div>
             <div style="font-size: 12px;">
-              <div behavior="" direction="left">
+              <div behavior="" direction="left" style="overflow: hidden;
+              height: 12px;
+              text-overflow: ellipsis;">
                 {{ this.db.allWordsData[this.podcast.currId][2]  }}
               </div>
 
@@ -124,11 +129,13 @@
               <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.podcast.isPlayerPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(false)"
+              *ngIf="!this.podcast.isPlayerPlaying && !this.podcast.isInTransition" color="light">
               <ion-icon slot="icon-only" name="play"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.podcast.isPlayerPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(true)"
+              *ngIf="this.podcast.isPlayerPlaying && !this.podcast.isInTransition" color="light">
               <ion-icon slot="icon-only" name="pause"></ion-icon>
             </ion-button>
             <ion-spinner name="lines-small" *ngIf="this.podcast.isInTransition"></ion-spinner>
