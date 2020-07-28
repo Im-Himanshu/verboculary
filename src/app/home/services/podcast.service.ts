@@ -2,34 +2,52 @@ import { Injectable } from '@angular/core';
 import { Howl } from 'howler';
 import { MusicControls } from '@ionic-native/music-controls/ngx';
 import { DatabaseService } from './data-base.service';
-
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class PodcastService {
 
-  currId = 5;
+  currId;
   player: Howl = null;
   isPlayerActive: boolean = false; // is playeractive means whether to show the below popup or not 
   isPlayerPlaying = false;// means whether to show the below 
   progress = 0;
-  continousPlayer: boolean = false;
-  isInTransition = true;
+  iscontinousPlayer: boolean = false;
+  isInTransition = false;
+  isToStopLooping = false;
 
-  constructor(public musicControls: MusicControls, private db: DatabaseService) {
+  constructor(public musicControls: MusicControls, private db: DatabaseService, public toastController: ToastController) {
+    this.currId = this.db.allSelectedWordIdsFiltered[0];
     this.startNewPlayer();
   }
 
-  playPauseGivenId(wordId, isToPlay, isToPlayAll?) {
 
+
+  playPauseGivenId(wordId, isToPlay, isToPlayAll?) {
     // here goes all the logic of what need to be done and when it needs to be done
     if (!isToPlay) { // not to play means to pause
       this.pause();
       return;
     }
+    if (!this.db.allWordsData[wordId][5] && isToPlayAll) {
+      this.iscontinousPlayer = isToPlayAll;
+      this.currId = wordId; // to make next run better
+      this.next(); // if play all then 0th index is passed and the next availaible index is played
+      return;
+    }
+    if (isToPlay && wordId == this.currId) {
+      // desire state already running
+      if (!this.isPlayerPlaying) {
+        this.play();
+      }
+      return;
+    }
+
     this.currId = wordId;
-    this.continousPlayer = isToPlayAll;
+    this.iscontinousPlayer = isToPlayAll;
     this.startNewPlayer();
+    this.isInTransition = true
     this.play();
     this.createNotification();
 
@@ -40,27 +58,55 @@ export class PodcastService {
 
 
   prev() {
-    let index = this.db.allSelectedWordIds.indexOf(this.currId);
-    if (index > 0) {
-      this.playPauseGivenId(this.db.allSelectedWordIds[index - 1], true);
-    } else {
-      this.playPauseGivenId(this.db.allSelectedWordIds[0], true);
+    let index = this.db.allSelectedWordIdsFiltered.indexOf(this.currId);
+    index = index - 1;
+    while (index > 0) {
+      if (!this.db.allWordsData[index][5]) {
+        index--; // if the podcast doesn't exist then move forward
+      }
+      else {
+        this.playPauseGivenId(this.db.allSelectedWordIdsFiltered[index], true, this.iscontinousPlayer);
+        return;
+      }
     }
+    console.log("No previous word was found, returning")
+    this.presentToast("No Podcast found!!")
+
+
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   next() {
-    // prone to boundary cases
-    let index = this.db.allSelectedWordIds.indexOf(this.currId);
+    let index = this.db.allSelectedWordIdsFiltered.indexOf(this.currId);
     let i = index + 1;
-    while (i < this.db.allSelectedWordIds.length) {
+    while (i < this.db.allSelectedWordIdsFiltered.length) {
       if (!this.db.allWordsData[i][5]) {
         i++; // if the podcast doesn't exist then move forward
       }
       else {
-        this.playPauseGivenId(this.db.allSelectedWordIds[i], true);
-        break;
+        //this.pause();
+        this.playPauseGivenId(this.db.allSelectedWordIdsFiltered[i], true, this.iscontinousPlayer);
+        this.isToStopLooping = false;
+        //break;
+        return;
       }
     }
+    if (this.isToStopLooping) {
+      this.presentToast("No Podcast found!!")
+      this.isToStopLooping = false;
+      return;
+      // nothing was found nothing will be played
+    }
+    this.currId = -1; // select the first one
+    this.isToStopLooping = true; // will stop playing
+    this.next(); // this will retart the thing // but it will be prone to keep looping
   }
 
 
@@ -70,12 +116,12 @@ export class PodcastService {
     this.isPlayerActive = true;
     this.musicControls.updateIsPlaying(true);
     this.musicControls.updateDismissable(false);
-    this.isInTransition = true
     this.player.play();
   }
 
   pause() {
     this.isPlayerPlaying = false;
+    this.isInTransition = false; // for the cases when it was marked paused before it start
     this.musicControls.updateIsPlaying(false);
     this.musicControls.updateDismissable(true);
     this.player.pause();
@@ -84,10 +130,12 @@ export class PodcastService {
 
   closePodcast() {
     this.player.stop();
-    this.player.unload()
+    this.player.unload();
+    this.currId = 0; // so that it refreshes everytime 
     this.musicControls.destroy();
     this.isPlayerActive = false;
     this.isPlayerPlaying = false;
+    this.isInTransition = false;
   }
 
 
@@ -109,7 +157,7 @@ export class PodcastService {
       onend: () => {
         // this will get triggered when the current podcast ends
         console.log('onEnd');
-        if (this.continousPlayer) {
+        if (this.iscontinousPlayer) {
           this.next();
         }
       }
@@ -148,7 +196,7 @@ export class PodcastService {
 
 
   createNotification() {
-    this.musicControls.destroy();
+    //this.musicControls.destroy();
     this.musicControls.create({
       track: this.db.allWordsData[this.currId][1],
       artist: this.db.allWordsData[this.currId][2],
@@ -183,36 +231,10 @@ export class PodcastService {
           this.prev();
           break;
         case 'music-controls-pause':
-          if (this.isPlayerActive) {
-            this.tooglePlayer();
-            this.isPlayerPlaying = true;
-            this.musicControls.updateIsPlaying(false);
-            this.musicControls.updateDismissable(true);
-            console.log("music pause");
-          }
-          else {
-            this.tooglePlayer()
-            this.isPlayerPlaying = false;
-            this.musicControls.updateIsPlaying(true);
-            this.musicControls.updateDismissable(false);
-          }
+          this.tooglePlayer();
           break;
         case 'music-controls-play':
-          // Do something
-          if (!this.isPlayerActive) {
-            console.log('music play');
-            this.tooglePlayer();
-            this.isPlayerPlaying = false;
-            this.musicControls.updateIsPlaying(true);
-            this.musicControls.updateDismissable(false);
-          }
-          else {
-            console.log("music pause");
-            this.tooglePlayer();
-            this.isPlayerPlaying = true;
-            this.musicControls.updateIsPlaying(false);
-            this.musicControls.updateDismissable(true);
-          }
+          this.tooglePlayer();
           break;
         case 'music-controls-destroy':
           // Do something

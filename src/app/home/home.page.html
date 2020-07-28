@@ -127,11 +127,13 @@
               <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(false)" *ngIf="!this.podcast.isPlayerPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(false)"
+              *ngIf="!this.podcast.isPlayerPlaying && !this.podcast.isInTransition" color="light">
               <ion-icon slot="icon-only" name="play"></ion-icon>
             </ion-button>
 
-            <ion-button fill="clear" (click)="tooglePlayer(true)" *ngIf="this.podcast.isPlayerPlaying" color="light">
+            <ion-button fill="clear" (click)="tooglePlayer(true)"
+              *ngIf="this.podcast.isPlayerPlaying && !this.podcast.isInTransition" color="light">
               <ion-icon slot="icon-only" name="pause"></ion-icon>
             </ion-button>
             <ion-spinner name="lines-small" *ngIf="this.podcast.isInTransition"></ion-spinner>

@@ -98,7 +98,7 @@ export class ViewComponent implements OnInit {
   togglePlaying(wordId, isToPlayAll?) {
     if (this.podcast.isPlayerPlaying) {
       if (this.podcast.currId == wordId) {
-        this.podcast.playPauseGivenId(wordId, false, isToPlayAll)
+        this.podcast.playPauseGivenId(wordId, false, isToPlayAll) // pause the current id
       }
       else {
         // will play a given new word...
