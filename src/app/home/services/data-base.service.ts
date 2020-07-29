@@ -246,6 +246,7 @@ export class DatabaseService {
             wordData.correctCount = 0;
             wordData.learnedDate = null;
             wordData.viewedDate = null;
+            wordData.notes = null;
           }
         }
         this.setAllWordsStateinStorage(allWords);

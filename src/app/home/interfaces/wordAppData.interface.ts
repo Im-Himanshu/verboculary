@@ -6,7 +6,8 @@ export interface wordAppData {
     isLearned: boolean;
     learnedDate: String;
     viewedDate: String;
-    correctCount: number
+    correctCount: number;
+    notes: string;
 }
 
 export class appNameToUINameMapping {

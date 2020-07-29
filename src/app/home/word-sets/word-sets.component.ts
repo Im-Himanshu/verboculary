@@ -27,7 +27,7 @@ export class WordSetsComponent implements OnInit {
   selectedFilter = 'all';
   FabButtonVisible: boolean = true;
 
-  constructor(private route: ActivatedRoute, private db: DatabaseService,
+  constructor(private route: ActivatedRoute, public db: DatabaseService,
     private router: Router) {
 
     this.selectedFilter = this.db.selectedFilter;
