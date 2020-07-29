@@ -38,4 +38,23 @@ export class ApprateService {
       }).then(res => res.present());
     }
   }
+
+  show(){
+    this.alertController.create({
+      header: "Enjoying Using Verboculary",
+      subHeader: "Please rate us",
+      buttons: [
+        {
+          text: 'Later',
+          role: 'cancel',
+        },
+        {
+          text: 'OK,Sure',
+          handler: () => {
+            window.location.href = "market://details?id=com.GRE.verboculary";
+          }
+        }
+      ],
+    }).then(res => res.present());
+  }
 }
