@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { dropdownData, processedDataSharing } from './interfaces/dropdown.interface';
+import { Component, OnInit, ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { processedDataSharing } from './interfaces/dropdown.interface';
 import { DatabaseService } from './services/data-base.service'
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonRange, IonSearchbar } from '@ionic/angular';
 import { AboutDeveloperComponent } from './about-developer/about-developer.component';
-import {FilterPopOverComponent} from './filter-pop-over/filter-pop-over.component'
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import {HowToUseComponent} from './how-to-use/how-to-use.component'
-import {appSessionData} from './appSessionData.interface'
-import {ThemeChangeService} from './services/theme-change.service'
+import { HowToUseComponent } from './how-to-use/how-to-use.component'
+import { ThemeChangeService } from './services/theme-change.service'
+import { SharingServiceService } from './services/sharing-service.service';
+import { Router } from '@angular/router';
+import { AppRateService } from './services/app-rate.service';
 
+import { AdmobSerService } from './services/admob-ser.service';
+import { Storage } from '@ionic/storage';
+import { PodcastService } from './services/podcast.service';
 
 @Component({
   selector: 'app-home',
@@ -17,235 +21,73 @@ import {ThemeChangeService} from './services/theme-change.service'
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChildren('searchBar', { read: ElementRef }) ionSearchBar: IonSearchbar;
 
-  appTitle : string = "Verboculary"
-  default_category: number = 0;
-  default_set: number = 0;
+  //@ViewChild("container", { static: false, read: ElementRef }) container: ElementRef;
+  appTitle: string = "GRE Ninja"
   isProcessed: boolean = false;
-  isMultiple: boolean = true;
-  totalWordsCount : number = 0;
-  titleThreshold = 2;
-  
-  
-  selectedCategory: string;
-  selectedSet = [];
-  selectedFilter:string;
-  selectedSorting:String = 'shuffle';
-  selectedTheme : string = 'Default'
+
+
+  selectedTheme: string = 'Default'
   //selectedWords: any; not maintaining here as lots of hassle in updating it
   allSetData: processedDataSharing;
-  allCategoryType: any[];
   allSetOfcategory: any;
-  allWordOfSets: any;
-  cards;
-  willComeAgain : boolean = false;
-  appSessionData : appSessionData;
-  isDarkMode : boolean = false;
+  allWordsOfSets;
+  isDarkMode: boolean = false;
+  chartLabelsAndData = {};
+  modeValue: boolean = true;
+  themeValue: 'Light Theme' | 'Dark Theme' = 'Light Theme';
 
+  prevDeltaX = 0;
+  prevDeltaY = 0;
 
-  constructor(private db: DatabaseService, public modalController: ModalController,public toastController: ToastController, public alertController : AlertController, private themeService : ThemeChangeService) {
-    this.cards = [];
+  @ViewChild('range', { static: false }) range: IonRange;
+
+  constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage, public podcast: PodcastService) {
+    this.allSetData = this.db.allSetData;
+    this.allWordsOfSets = this.allSetData.allWordOfSets;
+    this.showFullscreenAdd();
 
   }
   ngOnInit() {
-    // wait for the service to complete the request and then process t
-    this.db.fetchingSetDataCompleted.asObservable().subscribe(data => { 
-      // this is behaviour subject so if the event is already publish will send the previous data
-      // otherwise wiat for the new data to be send which will definetly occur at some point of time
-      if (data) {
-        this.saveData()
-      }
-    });
-    if(this.db.allSetData){ // in case the even in already published and has set the data
-      this.saveData();
-    }
-    this.db.fetchingWordDataCompleted.asObservable().subscribe(data=>{
-      this.sortSelectedIds();
-    })
-
-  }
-
-  fetchDataFromAPI(){
-
-  }
-
-  saveData() {
-    ///waiting for the Database service object ot get completed 
-    this.allSetData = this.db.allSetData; /// not fetch directly to avoid creation of multiple object in the app of the same things 
-    this.allCategoryType = this.allSetData.allCategoryType;
-    this.allSetOfcategory = this.allSetData.allSetOfcategory;
-    this.allWordOfSets = this.allSetData.allWordOfSets;
-    this.setPreviousSessionData();
-     // must be set befoere this as event is trigeered only then
-    //this.allCategories = new categories()
-    //this.selectedCategory = this.allCategoryType[this.default_category]; // default is set
-    this.db.selectedCategory = this.selectedCategory;
-    //this.selectedSet = []
-    //this.selectedSet.push(this.allSetOfcategory[this.selectedCategory][this.default_set]); // changing of option will happen dynamically through the html
-    this.setChanged({});    
-    this.isProcessed = true;
-  }
-
-  setPreviousSessionData(){
-    this.appSessionData =  this.db.appSessionData
-    this.selectedCategory = this.appSessionData.selectedCategory;
-    this.selectedSet = this.appSessionData.selectedSet;
-    this.selectedFilter = this.appSessionData.selectedFilter;
-    this.selectedSorting = this.appSessionData.selectedSorting;
-
-  }
-
-// these will trickle down from 1-5 like if starts from 2 will flow till 5
- //1
-  categoryChanged($event) {
-    this.selectedSet = [this.allSetOfcategory[this.selectedCategory][this.default_set]] // this will trigger the setChnaged Event;
-    this.db.selectedCategory = this.selectedCategory;
-    //this.selectedWords = this.allWordOfSets[this.selectedSet];
-  }
-
-  //2
-  setChanged($event) {
-    //this.selectedWords = this.allWordOfSets[this.selectedSet];
-    if( !this.selectedSet || this.selectedSet.length == 0){
-      this.selectedSet = [this.allSetOfcategory[this.selectedCategory][this.default_set]]
-      return; // will come again due to chnage of selectedSet event 
-    }
-
-    let toProcessList = this.selectedSet;
-    if(this.selectedSet[0] === 'All' ) {
-      toProcessList  = this.allSetOfcategory[this.selectedCategory]; // to process all of it.
-      if(this.selectedSet.length > 1){
-        this.selectedSet = this.selectedSet.slice(0,1);
-        return; // changes so the loop will be triggreed again
-      }
-    }
-
-    this.db.allSelectedWordIDs = [];
-    for (let oneSet of toProcessList) {
-      this.db.allSelectedWordIDs = this.db.allSelectedWordIDs.concat(this.allSetData.allWordOfSets[oneSet]); // making a master list of all the words
-    }
-    this.filterSelectedIDs();    
-    // this.db.wordListChangeEvent.next(this.selectedSet); // this event will publish the list of words selected 
-  }
-
-  //3
-  filterSelectedIDs(){  
-    if(this.selectedFilter === 'starred'){
-      this.db.filteredSelectedWordIds = this.filterWords(1 , this.db.allSelectedWordIDs); // marked word
-    }
-    else if(this.selectedFilter == 'Non-Starred'){
-      this.db.filteredSelectedWordIds = this.filterWords(0 , this.db.allSelectedWordIDs); // non-marked word
-      
-    }
-    else{      
-    this.db.filteredSelectedWordIds = this.db.allSelectedWordIDs;
-    this.selectedFilter = 'all'      
-    }
-    this.sortSelectedIds();    
-    this.db.wordListChangeEvent.next(this.selectedSet);
-    this.totalWordsCount = this.db.filteredSelectedWordIds.length;
-    return;
-    
-  }
-
-  //4 
-  sortSelectedIds(){
-    if(!this.db.filteredSelectedWordIds) return;
-    if(this.selectedSorting === 'alphabetically'){
-      this.db.sortIdsAlphabetically(this.db.filteredSelectedWordIds);
-    }
-    else {
-      this.db.shuffle(this.db.filteredSelectedWordIds); // will shuffle the list IDs randomly
-    }
-    this.updateSessionData();
-    // no need of event because basic objects is remaining same
-  }
-
-//5
-  updateSessionData(){
-    this.db.appSessionData.selectedCategory = this.selectedCategory;
-    this.db.appSessionData.selectedSet = this.selectedSet;
-    this.db.appSessionData.selectedFilter = this.selectedFilter;
-    this.db.appSessionData.selectedSorting = this.selectedSorting;
-    this.db.setSessionDatainStorage();
+    // this.themeService.setMode(this.themeService.mode);
+    this.themeService.setThemeValue(this.themeService.mode);
   }
 
 
-  filterWords(type : number, wordIDs : string[] ){
-    let dynamicData = this.db.wordDynamicData;
-    let filteredIds = [];
-
-    for(let wordID of wordIDs){
-      try {
-        let isWordMarked = dynamicData[Number(wordID)]['isMarked'];
-      if(type ==1 && isWordMarked){
-        filteredIds.push(wordID);
-      }
-      if(type==0 && !isWordMarked){
-        filteredIds.push(wordID);
-      }
-        
-      } catch (error) {
-        console.log(JSON.stringify(error)); // error occured still progressing for next loop
-        
-      }
-    }
-    return filteredIds;
+  goToUrl(url) {
+    this.router.navigate([url]);
 
   }
 
-  filterChanged($event){
-    this.filterSelectedIDs();
-  }
-  sortingChanged($event){
-    this.sortSelectedIds();
+  searchIconClicked() {
+    //this.ionSearchBar.setFocus();
+    this.goToUrl('/mainmodule/base/wordSets/allWords')
+    this.db.isToShowSearchBar = true;
+    let searchBar = document.getElementById("searchBar")
+    searchBar.focus();
+    //this.ionSearchBar.setFocus();
+    //this.db.allSelectedWordIdsFiltered.splice(0, this.db.allSelectedWordIdsFiltered.length); // deleting all the
+
+
   }
 
 
-  removeSet(oneSet){
-    // logic here is to remove the last set and keep all as the final case
-    let deleteCount = 1;    
-    let startIndex = this.selectedSet.indexOf(oneSet);
-    if(this.selectedSet.length <= 1){
-      if(this.selectedSet[0] && this.selectedSet[0] !== 'All'){
-        this.selectedSet = ['All']; // if the last element is not all then show all;        
-        this.presentToast('Last Filter removed, All words are selected!!');
-        return;
-      }
-      this.presentToast('Select atleast one Set From SideMenu!!');
-      return;
-    }    
-    if(oneSet == 'tails'){
-      startIndex = this.titleThreshold;
-      deleteCount = this.selectedSet.length-this.titleThreshold;
-  
-    }
-    let deletedSet ;
-    if(startIndex != -1){      
-      deletedSet = this.selectedSet.splice(startIndex,deleteCount);
-      }
-      
-    this.presentToast('Removed ' + deleteCount + " Selected Sets : " + deletedSet)    
-    this.selectedSet = [].concat(this.selectedSet); // to trigger the setChnaged Event 
-  }
 
-  removeFilter(){
-    this.presentToast('Filtered Removed: '+this.selectedFilter )   
-    this.selectedFilter = 'all';
-  }
+
 
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Warning! Deleting all App Data?',
       message: 'Are You sure you want to reset all the app data? this will delete all the progress.',
-      cssClass : 'ionicAlert',
+      cssClass: 'ionicAlert',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           handler: (blah) => {
-            this.db.presentToast("Deletion Cancelled!!");            
+            this.db.presentToast("Deletion Cancelled!!");
           }
         }, {
           text: 'Reset',
@@ -271,7 +113,7 @@ export class HomePage implements OnInit {
     });
 
     await alert.present();
-  }  
+  }
   async presentRatingAlert() {
     const alert = await this.alertController.create({
       header: 'Rate Us',
@@ -299,12 +141,12 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  changeAppTheme(){
+  changeAppTheme() {
     this.themeService.changeTheme(this.selectedTheme);
 
   }
 
-  goToRatingSite(){
+  goToRatingSite() {
   }
   async presentModal() {
     const modal = await this.modalController.create({
@@ -329,8 +171,14 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-  resetProgress(){
+  resetProgress() {
 
+  }
+
+
+
+  toggleMode(e) {
+    this.themeService.toggleMode();
   }
 
 
@@ -345,4 +193,43 @@ export class HomePage implements OnInit {
   compareWith_category = this.compareWithFn_category;
   compareWith_set = this.compareWithFn_set;
 
+
+
+  prev() {
+    this.podcast.prev();
+  }
+
+  next() {
+    this.podcast.next();
+  }
+
+  tooglePlayer(newState) {
+    this.podcast.tooglePlayer();
+  }
+
+  seek() {
+    this.podcast.seek(this.range);
+  }
+
+  close() {
+    this.podcast.closePodcast();
+  }
+
+  rateapp() {
+    this.appRateService.triggerRateApp();
+  }
+
+  showFullscreenAdd() {
+    this.storage.get("loginCount").then(data => {
+      let x = data % 5;
+      if (x == 4) { // for every 5 th login
+        this.admob.showInterstitialAds();
+        console.log("Add shown");
+      }
+    })
+  }
+
+  rate() {
+    window.location.href = "market://details?id=com.GRE.verboculary";
+  }
 }

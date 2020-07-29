@@ -1,0 +1,131 @@
+.wordsetmain {
+  height: 100%;
+  width: 100%;
+}
+.backgroundGraph{
+  background-color: var(--app-homepage-graph);
+  height: 40vh;
+}
+
+.selectedBadge{
+  position: absolute;
+  top: -8px;
+  right: -28px;
+  /* overflow: visible; */
+  --background: #f0f8ff00;
+}
+
+.chartArea{
+  position: absolute;
+  top: 6%;
+  left: -3px;
+  width: 101%;
+  height: 93%;
+}
+super-tabs-toolbar {
+  background-color: var(--cardBackground);
+}
+:host {
+  --st-indicator-color: #ffa500;
+  --st-indicator-height: 3px;
+}
+
+.superTabs{
+  max-width : 1000px;
+}
+
+.superTabContainer{
+  max-width: 1000px !important;
+  background: var(--wordset-background);
+}
+
+
+.fab-button-top{
+  bottom: 20%;
+  margin-right: 2%;
+  ion-icon{
+    color: #ffa500 ;
+  }
+}
+
+.fab-button-bottom{
+  bottom: 10%;
+  margin-right: 2%;
+  ion-icon{
+    color: #ffa500 ;
+  }
+}
+
+
+ion-fab{
+  bottom: 20%;
+  margin-right: 2%;
+  ion-icon{
+    color: #ffa500 ;
+  }
+}
+
+ion-fab-button[data-desc] {
+  position: relative;
+}
+
+ion-fab-button[data-desc]::after {
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  right: 55px;
+  bottom: 4px;
+  background-color: #ffa500;
+  padding: 9px;
+  border-radius: 8px;
+  color: black;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+}
+
+.fab-button{
+  --background: var(--fab-button-background);
+}
+
+.filtericon {
+  width: 49%;
+  height: 41%;
+  margin: 0.2em 1.75em 0 0;
+  position: relative;
+}
+
+
+.bottomSheet{
+  position: fixed;
+  width: 100%;
+  height: auto;
+  bottom: -1000px;
+  border-radius: 15px 15px 0 0;
+  z-index: 20;
+  background-color: white;
+  transition: 0.3s;
+  transform: translate3d(0,0,0);
+  background-color: var(--app-homepage-graph);
+
+  .swipe-handler::after{
+      content: '';
+      width: 36px;
+      height: 6px;
+      position: absolute;
+      left: calc(50% + -18px);
+      top: -3%;
+      border-radius: 3px;
+      background: lightgray;
+
+  }
+}
+
+.bg{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  z-index: 10;
+  transition: 0.3s;
+}

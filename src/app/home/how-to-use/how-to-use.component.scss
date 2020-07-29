@@ -1,9 +1,9 @@
 .modalContent{
-    --background: var(--app-modalContent-background);
-    --color : var(--app-modalContent-color)
+    --background: var(--learn-background-color);
+    --color : var(--app-sideMenu-text-color)
 }
 
 .modalToolbar{
-    --background: var(--app-modalToolbar-background);
+    --background: var(--app-mainToolbar-background);
     --color: var(--app-modalToolbar-color);
   }

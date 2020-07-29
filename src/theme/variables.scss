@@ -1,328 +1,511 @@
 :root {
   :root {
     --ion-color-primary: #3880ff;
-    --ion-color-primary-rgb: 56,128,255;
+    --ion-color-primary-rgb: 56, 128, 255;
     --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255,255,255;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
     --ion-color-primary-shade: #3171e0;
     --ion-color-primary-tint: #4c8dff;
-  
     --ion-color-secondary: #0cd1e8;
-    --ion-color-secondary-rgb: 12,209,232;
+    --ion-color-secondary-rgb: 12, 209, 232;
     --ion-color-secondary-contrast: #ffffff;
-    --ion-color-secondary-contrast-rgb: 255,255,255;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
     --ion-color-secondary-shade: #0bb8cc;
     --ion-color-secondary-tint: #24d6ea;
-  
+
     --ion-color-tertiary: #7044ff;
-    --ion-color-tertiary-rgb: 112,68,255;
+    --ion-color-tertiary-rgb: 112, 68, 255;
     --ion-color-tertiary-contrast: #ffffff;
-    --ion-color-tertiary-contrast-rgb: 255,255,255;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
     --ion-color-tertiary-shade: #633ce0;
     --ion-color-tertiary-tint: #7e57ff;
-  
+
     --ion-color-success: #10dc60;
-    --ion-color-success-rgb: 16,220,96;
+    --ion-color-success-rgb: 16, 220, 96;
     --ion-color-success-contrast: #ffffff;
-    --ion-color-success-contrast-rgb: 255,255,255;
+    --ion-color-success-contrast-rgb: 255, 255, 255;
     --ion-color-success-shade: #0ec254;
     --ion-color-success-tint: #28e070;
-  
+
     --ion-color-warning: #ffce00;
-    --ion-color-warning-rgb: 255,206,0;
+    --ion-color-warning-rgb: 255, 206, 0;
     --ion-color-warning-contrast: #ffffff;
-    --ion-color-warning-contrast-rgb: 255,255,255;
+    --ion-color-warning-contrast-rgb: 255, 255, 255;
     --ion-color-warning-shade: #e0b500;
     --ion-color-warning-tint: #ffd31a;
-  
+
     --ion-color-danger: #f04141;
-    --ion-color-danger-rgb: 245,61,61;
+    --ion-color-danger-rgb: 245, 61, 61;
     --ion-color-danger-contrast: #ffffff;
-    --ion-color-danger-contrast-rgb: 255,255,255;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
     --ion-color-danger-shade: #d33939;
     --ion-color-danger-tint: #f25454;
-  
+
     --ion-color-dark: #222428;
-    --ion-color-dark-rgb: 34,34,34;
+    --ion-color-dark-rgb: 34, 34, 34;
     --ion-color-dark-contrast: #ffffff;
-    --ion-color-dark-contrast-rgb: 255,255,255;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
     --ion-color-dark-shade: #1e2023;
     --ion-color-dark-tint: #383a3e;
-  
+
     --ion-color-medium: #989aa2;
-    --ion-color-medium-rgb: 152,154,162;
+    --ion-color-medium-rgb: 152, 154, 162;
     --ion-color-medium-contrast: #ffffff;
-    --ion-color-medium-contrast-rgb: 255,255,255;
+    --ion-color-medium-contrast-rgb: 255, 255, 255;
     --ion-color-medium-shade: #86888f;
     --ion-color-medium-tint: #a2a4ab;
-  
+
     --ion-color-light: #f4f5f8;
-    --ion-color-light-rgb: 244,244,244;
+    --ion-color-light-rgb: 244, 244, 244;
     --ion-color-light-contrast: #000000;
-    --ion-color-light-contrast-rgb: 0,0,0;
+    --ion-color-light-contrast-rgb: 0, 0, 0;
     --ion-color-light-shade: #d7d8da;
     --ion-color-light-tint: #f5f6f9;
 
-      // have to be calculated 
+    // have to be calculated
 
-  //Note line color in between item of list should match the background it give the feel of space rather than line
-  // in this list some portion of the background should be visible.
-  --app-mainToolbar-background :var(--ion-color-primary-tint);
-  --app-mainToolbar-color : var(--ion-color-primary-contrast);
-  --app-navigatonMenubar-background :var(--primary);  // this is the main focus so it is to be of darker than maintoolbar
-  --app-navigatonMenubar-color : var(--primary-contrast); // smaller and slightly darker with better contrast with background this has to be perfect as this is the main thing 
-  --app-navigatonMenubarSelectedTabs-color : var(--ion-color-dark:);
-  --appBackground :var(--ion-color-light);  // have to be lighter and card will be darker
-  --appTextColor : var(--ion-color-light-contrast);  // color on the lighter background have to be opposite of --appBackground
-  --cardBackground: var(--ion-color-secondary-contrast);
-  --cardTextColor : var(--ion-color-light-contrast);
-/// derived -- defining relations
+    //Note line color in between item of list should match the background it give the feel of space rather than line
+    // in this list some portion of the background should be visible.
+    --app-mainToolbar-background: var(--ion-color-primary-tint);
+    --app-mainToolbar-color: var(--ion-color-primary-contrast);
+    --app-navigatonMenubar-background: var(
+      --primary
+    ); // this is the main focus so it is to be of darker than maintoolbar
+    --app-navigatonMenubar-color: var(
+      --primary-contrast
+    ); // smaller and slightly darker with better contrast with background this has to be perfect as this is the main thing
+    --app-navigatonMenubarSelectedTabs-color: var(--ion-color-dark: );
+    --appBackground: var(
+      --ion-color-light
+    ); // have to be lighter and card will be darker
+    --appTextColor: var(
+      --ion-color-light-contrast
+    ); // color on the lighter background have to be opposite of --appBackground
+    --cardBackground: var(--ion-color-secondary-contrast);
+    --cardTextColor: var(--ion-color-light-contrast);
+    /// derived -- defining relations
+
+    --app-selectedfilterToolbar-background: var(--appBackground);
+    --app-sideMenuHeader-background: var(
+      --app-navigatonMenubar-background
+    ); // have to be same to the main header
+    --app-sideMenuHeader-color: var(
+      --app-navigatonMenubar-color
+    ); // have to be same as of the main color
+    // app background color
+    --app-sideMenuContent-background: var(--appBackground);
+    --app-sideMenuContent-color: var(--appTextColor);
+    --app-sideMenuFilterHeader-background: var(
+      --cardBackground
+    ); // like a card in the menu
+    --app-sideMenuFilterBody-background: var(--appBackground);
+    --app-sideMenuFilterHeader-color: var(--app-mainToolbar-color);
+
+    --app-alWordsContent-background: var(
+      --appBackground
+    ); // this has no background this color is used for foreground element
+    --app-alWordsContent-color: var(--appTextColor);
+    --app-alWordsborder-color: var(
+      --app-alWordsContent-background
+    ); // have to be same to give the inteline space feel and blend with background
+
+    --app-learnWordsContent-background: var(--appBackground);
+    --app-learnWordsContent-color: var(--cardTextColor);
+    --app-learnWordsCard-background: var(--cardBackground);
+    --app-learnWordTogglehandle-background: var(--app-navigatonMenubar-color);
+    --app-learnWordToggleChecked-background: var(
+      --app-navigatonMenubar-background
+    );
+    --app-learnWordsChangeButton-background: var(
+      --app-navigatonMenubar-background
+    );
+    --app-learnWordsChangeButton-color: var(--app-navigatonMenubar-color);
+
+    --app-practiseContent-background: var(--appBackground);
+    --app-practiseProgressBarbuffer-background: var(--appTextColor);
+    --app-practiseCard-background: var(--cardBackground);
+    --app-practiseCard-color: var(--cardTextColor);
+
+    --app-modalToolbar-background: var(
+      --app-navigatonMenubar-background
+    ); // have to be same as mainToolbar
+    --app-modalToolbar-color: var(
+      --app-navigatonMenubar-color
+    ); // have to be same as main toolbar
+    --app-modalContent-color: var(--appBackground);
+    --app-modalContent-background: var(--appTextColor);
+
+    --app-alert-background: var(--cardBackground);
+    --app-alerttitle-color: var(--cardTextColor); // onl;y this for rest 2 below
+    --app-alertmessage-color: var(--app-alerttitle-color);
+    --app-alertButton-color: var(--app-alerttitle-color);
+
+    --app-popover-background: var(--cardBackground);
+    --app-popover-color: var(--cardTextColor);
+    --app-popoverRadioSelect-color: var(--cardTextColor);
+    --ion-overlay-background-color: var(--app-alert-background);
+    --ion-item-background: var(
+      --app-alert-background
+    ); // this is to avoid the side blue color in popover element
+  }
+    .darkTheme{
+
+      --primary-dark : #00000b;  //
+      --primary :#1e1e30;  //#1f271f
+      --primary-light: #3b4b5b;
+      //--primary-lighter : #739699;
+      --primary-contrast : rgb(255, 255, 255); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
+      --primaryLight-contrast : #ffffff6e;     //#F5F5F6;
+      --secondary : #D85A5A;
+
+      --appBackground : rgb(255, 255, 255);
+      --appTextColor : #3c3c3c;
+      --cardBackground : rgb(255, 255, 255);
+
+  //#F5F5F6 -- card background
+  //#E1E2E1;
+  //#cccccc -- selected White
+      --tertiary : #3d708b;
+      --tertiaryContrast : #fff;
+
+      --app-mainToolbar-background :var(--primary-dark);
+      --app-mainToolbar-color : var(--primary-contrast);
+      --app-navigatonMenubar-background :var(--primary);
+      --app-navigatonMenubar-color : var(--primary-contrast);
+      --app-navigatonMenubarSelectedTabs-color : var(--secondary);
+      //--app-selectedFilterTabbar-background :var(--ion-color-primary);
+      //--app-selectedFilterTabbar-color : #fff;
+      --app-selectedfilterToolbar-background :var(--appBackground);//var(--ion-color-primary);
+      --app-selectedfilterToolbar-color : var(--appTextColor);
+      //--app-sideMenu-background : #f04141; // useless as of now
+      --app-sideMenuHeader-background :#1e1e30;
+      --app-sideMenuHeader-color : #bdbdbd;
+      --app-sideMenuContent-background :var(--appBackground);
+      --app-sideMenuContent-color : #6c757d;
+      --app-sideMenuFilterHeader-background : var(--cardBackground);
+      --app-sideMenuFilterBody-background :var(--appBackground);
+
+      --app-alWordsContent-background: var(--appBackground); // this has no background this color is used for foreground element
+      --app-alWordsContent-color: var(--appTextColor);
+      --app-alWordsborder-color: var(--primaryLight-contrast);
+
+      --app-learnWordsContent-background : var(--appBackground);
+      --app-learnWordsContent-color : var(--appTextColor);
+      --app-learnWordsCard-background : var(--cardBackground);
+      --app-learnWordTogglehandle-background : var(--primary-contrast);
+      --app-learnWordToggleChecked-background :var(--appBackground);
+      --app-learnWordsChangeButton-background : var(--primary);
+      --app-learnWordsChangeButton-color : var(--appBackground);
+
+      --app-practiseContent-background : var(--appBackground);
+      //--app-practiseProgressBar-background : #ffd31a;
+      --app-practiseProgressBarbuffer-background : var(--primary-contrast);
+      --app-practiseCard-background : var(--primary);
+      --app-practiseCard-color : var(--primary-contrast);
+
+      --app-alert-background :var(--primary);
+      --app-alerttitle-color : var(--primary-contrast);
+      --app-alertmessage-color : var(--primary-contrast);
+      --app-alertButton-color : var(--primary-contrast);
+      --app-popover-background : var(--app-alert-background);
+      --app-popover-color : var(--app-alertmessage-color);
+      --app-popoverRadioSelect-color : var(--primary-contrast);
+
+      --app-modalContent-color:var(--primary-contrast);
+      --app-modalContent-background: var(--primary-light);
+      --app-modalToolbar-background :var(--ion-color-primary); // have to be same as mainToolbar
+      --app-modalToolbar-color : var(--primary-light); // have to be same as main toolbar
+
+      --ion-overlay-background-color :var(--app-alert-background);
+      --ion-item-background : var(--app-alert-background); // this is to avoid the side blue color in popover element
+      //--app-practiseProgressBarprogress-background : #f7f6f4;
+      // -app-sideMenuContent-color : #f4f5f8; // use less as of now
 
 
---app-selectedfilterToolbar-background :var(--appBackground);
---app-sideMenuHeader-background :var(--app-navigatonMenubar-background); // have to be same to the main header 
---app-sideMenuHeader-color : var(--app-navigatonMenubar-color); // have to be same as of the main color
-// app background color 
---app-sideMenuContent-background :var(--appBackground);
---app-sideMenuContent-color :var(--appTextColor);
---app-sideMenuFilterHeader-background : var(--cardBackground); // like a card in the menu
---app-sideMenuFilterBody-background :var(--appBackground);
---app-sideMenuFilterHeader-color : var(--app-mainToolbar-color);
+      //new colors for dark mode
+      --home-name-text-color: #bdbdbd;
+      --dashboard-content: #1e1e30;
+      --cardBackground: #1e1e30;
+      --app-homepage-graph: #161625;
+      --card-border-bottom: #fecc7b;
+      --user-level: #161625;
+      --dashboard-fixed-header: #1e1e30;
+      --dashboard-text-color: #bdbdbd;
+      --viewed-card-color: #bdbdbd;
+      --app-mainToolbar-background: black;
+      --app-mainToolbar-color: var(--primarylight-contrast);
+      --progress-bar-green: rgba(40,167,69,0.125);
+      --progress-green: #62c589;
+      --progress-bar-orange: #634a37;
+      --progress-orange: #ffbb4d;
+      --progress-stat-text-color: #707070;
+      --arrow-icon-color: #87768d;
+      --level-name-color: #bdbdbd;
+      --level-status-color: #707070;
+      --dashboard-background-color: white;
+      --level-icon-background-beginner: #61c68842;
+      --level-icon-background-transitional: #fecc7b36; //#ff815b8c
+      --level-icon-background-pro: rgba(255,7,58,0.125);
+      --level-icon-below: #fe805d;
+      --view-text-color: #bdbdbd;
+      --word-name-item-text-color: white;
+      --word-name-item-background-color: #161625;
+      --word-border-bottom-color: #3a3939;
+      --learn-card-background: #1e1e30;
+      --app-learnWordsContent-color: #bdbdbd;
+      --app-learnWordsChangeButton-background: var(
+        --cardBackground
+      );
+      --app-podcast-background : var(--app-mainToolbar-background);
+      --app-practiseContent-background: #161625;
+      --test-swipable-card-background: #1e1e30;
+      --test-swipe-button: #1e1e30;
+      --app-practiseCard-color: #bdbdbd;
+      --practise-card-border: #161625;
+      --dasboard-card-hover-background: #161625;
+      --dashboard-parent-box-color: transparent;
+      --fab-button-background: #1e1e30;
+      --app-modalToolbar-background: var(
+      --app-navigatonMenubar-background
+    ); // have to be same as mainToolbar
+    --app-modalToolbar-color: var(
+      --app-navigatonMenubar-color
+    );
+    --wordset-background: #161625;
+    --slide-bar-text-color: #bdbdbd;
+    --meaning-text-color: #bdbdbd;
+    --card-hover: #161625;
+    --app-mainToolbar-background: #1e1e30;
+    --app-mainToolbar-color: #bdbdbd;
+    --dotted-line-color: #bdbdbd;
+    --app-sideMenuContent-background: #161625;
+    --app-sideMenu-text-color: #bdbdbd;
+    --view-icon-color: #ECF8F1;
+    --learn-background-color: #161625;
+    --toggle-button-color: #bdbdbd;
 
---app-alWordsContent-background: var(--appBackground); // this has no background this color is used for foreground element  
---app-alWordsContent-color: var(--appTextColor);
---app-alWordsborder-color: var(--app-alWordsContent-background); // have to be same to give the inteline space feel and blend with background
+    --ripple-color-1: #000000;
+    --ripple-color-2: #000000;
+    --learn-button: #1e1e30;
+    --learn-icon-fill: rgb(255, 165, 0);
+    --box-shadow: 10px 2px 99px 0px rgba(0,0,0,0.99);
+    --search-bar-color: #161625;
+    --search-bar-text-color: #bdbdbd;
+    --mat-tab-background: #1e1e30;
+
+    --app-learnWordsMatTab-color: rgb(255, 165, 0);
+
+    --color-font-general : rgb(158, 40, 226);
 
 
---app-learnWordsContent-background : var(--appBackground);
---app-learnWordsContent-color : var(--cardTextColor);
---app-learnWordsCard-background : var(--cardBackground);
---app-learnWordTogglehandle-background : var(--app-navigatonMenubar-color);
---app-learnWordToggleChecked-background :var(--app-navigatonMenubar-background);
---app-learnWordsChangeButton-background : var(--app-navigatonMenubar-background);  
---app-learnWordsChangeButton-color : var(--app-navigatonMenubar-color); 
+    //new icon colors to be changed and tested for dark theme
 
---app-practiseContent-background : var(--appBackground);
---app-practiseProgressBarbuffer-background : var(--appTextColor);
---app-practiseCard-background : var(--cardBackground);
---app-practiseCard-color : var(--cardTextColor);
-
-
---app-modalToolbar-background :var(--app-navigatonMenubar-background); // have to be same as mainToolbar
---app-modalToolbar-color : var(--app-navigatonMenubar-color); // have to be same as main toolbar
---app-modalContent-color:var(--appBackground);
---app-modalContent-background: var(--appTextColor);
-
-
---app-alert-background :var(--cardBackground);  
---app-alerttitle-color : var(--cardTextColor);     // onl;y this for rest 2 below 
---app-alertmessage-color : var(--app-alerttitle-color);
---app-alertButton-color : var(--app-alerttitle-color);
-
---app-popover-background : var(--cardBackground);
---app-popover-color : var(--cardTextColor);
---app-popoverRadioSelect-color : var(--cardTextColor);
---ion-overlay-background-color :var(--app-alert-background);
---ion-item-background : var(--app-alert-background); // this is to avoid the side blue color in popover element
-
-
-
-
-
-
-
-
-
-
+    --beginner-outer-color: #62C58A;
+    --beginner-inner-color: #61C688;
+    --transitional-outer-color: #FECC7B;
+    --transitional-inner-color: #FECC7B;
+    --pro-outer-color: #FE805D;
+    --pro-inner-color: #FE805D;
+    --book-mark-color: #61C688;
 
 
 
   }
-//   .darkTheme{
 
-//     --primary-dark : #00000b;  //
-//     --primary : #132332;  //#1f271f
-//     --primary-light: #3b4b5b;
-//     //--primary-lighter : #739699;
-//     --primary-contrast : rgb(255, 255, 255); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
-//     --primaryLight-contrast : #ffffff6e;     //#F5F5F6;
-//     --secondary : #D85A5A;
+  .lightTheme {
+    // have to be calculated
 
-//     --appBackground : rgb(255, 255, 255);
-//     --appTextColor : #3c3c3c;
-//     --cardBackground : rgb(255, 255, 255);
+    //Note line color in between item of list should match the background it give the feel of space rather than line
+    // in this list some portion of the background should be visible.
+    --primary:#452b4f;
+    --primary-contrast: rgb(
+      255,
+      255,
+      255
+    ); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
 
-// //#F5F5F6 -- card background
-// //#E1E2E1;
-// //#cccccc -- selected White
-//     --tertiary : #3d708b;
-//     --tertiaryContrast : #fff;
+    --primary-light:#452b4f;
+    --primarylight-contrast: rgb(255, 255, 255); //#F5F5F6;
+    --primary-dark: #00000b; //
 
-//     --app-mainToolbar-background :var(--primary-dark);
-//     --app-mainToolbar-color : var(--primary-contrast);
-//     --app-navigatonMenubar-background :var(--primary);
-//     --app-navigatonMenubar-color : var(--primary-contrast);
-//     --app-navigatonMenubarSelectedTabs-color : var(--secondary);
-//     //--app-selectedFilterTabbar-background :var(--ion-color-primary);
-//     //--app-selectedFilterTabbar-color : #fff;
-//     --app-selectedfilterToolbar-background :var(--appBackground);//var(--ion-color-primary);
-//     --app-selectedfilterToolbar-color : var(--appTextColor);
-//     //--app-sideMenu-background : #f04141; // useless as of now 
-//     --app-sideMenuHeader-background :var(--primary);
-//     --app-sideMenuHeader-color : var(--appTextColor);
-//     --app-sideMenuContent-background :var(--appBackground);
-//     --app-sideMenuContent-color :var(--appTextColor);
-//     --app-sideMenuFilterHeader-background : var(--cardBackground);
-//     --app-sideMenuFilterBody-background :var(--appBackground);
+    --secondary: green;
 
+    --appBackground: rgb(255, 255, 255);
+    --appTextColor: #3c3c3c;
+    --cardBackground: rgb(255, 255, 255);
+    --ion-color-primary:#452b4f;
 
-//     --app-alWordsContent-background: var(--appBackground); // this has no background this color is used for foreground element  
-//     --app-alWordsContent-color: var(--appTextColor);
-//     --app-alWordsborder-color: var(--primaryLight-contrast);
+    --app-navigatonMenubar-background: var(
+      --primary
+    ); // this is the main focus so it is to be of darker than maintoolbar
+    --app-navigatonMenubar-color: var(
+      --primary-contrast
+    ); // smaller and slightly darker with better contrast with background this has to be perfect as this is the main thing
+    --app-navigatonMenubarSelectedTabs-color: var(--secondary);
+    --appBackground: rgb(
+      255,
+      255,
+      255
+    ); // have to be lighter and card will be darker
+    --appTextColor: #3c3c3c; // color on the lighter background have to be opposite of --appBackground
+    --cardBackground: #fffefe;
+    --cardTextColor: #2e2d2d;
+    --lightColorFocus: #f8f8f8; // this decide the side menu filter body
+    --nonImportantDarkColor: #1e20232e;
 
-//     --app-learnWordsContent-background : var(--appBackground);
-//     --app-learnWordsContent-color : var(--appTextColor);
-//     --app-learnWordsCard-background : var(--cardBackground);
-//     --app-learnWordTogglehandle-background : var(--primary-contrast);
-//     --app-learnWordToggleChecked-background :var(--appBackground);
-//     --app-learnWordsChangeButton-background : var(--primary);  
-//     --app-learnWordsChangeButton-color : var(--appBackground);
+    /// derived -- defining relations
 
-//     --app-practiseContent-background : var(--appBackground);
-//     //--app-practiseProgressBar-background : #ffd31a;
-//     --app-practiseProgressBarbuffer-background : var(--primary-contrast);
-//     --app-practiseCard-background : var(--primary);
-//     --app-practiseCard-color : var(--primary-contrast);
+    --app-selectedfilterToolbar-background: var(--appBackground);
+    // app background color
+    --app-sideMenuContent-background: var(--appBackground);
+    --app-sideMenuContent-color: var(--appTextColor);
 
-//     --app-alert-background :var(--primary);  
-//     --app-alerttitle-color : var(--primary-contrast); 
-//     --app-alertmessage-color : var(--primary-contrast);
-//     --app-alertButton-color : var(--primary-contrast);
-//     --app-popover-background : var(--app-alert-background);
-//     --app-popover-color : var(--app-alertmessage-color);
-//     --app-popoverRadioSelect-color : var(--primary-contrast);
-  
-//     --app-modalContent-color:var(--primary-contrast);
-//     --app-modalContent-background: var(--primary-light);
-//     --app-modalToolbar-background :var(--ion-color-primary); // have to be same as mainToolbar
-//     --app-modalToolbar-color : var(--primary-light); // have to be same as main toolbar
-    
-//     --ion-overlay-background-color :var(--app-alert-background);
-//     --ion-item-background : var(--app-alert-background); // this is to avoid the side blue color in popover element
-//     //--app-practiseProgressBarprogress-background : #f7f6f4;   
-//     // -app-sideMenuContent-color : #f4f5f8; // use less as of now
+    --app-sideMenuFilterHeader-background: var(
+      --primary
+    ); // like a card in the menu
+    --app-sideMenuFilterHeader-color: var(--app-mainToolbar-color);
+    --app-sideMenuFilterBody-background: var(--lightColorFocus);
+     // have to be same to the main header
+    --app-sideMenuHeader-color: var(
+      --app-navigatonMenubar-color
+    ); // have to be same as of the main color
+    --app-alWordsContent-background: var(
+      --appBackground
+    ); // this has no background this color is used for foreground element
+    --app-alWordsContent-color: var(--appTextColor);
+    --app-alWordsborder-color: var(
+      --nonImportantDarkColor
+    ); // have to be same to give the inteline space feel and blend with background
 
 
+    --app-learnWordsContent-color: var(--cardTextColor);
+    --app-learnWordsCard-background: var(--cardBackground);
+    --app-learnWordTogglehandle-background: var(--app-navigatonMenubar-color);
 
-// }
-
-
-.lightTheme{
-  // have to be calculated 
-
-  //Note line color in between item of list should match the background it give the feel of space rather than line
-  // in this list some portion of the background should be visible.
-  --primary :#132332;
-  --primary-contrast : rgb(255, 255, 255); /// rgba(255, 255, 255, 0.884);  //#E1E2E1
-  
-  --primary-light: #132332;
-  --primarylight-contrast :rgb(255, 255, 255);     //#F5F5F6;
-  --primary-dark : #00000b;  //
-  
-  --secondary : green;
-
-  --appBackground : rgb(255, 255, 255);
-  --appTextColor : #3c3c3c;
-  --cardBackground : rgb(255, 255, 255);
-  --ion-color-primary :#132332;;
+    --app-learnWordsChangeButton-background: var(
+      --app-navigatonMenubar-background
+    );
+    --app-learnWordsChangeButton-color: var(--app-navigatonMenubar-color);
+    --app-learnWordsMatTab-background: var(--lightColorFocus);
+    --app-learnWordsMatTab-color: var(--app-mainToolbar-background);
 
 
-  --app-mainToolbar-background :var(--primary-light);
-  --app-mainToolbar-color : var(--primarylight-contrast);
-  --app-navigatonMenubar-background :var(--primary);  // this is the main focus so it is to be of darker than maintoolbar
-  --app-navigatonMenubar-color : var(--primary-contrast); // smaller and slightly darker with better contrast with background this has to be perfect as this is the main thing 
-  --app-navigatonMenubarSelectedTabs-color : var(--secondary);
-  --appBackground : rgb(255, 255, 255);  // have to be lighter and card will be darker
-  --appTextColor : #3c3c3c;  // color on the lighter background have to be opposite of --appBackground
-  --cardBackground: #FFFEFE;
-  --cardTextColor : #2e2d2d;
-  --lightColorFocus : #f8f8f8; // this decide the side menu filter body
-  --nonImportantDarkColor : #1e20232e;
+    --app-practiseProgressBarbuffer-background: var(--appTextColor);
+    --app-practiseCard-background: var(--cardBackground);
 
 
+    --app-modalToolbar-background: var(
+      --app-navigatonMenubar-background
+    ); // have to be same as mainToolbar
+    --app-modalToolbar-color: var(
+      --app-navigatonMenubar-color
+    ); // have to be same as main toolbar
+    --app-modalContent-color: var(--appTextColor);
+    --app-modalContent-background: var(--appBackground);
 
-/// derived -- defining relations
+    --app-alert-background: var(--cardBackground);
+    --app-alerttitle-color: var(--cardTextColor); // onl;y this for rest 2 below
+    --app-alertmessage-color: var(--app-alerttitle-color);
+    --app-alertButton-color: var(--app-alerttitle-color);
 
+    --app-popover-background: var(--cardBackground);
+    --app-popover-color: var(--cardTextColor);
+    --app-popoverRadioSelect-color: var(--cardTextColor);
+    --ion-overlay-background-color: var(--app-alert-background);
+    --ion-item-background: var(
+      --app-alert-background
+    ); // this is to avoid the side blue color in popover element
 
---app-selectedfilterToolbar-background :var(--appBackground);
-// app background color 
---app-sideMenuContent-background :var(--appBackground);
---app-sideMenuContent-color :var(--appTextColor);
+    /// relations are as follows
 
---app-sideMenuFilterHeader-background : var(--primary); // like a card in the menu
---app-sideMenuFilterHeader-color : var(--app-mainToolbar-color);
---app-sideMenuFilterBody-background :var(--lightColorFocus);
---app-sideMenuHeader-background :var(--app-navigatonMenubar-background); // have to be same to the main header 
---app-sideMenuHeader-color : var(--app-navigatonMenubar-color); // have to be same as of the main color
---app-alWordsContent-background: var(--appBackground); // this has no background this color is used for foreground element  
---app-alWordsContent-color: var(--appTextColor);
---app-alWordsborder-color: var(--nonImportantDarkColor); // have to be same to give the inteline space feel and blend with background
+    //new colors -- to be added in dark variants
+    --app-homepage-graph: #4c3156;
+    --card-border-bottom: #fecc7b;
+    --user-level: #F9FBFC;
+    --dashboard-text-color: #452b4f;
+    --viewed-card-color: #707070;
+    // --app-mainToolbar-background: var(--primary-light);
+    // --app-mainToolbar-color: var(--primarylight-contrast);
+    --progress-bar-green: #c0e8cf;
+    --progress-green: #62c589;
+    --progress-bar-orange: #fde6c1;
+    --progress-orange: #ffbb4d;
+    --progress-stat-text-color: #707070;
+    --arrow-icon-color: #87768d;
+    --level-name-color: #707070;
+    --level-status-color: #707070;
+    --dashboard-background-color: white;
+    --level-icon-background-beginner: #61c68842;
+    --level-icon-background-transitional: #fecc7b36;
+    --level-icon-background-pro: #fbd4ca85;
+    --level-icon-below: #fe805d;
+    --view-text-color: #6B6B6B;
+    --word-name-item-text-color: #bdbdbd;
+    --word-name-item-background-color: white;
+    --word-border-bottom-color: #bdbdbd;
+    --learn-card-background: white;
+    --app-learnWordsContent-color: var(--cardTextColor);
+    --app-learnWordsChangeButton-background: var(
+      --app-navigatonMenubar-background
+    );
+    --app-practiseContent-background: var(--appBackground);
+    --mat-tab-background: var(--appBackground);
+    --test-swipable-card-background: white;
+    --test-swipe-button: white;
+    --app-practiseCard-color: var(--appTextColor);
+    --practise-card-border: #70757a21;
+    --dasboard-card-hover-background: #f9fbfc;
+    --dashboard-parent-box-color: transparent;
+    --toggle-button-color: white;
+    --app-podcast-background : #28192e;
 
+    --dashboard-content: white;
+    --home-name-text-color: white;
+    --wordset-background: white;
+    --slide-bar-text-color: black;
+    --meaning-text-color: black;
+    --card-hover: white;
+    --app-mainToolbar-background: #452b4f;
+    --app-mainToolbar-color: white;
+    --dotted-line-color: #e7e7e7;
+    --app-sideMenu-text-color: black;
+    --ripple-color-1: #ffffff;
+    --ripple-color-2: #f5f5f5;
+    --learn-background-color: white;
+    --fab-button-background: #452b4f;
+    --learn-button: #452b4f;
+    --box-shadow: 0 1px 1px -2px rgba(0,0,0,.2), 0 0px 0px 0 rgba(0,0,0,.14), 6px 10px 11px 0 rgba(0,0,0,.12);
+    --search-bar-color: white;
+    --search-bar-text-color: black;
+    --dashboard-fixed-header: white;
+    --app-sideMenuHeader-background: #452b4f;
+    --background: #452b4f;
+    //new icon colors
 
---app-learnWordsContent-background : var(--appBackground);
---app-learnWordsContent-color : var(--cardTextColor);
---app-learnWordsCard-background : var(--cardBackground);
---app-learnWordTogglehandle-background : var(--app-navigatonMenubar-color);
---app-learnWordToggleChecked-background :var(--app-navigatonMenubar-background);
---app-learnWordsChangeButton-background : var(--app-navigatonMenubar-background);  
---app-learnWordsChangeButton-color : var(--app-navigatonMenubar-color); 
---app-learnWordsMatTab-background : var(--lightColorFocus);
---app-learnWordsMatTab-color : var(--app-mainToolbar-background);
+    --beginner-outer-color: #62C58A;
+    --beginner-inner-color: #61C688;
+    --transitional-outer-color: #FECC7B;
+    --transitional-inner-color: #FECC7B;
+    --pro-outer-color: #FE805D;
+    --pro-inner-color: #FE805D;
+    --book-mark-color: #61C688;
 
---app-practiseContent-background : var(--appBackground);
---app-practiseProgressBarbuffer-background : var(--appTextColor);
---app-practiseCard-background : var(--cardBackground);
---app-practiseCard-color : var(--appTextColor);
-
-
---app-modalToolbar-background :var(--app-navigatonMenubar-background); // have to be same as mainToolbar
---app-modalToolbar-color : var(--app-navigatonMenubar-color); // have to be same as main toolbar
---app-modalContent-color:var(--appTextColor);
---app-modalContent-background: var(--appBackground);
-
-
---app-alert-background :var(--cardBackground);  
---app-alerttitle-color : var(--cardTextColor);     // onl;y this for rest 2 below 
---app-alertmessage-color : var(--app-alerttitle-color);
---app-alertButton-color : var(--app-alerttitle-color);
-
---app-popover-background : var(--cardBackground);
---app-popover-color : var(--cardTextColor);
---app-popoverRadioSelect-color : var(--cardTextColor);
---ion-overlay-background-color :var(--app-alert-background);
---ion-item-background : var(--app-alert-background); // this is to avoid the side blue color in popover element
-
-/// relations are as follows
- 
-
-
-
-
-
+  }
 }
 
-
+@font-face{
+  font-family: 'arigatou';
+  src: url('../assets/fonts/ArigatouGozaimasu-1Gnqg.ttf');
 }
 
-$colors:(
-  primary : rgb(44, 12, 12),
-  secondary : #ffff,
-  danger : #ffff,
-  light : #ffff,
-  dark : #ffff,
-  lightdark : #fff
-)
-
+$colors: (
+  primary: rgb(44, 12, 12),
+  secondary: #ffff,
+  danger: #ffff,
+  light: #ffff,
+  dark: #ffff,
+  lightdark: #fff,
+);
 
 // ion-toolbar-original {
 //   --color: #222;
@@ -336,7 +519,6 @@ $colors:(
 //     --min-height: 56px,
 // }
 
-
 // ion-tabBar-original{
 //   --background: var(--ion-tab-bar-background,var(--ion-background-color,#fff));
 //     --background-focused: #e0e0e0;
@@ -345,7 +527,6 @@ $colors:(
 //     --color-selected: var(--ion-tab-bar-color-activated,var(--ion-color-primary,#3880ff));
 //     height: 56px;
 // }
-
 
 // ion-toolbar{
 //     --background: var(--app-mainToolbar-background),
@@ -357,8 +538,3 @@ $colors:(
 //     // --padding-end: 0,
 //     // --min-height: 56px,
 // }
-
-
-
-
-

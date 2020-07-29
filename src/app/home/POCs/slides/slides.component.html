@@ -1,0 +1,107 @@
+<ion-content>
+  <ion-slides mode="md" #slides [options]="slideOpts">
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <h1 id="heading">Mark & Note Down</h1>
+              <p>Mark down the learning & take real-time short Notes for every words</p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img src="./assets/pen.svg">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row class="btn">
+              <ion-col>
+                <ion-button shape="round" (click)="next()" style="--background:indigo">NEXT
+                  <ion-icon name="arrow-forward" style="padding-left: 10px;"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-img src="./assets/book.svg"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <h1>Prepare Verbal Better</h1>
+              <p style="text-align: left;margin-left: 4%;"> with Feature like:
+                <br>&nbsp;&nbsp; Multiple Dictionary support in-built
+                <br>&nbsp;&nbsp; Images depicting the meaning of the word
+                <br>&nbsp;&nbsp; Advanced charting to track your progress
+                <br>&nbsp;&nbsp; Flashcards
+                <br>&nbsp;&nbsp; Listen podcasts on the Go and prepare</p>
+
+
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row class="btn2">
+              <ion-col>
+                <ion-button shape="round" (click)="prev()" style="--background:indigo">
+                  <ion-icon name="arrow-back" style="padding-right: 10px;"></ion-icon>
+                  BACK
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button shape="round" (click)="next()" style="--background:indigo">NEXT
+                  <ion-icon name="arrow-forward" style="padding-left: 10px;"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <h1>Track The Progress</h1>
+              <p>Learn, Test and Track the knowledge</p>
+            </ion-text>
+            <ion-img src="./assets/charts.svg"> </ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row class="btn3">
+              <ion-col>
+                <ion-button shape="round" (click)="prev()" style="--background:indigo">
+                  <ion-icon name="arrow-back" style="padding-right: 10px;"></ion-icon>
+                  BACK
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button shape="round" style="--background:indigo" [routerLink]="['/mainmodule/base/dashboard']">GET
+                  STARTED
+                  <ion-icon name="arrow-forward" style="padding-left: 10px;"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

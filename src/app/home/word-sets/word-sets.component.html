@@ -1,0 +1,94 @@
+<div class="wordsetmain">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-button-top">
+    <ion-fab-button class="fab-button">
+      <div class="filtericon">
+        <svg-icon name="filter"></svg-icon>
+        <ion-badge class="selectedBadge" slot="end">{{this.db.allSelectedWordIdsFiltered.length}}</ion-badge>
+      </div>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="filterButton('all')" data-desc="All" class="fab-button">
+        <ion-icon name="star"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('viewed')" data-desc="Viewed" class="fab-button">
+        <ion-icon name="eye"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('notViewed')" data-desc="Not Viewed" class="fab-button">
+        <ion-icon name="eye-off"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('marked')" data-desc="Marked" class="fab-button">
+        <ion-icon name="star"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('notMarked')" data-desc="Not Marked" class="fab-button">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('learned')" data-desc="Learned" class="fab-button">
+        <ion-icon name="battery-full"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filterButton('notLearned')" data-desc="Not Learned" class="fab-button">
+        <ion-icon name="battery-dead"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <!-- <ion-fab-button (click)="open()" *ngIf="this.FabButtonVisible" class="fab-button" style="margin-top: 20px;">
+      <div class="filtericon">
+        <svg-icon name="bar-chart"></svg-icon>
+      </div>
+    </ion-fab-button> -->
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-button-bottom">
+    <ion-fab-button (click)="open()" *ngIf="this.FabButtonVisible" class="fab-button">
+      <div class="filtericon">
+        <svg-icon name="bar-chart"></svg-icon>
+      </div>
+    </ion-fab-button>
+  </ion-fab>
+  <super-tabs [(activeTabIndex)]="activeTabIndex" [config]="{
+      debug: true,
+      allowElementScroll: true,
+      nativeSmoothScroll: true,
+      avoidElements: true
+    }" (tabChange)="onTabChange($event)">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label style="color: var(--slide-bar-text-color)">View</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label style="color: var(--slide-bar-text-color)">Learn</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label style="color: var(--slide-bar-text-color)">Test</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <super-tabs-container autoScrollTop class="superTabContainer">
+      <super-tab class="ion-padding superTabs">
+        <app-view></app-view>
+      </super-tab>
+      <super-tab class="superTabs">
+        <app-learn></app-learn>
+      </super-tab>
+      <super-tab class="superTabs" avoid-super-tabs>
+        <app-practise></app-practise>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</div>
+
+<div *ngIf="isOpen" class="bg" (click)="close()"></div>
+
+<div class="bottomSheet" (touchmove)="touchMove($event)" (touchend)="touchEnd()">
+
+  <div class="swipe-handler"></div>
+
+  <div class="content ion-padding">
+    <span *ngIf="!isChartDataReady">Loading Progrees chart....</span>
+    <div class="backgroundGraph">
+      <div *ngIf="isChartDataReady" class="chartArea">
+        <app-progress-chart [(chartLabelsAndData)]="chartLabelsAndData">
+
+        </app-progress-chart>
+      </div>
+    </div>
+  </div>
+</div>

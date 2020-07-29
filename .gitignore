@@ -12,7 +12,7 @@
 Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
-
+*.xml
 *.log
 log.txt
 npm-debug.log*
@@ -24,11 +24,12 @@ npm-debug.log*
 /.versions
 /.vscode
 /coverage
-/resources
+
+
 /dist
 /node_modules
 /platforms/
-
-
+**/package-lock.json
+/config.xml
 /plugins
 /www

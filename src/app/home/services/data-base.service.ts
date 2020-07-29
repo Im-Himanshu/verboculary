@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { ActivatedRoute } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { wordAppData } from "../interfaces/wordAppData.interface";
-import { processedDataSharing } from "../interfaces/dropdown.interface";
-import { Subject } from "rxjs";
-import { appSessionData } from "../appSessionData.interface";
+import { processedDataSharing, setLevelProgress } from "../interfaces/dropdown.interface";
+import { Subject, forkJoin, Observable } from "rxjs";
 import { ToastController } from "@ionic/angular";
-
+import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
+import { AdmobSerService } from './admob-ser.service';
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -16,132 +17,337 @@ const STORAGE_KEY_sessionData = "sessionData";
 })
 export class DatabaseService {
   public allSetData: processedDataSharing;
-
-  // this is for the event when the sets data has been fetched from the localstorage
-  public fetchingSetDataCompleted: Subject<any> = new Subject<any>();
-  public fetchingWordDataCompleted: Subject<any> = new Subject<any>();
-  allSelectedWordIDs: any;
-  // thie is for the event, user changes the set from the dropdown and selected word changes
-  public wordListChangeEvent: Subject<any> = new Subject<any>();
-
-  // for event when the word state is chnaged like marked, unmarked so to publish this to all
-  // this is the only way to fetch starting with null to create a if condition
-  public wordDynamicData: any; // this always need to in synced with the stored data;
+  public wordsDynamicData: any; // this always need to in synced with the stored data;
   public allWordsData: any;
   isDataFetched: boolean = false;
   public allSelectedWordIds: any;
+  public allSelectedWordIdsFiltered: any = [];
   public filteredSelectedWordIds: any;
-  public selectedCategory;
-  public appSessionData: appSessionData;
-
-  ///this have to be changed based on the dataset Name
-  private defaultappSessionData: appSessionData = {
-    selectedCategory: "Set Based",
-    selectedSet: ["Set 1"],
-    selectedFilter: "all",
-    selectedSorting: "shuffle"
-  };
+  public selectedSet = "allWords";
+  public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
+  public allSetinSelectedCategory;
+  public wordFilterChangeEvent: Subject<any> = new Subject();
+  public activeTabIndex: number = 0;
+  public isSearchBarVisible: boolean = false;
+  public isToShowSearchBar = false;
+  public isToRemoveCompleteSearch = false;
+  public selectedFilter = 'all';
+  public deleteMe;
 
   constructor(
     public storage: Storage,
     public http: HttpClient,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private route: ActivatedRoute,
+    private router: Router,
+    public admob: AdmobSerService,
   ) {
-    this.processSetDataIfNotExist();
-    this.ProcessWordDynamicDataIfNotExist(); //  this is the dynamic app data, to be fetched from the local storage and initiated only once in ap lifecycle
-    // this need to be resave everytime in localstorage because it is dynamic
+    router.events.forEach((event: NavigationEvent) => {
+      //After Navigation, because firstchild are populated only till navigation ends
+      if (event instanceof NavigationEnd) {
+        if (event.urlAfterRedirects.startsWith("/mainmodule/base/dashboard")) {
+          this.selectedFilter = 'all'
+          this.selectedSet = "allWords" // resetting this here as in ngOndestroy it was causing bugs
+
+        }
+        if (event.urlAfterRedirects.startsWith("/mainmodule/base/wordSets")) {
+          this.route.firstChild.firstChild.firstChild.paramMap.subscribe(params => {
+            if (params.get('setName')) {
+              this.selectedSet = params.get('setName');
+              this.getAllwordsOfSelectedSet();
+              if ((this.selectedSet !== "allWords")) {
+                this.isToRemoveCompleteSearch = true;
+              }
+              else {
+                this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+              }
+            }
+          })
+        }
+      }
+    });
+  }
+
+
+  onSearchQueryChange(searchQuery: string) {
+    if (!this.isToShowSearchBar) {
+      return; // not do anything if it is not shown
+    }
+    if (searchQuery.length <= 0) {
+      return;
+    }
+    //console.log(searchQuery);
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+    let count = 0;
+    for (var i = 0; i < this.allSelectedWordIds.length; i++) {
+      if (this.allWordsData[this.allSelectedWordIds[i]][1].indexOf(searchQuery) != -1) {
+        this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
+        count++
+      }
+      if (count > 10) {
+        break; // showing max of 10
+      }
+    }
+  }
+
+  getAllwordsOfSelectedSet() {
+    // first process after all the data is laoded from the data base...
+    if (this.allSetData) {
+      this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet];
+      this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
+      this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+      for (var i = 0; i < this.allSelectedWordIds.length; i++) {
+        this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
+      }
+      this.filterSelectedIDBasedOnGivenCriterion(this.selectedFilter); // when routing is reverted then reset this
+      // this will save all the selected word IDs which will be displayed
+    }
   }
 
   // one time function, have to reset all the data if need to reset all the progress.
-  processSetDataIfNotExist() {
-    return this.getSetDataFromStorage().then(data => {
-      if (!data) {
-        let output: processedDataSharing = {} as processedDataSharing;
-        let allCategoryType = [];
-        let allSetOfcategory = {};
-        let allWordOfSets = {};
-        output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
-        output.allSetOfcategory = allSetOfcategory;
-        output.allWordOfSets = allWordOfSets;
+  isTheUserNew() {
+    //just check if the user-session data exist if yes then redirect to the actual screen
+    let isTheUserNew = true;
+    let promise1 = new Promise((resolve1, reject) => {
+      this.getAllWordsStateFromStorage().then(data => {
         if (!data) {
-          this.getSetDataFromJSON().subscribe(data => {
-            for (var key in data) {
-              if (data.hasOwnProperty(key)) {
-                var allSets = data[key];
-                allCategoryType.push(key);
-                allSetOfcategory[key] = Object.keys(allSets);
-                for (var set in allSets) {
-                  allWordOfSets[set] = allSets[set];
-                }
-              }
-            }
-            this.setSetDatainStorage(output).then(data => {
-              this.fetchSetDataFromLocalStorage();
-            }); // after the data is processed save it in the local storage, this could be retrived later and need not to be processed again and again
-          });
+          this.reStartWordDynamicData().then(data => {
+            resolve1(false);
+          }
+
+          ); // this will save the initiate the data in cache memory
+        } else {
+          this.wordsDynamicData = data; // will save the data
+          resolve1(true); // there was session data
         }
-      } else {
-        this.fetchSetDataFromLocalStorage();
-        //return this.getSetDataFromStorage();
-      }
-    });
+      });
+    })
+
+    let promise2 = new Promise((resolve2, reject) => {
+      this.getSetDataFromStorage().then(data => {
+        if (!data) {
+          this.reStartSetDynamicData().then(data => {
+            resolve2(false); // this will create the set data in data-base
+          });
+        } else {
+          this.allSetData = data;
+          resolve2(true);
+        }
+      });
+
+    })
+
+    let promise3 = this.getAllWordsDataFromJSON();
+
+    let allPromises: Observable<any> = forkJoin(promise1, promise2, promise3)
+    return allPromises;
+
   }
-  ProcessWordDynamicDataIfNotExist() {
-    this.getAllWordsStateFromStorage().then(data => {
-      if (!data) {
-        let allWords = {};
-        let i = 0;
-        this.getData().subscribe(data => {
-          for (var key in data) {
-            i++;
-            if (data.hasOwnProperty(key)) {
-              var val = data[key]; // all word data
-              let wordData: wordAppData = {} as wordAppData;
-              allWords[key] = wordData;
-              wordData.id = key;
-              wordData.word = val[1];
-              wordData.isMarked = false;
-              wordData.isSeen = false;
+
+
+  generateTotalProgressReportTillToday() {
+    // be very careful in triggering this function as this sets all the other
+
+    // this function will run through all the sets progress and calculate progress report till today
+
+    let setLevelProgress = this.allSetData.setLevelProgressData;
+    let allSets = this.allSetData.allSetOfcategory[this.selectedCategory]; // all
+    let totalViewed = 0;
+    let totalLearned = 0;
+    let totalAllWords = 0;
+
+    for (let oneSet of allSets) {
+      let setViewed = setLevelProgress[oneSet]["totalViewed"];
+      let setLearned = setLevelProgress[oneSet]["totalLearned"];
+      let totalWords = setLevelProgress[oneSet]["totalWords"];
+      totalViewed += setViewed;
+      totalLearned += setLearned
+      totalAllWords += totalWords
+    }
+    let newProgressReportEntry = {
+      "viewed": totalViewed,
+      "learned": totalLearned
+    }
+    let todaysDate = (new Date()).toLocaleDateString(); // MM/DD/YYYY format will be published
+
+    //(new Date()).toLocaleString() -- >  "7/17/2020, 7:05:31 PM"
+
+    // will keep only one entry for one date that is computed every time the applicaTION IS loaded for the first time itself
+    this.allSetData.dateWiseTotalProgressReport[todaysDate] = newProgressReportEntry;
+    this.saveCurrentStateofDynamicData();
+    console.log("total words used for the chartign ; ", totalAllWords)
+  }
+
+
+  // to be executed only when no data is found in session
+  private reStartSetDynamicData() {
+    return new Promise((resolve, reject) => {
+      let output: processedDataSharing = {} as processedDataSharing;
+      let allCategoryType = [];
+      let allSetOfcategory = {};
+      let allWordOfSets = {};
+      let setLevelProgressData = {}
+      let todaysDate = new Date().toLocaleDateString();
+      let dateWiseTotalProgressReport = {} // "date" :  #number of wordsword maping
+      dateWiseTotalProgressReport[todaysDate] = { "viewed": 0, "learned": 0 };
+      output.allCategoryType = allCategoryType; // here we only need to change the JSON to populate the dropDown no need of hardcoding
+      output.allSetOfcategory = allSetOfcategory;
+      output.allWordOfSets = allWordOfSets;
+      output.setLevelProgressData = setLevelProgressData;
+      output.dateWiseTotalProgressReport = dateWiseTotalProgressReport;
+      this.getSetDataFromJSON().subscribe(data => {
+        for (var key in data) {
+          if (data.hasOwnProperty(key)) {
+            var allSets = data[key];
+            allCategoryType.push(key);
+            allSetOfcategory[key] = Object.keys(allSets);
+            for (var set in allSets) {
+              allWordOfSets[set] = allSets[set];
+              let setProgress = {} as setLevelProgress;
+              setProgress.totalLearned = 0;
+              setProgress.totalViewed = 0;
+              setProgress.isAdShown = false;
+              setProgress.totalWords = allSets[set].length
+              setLevelProgressData[set] = setProgress;
             }
           }
-          this.setAllWordsStateinStorage(allWords);
-          this.wordDynamicData = allWords; // only first time the app is loaded
-          return this.getAllWordsDataFromJSON();
-        });
-      } else {
-        this.wordDynamicData = data; // will save the data
-        return this.getAllWordsDataFromJSON();
+        }
+        for (let i = 0; i < 1209; i++) {
+          allWordOfSets["allWords"].push(i);
+        }
+
+        this.allSetData = output;
+        this.setSetDatainStorage(output);
+        resolve("reset all the set Data");
+      });
+    })
+
+
+
+  }
+
+  //to be executed only when no data is found in session
+  private reStartWordDynamicData() {
+    return new Promise((resolve, reject) => {
+      let allWords = {};
+      let i = 0;
+      this.getData().subscribe(data => {
+        for (var key in data) {
+          i++;
+          if (data.hasOwnProperty(key)) {
+            var val = data[key]; // all word data
+            let wordData: wordAppData = {} as wordAppData;
+            allWords[key] = wordData;
+            wordData.id = key;
+            wordData.word = val[1];
+            wordData.isMarked = false;
+            wordData.isViewed = false;
+            wordData.isLearned = false;
+            wordData.correctCount = 0;
+            wordData.learnedDate = null;
+            wordData.viewedDate = null;
+            wordData.notes = null;
+          }
+        }
+        this.setAllWordsStateinStorage(allWords);
+        this.wordsDynamicData = allWords; // only first time the app is loaded
+        resolve("restarted all words Dynamic Data");
+      });
+
+    })
+  }
+
+  private getAllWordsDataFromJSON() {
+    return new Promise((resolve, reject) => {
+      this.getData().subscribe((data: any) => {
+        this.allWordsData = data;
+        this.isDataFetched = true;
+        resolve("fetched all words data");
+      });
+    })
+
+  }
+
+
+  changeSortingOfIds(sortingType) {
+    if (sortingType == 'alpha') {
+      this.allSelectedWordIdsFiltered.sort(function (a, b) {
+        if (a > b) {
+          return 1;
+        }
+        if (a < b) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    else {
+      // randomly shuffled
+      var currentIndex = this.allSelectedWordIdsFiltered.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = this.allSelectedWordIdsFiltered[currentIndex];
+        this.allSelectedWordIdsFiltered[currentIndex] = this.allSelectedWordIdsFiltered[randomIndex];
+        this.allSelectedWordIdsFiltered[randomIndex] = temporaryValue;
       }
-    });
+
+    }
   }
 
-  getAllWordsDataFromJSON() {
-    this.getData().subscribe((data: any) => {
-      this.allWordsData = data;
-      this.isDataFetched = true;
-      this.fetchingWordDataCompleted.next(data);
-      //this.fetchingWordDataCompleted.complete();
-    });
-  }
+  filterSelectedIDBasedOnGivenCriterion(filterName) {
 
-  fetchSetDataFromLocalStorage() {
-    this.getSetDataFromStorage().then(data => {
-      this.allSetData = data;
-      this.processAppSesionData(data);
-    });
-  }
+    // reset all the given IDs
+    this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
+    for (var i = 0; i < this.allSelectedWordIds.length; i++) {
+      let crntId = this.allSelectedWordIds[i]
 
-  processAppSesionData(data2) {
-    this.getSessionDataFromStorage().then((data: appSessionData) => {
-      if (data) {
-        this.appSessionData = data;
-      } else {
-        this.appSessionData = this.defaultappSessionData;
-        this.setSessionDatainStorage();
+      if (filterName == 'all') {
+        // push all of them
+        this.allSelectedWordIdsFiltered.push(crntId);
       }
-      this.fetchingSetDataCompleted.next(data2); // data2 otherwise null is send in the event
-    });
+      if (filterName == 'viewed') {
+        if (this.wordsDynamicData[crntId].isViewed) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      else if (filterName == 'notViewed') {
+        if (!this.wordsDynamicData[crntId].isViewed) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      if (filterName == 'marked') {
+        if (this.wordsDynamicData[crntId].isMarked) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      else if (filterName == 'notMarked') {
+        if (!this.wordsDynamicData[crntId].isMarked) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      if (filterName == 'learned') {
+        if (this.wordsDynamicData[crntId].isLearned) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+      else if (filterName == 'notLearned') {
+        if (!this.wordsDynamicData[crntId].isLearned) {
+          this.allSelectedWordIdsFiltered.push(crntId)
+        }
+      }
+
+    }
+    this.wordFilterChangeEvent.next(true);
+
   }
+
 
   getData() {
     return this.http.get("assets/csvToJsonData.json");
@@ -151,44 +357,139 @@ export class DatabaseService {
     return this.http.get("assets/setDivision.json");
   }
 
-  getOneWordState(wordId) {
-    // getting it from the RAM data only
-    let oneWordData: wordAppData = this.wordDynamicData[wordId];
-    return oneWordData;
-  }
-  getMultipleWordsState(wordIds: string[]) {
-    let allWordData = {};
-    if (!wordIds || wordIds.length == 0) {
-      return {};
+  checkForAdvertisement() {
+    let x = (this.allSetData.allWordOfSets["allViewed"].length + 1) % 50;
+    if (x == 0) {
+      this.admob.showInterstitialAds();
     }
-    for (let wordId of wordIds) {
-      let oneWordData: wordAppData = this.wordDynamicData[wordId];
-      allWordData[wordId] = oneWordData;
+    let data = this.allSetData;
+    let adTrigger = data.setLevelProgressData;
+    if (!(adTrigger[this.selectedSet]["isAdShown"])) {
+      if (adTrigger[this.selectedSet]["totalViewed"] >= adTrigger[this.selectedSet]["totalWords"]) {
+        this.admob.showAdMobFreeRewardVideoAds();
+        data.setLevelProgressData[this.selectedSet]["isAdShown"] = true;
+        console.log("Reward Video Ad is Shown");
+      }
     }
-    return this.wordDynamicData; // giving it all it causing un-necassary trouble
+
   }
 
   saveCurrentStateofDynamicData() {
-    return this.setAllWordsStateinStorage(this.wordDynamicData); // can only be stored from this function
+    this.checkForAdvertisement(); // to check if a video or banner add can be shown to the user or not
+    this.setSetDatainStorage(this.allSetData)
+    return this.setAllWordsStateinStorage(this.wordsDynamicData); // can only be stored from this function
+
   }
 
-  setOneWordState(wordData: wordAppData) {
-    return this.getAllWordsStateFromStorage().then(result => {
-      if (result) {
-        let id = wordData.id;
-        result[id] = wordData; // update the word in the dynamic data;
-        return this.setAllWordsStateinStorage(result);
-      } else {
-        this.ProcessWordDynamicDataIfNotExist();
-        return this.setOneWordState(wordData);
+  // all the process for syncing in this just pass the new state and property
+  changeWordIdState(wordId, stateToEdit, newState: boolean) {
+    // this function will sync all the task need to be done for any change...
+    this.deleteMe = this.allSetData.setLevelProgressData[this.selectedSet];
+    if (stateToEdit == 'isViewed') {
+      this.updateSetLevelProgressCount(wordId, 'isViewed', newState);
+      this.editDateinWordDynamicData(wordId, "viewedDate", newState); // data-1 is in sync till now
+      this.updateDynamicSet(wordId, "allViewed", newState); // add/remove the id from the dynamic set
+    }
+    if (stateToEdit == 'isLearned') {
+      this.updateSetLevelProgressCount(wordId, 'isLearned', newState);
+      this.editDateinWordDynamicData(wordId, "learnedDate", newState)
+      this.updateDynamicSet(wordId, "allLearned", newState);
+    }
+    if (stateToEdit == 'isMarked') {
+      this.updateSetLevelProgressCount(wordId, 'isMarked', newState);
+      //this.editDateinWordDynamicData(wordId, "markedDate", newState)
+      this.updateDynamicSet(wordId, "allMarked", newState);
+    }
+    this.saveCurrentStateofDynamicData(); // this will save whatever be the state of progress
+
+  }
+  private updateSetLevelProgressCount(wordId, stateToEdit, newState) {
+    let statName;
+    if (stateToEdit == "isViewed") {
+      statName = "totalViewed"
+    }
+    else if (stateToEdit == "isLearned") {
+      statName = "totalLearned"
+    }
+    else {
+      this.wordsDynamicData[wordId][stateToEdit] = newState;
+      return; // for other cases returning for // "isMarked case"
+    }
+    if (stateToEdit != "isMarked") {
+
+      // here this.selectedSet need to changed because sometime word is opened outside of its sets as well like in allWords.
+      let setToBeUpdated = this.selectedSet; // have to change this afterwards for more accuracy
+      let setProgressData = this.allSetData.setLevelProgressData[setToBeUpdated] as setLevelProgress;
+      if (!this.wordsDynamicData[wordId][stateToEdit] && newState) {
+        // if word is not viewed and newstate is true then update count;
+        setProgressData[statName] = setProgressData[statName] + 1
       }
-    });
+      else if (this.wordsDynamicData[wordId][stateToEdit] && !newState) {
+        // if word is not viewed and newstate is true then update count;
+        setProgressData[statName] = setProgressData[statName] - 1 // if removing
+      }
+      else {
+        console.log("no state was updated!! as it was already there")
+      }
+    }
+
+    this.wordsDynamicData[wordId][stateToEdit] = newState; // now update the wordDynamic data
+
+  }
+
+  runSyncOperationForSetLevelOperation() {
+    let allWordIds = this.allSetData.allWordOfSets[this.selectedSet];
+    let setLevelProgress = this.allSetData.setLevelProgressData[this.selectedSet];
+    let totalViewed = 0;
+    let totalLearned = 0;
+    for (let oneId of allWordIds) {
+      let oneWordData = this.wordsDynamicData[oneId];
+      if (oneWordData["isViewed"]) {
+        totalViewed++;
+      }
+      if (oneWordData["isLearned"]) {
+        totalLearned++;
+      }
+    }
+    setLevelProgress["totalViewed"] = totalViewed;
+    setLevelProgress["totalLearned"] = totalLearned;
+  }
+
+  private editDateinWordDynamicData(wordId, dateTitle, newState) {
+    // only update date if it is not availaible previously or has been unmarked -- null, and then marked
+    if ((!this.wordsDynamicData[wordId][dateTitle]) && newState) {
+      // if date is empty and newState is true edit the date
+      this.wordsDynamicData[wordId][dateTitle] = (new Date()).toUTCString();
+    }
+    else {
+      // if date is there or newState is false;
+      this.wordsDynamicData[wordId][dateTitle] = null;
+    }
+  }
+
+  private updateDynamicSet(wordID, dynamicSetName, isToAdd: boolean) {
+    // first check if it already exist or not...
+    let oneSetData = this.allSetData.allWordOfSets[dynamicSetName];
+    if (!oneSetData) {
+      // boundary cases
+      oneSetData = [];
+      this.allSetData.allWordOfSets[dynamicSetName] = oneSetData;
+    }
+    if (!(oneSetData.includes(wordID)) && isToAdd) {
+      oneSetData.push(wordID);
+    }
+    else if (!isToAdd) {
+      const index = oneSetData.indexOf(wordID);
+      if (index > -1) {
+        oneSetData.splice(index, 1);
+      }
+    }
   }
 
   public reSetApp() {
     this.storage.clear().then(data => {
-      this.processSetDataIfNotExist();
-      this.ProcessWordDynamicDataIfNotExist();
+      this.reStartSetDynamicData();
+      this.reStartWordDynamicData();
       this.presentToast("All progress has been Reset."); // to save the session data from getting destroyed
     });
   }
@@ -218,13 +519,6 @@ export class DatabaseService {
     return this.storage.set(STORAGE_KEY_SetData, data);
   }
 
-  public getSessionDataFromStorage(): Promise<appSessionData> {
-    return this.storage.get(STORAGE_KEY_sessionData);
-  }
-  // not having a checker but should be checked before using it
-  public setSessionDatainStorage() {
-    return this.storage.set(STORAGE_KEY_sessionData, this.appSessionData);
-  }
 
   // this will shuffle the given array
   public shuffle(array) {
@@ -247,33 +541,4 @@ export class DatabaseService {
     return array;
   }
 
-  public sortIdsAlphabetically(WordIds: string[]) {
-    if (!this.allWordsData) {
-      return; // will call again after the data is set
-    }
-
-    let FeedListtoSort = [];
-    for (let wordID of WordIds) {
-      let crntData = {};
-      crntData["word"] = this.allWordsData[wordID][1];
-      crntData["id"] = wordID;
-      FeedListtoSort.push(crntData);
-    }
-    FeedListtoSort.sort(this.compareForsortAlphabetically);
-    let index = 0;
-    for (let sortedList of FeedListtoSort) {
-      WordIds[index] = sortedList["id"]; // this will updated the current object without removing the object
-      index++;
-    }
-  }
-
-  compareForsortAlphabetically(wordsData1, wordsData2) {
-    if (wordsData1["word"] < wordsData2["word"]) {
-      return -1;
-    }
-    if (wordsData1["word"] > wordsData2["word"]) {
-      return 1;
-    }
-    return 0;
-  }
 }

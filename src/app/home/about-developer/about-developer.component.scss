@@ -4,13 +4,13 @@
   }
 
 
-  
+
   .center {
     display: table;
     width: 100%;
     height: 100vh;
   }
-  
+
   #social-test {
     display: table-cell;
     vertical-align: middle;
@@ -43,27 +43,27 @@
       }
     }
   }
-  
+
   .social:hover > li {
     opacity: 0.5;
   }
-  
+
   .social:hover > li:hover {
     opacity: 1;
   }
 
   .text{
-    color: var(--app-modalContent-color);
+    color: var(--app-sideMenu-text-color);
     // color= "primary";
     font-size: smaller;
   }
 
   .modalContent{
-    --background: var(--app-modalContent-background);
-    --color : var(--app-modalContent-color)
+    --background: var(--learn-background-color);
+    --color : var(--app-sideMenu-text-color);
 }
 
 .modalToolbar{
-    --background: var(--app-modalToolbar-background);
+    --background: var(--app-mainToolbar-background);
     --color: var(--app-modalToolbar-color);
   }

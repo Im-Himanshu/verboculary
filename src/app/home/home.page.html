@@ -1,139 +1,56 @@
-<ion-menu
-  class="sideMenu"
-  side="end"
-  swipe-gesture="true"
-  menuId="first"
-  contentId="mainContent"
->
+<ion-menu class="sideMenu" side="start" swipe-gesture="true" menuId="first" contentId="mainContent">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
+
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Verboculary</ion-title>
+      <ion-title (click)="goToUrl('/mainmodule/base/dashboard') " class="titleicon">GRE Ninja</ion-title>
 
       <img slot="secondary" src="assets/logo.png" height="58px" />
     </ion-toolbar>
   </ion-header>
 
   <ion-content fullscreen>
-    <ion-list *ngIf="isProcessed">
-      <ion-item>
-        <ion-icon
-          class="listIcon headerColor"
-          name="options"
-          slot="start"
-        ></ion-icon>
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Filters
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <ion-list class="filterItem" *ngIf="isProcessed">
-            <ion-item>
-              <ion-label>Category</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="categoryChanged($event)"
-                [(ngModel)]="selectedCategory"
-                [compareWith]="compareWith_category"
-              >
-                <ion-select-option
-                  [value]="oneCategory"
-                  *ngFor="let oneCategory of allCategoryType"
-                  >{{oneCategory}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>Type</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="setChanged($event)"
-                [(ngModel)]="selectedSet"
-                [compareWith]="compareWith_set"
-                multiple="isMultiple"
-              >
-                <ion-select-option [value]="'All'"
-                  >Select All</ion-select-option
-                >
-                <ion-select-option
-                  [value]="oneSet"
-                  *ngFor="let oneSet of allSetOfcategory[selectedCategory]"
-                  >{{oneSet}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Filter</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="filterChanged($event)"
-                [(ngModel)]="selectedFilter"
-                [compareWith]="compareWith_category"
-              >
-                <ion-select-option [value]="'all'">All</ion-select-option>
-                <ion-select-option [value]="'starred'"
-                  >Starred</ion-select-option
-                >
-                <ion-select-option [value]="'Non-Starred'"
-                  >Non-Starred</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Sort</ion-label>
-              <ion-select
-                interface="popover"
-                (ionChange)="sortingChanged($event)"
-                [(ngModel)]="selectedSorting"
-                [compareWith]="compareWith_category"
-              >
-                <ion-select-option [value]="'shuffle'"
-                  >Shuffle</ion-select-option
-                >
-                <ion-select-option [value]="'alphabetically'"
-                  >Alphabetically</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-          </ion-list>
-        </mat-expansion-panel>
-      </ion-item>
-
-      <ion-item (click)="presentHowToUseModal()">
+    <ion-list>
+      <ion-item (click)="presentHowToUseModal()" class="side-menu-label">
         <ion-icon name="help-circle" slot="start"></ion-icon>
         <ion-label>How To Use?</ion-label>
       </ion-item>
 
-      <ion-item>
+      <ion-item (click)="sharingService.onShareApp()" class="side-menu-label">
         <ion-icon name="share" slot="start"></ion-icon>
         <ion-label>Share app</ion-label>
       </ion-item>
-      <ion-item (click)="presentRatingAlert()">
+      <ion-item (click)="rate()" class="side-menu-label">
         <ion-icon name="star-outline" slot="start"></ion-icon>
         <ion-label>Rate Us</ion-label>
       </ion-item>
-      <ion-item (click)="presentModal()">
+      <ion-item (click)="presentModal()" class="side-menu-label">
         <ion-icon name="bonfire" slot="start"></ion-icon>
         <ion-label>About Developer</ion-label>
       </ion-item>
-      <ion-item (click)="presentAlertConfirm()">
+      <ion-item (click)="presentAlertConfirm()" class="side-menu-label">
         <ion-icon name="refresh-circle" slot="start"></ion-icon>
         <ion-label>Reset App</ion-label>
       </ion-item>
-      <!-- <ion-item>
+      <ion-item>
         <ion-icon name="settings" slot="start"></ion-icon>
-        <ion-label>Settings</ion-label>
-      </ion-item> -->
+        <ion-label class="side-menu-label">Settings</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label class="side-menu-label">{{themeService.value}}</ion-label>
+        <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)"
+          [(checked)]="themeService.checked" style="--handle-background: var(--toggle-button-color);"></ion-toggle>
+        <!-- <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle> -->
+      </ion-item>
+
       <!-- <ion-item >
                 <ion-icon name="settings" slot="start"></ion-icon>
                 <ion-label>Theme</ion-label>
                 <ion-select interface="popover" (ionChange)="changeAppTheme()"[(ngModel)]="selectedTheme"
                   [compareWith]="compareWith_category">
-                  
+
                   <ion-select-option [value] = "'default'">Default</ion-select-option>
                   <ion-select-option [value] = "'darkTheme'">Dark</ion-select-option>
                   <ion-select-option [value] = "'lightTheme'">Light</ion-select-option>
@@ -142,99 +59,97 @@
             </ion-item> -->
     </ion-list>
   </ion-content>
+  <ion-footer class="copyright">
+    Copyright © GRE Ninja 2020 All Rights Reserved
+  </ion-footer>
 </ion-menu>
 
 <div class="ion-page" id="mainContent" main>
   <ion-header translucent>
     <ion-toolbar class="mainToolbar">
-      <img slot="start" src="assets/logo.png" height="63px" />
-      <!-- <img src="assets/logo.png" alt="appIcon"> -->
-      <ion-title class="titleicon">{{appTitle}}</ion-title>
-      <ion-buttons slot="secondary">
+      <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <img slot="start" src="assets/logo.png" height="50px" />
+      <!-- <img src="assets/logo.png" alt="appIcon"> -->
+      <ion-title (click)="goToUrl('/mainmodule/base/dashboard') " class="titleicon">{{appTitle}}</ion-title>
+      <ion-buttons slot="secondary">
+        <!-- <ion-searchbar id="searchBar"
+          [ngStyle]="{'visibility': (this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch) ? 'visible' : 'hidden'}"
+          inputmode="text" placeholder="Enter Word to search" showCancelButton="always"
+          (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())">
+        </ion-searchbar> -->
+        <ion-searchbar id="searchBar" *ngIf="this.db.isToShowSearchBar && !db.isToRemoveCompleteSearch" inputmode="text"
+          placeholder="Enter Word to search" showCancelButton="always"
+          (ionChange)="db.onSearchQueryChange($event.target.value.toLowerCase())"
+          style="--background: var(--search-bar-color); --color: var(--search-bar-text-color); --cancel-button-color: var(--search-bar-text-color); --clear-button-color: var(--search-bar-text-color);">
+        </ion-searchbar>
+        <ion-icon *ngIf="((!this.db.isToShowSearchBar) && !db.isToRemoveCompleteSearch)" (click)="searchIconClicked()"
+          slot="start" name="search"></ion-icon>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-tabs class="tabs">
-      <ion-tab-bar class="navigatonMenubar" slot="top">
-        <ion-tab-button tab="allWords">
-          <ion-icon name="calendar"></ion-icon>
-          <ion-label>All Words</ion-label>
-          <ion-badge>{{totalWordsCount}}</ion-badge>
-        </ion-tab-button>
-        <ion-tab-button tab="learn">
-          <ion-icon name="paper"></ion-icon>
-          <ion-label>Learn Set</ion-label>
-        </ion-tab-button>
-        <ion-tab-button tab="practise">
-          <ion-icon name="body"></ion-icon>
-          <ion-label>Practise</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-      <ion-tab-bar
-        *ngIf="isProcessed"
-        class="selectedFilterTabbar"
-        slot="top"
-        style="height: 43px;"
-      >
-        <ion-toolbar
-          class="selectedfilterToolbar"
-          style="width: 100%;padding-left: 15px;"
-        >
-          <mat-chip-list aria-label="Filter Selection">
-            <mat-chip class="categoryChip">{{selectedCategory}}</mat-chip>
-            <mat-chip
-              class="filterChip"
-              removable="true"
-              (removed)="removeFilter()"
-              *ngIf="selectedFilter !== 'all' "
-              selected
-            >
-              <ion-buttons style="float:left">
-                <ion-icon
-                  *ngIf="selectedFilter === 'starred'"
-                  name="star"
-                ></ion-icon>
-                <ion-icon
-                  *ngIf="selectedFilter === 'Non-Starred'"
-                  name="star-outline"
-                ></ion-icon>
-              </ion-buttons>
-              {{selectedFilter}}
-
-              <ion-icon matChipRemove name="close"></ion-icon>
-            </mat-chip>
-            <mat-chip
-              class="setChip"
-              removable="true"
-              (removed)="removeSet(oneSet)"
-              *ngFor="let oneSet of (selectedSet.length<=titleThreshold)? selectedSet : selectedSet.slice(0,titleThreshold)"
-            >
-              {{oneSet}}
-              <ion-icon matChipRemove name="close"></ion-icon>
-            </mat-chip>
-            <mat-chip
-              class="setChip"
-              *ngIf="selectedSet.length>titleThreshold"
-              removable="true"
-              (removed)="removeSet('tails')"
-            >
-              {{"+"+(selectedSet.length-titleThreshold)+" more"}}
-              <ion-icon matChipRemove name="close"></ion-icon>
-            </mat-chip>
-          </mat-chip-list>
-
-          <ion-buttons
-            slot="secondary"
-            style="margin-left: -9px;margin-right: -11px;"
-          >
-            <ion-menu-button>
-              <ion-icon name="settings"></ion-icon>
-            </ion-menu-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-tab-bar>
-    </ion-tabs>
+    <ion-router-outlet>
+    </ion-router-outlet>
   </ion-content>
+
+  <ion-footer class="no-padding" [hidden]="!this.podcast.isPlayerActive" size="fixed">
+    <ion-toolbar color="dark">
+
+      <div class="mainPlayer">
+        <div class="rangeSlider">
+          <ion-range #range [(ngModel)]="this.podcast.progress" max="100" color="success" (touchend)="seek()"
+            style="height: 16px;" (mouseup)="seek()"></ion-range>
+
+        </div>
+        <div class="playerControl">
+
+          <div style="width: 16%;">
+            <ion-button fill="clear" (click)="close()" color="light">
+              <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+            </ion-button>
+          </div>
+          <div style="width: 88%;" class="wordDescription"
+            (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.podcast.currId)">
+            <div style="font-size: 20px;">
+              <span>{{ this.db.allWordsData[this.podcast.currId][1] | titlecase}}</span>
+            </div>
+            <div style="font-size: 12px;">
+              <div behavior="" direction="left" style="overflow: hidden;
+              height: 12px;
+              text-overflow: ellipsis;">
+                {{ this.db.allWordsData[this.podcast.currId][2]  }}
+              </div>
+
+            </div>
+          </div>
+          <div style="width: 58%;" class="controlButton">
+            <ion-button fill="clear" (click)="prev()" color="light">
+              <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+            </ion-button>
+
+            <ion-button fill="clear" (click)="tooglePlayer(false)"
+              *ngIf="!this.podcast.isPlayerPlaying && !this.podcast.isInTransition" color="light">
+              <ion-icon slot="icon-only" name="play"></ion-icon>
+            </ion-button>
+
+            <ion-button fill="clear" (click)="tooglePlayer(true)"
+              *ngIf="this.podcast.isPlayerPlaying && !this.podcast.isInTransition" color="light">
+              <ion-icon slot="icon-only" name="pause"></ion-icon>
+            </ion-button>
+            <ion-spinner name="lines-small" *ngIf="this.podcast.isInTransition"></ion-spinner>
+
+            <ion-button fill="clear" (click)="next()" color="light">
+              <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+            </ion-button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- -->
+    </ion-toolbar>
+  </ion-footer>
 </div>

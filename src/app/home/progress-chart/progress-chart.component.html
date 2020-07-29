@@ -5,9 +5,14 @@
     <canvas #chart baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
       [colors]="lineChartColors" [legend]="true" (chartClick)="onChartClick($event)">
     </canvas>
-  </div>
 
+  </div>
 
   <canvas id="canvas">
   </canvas>
+
+  <div *ngIf="noDataParsed">
+    Your Progress will appear here, let's get started
+  </div>
+
 </div>

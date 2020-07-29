@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../services/data-base.service';
+import { wordToIdMap } from '../../wordToId';
+import { AppRateService } from '../services/app-rate.service';
+import { AdmobSerService } from '../services/admob-ser.service';
+import { PodcastService } from '../services/podcast.service'
+import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
+
 
 @Component({
   selector: 'app-view',
@@ -7,54 +14,102 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewComponent implements OnInit {
   wordlist = null;
-  selectedSorting: string = "alpha";
+  selectedSorting: string = "shuffel";
   selectedFilter: string = "all"
+  id = wordToIdMap;
+  allSelectedWordIDs: string[];
+  allWordsData: any;
+  wordsDynamicData: any;
+  isWordopen: any = {}; // {id:boolean}
+  isToTakeNote: any = {};
+  wordState: any = {}; // save isOpen, isToShowNote
+  wordArray: any[];
+  sortedAllSelectedWordIds: string[] = [];
+  selectedSet;
+  shuffleIt = true;
+  appNametoUINameMapping = new appNameToUINameMapping().appNametoUINamemapping;
 
 
   sortingTypes = [
+    { value: 'shuffel', viewValue: 'Shuffeled' }, // default state
     { value: 'alpha', viewValue: 'Alphabetical' },
-    { value: 'shuffel', viewValue: 'Shuffeled' }
   ];
   filterTypes = [
     { value: 'all', viewValue: 'All' },
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor() {
+  constructor(public db: DatabaseService, private apprate: AppRateService, private admob: AdmobSerService, public podcast: PodcastService) {
+    this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
+    this.allWordsData = this.db.allWordsData;
+    this.wordsDynamicData = this.db.wordsDynamicData;
 
-    this.wordlist = [
-      { word: "First", meaning: "a very very very long text goes here so that we can see how it wraps with the other element", isOpen: false, isToTakeNote: false, isBookMarked: true },
-      { word: "Second", meaning: "Second's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true },
-      { word: "Third", meaning: "Third's meaning", isOpen: false, isToTakeNote: false, isBookMarked: false },
-      { word: "Fourth", meaning: "Fourth's meaning", isOpen: false, isToTakeNote: false, isBookMarked: true }
-    ]
+    this.selectedSet = this.db.selectedSet;
+    this.admob.showBannerAdd();
+    this.apprate.showAppRate();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
 
-  onWordClickToggleit(word: any) {
-    word.isOpen = !word.isOpen;
+    //this.db.changeSortingOfIds("alpha")
   }
 
-  takeNoteToggle(event, word: any) {
-    word.isToTakeNote = !word.isToTakeNote;
-    event.stopPropagation();
+  ngOnDestroy() {
+    //this.saveDynamicData();
   }
 
-  toggleBookMark(event, word: any) {
-    word.isBookMarked = !word.isBookMarked
-    event.stopPropagation();
 
-  }
+
   changeFilter(event) {
-    console.log("Filter Changed")
+    this.db.filterSelectedIDBasedOnGivenCriterion(event.value);
+    this.selectedSorting = "shuffel";
+  }
 
+  shuffleButton(event) {
+    this.shuffleIt = !this.shuffleIt;
+    this.db.changeSortingOfIds(event.currentTarget.attributes.value.nodeValue);
   }
   changeSorting(event) {
-    console.log("sorting chnaged")
-
+    this.db.changeSortingOfIds(event.value)
   }
 
+  onWordClickToggleit(wordId: any) {
+    if (!this.isWordopen[wordId]) {
+      this.isWordopen[wordId] = false;
+    }
+    this.isWordopen[wordId] = !this.isWordopen[wordId];
+    event.stopPropagation();
+  }
+
+  takeNoteToggle(event, wordId: any) {
+    if (!this.isToTakeNote[wordId]) {
+      this.isToTakeNote[wordId] = false;
+    }
+    this.isToTakeNote[wordId] = !this.isToTakeNote[wordId];
+    event.stopPropagation();
+  }
+
+  toggleBookMark(event, wordId: any) {
+    // this function will handle all the complexity inside this
+    this.db.changeWordIdState(wordId, 'isMarked', !this.wordsDynamicData[wordId]['isMarked']);
+    event.stopPropagation();
+  }
+
+  togglePlaying(wordId, isToPlayAll?) {
+    if (this.podcast.isPlayerPlaying) {
+      if (this.podcast.currId == wordId) {
+        this.podcast.playPauseGivenId(wordId, false, isToPlayAll) // pause the current id
+      }
+      else {
+        // will play a given new word...
+        this.podcast.playPauseGivenId(wordId, true, isToPlayAll)
+      }
+    }
+    else {
+      // if player is not playing then play it
+      this.podcast.playPauseGivenId(wordId, true, isToPlayAll)
+    }
+  }
 
 
 }

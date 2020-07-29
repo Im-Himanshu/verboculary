@@ -1,0 +1,32 @@
+.beginner-inner{
+    fill: var(--beginner-outer-color);
+}
+
+.beginner-outer{
+    fill: var(--beginner-inner-color);
+}
+
+.transitional-outer{
+    fill: var(--transitional-outer-color);
+}
+
+.transitional-inner{
+    fill: var(--transitional-inner-color);
+}
+
+.pro-outer{
+    fill: var(--pro-outer-color);
+}
+
+.pro-inner{
+    fill: var(--pro-inner-color);
+}
+
+.book-mark{
+    stroke: var(--book-mark-color);
+}
+
+.selected-book-mark{
+    stroke: var(--book-mark-color);
+    fill: var(--book-mark-color);
+}

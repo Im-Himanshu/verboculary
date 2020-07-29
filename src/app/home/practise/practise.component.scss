@@ -1,10 +1,14 @@
 .practiseContent{
   --background:var(--app-practiseContent-background);
-  
 }
 
 .progressBar{
   --buffer-background	: var(--app-practiseProgressBarbuffer-background);
+}
+
+.ioncontentheight{
+  height: 50vh;
+
 }
 
 
@@ -47,7 +51,7 @@
   }
 
   .alignMiddle{
-    top : 0%
+    top : 13vh;
   }
   .iframe{
     width: 100%;
