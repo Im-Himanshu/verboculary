@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
 import { wordToIdMap } from '../../wordToId';
-import { AppRateService } from '../services/app-rate.service';
 import { AdmobSerService } from '../services/admob-ser.service';
 import { PodcastService } from '../services/podcast.service'
 import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
@@ -39,14 +38,13 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(public db: DatabaseService, private apprate: AppRateService, private admob: AdmobSerService, public podcast: PodcastService) {
+  constructor(public db: DatabaseService,private admob: AdmobSerService, public podcast: PodcastService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
 
     this.selectedSet = this.db.selectedSet;
     this.admob.showBannerAdd();
-    this.apprate.showAppRate();
   }
 
   ngOnInit() {

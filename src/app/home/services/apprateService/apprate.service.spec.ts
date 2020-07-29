@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppRateService } from './app-rate.service';
+import { ApprateService } from './apprate.service';
 
-describe('AppRateService', () => {
+describe('ApprateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AppRateService = TestBed.get(AppRateService);
+    const service: ApprateService = TestBed.get(ApprateService);
     expect(service).toBeTruthy();
   });
 });

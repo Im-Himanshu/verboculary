@@ -9,11 +9,12 @@ import { HowToUseComponent } from './how-to-use/how-to-use.component'
 import { ThemeChangeService } from './services/theme-change.service'
 import { SharingServiceService } from './services/sharing-service.service';
 import { Router } from '@angular/router';
-import { AppRateService } from './services/app-rate.service';
 
 import { AdmobSerService } from './services/admob-ser.service';
 import { Storage } from '@ionic/storage';
 import { PodcastService } from './services/podcast.service';
+
+import { ApprateService } from './services/apprateService/apprate.service';
 
 @Component({
   selector: 'app-home',
@@ -43,11 +44,12 @@ export class HomePage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public appRateService: AppRateService, public admob: AdmobSerService, private storage: Storage, public podcast: PodcastService) {
+  constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public admob: AdmobSerService, private storage: Storage, public podcast: PodcastService,
+    private apprate : ApprateService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.showFullscreenAdd();
-
+    this.apprate.presentRateUs();
   }
   ngOnInit() {
     // this.themeService.setMode(this.themeService.mode);
@@ -215,9 +217,6 @@ export class HomePage implements OnInit {
     this.podcast.closePodcast();
   }
 
-  rateapp() {
-    this.appRateService.triggerRateApp();
-  }
 
   showFullscreenAdd() {
     this.storage.get("loginCount").then(data => {
