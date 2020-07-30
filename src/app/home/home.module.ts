@@ -67,10 +67,6 @@ import {
 import { DatePipe } from "@angular/common";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
-//rate-App
-import { AppRate } from '@ionic-native/app-rate/ngx';
-import { AppRateComponent } from "./POCs/app-rate/app-rate.component";
-
 //podcast
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
 
@@ -123,7 +119,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     AdMobComponent,
     AudioComponent,
     SwiperComponent,
-    AppRateComponent,
     DrawerComponent,
   ],
   providers: [
@@ -141,7 +136,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     File,
     DatePipe,
     MusicControls,
-    AppRate,
     Screenshot,
   ],
   entryComponents: [

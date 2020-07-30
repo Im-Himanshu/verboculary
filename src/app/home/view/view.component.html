@@ -98,9 +98,9 @@
 
             </div>
 
-            <div *ngIf="(isWordopen[oneWordId]) && (isToTakeNote[oneWordId] || wordsDynamicData[oneWordId][notes])"
+            <div *ngIf="(isWordopen[oneWordId]) && (isToTakeNote[oneWordId] || wordsDynamicData[oneWordId]['notes'])"
               class="fourthRow">
-              <textarea [(ngModel)]="wordsDynamicData[oneWordId]['Notes']" class="textArea" rows="4" cols="50"
+              <textarea [(ngModel)]="wordsDynamicData[oneWordId]['notes']" class="textArea" rows="4" cols="50"
                 placeholder="Make a Note to remember this word"></textarea>
 
             </div>

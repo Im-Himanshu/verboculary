@@ -61,8 +61,8 @@ export class DashBoardComponent implements OnInit {
 
   }
 
-  onScreenshot(event){
-    this.screenshot.URI(80).then(res=> {
+  onScreenshot(event) {
+    this.screenshot.URI(80).then(res => {
       this.shareService.onShareImage(res.URI);
     })
   }
@@ -184,5 +184,7 @@ export class DashBoardComponent implements OnInit {
   scrollToTop() {
     this.ionScroll.scrollToTop(1000);
   }
+
+  scrollToElement(element) { }
 
 }

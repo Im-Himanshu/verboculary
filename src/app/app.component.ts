@@ -14,7 +14,7 @@ import { InappNotificationService } from './home/services/inapp-notification.ser
 })
 export class AppComponent {
 
-  private isAppReady = false;
+  public isAppReady = false;
 
   //deeplinks will work like verboculary://url_ahead.com
 

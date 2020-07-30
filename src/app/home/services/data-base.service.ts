@@ -246,6 +246,7 @@ export class DatabaseService {
             wordData.correctCount = 0;
             wordData.learnedDate = null;
             wordData.viewedDate = null;
+            wordData.notes = null;
           }
         }
         this.setAllWordsStateinStorage(allWords);
@@ -364,7 +365,7 @@ export class DatabaseService {
     let data = this.allSetData;
     let adTrigger = data.setLevelProgressData;
     if (!(adTrigger[this.selectedSet]["isAdShown"])) {
-      if (adTrigger[this.selectedSet]["totalViewed"] >= adTrigger[this.selectedSet]["totalWords"]) {
+      if (adTrigger[this.selectedSet]["totalViewed"] >= adTrigger[this.selectedSet]["totalWords"] && adTrigger[this.selectedSet]["totalViewed"] != 0) {
         this.admob.showAdMobFreeRewardVideoAds();
         data.setLevelProgressData[this.selectedSet]["isAdShown"] = true;
         console.log("Reward Video Ad is Shown");

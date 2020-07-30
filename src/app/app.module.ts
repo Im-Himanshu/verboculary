@@ -27,7 +27,6 @@ import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
 import { SlidesComponent } from './home/POCs/slides/slides.component'
 import { Media } from "@ionic-native/media/ngx";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
-import { AppRate } from '@ionic-native/app-rate/ngx';
 
 import{ MusicControls } from "@ionic-native/music-controls/ngx";
 import { AdMobFree } from "@ionic-native/admob-free/ngx";
@@ -78,7 +77,6 @@ var firebaseConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
     Media,
-    AppRate,
     MusicControls,
     AdMobFree,
     LocalNotifications,
