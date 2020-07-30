@@ -46,7 +46,7 @@ export class LearnComponent implements OnInit {
 
 
 
-  constructor(private screenshot: Screenshot, public db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router, private podcast: PodcastService) {
+  constructor(private screenshot: Screenshot, public db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router, public podcast: PodcastService) {
 
     this.selectedSet = this.db.selectedSet;
 

@@ -1,7 +1,7 @@
 <div class="wordsetmain">
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-button-top">
-    <ion-fab-button class="fab-button">
+    <ion-fab-button class="fab-button" *ngIf="this.FabButtonVisible">
       <div class="filtericon">
         <svg-icon name="filter"></svg-icon>
         <ion-badge class="selectedBadge" slot="end">{{this.db.allSelectedWordIdsFiltered.length}}</ion-badge>

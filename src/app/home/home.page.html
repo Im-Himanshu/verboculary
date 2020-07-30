@@ -13,37 +13,50 @@
 
   <ion-content fullscreen>
     <ion-list>
+
       <ion-item (click)="presentHowToUseModal()" class="side-menu-label">
         <ion-icon name="help-circle" slot="start"></ion-icon>
         <ion-label>How To Use?</ion-label>
+      </ion-item>
+
+      <ion-item (click)="presentModal()" class="side-menu-label">
+        <ion-icon name="bonfire" slot="start"></ion-icon>
+        <ion-label>About Developer</ion-label>
+      </ion-item>
+
+      <ion-item (click)="presentAlertConfirm()" class="side-menu-label">
+        <ion-icon name="refresh-circle" slot="start"></ion-icon>
+        <ion-label>Reset App</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="settings" slot="start"></ion-icon>
+        <ion-label class="side-menu-label">Settings</ion-label>
       </ion-item>
 
       <ion-item (click)="sharingService.onShareApp()" class="side-menu-label">
         <ion-icon name="share" slot="start"></ion-icon>
         <ion-label>Share app</ion-label>
       </ion-item>
+
       <ion-item (click)="rate()" class="side-menu-label">
         <ion-icon name="star-outline" slot="start"></ion-icon>
         <ion-label>Rate Us</ion-label>
       </ion-item>
-      <ion-item (click)="presentModal()" class="side-menu-label">
-        <ion-icon name="bonfire" slot="start"></ion-icon>
-        <ion-label>About Developer</ion-label>
-      </ion-item>
-      <ion-item (click)="presentAlertConfirm()" class="side-menu-label">
-        <ion-icon name="refresh-circle" slot="start"></ion-icon>
-        <ion-label>Reset App</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="settings" slot="start"></ion-icon>
-        <ion-label class="side-menu-label">Settings</ion-label>
-      </ion-item>
-      <ion-item>
+
+
+      <!-- <ion-item>
         <ion-label class="side-menu-label">{{themeService.value}}</ion-label>
         <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)"
           [(checked)]="themeService.checked" style="--handle-background: var(--toggle-button-color);"></ion-toggle>
-        <!-- <ion-toggle slot="start" name="blackberry" color="light" (click)="toggleMode($event)" checked={{themeService.checked}}></ion-toggle> -->
+      </ion-item> -->
+
+      <ion-item (click)="toggleMode($event)">
+        <ion-icon *ngIf="themeService.checked" slot="start" name="sunny"></ion-icon>
+        <ion-icon *ngIf="!themeService.checked" slot="start" name="moon"></ion-icon>
+        <ion-label class="side-menu-label">Toggle Mode</ion-label>
       </ion-item>
+
 
       <!-- <ion-item >
                 <ion-icon name="settings" slot="start"></ion-icon>
@@ -70,7 +83,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <img slot="start" src="assets/logo.png" height="50px" />
+      <img slot="start" src="assets/logo.png" height="50px" (click)="goToUrl('/mainmodule/base/dashboard')"/>
       <!-- <img src="assets/logo.png" alt="appIcon"> -->
       <ion-title (click)="goToUrl('/mainmodule/base/dashboard') " class="titleicon">{{appTitle}}</ion-title>
       <ion-buttons slot="secondary">

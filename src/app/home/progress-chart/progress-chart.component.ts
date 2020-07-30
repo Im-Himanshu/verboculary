@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit, Input} from '@angular/core';
 import { BaseChartDirective, } from 'ng2-charts';
 import { ChartDataSets } from 'chart.js';
 import { SharingServiceService } from '../services/sharing-service.service'
-import { Screenshot } from '@ionic-native/screenshot';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
 
 @Component({
   selector: 'app-progress-chart',
@@ -38,8 +38,8 @@ export class ProgressChartComponent implements AfterViewInit {
 
   ];
   public lineChartColors;
-  private screenshot: Screenshot;
-  constructor(private shareService: SharingServiceService ) { }
+
+  constructor(private shareService: SharingServiceService, private screenshot: Screenshot) { }
 
   onScreenshot(event){
     this.screenshot.URI(80).then(res=> {
