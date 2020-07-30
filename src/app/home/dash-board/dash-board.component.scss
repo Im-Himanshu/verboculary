@@ -527,7 +527,8 @@ mat-form-field {
   bottom: -4%;
   box-shadow: 0 -3px 12px 1px rgb(0 0 0 / 20%);
   border-radius: 20px;
-  background-color: var(--dashboard-background-color);
+  // background-color: var(--dashboard-background-color);
+  background: var(--dashboard-fixed-header);
 
   transition: 0.1s;
   z-index : 10;
@@ -579,7 +580,6 @@ mat-form-field {
 
   .masterFilter{
       height: 100px;
-      top: 32%;
       width: 100%;
       position: absolute;
       background-color: #ffebcd00 ;

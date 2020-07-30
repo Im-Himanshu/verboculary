@@ -1,5 +1,5 @@
 <div class="backgroundGraph">
-  <div class="chartArea">
+  <div class="chartArea"  *ngIf="isGraphVisible">
     <!-- <div class="share-button-container">
       <ion-icon name="share" (click)="onScreenshot($event)"></ion-icon>
     </div> -->
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div id="masterFilter" class="masterFilter">
+  <div id="masterFilter" class="masterFilter" [ngStyle]="{'top': isGraphVisible? '32%' : '2%'}">
 
     <div class="allMasterCards">
 
@@ -63,7 +63,7 @@
     </div>
 
   </div>
-  <div #mainDiv class="full" style="top:50%; background: var(--dashboard-fixed-header);" id="toMove">
+  <div #mainDiv class="full"  id="toMove" [ngStyle]="{'top': isGraphVisible? '50%' : '18%'}">
 
     <div #parent class="parentBox">
 
@@ -348,6 +348,8 @@
 
       <!-- this router outlet handled routing coming from the sub-routing module -->
     </div>
+
+
   </div>
 
 </div>

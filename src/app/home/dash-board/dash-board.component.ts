@@ -32,6 +32,7 @@ export class DashBoardComponent implements OnInit {
   chartLabelsAndData = {};
   totalScreenHeight;
   heightFromTop
+  isGraphVisible = false;
 
   constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService) {
     this.totalScreenHeight = this.platform.height();
@@ -43,6 +44,9 @@ export class DashBoardComponent implements OnInit {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.setChartResult();
+    if(Object.keys(this.db.allSetData.dateWiseTotalProgressReport).length>1){
+      this.isGraphVisible = true;
+    }
 
 
   }

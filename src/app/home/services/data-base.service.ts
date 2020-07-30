@@ -93,6 +93,7 @@ export class DatabaseService {
   getAllwordsOfSelectedSet() {
     // first process after all the data is laoded from the data base...
     if (this.allSetData) {
+      console.log(Object.keys(this.allSetData.dateWiseTotalProgressReport).length);
       this.allSelectedWordIds = this.allSetData.allWordOfSets[this.selectedSet];
       this.allSetinSelectedCategory = this.allSetData.allSetOfcategory[this.selectedCategory];
       this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
