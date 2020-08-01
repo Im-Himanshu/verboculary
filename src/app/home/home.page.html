@@ -54,7 +54,8 @@
       <ion-item (click)="toggleMode($event)">
         <ion-icon *ngIf="themeService.checked" slot="start" name="sunny"></ion-icon>
         <ion-icon *ngIf="!themeService.checked" slot="start" name="moon"></ion-icon>
-        <ion-label class="side-menu-label">Toggle Mode</ion-label>
+        <ion-label class="side-menu-label" *ngIf="themeService.checked">Light Theme</ion-label>
+        <ion-label class="side-menu-label" *ngIf="!themeService.checked">Dark Theme</ion-label>
       </ion-item>
 
 
