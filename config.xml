@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.GRE.Verboculary" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>GRE Ninja</name>
+    <name>Verboculary</name>
     <description>Master GRE Vocabulary</description>
     <author email="himanshugoyal414@gmail.com" href="http://github.com/ImHimanShoe">Himanshu Goyal</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

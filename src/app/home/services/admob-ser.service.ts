@@ -13,7 +13,7 @@ export class AdmobSerService {
    showInterstitialAds(){
      if (this.AdStatus){
       const interstitialConfig: AdMobFreeInterstitialConfig = {
-        id:'ca-app-pub-7438833190046160/2766623438',
+        id:'ca-app-pub-3699793333730266/2360882025',
         autoShow: true,
         isTesting: false,
 
@@ -30,7 +30,7 @@ export class AdmobSerService {
   showAdMobFreeRewardVideoAds(){
     if (this.AdStatus){
       const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
-        id:'ca-app-pub-7438833190046160/3137609783',
+        id:'ca-app-pub-3699793333730266/3937795372',
         autoShow: true,
         isTesting: false,
       }
@@ -47,7 +47,7 @@ export class AdmobSerService {
     if (this.AdStatus){
 
       const bannerConfig: AdMobFreeBannerConfig = {
-        id : 'ca-app-pub-7438833190046160/3972604334',
+        id : 'ca-app-pub-3699793333730266/1239372043',
         autoShow: true,
         isTesting: false,
         bannerAtTop: false,

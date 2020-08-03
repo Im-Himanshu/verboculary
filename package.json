@@ -51,13 +51,13 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.5",
     "com.darktalker.cordova.screenshot": "^0.1.6",
-    "cordova-admob-sdk": "0.24.1",
+    "cordova-admob-sdk": "^0.24.1",
     "cordova-android": "^8.1.0",
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-play-services-version-adapter": "^1.1.0",
-    "cordova-plugin-admob-free": "0.27.0",
+    "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-androidx": "^2.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.1",
     "cordova-plugin-apprate": "^1.5.0",
@@ -257,7 +257,7 @@
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-admob-free": {
-        "ADMOB_APP_ID": "ca-app-pub-7438833190046160~7459998173"
+        "ADMOB_APP_ID": "ca-app-pub-3699793333730266~2935597099"
       }
     },
     "platforms": [
