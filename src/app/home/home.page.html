@@ -34,6 +34,11 @@
         <ion-label class="side-menu-label">Settings</ion-label>
       </ion-item>
 
+      <ion-item (click)="this.admob.presentAlert()" class="side-menu-label">
+        <ion-icon slot="start" name="logo-bitcoin"></ion-icon>
+        <ion-label>Rewards</ion-label>
+      </ion-item>
+
       <ion-item (click)="sharingService.onShareApp()" class="side-menu-label">
         <ion-icon name="share" slot="start"></ion-icon>
         <ion-label>Share app</ion-label>

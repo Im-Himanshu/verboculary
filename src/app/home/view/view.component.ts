@@ -48,7 +48,6 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit() {
-
     //this.db.changeSortingOfIds("alpha")
   }
 

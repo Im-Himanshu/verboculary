@@ -1,14 +1,35 @@
 import { Injectable } from '@angular/core';
 import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeRewardVideoConfig,AdMobFreeInterstitialConfig } from '@ionic-native/admob-free/ngx';
+import { Storage } from '@ionic/storage';
+import { AdmobConfig } from '../interfaces/admob-config';
+import { AlertController } from '@ionic/angular';
+import { Button } from 'protractor';
+
+const STORAGE_KEY_AdmobSessionData = "admobSettings";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdmobSerService {
 
-  AdStatus = true;
+  AdStatus;
+  points;
+  admobConfig = {} as AdmobConfig;
 
-  constructor(public admob: AdMobFree) {}
+  constructor(public admob: AdMobFree, public storage: Storage, public alertController: AlertController) {
+    this.getAdmobConfig().then(data => {
+      if (data) {
+        this.admobConfig = data;
+        this.AdStatus = this.admobConfig.Adstatus;
+        this.checkAdStatus();
+      } else {
+        this.admobConfig.Adstatus = true;
+        this.admobConfig.expireDate = null;
+        this.admobConfig.points = 0;
+        this.setAdmobConfig(this.admobConfig);
+      }
+    });
+  }
 
    showInterstitialAds(){
      if (this.AdStatus){
@@ -28,7 +49,7 @@ export class AdmobSerService {
     }
 
   showAdMobFreeRewardVideoAds(){
-    if (this.AdStatus){
+    if (true){
       const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
         id:'ca-app-pub-3699793333730266/3937795372',
         autoShow: true,
@@ -38,8 +59,11 @@ export class AdmobSerService {
       this.admob.rewardVideo.config(rewardVideoConfig);
       this.admob.rewardVideo.prepare().then(() =>
       {
-        
-      }).then(e => console.log(e));
+        console.log("SUCCESS")
+        document.addEventListener(this.admob.events.REWARD_VIDEO_REWARD, (result) => {
+          this.WatchedAd();
+        });
+      }).then(e => console.log(e)); 
     }
   }
 
@@ -61,4 +85,50 @@ export class AdmobSerService {
     }
   }
 
+  WatchedAd() {
+    let today = new Date();
+    this.admobConfig.expireDate = new Date(today.getFullYear(),today.getMonth(),today.getDate() + 1);
+    this.admobConfig.Adstatus = false;
+    this.admobConfig.points = 0;
+    this.setAdmobConfig(this.admobConfig); 
+  }
+
+  checkAdStatus(){
+    let today = new Date();
+    
+    if(today >= this.admobConfig.expireDate && this.admobConfig.expireDate != null) {
+      this.admobConfig.Adstatus = true;
+      this.admobConfig.expireDate = null;
+      this.AdStatus = true;
+      this.setAdmobConfig(this.admobConfig);
+    }
+  }
+
+  setAdmobConfig(x){
+    this.storage.set(STORAGE_KEY_AdmobSessionData,x);
+  }
+
+  getAdmobConfig(){
+    return this.storage.get(STORAGE_KEY_AdmobSessionData);
+  }
+
+  async presentAlert() {
+    const alert =await this.alertController.create({
+      header: 'Reward',
+      subHeader: 'Watching Video Ads Disable Ads for 24 Hours!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            this.showAdMobFreeRewardVideoAds();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }

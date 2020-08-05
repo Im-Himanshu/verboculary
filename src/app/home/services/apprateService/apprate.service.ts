@@ -15,12 +15,12 @@ export class ApprateService {
     return this.storage.get("loginCount");
   }
 
-  presentRateUs(){
+  async presentRateUs(){
     this.getLoginCount().then(data => {
       this.loginCount = data;
     });
     if(this.loginCount == 30) {
-      this.alertController.create({
+      const alert = await this.alertController.create({
         header: "Enjoying Using Verboculary",
         subHeader: "Please rate us",
         buttons: [
@@ -35,7 +35,8 @@ export class ApprateService {
             }
           }
         ],
-      }).then(res => res.present());
+      });
+      await alert.present();
     }
   }
 
