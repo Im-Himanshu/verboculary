@@ -167,6 +167,7 @@
   //#cccccc -- selected White
       --tertiary : #3d708b;
       --tertiaryContrast : #fff;
+      --box-shadowColor : #141422;
 
       --app-mainToolbar-background :var(--primary-dark);
       --app-mainToolbar-color : var(--primary-contrast);
@@ -327,6 +328,7 @@
     --primary-light:#452b4f;
     --primarylight-contrast: rgb(255, 255, 255); //#F5F5F6;
     --primary-dark: #00000b; //
+    --box-shadowColor : #00000038;
 
     --secondary: green;
 
@@ -381,6 +383,7 @@
     --app-learnWordsContent-color: var(--cardTextColor);
     --app-learnWordsCard-background: var(--cardBackground);
     --app-learnWordTogglehandle-background: var(--app-navigatonMenubar-color);
+    --app-learnWordToggleChecked-background :var(--primary);
 
     --app-learnWordsChangeButton-background: var(
       --app-navigatonMenubar-background

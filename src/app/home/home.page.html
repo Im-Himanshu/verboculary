@@ -29,19 +29,19 @@
         <ion-label>Reset App</ion-label>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-icon name="settings" slot="start"></ion-icon>
         <ion-label class="side-menu-label">Settings</ion-label>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item (click)="this.admob.presentAlert()" class="side-menu-label">
-        <ion-icon slot="start" name="logo-bitcoin"></ion-icon>
-        <ion-label>Rewards</ion-label>
+        <ion-icon slot="start" name="hand"></ion-icon>
+        <ion-label>Remove Adds</ion-label>
       </ion-item>
 
       <ion-item (click)="sharingService.onShareApp()" class="side-menu-label">
         <ion-icon name="share" slot="start"></ion-icon>
-        <ion-label>Share app</ion-label>
+        <ion-label>Share App</ion-label>
       </ion-item>
 
       <ion-item (click)="rate()" class="side-menu-label">
@@ -59,8 +59,8 @@
       <ion-item (click)="toggleMode($event)">
         <ion-icon *ngIf="themeService.checked" slot="start" name="sunny"></ion-icon>
         <ion-icon *ngIf="!themeService.checked" slot="start" name="moon"></ion-icon>
-        <ion-label class="side-menu-label" *ngIf="themeService.checked">Light Theme</ion-label>
-        <ion-label class="side-menu-label" *ngIf="!themeService.checked">Dark Theme</ion-label>
+        <ion-label class="side-menu-label" *ngIf="themeService.checked">Change Theme : Dark</ion-label>
+        <ion-label class="side-menu-label" *ngIf="!themeService.checked">Change Theme : Light</ion-label>
       </ion-item>
 
 

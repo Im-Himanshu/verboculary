@@ -2,7 +2,11 @@
   height: 75vh;
   // width: 100%;
 }
-
+.mainLearnCard{
+  box-shadow: 2px 2px 7px 1px var(--box-shadowColor);
+  width: 94%;
+  margin-left: 3%;
+}
 .learnWordsContent {
   --background: var(--learn-background-color);
   ion-card {
@@ -53,17 +57,25 @@
   font-size: 27px;
   position: absolute;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: -3%;
+}
+.learnCards{
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  margin-left: 4%;  
+  position: relative;
+
 }
 
 .starbutton {
-  right: 1px;
+  right: -4%;
   top: 1px;
   font-size: 27px;
   position: absolute;
   margin-right: 5px;
   margin-top: 7px;
-  color: #cdd9e4;
+  // color: #cdd9e4;
 }
 .seenButton {
   right: 1px;
