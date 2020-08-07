@@ -1,0 +1,1777 @@
+{
+    "aesthetic": [
+        "unaesthetic",
+        "inaesthetic"
+    ],
+    "alacrity": [],
+    "archaic": [],
+    "ascetic": [],
+    "assuage": [],
+    "audacious": [],
+    "austere": [],
+    "banal": [],
+    "capricious": [],
+    "censure": [],
+    "coalesce": [],
+    "craven": [],
+    "demur": [],
+    "deride": [],
+    "derivative": [
+        "primitive"
+    ],
+    "diatribe": [],
+    "didactic": [],
+    "diffident": [],
+    "disparate": [],
+    "ephemeral": [],
+    "eschew": [],
+    "esoteric": [
+        "exoteric"
+    ],
+    "facetious": [],
+    "fortuitous": [],
+    "garrulous": [],
+    "hackneyed": [],
+    "immutable": [
+        "mutable",
+        "changeable"
+    ],
+    "inimical": [],
+    "insipid": [],
+    "irascible": [],
+    "laconic": [],
+    "lucid": [],
+    "malleable": [],
+    "mercurial": [],
+    "meticulous": [],
+    "mitigate": [],
+    "obsequious": [],
+    "obstinate": [],
+    "opaque": [
+        "clear"
+    ],
+    "perfunctory": [],
+    "phlegmatic": [],
+    "platitude": [],
+    "pristine": [],
+    "prodigal": [],
+    "recondite": [],
+    "refute": [],
+    "repudiate": [],
+    "reticent": [],
+    "sedulous": [],
+    "soporific": [],
+    "taciturn": [
+        "voluble"
+    ],
+    "abjure": [],
+    "acumen": [],
+    "advocate": [],
+    "ameliorate": [
+        "exacerbate",
+        "decline",
+        "aggravate",
+        "exasperate"
+    ],
+    "amenable": [
+        "unamenable"
+    ],
+    "approbation": [
+        "condemnation",
+        "disapprobation"
+    ],
+    "arcane": [],
+    "arduous": [],
+    "artless": [
+        "disingenuous",
+        "artful"
+    ],
+    "attenuate": [],
+    "augment": [],
+    "benign": [
+        "malign"
+    ],
+    "bucolic": [],
+    "burgeon": [],
+    "calumny": [],
+    "castigate": [],
+    "chicanery": [],
+    "cogent": [],
+    "commensurate": [
+        "incommensurate"
+    ],
+    "contrite": [],
+    "copious": [],
+    "corroborate": [
+        "negate",
+        "contradict"
+    ],
+    "denigrate": [],
+    "dilatory": [],
+    "dissemble": [],
+    "dupe": [],
+    "ebullient": [],
+    "eclectic": [],
+    "egregious": [],
+    "empirical": [
+        "theoretical",
+        "theoretic"
+    ],
+    "emulate": [],
+    "engender": [],
+    "erudite": [],
+    "exacerbate": [
+        "better",
+        "ameliorate",
+        "amend",
+        "improve"
+    ],
+    "exonerate": [
+        "convict"
+    ],
+    "extraneous": [],
+    "fastidious": [
+        "unfastidious"
+    ],
+    "foment": [],
+    "fractious": [],
+    "gainsay": [],
+    "germane": [],
+    "glib": [],
+    "gregarious": [
+        "ungregarious"
+    ],
+    "harangue": [],
+    "impetuous": [],
+    "implacable": [
+        "placable"
+    ],
+    "impugn": [],
+    "ingenuous": [
+        "disingenuous",
+        "artful"
+    ],
+    "innocuous": [
+        "noxious",
+        "harmful"
+    ],
+    "insular": [],
+    "intransigent": [],
+    "intrepid": [],
+    "loquacious": [],
+    "mollify": [],
+    "mundane": [],
+    "munificent": [],
+    "nascent": [],
+    "obdurate": [],
+    "opprobrium": [
+        "fame",
+        "renown",
+        "celebrity"
+    ],
+    "ostentatious": [
+        "unpretentious",
+        "unostentatious"
+    ],
+    "paucity": [],
+    "pedantic": [],
+    "pedestrian": [],
+    "pernicious": [],
+    "pervasive": [],
+    "placate": [],
+    "pragmatic": [],
+    "precarious": [],
+    "precipitate": [],
+    "predilection": [],
+    "prevaricate": [],
+    "probity": [],
+    "prodigious": [],
+    "profligate": [],
+    "proliferate": [],
+    "prosaic": [],
+    "puerile": [],
+    "pugnacious": [],
+    "quixotic": [],
+    "quotidian": [],
+    "reproach": [],
+    "salubrious": [],
+    "sanction": [
+        "reject",
+        "disapprove"
+    ],
+    "sanguine": [],
+    "solicitous": [],
+    "specious": [],
+    "spurious": [],
+    "supplant": [],
+    "sycophant": [],
+    "timorous": [],
+    "tirade": [],
+    "tortuous": [],
+    "ubiquitous": [],
+    "umbrage": [],
+    "vacillate": [],
+    "whimsical": [],
+    "abate": [],
+    "aberrant": [],
+    "abstain": [
+        "take",
+        "have",
+        "consume",
+        "ingest"
+    ],
+    "acerbic": [],
+    "admonish": [],
+    "adulterate": [],
+    "affable": [],
+    "affectation": [],
+    "aggrandize": [],
+    "amalgamate": [],
+    "anodyne": [],
+    "anomaly": [],
+    "antipathy": [],
+    "apathy": [],
+    "apocryphal": [],
+    "arbitrary": [
+        "nonarbitrary",
+        "unarbitrary"
+    ],
+    "assail": [
+        "defend"
+    ],
+    "avarice": [],
+    "belie": [],
+    "blithe": [],
+    "bolster": [],
+    "buttress": [],
+    "byzantine": [],
+    "cacophony": [],
+    "canard": [],
+    "caustic": [],
+    "churlish": [],
+    "circumspect": [],
+    "confound": [],
+    "connoisseur": [],
+    "conspicuous": [
+        "invisible",
+        "inconspicuous"
+    ],
+    "contentious": [],
+    "convoluted": [],
+    "cosmopolitan": [
+        "endemic",
+        "provincial"
+    ],
+    "deleterious": [],
+    "desiccate": [],
+    "desultory": [],
+    "dilettante": [],
+    "disabuse": [],
+    "discrepancy": [],
+    "disingenuous": [
+        "ingenuous",
+        "artless"
+    ],
+    "disparage": [
+        "flatter",
+        "blandish"
+    ],
+    "disseminate": [],
+    "dogmatic": [],
+    "eccentric": [
+        "concentric",
+        "homocentric",
+        "concentrical"
+    ],
+    "effrontery": [],
+    "elicit": [],
+    "eminent": [],
+    "enervate": [],
+    "equivocate": [],
+    "estimable": [
+        "contemptible"
+    ],
+    "evanescent": [],
+    "exacting": [
+        "unfastidious"
+    ],
+    "exculpate": [
+        "convict"
+    ],
+    "expurgate": [],
+    "extrapolate": [],
+    "fawn": [],
+    "fecund": [],
+    "forestall": [],
+    "furtive": [],
+    "gauche": [],
+    "hegemony": [],
+    "iconoclast": [],
+    "idiosyncrasy": [],
+    "imperious": [],
+    "imperturbable": [],
+    "implicit": [
+        "explicit",
+        "expressed"
+    ],
+    "inchoate": [],
+    "indefatigable": [],
+    "indolent": [],
+    "inscrutable": [],
+    "intimate": [],
+    "inundate": [],
+    "invidious": [],
+    "irresolute": [
+        "resolute"
+    ],
+    "lachrymose": [],
+    "languid": [],
+    "laudable": [],
+    "limpid": [],
+    "lugubrious": [],
+    "maverick": [],
+    "mendacity": [
+        "veracity"
+    ],
+    "mendicant": [],
+    "misanthrope": [],
+    "morose": [],
+    "myopic": [],
+    "nadir": [
+        "zenith"
+    ],
+    "neophyte": [],
+    "noisome": [],
+    "nonplussed": [],
+    "nuance": [],
+    "obstreperous": [],
+    "obviate": [
+        "take",
+        "demand",
+        "need",
+        "ask"
+    ],
+    "officious": [],
+    "onerous": [],
+    "panacea": [],
+    "panache": [],
+    "pariah": [],
+    "parsimonious": [],
+    "partisan": [
+        "nonpartisan",
+        "nonpartizan"
+    ],
+    "patent": [],
+    "perennial": [
+        "biennial",
+        "annual",
+        "scouring",
+        "one-year"
+    ],
+    "perfidy": [],
+    "peripatetic": [],
+    "peripheral": [
+        "central"
+    ],
+    "petulant": [],
+    "pith": [],
+    "presumptuous": [],
+    "proclivity": [],
+    "profuse": [],
+    "propensity": [],
+    "propitiate": [],
+    "propriety": [
+        "impropriety",
+        "improperness"
+    ],
+    "provincial": [
+        "cosmopolitan"
+    ],
+    "prudent": [
+        "imprudent"
+    ],
+    "punctilious": [],
+    "querulous": [],
+    "replete": [],
+    "rescind": [],
+    "restive": [],
+    "reverent": [
+        "irreverent"
+    ],
+    "sagacious": [],
+    "sporadic": [
+        "continual"
+    ],
+    "stolid": [],
+    "surreptitious": [],
+    "tendentious": [],
+    "tractable": [
+        "intractable"
+    ],
+    "truculent": [],
+    "turgid": [],
+    "turpitude": [],
+    "undermine": [],
+    "underscore": [],
+    "untenable": [],
+    "upbraid": [],
+    "venerate": [],
+    "veracity": [
+        "mendacity"
+    ],
+    "verbose": [],
+    "vociferous": [],
+    "volatile": [
+        "nonvolatile",
+        "nonvolatilizable"
+    ],
+    "accretion": [],
+    "acme": [],
+    "adroit": [
+        "maladroit"
+    ],
+    "alleviate": [],
+    "ambiguous": [
+        "unequivocal",
+        "unambiguous",
+        "univocal"
+    ],
+    "ambivalent": [],
+    "amortize": [],
+    "anachronism": [],
+    "analogous": [
+        "homologous",
+        "heterologous",
+        "heterological",
+        "heterologic"
+    ],
+    "apostate": [],
+    "appease": [],
+    "arrogate": [
+        "render",
+        "forgo",
+        "forfeit",
+        "waive"
+    ],
+    "articulate": [
+        "inarticulate",
+        "unarticulated",
+        "unarticulate"
+    ],
+    "asperity": [
+        "dullness",
+        "dulness",
+        "bluntness"
+    ],
+    "assiduous": [],
+    "august": [],
+    "auspicious": [
+        "unfortunate",
+        "inauspicious"
+    ],
+    "aver": [],
+    "base": [],
+    "brazen": [],
+    "brook": [],
+    "candid": [],
+    "cardinal": [
+        "ordinal"
+    ],
+    "catalyst": [
+        "anticatalyst"
+    ],
+    "cavalier": [],
+    "collusion": [],
+    "condone": [],
+    "construe": [],
+    "contumacious": [],
+    "covert": [
+        "open",
+        "overt"
+    ],
+    "credulous": [
+        "incredulous"
+    ],
+    "cumbersome": [],
+    "cupidity": [],
+    "curmudgeon": [],
+    "dearth": [],
+    "debunk": [],
+    "decorous": [
+        "indecorous",
+        "indelicate"
+    ],
+    "deference": [],
+    "delineate": [
+        "undelineated"
+    ],
+    "diaphanous": [],
+    "dichotomy": [],
+    "dirge": [],
+    "discomfit": [],
+    "discreet": [
+        "indiscreet"
+    ],
+    "discrete": [],
+    "disinterested": [],
+    "dispassionate": [],
+    "droll": [],
+    "dubious": [],
+    "efficacious": [
+        "ineffectual",
+        "ineffective",
+        "inefficacious",
+        "uneffective"
+    ],
+    "elegy": [],
+    "elucidate": [
+        "obscure",
+        "obfuscate",
+        "blur",
+        "confuse"
+    ],
+    "embellish": [
+        "uglify"
+    ],
+    "encomium": [],
+    "endemic": [
+        "epidemic",
+        "cosmopolitan",
+        "widely distributed"
+    ],
+    "enumerate": [],
+    "equivocal": [
+        "unequivocal",
+        "unambiguous",
+        "univocal"
+    ],
+    "ersatz": [],
+    "espouse": [],
+    "eulogy": [],
+    "euphemism": [],
+    "exigent": [],
+    "extemporaneous": [],
+    "fallacious": [],
+    "fatuous": [],
+    "feckless": [],
+    "fetid": [],
+    "florid": [],
+    "frugal": [],
+    "genial": [],
+    "grovel": [],
+    "guile": [],
+    "halcyon": [],
+    "hermetic": [],
+    "histrionic": [],
+    "hodgepodge": [],
+    "hubris": [],
+    "ignoble": [
+        "noble"
+    ],
+    "illusory": [],
+    "imminent": [],
+    "impecunious": [],
+    "impute": [],
+    "incipient": [],
+    "incorrigible": [
+        "corrigible"
+    ],
+    "ineffable": [],
+    "inexorable": [],
+    "ingratiate": [],
+    "invective": [],
+    "inveigle": [],
+    "inveterate": [],
+    "itinerant": [],
+    "jettison": [],
+    "jingoism": [],
+    "judicious": [],
+    "juxtapose": [],
+    "lament": [],
+    "lampoon": [],
+    "largess": [],
+    "lassitude": [],
+    "latent": [],
+    "lethargic": [
+        "energetic"
+    ],
+    "levity": [
+        "gravity",
+        "solemnity"
+    ],
+    "libertine": [],
+    "luminous": [],
+    "magnanimous": [],
+    "magnate": [],
+    "malevolent": [
+        "good",
+        "benevolent"
+    ],
+    "malinger": [],
+    "maudlin": [],
+    "meretricious": [],
+    "miscreant": [],
+    "mordant": [],
+    "noxious": [
+        "innocuous",
+        "harmless"
+    ],
+    "oblique": [
+        "parallel",
+        "direct",
+        "perpendicular",
+        "lineal"
+    ],
+    "obscure": [
+        "clear",
+        "elucidate",
+        "clarify",
+        "illuminate"
+    ],
+    "outstrip": [],
+    "palliate": [],
+    "panegyric": [],
+    "paragon": [],
+    "pellucid": [],
+    "penchant": [],
+    "peruse": [],
+    "philistine": [],
+    "pious": [
+        "impious"
+    ],
+    "pithy": [],
+    "placid": [],
+    "plethora": [],
+    "polemical": [],
+    "posit": [],
+    "prattle": [],
+    "precursor": [],
+    "prescient": [],
+    "prolix": [
+        "concise"
+    ],
+    "propagate": [],
+    "pusillanimous": [],
+    "quiescent": [],
+    "raconteur": [],
+    "recalcitrant": [],
+    "redress": [
+        "wrong"
+    ],
+    "refractory": [],
+    "relegate": [
+        "raise",
+        "advance",
+        "promote",
+        "elevate"
+    ],
+    "remedial": [],
+    "reprobate": [
+        "approbate"
+    ],
+    "rhetoric": [],
+    "ribald": [],
+    "rudimentary": [],
+    "salient": [
+        "reentrant",
+        "re-entrant"
+    ],
+    "sardonic": [],
+    "schism": [],
+    "scintillating": [],
+    "scrupulous": [
+        "unscrupulous"
+    ],
+    "slake": [],
+    "solecism": [],
+    "spendthrift": [],
+    "squalid": [],
+    "subjective": [
+        "objective",
+        "transient",
+        "nonsubjective",
+        "transeunt"
+    ],
+    "subversive": [],
+    "superfluous": [],
+    "surfeit": [],
+    "surly": [],
+    "sybarite": [],
+    "tacit": [],
+    "tawdry": [],
+    "temperance": [
+        "intemperance"
+    ],
+    "tenuous": [],
+    "terse": [],
+    "torpor": [],
+    "transient": [
+        "subjective",
+        "immanent"
+    ],
+    "transitory": [],
+    "trenchant": [],
+    "urbane": [],
+    "verisimilitude": [],
+    "vestige": [],
+    "virulent": [
+        "avirulent"
+    ],
+    "vitiate": [
+        "validate"
+    ],
+    "vitriolic": [],
+    "wane": [
+        "rise",
+        "mount",
+        "full",
+        "wax"
+    ],
+    "wizened": [],
+    "zealous": [],
+    "zenith": [
+        "nadir"
+    ],
+    "abeyance": [],
+    "abrasive": [],
+    "abrogate": [],
+    "abscission": [],
+    "abscond": [],
+    "abstruse": [],
+    "abysmal": [],
+    "accolade": [],
+    "acidulous": [],
+    "amiable": [],
+    "amorphous": [],
+    "anachronistic": [],
+    "anathema": [],
+    "animosity": [],
+    "anoint": [],
+    "anomalous": [],
+    "antedate": [
+        "follow",
+        "postdate"
+    ],
+    "antithesis": [],
+    "antithetical": [],
+    "apotheosis": [],
+    "apposite": [],
+    "appropriate": [
+        "inappropriate"
+    ],
+    "ascertain": [],
+    "ascribe": [],
+    "astute": [],
+    "augury": [],
+    "avaricious": [],
+    "aversion": [],
+    "avid": [],
+    "baleful": [],
+    "bellicose": [],
+    "belligerent": [],
+    "beneficent": [
+        "maleficent"
+    ],
+    "bent": [],
+    "bonhomie": [],
+    "boor": [],
+    "bromide": [],
+    "burnish": [],
+    "cajole": [],
+    "canonical": [],
+    "capitulate": [],
+    "catholic": [],
+    "celerity": [],
+    "cerebral": [
+        "emotional"
+    ],
+    "chagrin": [],
+    "chary": [],
+    "choleric": [],
+    "chronological": [],
+    "circumscribe": [],
+    "clandestine": [],
+    "cloying": [],
+    "complacent": [],
+    "complementary": [],
+    "conciliatory": [
+        "antagonistic",
+        "inflexible",
+        "uncompromising",
+        "antagonizing"
+    ],
+    "concomitant": [],
+    "conflagration": [],
+    "conflate": [],
+    "consummate": [],
+    "conundrum": [],
+    "coterie": [],
+    "countenance": [
+        "forbid",
+        "proscribe",
+        "veto",
+        "interdict"
+    ],
+    "covet": [],
+    "credence": [],
+    "cynical": [],
+    "daunt": [],
+    "decorum": [
+        "indecorum",
+        "indecorousness"
+    ],
+    "deflect": [],
+    "demagogue": [],
+    "despot": [],
+    "diffuse": [],
+    "dispatch": [],
+    "dissolution": [],
+    "dissonance": [
+        "harmony"
+    ],
+    "distill": [],
+    "dither": [],
+    "diurnal": [
+        "nocturnal"
+    ],
+    "doctrinaire": [],
+    "dogma": [],
+    "dolorous": [],
+    "dyspeptic": [],
+    "edify": [],
+    "effusive": [],
+    "egalitarian": [
+        "elitist"
+    ],
+    "eloquent": [],
+    "emollient": [],
+    "enigmatic": [],
+    "epicure": [],
+    "equanimity": [
+        "discomposure"
+    ],
+    "equitable": [
+        "unjust",
+        "inequitable"
+    ],
+    "eradicate": [],
+    "erratic": [],
+    "ethereal": [],
+    "euphony": [],
+    "exegesis": [],
+    "exorbitant": [],
+    "expatiate": [],
+    "expedient": [
+        "inexpedient"
+    ],
+    "exponent": [],
+    "extant": [
+        "extinct",
+        "nonextant"
+    ],
+    "extol": [],
+    "facilitate": [],
+    "fallible": [
+        "infallible"
+    ],
+    "fallow": [],
+    "fervid": [],
+    "flag": [],
+    "flippant": [],
+    "flounder": [],
+    "flout": [],
+    "foible": [],
+    "ford": [],
+    "fracas": [],
+    "frenetic": [],
+    "frivolous": [
+        "serious"
+    ],
+    "fulminate": [],
+    "futile": [],
+    "gaffe": [],
+    "galvanize": [],
+    "gambit": [],
+    "gambol": [],
+    "garner": [
+        "spread",
+        "distribute"
+    ],
+    "goad": [],
+    "gossamer": [],
+    "grandiloquent": [],
+    "grouse": [],
+    "hapless": [],
+    "harrow": [],
+    "heterodox": [],
+    "heterogeneous": [
+        "homogeneous",
+        "autogenous",
+        "autogenic"
+    ],
+    "hoary": [],
+    "homogeneous": [
+        "heterogeneous"
+    ],
+    "humdrum": [],
+    "hyperbole": [],
+    "iconoclastic": [],
+    "ignominious": [],
+    "imbroglio": [],
+    "immure": [],
+    "impair": [],
+    "impassive": [],
+    "impede": [
+        "free",
+        "disengage"
+    ],
+    "impervious": [
+        "pervious"
+    ],
+    "impudent": [],
+    "inadvertent": [],
+    "incongruous": [
+        "congruent",
+        "congruous"
+    ],
+    "inculcate": [],
+    "incumbent": [],
+    "indigenous": [],
+    "indignant": [],
+    "industrious": [],
+    "ineluctable": [],
+    "inherent": [],
+    "inimitable": [],
+    "iniquity": [],
+    "intractable": [
+        "tractable"
+    ],
+    "intrinsic": [
+        "extrinsic"
+    ],
+    "inure": [],
+    "inviolate": [],
+    "jargon": [],
+    "jejune": [],
+    "jocular": [],
+    "kindle": [],
+    "laud": [],
+    "lax": [
+        "tense"
+    ],
+    "legerdemain": [
+        "maladroit"
+    ],
+    "licentious": [],
+    "lionize": [],
+    "listless": [],
+    "lumber": [],
+    "maelstrom": [],
+    "magisterial": [],
+    "makeshift": [],
+    "malfeasance": [],
+    "malign": [
+        "benign",
+        "benignant"
+    ],
+    "manifest": [],
+    "martial": [],
+    "martinet": [],
+    "mawkish": [],
+    "maxim": [],
+    "mellifluous": [],
+    "militate": [],
+    "miserly": [],
+    "modest": [
+        "immodest"
+    ],
+    "modicum": [],
+    "modish": [],
+    "monastic": [],
+    "mores": [],
+    "moribund": [],
+    "multifarious": [],
+    "myriad": [],
+    "na\u00efve": [],
+    "nebulous": [],
+    "neologism": [],
+    "nettle": [],
+    "nominal": [
+        "real"
+    ],
+    "nonchalant": [],
+    "novel": [],
+    "obtuse": [
+        "acute"
+    ],
+    "occlude": [
+        "free",
+        "disengage"
+    ],
+    "occult": [],
+    "odious": [],
+    "offset": [
+        "end",
+        "middle",
+        "ending"
+    ],
+    "opine": [],
+    "ornate": [],
+    "orthodox": [
+        "unorthodox"
+    ],
+    "oscillate": [],
+    "ossify": [],
+    "overshadow": [],
+    "overweening": [],
+    "painstaking": [],
+    "palatial": [],
+    "pallid": [],
+    "paradigm": [],
+    "paradox": [],
+    "parley": [],
+    "parochial": [],
+    "parody": [],
+    "parry": [],
+    "partial": [
+        "fair",
+        "impartial"
+    ],
+    "pastiche": [],
+    "peccadillo": [],
+    "pejorative": [],
+    "penitent": [
+        "unrepentant",
+        "impenitent",
+        "unremorseful"
+    ],
+    "penurious": [],
+    "penury": [],
+    "peregrinate": [],
+    "peremptory": [],
+    "permeate": [],
+    "perspicacious": [],
+    "pertinent": [],
+    "picayune": [],
+    "pillory": [],
+    "piquant": [],
+    "plaintive": [],
+    "plastic": [],
+    "plausible": [
+        "unlikely",
+        "implausible",
+        "improbable"
+    ],
+    "pliant": [],
+    "plucky": [],
+    "plummet": [],
+    "poignant": [],
+    "polarize": [],
+    "polemic": [],
+    "politic": [
+        "impolitic"
+    ],
+    "ponderous": [],
+    "precocious": [
+        "retarded"
+    ],
+    "profound": [
+        "superficial"
+    ],
+    "prolific": [],
+    "prophetic": [
+        "unprophetic"
+    ],
+    "propitious": [
+        "unpropitious"
+    ],
+    "proscribe": [
+        "let",
+        "countenance",
+        "allow",
+        "permit"
+    ],
+    "providential": [],
+    "pundit": [],
+    "pungent": [
+        "bland"
+    ],
+    "quail": [],
+    "qualm": [],
+    "quandary": [],
+    "rancorous": [],
+    "rapacious": [],
+    "rarefied": [],
+    "raucous": [],
+    "recant": [],
+    "reconcile": [],
+    "recrudescent": [],
+    "redoubtable": [],
+    "refulgent": [],
+    "relish": [],
+    "remiss": [],
+    "renege": [],
+    "respite": [],
+    "robust": [
+        "frail"
+    ],
+    "ruminate": [],
+    "sacrosanct": [],
+    "salutary": [],
+    "sanctimonious": [],
+    "sap": [],
+    "satiate": [
+        "munch",
+        "insatiable",
+        "nibble",
+        "insatiate"
+    ],
+    "scathing": [],
+    "secular": [],
+    "sententious": [],
+    "sentient": [
+        "insensate",
+        "insentient"
+    ],
+    "shard": [],
+    "skittish": [],
+    "slight": [],
+    "somnolent": [],
+    "sophistry": [],
+    "sordid": [],
+    "sparse": [],
+    "spartan": [],
+    "splenetic": [],
+    "squelch": [],
+    "stalwart": [],
+    "staunch": [],
+    "stentorian": [],
+    "stoic": [
+        "emotional person"
+    ],
+    "stringent": [],
+    "stultify": [],
+    "stymie": [],
+    "sublime": [],
+    "substantiate": [
+        "negate",
+        "contradict"
+    ],
+    "subtle": [],
+    "supercilious": [],
+    "synoptic": [],
+    "tact": [
+        "tactlessness"
+    ],
+    "tangential": [],
+    "temerity": [],
+    "tempestuous": [],
+    "toady": [],
+    "torpid": [],
+    "tout": [],
+    "tranquil": [],
+    "transgression": [],
+    "travesty": [],
+    "trifling": [],
+    "trite": [],
+    "unconscionable": [],
+    "unprecedented": [
+        "precedented"
+    ],
+    "unseemly": [],
+    "untoward": [],
+    "usury": [],
+    "vacuous": [],
+    "variegated": [],
+    "venal": [],
+    "verdant": [],
+    "veritable": [],
+    "vexation": [],
+    "viable": [],
+    "vicissitude": [],
+    "vigilant": [],
+    "vilify": [],
+    "viscous": [],
+    "vituperate": [],
+    "voracious": [],
+    "wanton": [],
+    "wax": [
+        "wane"
+    ],
+    "welter": [],
+    "wily": [],
+    "winsome": [],
+    "abase": [],
+    "abhor": [],
+    "abstemious": [
+        "gluttonous"
+    ],
+    "acquiesce": [
+        "dissent"
+    ],
+    "alchemy": [],
+    "aloof": [],
+    "apothegm": [],
+    "ardent": [],
+    "axiom": [],
+    "badger": [],
+    "balk": [],
+    "banish": [],
+    "bedlam": [],
+    "belittle": [
+        "flatter",
+        "blandish"
+    ],
+    "bemoan": [],
+    "benevolent": [
+        "malevolent",
+        "malicious"
+    ],
+    "bereft": [],
+    "besiege": [],
+    "betray": [
+        "undeceive"
+    ],
+    "brevity": [],
+    "callous": [],
+    "callow": [],
+    "canon": [],
+    "charlatan": [],
+    "chastise": [],
+    "chivalrous": [],
+    "clemency": [],
+    "cognizant": [
+        "unaware",
+        "incognizant"
+    ],
+    "complaisant": [],
+    "compliant": [
+        "defiant"
+    ],
+    "complicit": [],
+    "concede": [],
+    "consternation": [],
+    "contemptuous": [],
+    "contend": [],
+    "coterminous": [],
+    "culminate": [],
+    "culpable": [],
+    "cursory": [],
+    "decry": [],
+    "deign": [],
+    "denounce": [],
+    "desecrate": [
+        "consecrate",
+        "bless",
+        "hallow",
+        "sanctify"
+    ],
+    "diminutive": [],
+    "discern": [],
+    "divulge": [],
+    "dormant": [
+        "active",
+        "extinct",
+        "inactive"
+    ],
+    "draconian": [],
+    "duress": [],
+    "efficacy": [
+        "inefficacy",
+        "inefficaciousness"
+    ],
+    "effigy": [],
+    "ennui": [],
+    "enormity": [],
+    "entrenched": [],
+    "epitome": [],
+    "erroneous": [],
+    "excoriate": [],
+    "exhort": [],
+    "exposition": [],
+    "expound": [],
+    "expunge": [],
+    "extirpate": [],
+    "facile": [],
+    "fallacy": [],
+    "ferret": [],
+    "fervent": [],
+    "fidelity": [
+        "infidelity",
+        "unfaithfulness"
+    ],
+    "flamboyant": [],
+    "forage": [],
+    "gratuitous": [],
+    "harbinger": [],
+    "harried": [],
+    "hedonist": [],
+    "heyday": [],
+    "hirsute": [
+        "hairless"
+    ],
+    "impasse": [],
+    "impediment": [],
+    "impermeable": [
+        "permeable"
+    ],
+    "impertinent": [],
+    "importune": [],
+    "impregnable": [],
+    "incessant": [],
+    "incisive": [],
+    "incredulous": [
+        "credulous"
+    ],
+    "insidious": [],
+    "intermittent": [],
+    "inveigh": [],
+    "irk": [],
+    "macabre": [],
+    "magnanimity": [],
+    "malodorous": [
+        "fragrant"
+    ],
+    "mendacious": [],
+    "mercenary": [],
+    "milieu": [],
+    "misconstrue": [],
+    "misogynist": [],
+    "obloquy": [],
+    "ominous": [],
+    "opulent": [],
+    "ostensible": [],
+    "overt": [
+        "covert"
+    ],
+    "paean": [],
+    "palatable": [
+        "unpalatable"
+    ],
+    "perturb": [],
+    "pittance": [],
+    "precipitous": [],
+    "preempt": [],
+    "puissance": [],
+    "raze": [
+        "raise",
+        "rear",
+        "set up",
+        "put up"
+    ],
+    "rebuke": [],
+    "remuneration": [],
+    "reprehensible": [],
+    "repugnant": [],
+    "rift": [],
+    "rustic": [],
+    "sangfroid": [],
+    "scant": [],
+    "scurrilous": [],
+    "solvent": [
+        "insolvent"
+    ],
+    "sophomoric": [],
+    "sparing": [],
+    "subpoena": [],
+    "subterfuge": [],
+    "succinct": [],
+    "sully": [],
+    "supine": [],
+    "surmise": [],
+    "symbiosis": [],
+    "tantamount": [],
+    "truculence": [],
+    "unctuous": [],
+    "unequivocal": [
+        "ambiguous",
+        "equivocal"
+    ],
+    "unscrupulous": [
+        "scrupulous"
+    ],
+    "vapid": [],
+    "venality": [],
+    "veracious": [],
+    "vernacular": [],
+    "vindicate": [],
+    "virtuoso": [],
+    "vitriol": [],
+    "volubility": [],
+    "wan": [],
+    "whet": [],
+    "abnegate": [],
+    "abomination": [],
+    "aboriginal": [
+        "nonnative"
+    ],
+    "acrid": [],
+    "adherent": [],
+    "aegis": [],
+    "aesthete": [],
+    "aggravate": [
+        "better",
+        "ameliorate",
+        "amend",
+        "improve"
+    ],
+    "allege": [],
+    "arid": [],
+    "artful": [
+        "ingenuous",
+        "artless"
+    ],
+    "artlessness": [
+        "artfulness"
+    ],
+    "askance": [],
+    "assiduously": [],
+    "assimilate": [
+        "dissimilate"
+    ],
+    "banality": [],
+    "besmirch": [],
+    "blas\u00e9": [],
+    "bleak": [],
+    "bristle": [],
+    "brusque": [],
+    "brusquely": [],
+    "cacophonous": [
+        "euphonious",
+        "euphonous"
+    ],
+    "cadaverous": [],
+    "candor": [
+        "inequity",
+        "unfairness"
+    ],
+    "chauvinistic": [],
+    "clamor": [],
+    "coercion": [],
+    "coercive": [],
+    "complaisance": [],
+    "congenial": [
+        "incompatible",
+        "uncongenial"
+    ],
+    "contrition": [],
+    "contrive": [],
+    "debauchery": [],
+    "decimate": [],
+    "deft": [],
+    "demonstrative": [
+        "undemonstrative"
+    ],
+    "despoiled": [],
+    "deviation": [],
+    "discerning": [
+        "undiscerning"
+    ],
+    "disdain": [],
+    "disseminated": [],
+    "dulcet": [],
+    "effervescent": [
+        "still",
+        "noneffervescent"
+    ],
+    "elevate": [
+        "break",
+        "bump",
+        "relegate",
+        "lower"
+    ],
+    "emaciate": [],
+    "entice": [],
+    "epigram": [],
+    "epithet": [],
+    "err": [],
+    "euphoria": [
+        "dysphoria"
+    ],
+    "evince": [],
+    "exacerbated": [],
+    "exasperated": [],
+    "excoriated": [],
+    "exculpated": [],
+    "exult": [],
+    "faction": [],
+    "factious": [],
+    "factitious": [],
+    "fawning": [],
+    "felicitious": [],
+    "fickle": [],
+    "fluke": [],
+    "foil": [],
+    "forfeit": [
+        "claim",
+        "arrogate",
+        "lay claim"
+    ],
+    "forlorn": [],
+    "fortitude": [],
+    "fret": [],
+    "frugality": [],
+    "gauntlet": [],
+    "glean": [],
+    "hamstrung": [],
+    "hankering": [],
+    "ignominy": [],
+    "illicit": [
+        "licit"
+    ],
+    "impunity": [],
+    "inclement": [
+        "clement"
+    ],
+    "indict": [],
+    "indignation": [],
+    "inerrancy": [
+        "errancy"
+    ],
+    "inquest": [],
+    "internecine": [],
+    "ire": [],
+    "irksome": [],
+    "irreverent": [
+        "reverent"
+    ],
+    "lacerate": [],
+    "largesse": [],
+    "livid": [],
+    "meander": [],
+    "melancholy": [],
+    "metamorphosis": [],
+    "misanthropic": [],
+    "moot": [],
+    "morbid": [],
+    "nihilism": [],
+    "nondescript": [],
+    "notorious": [],
+    "olfactory": [],
+    "opulence": [],
+    "ostensible or ostensive": [],
+    "ostracize": [],
+    "ostracized": [],
+    "oust": [],
+    "pacific": [],
+    "pacify": [],
+    "pall": [],
+    "paroxysm": [],
+    "pecuniary": [],
+    "perilous": [],
+    "perpetrate": [],
+    "perverse": [],
+    "pique": [],
+    "ploy": [],
+    "pre-empt": [],
+    "premeditate": [],
+    "premonition": [],
+    "profane": [
+        "sacred"
+    ],
+    "proficient": [],
+    "prognostication": [],
+    "puissant": [],
+    "quip": [],
+    "ramification": [],
+    "ravenous": [],
+    "rebut": [],
+    "renaissance": [],
+    "repertoire": [],
+    "reverberate": [],
+    "revile": [],
+    "rhetorical": [
+        "unrhetorical"
+    ],
+    "rife": [],
+    "scanty": [],
+    "slack": [],
+    "stern": [],
+    "stymie or stymy": [],
+    "subservient": [],
+    "thwart": [],
+    "uncanny": [],
+    "unkempt": [],
+    "utopian": [
+        "dystopian"
+    ],
+    "veneration": [],
+    "venial": [],
+    "vituperated": [],
+    "wayward": [],
+    "wheedle": [],
+    "volition": [],
+    "aberration": [],
+    "adamant": [],
+    "apex": [
+        "antapex"
+    ],
+    "aplomb": [],
+    "apogee": [
+        "perigee"
+    ],
+    "arch": [],
+    "arrant": [],
+    "artifice": [],
+    "ascendancy": [],
+    "beatific": [],
+    "bilious": [],
+    "boon": [],
+    "boorish": [],
+    "bowdlerize": [],
+    "bridle": [],
+    "cataclysm": [],
+    "champion": [],
+    "chauvinism": [],
+    "chimera": [],
+    "cohesive": [],
+    "conciliate": [],
+    "conniving": [],
+    "convivial": [],
+    "crestfallen": [],
+    "debase": [],
+    "deliberate": [
+        "natural",
+        "uncontrived",
+        "unstudied"
+    ],
+    "demure": [],
+    "denote": [],
+    "denouement": [],
+    "derelict": [],
+    "desiccated": [],
+    "destitute": [],
+    "devolve": [],
+    "diabolical": [],
+    "dilapidated": [],
+    "discriminate": [
+        "indiscriminate"
+    ],
+    "discursive": [],
+    "disenfranchise": [
+        "enfranchise",
+        "enfranchize"
+    ],
+    "docile": [
+        "stubborn"
+    ],
+    "dovetail": [],
+    "duplicity": [],
+    "edifying": [
+        "unedifying",
+        "unenlightening"
+    ],
+    "embroiled": [],
+    "embryonic": [],
+    "enmity": [],
+    "evasive": [],
+    "exasperate": [
+        "better",
+        "ameliorate",
+        "amend",
+        "improve"
+    ],
+    "exemplar": [],
+    "extenuating": [],
+    "fledgling": [],
+    "flush": [],
+    "foolhardy": [],
+    "glut": [
+        "munch",
+        "nibble"
+    ],
+    "graft": [],
+    "gumption": [],
+    "hamper": [],
+    "haphazard": [],
+    "haughty": [],
+    "hector": [],
+    "hedge": [],
+    "hoodwink": [],
+    "impartial": [
+        "partial",
+        "unfair",
+        "prejudiced",
+        "discriminatory"
+    ],
+    "impeccable": [],
+    "incontrovertible": [],
+    "ingenuity": [],
+    "juggernaut": [],
+    "kowtow": [],
+    "lascivious": [],
+    "leery": [],
+    "maladroit": [
+        "trick",
+        "magic",
+        "illusion",
+        "adroit"
+    ],
+    "maunder": [],
+    "mettlesome": [],
+    "miser": [],
+    "nettlesome": [],
+    "palimpsest": [],
+    "peevish": [],
+    "perpetuate": [],
+    "perquisite": [],
+    "pine": [],
+    "pinnacle": [],
+    "plodding": [],
+    "portentous": [],
+    "preclude": [],
+    "prescience": [],
+    "presumption": [],
+    "prevail": [],
+    "primacy": [],
+    "promulgate": [],
+    "proselytize": [],
+    "protean": [],
+    "provident": [
+        "improvident",
+        "sea cucumber",
+        "holothurian"
+    ],
+    "qualify": [
+        "unfit",
+        "disqualify",
+        "indispose"
+    ],
+    "raffish": [],
+    "rash": [],
+    "remonstrate": [],
+    "resolve": [
+        "irresolution",
+        "irresoluteness"
+    ],
+    "resurgent": [],
+    "retiring": [],
+    "row": [],
+    "sartorial": [],
+    "saturnine": [],
+    "schadenfreude": [],
+    "semblance": [],
+    "serendipity": [],
+    "simulacrum": [],
+    "steadfast": [],
+    "subsume": [],
+    "sullen": [],
+    "tarnish": [],
+    "tenacious": [],
+    "tender": [
+        "tough",
+        "toughened"
+    ],
+    "treacherous": [],
+    "unpropitious": [
+        "propitious"
+    ],
+    "unruly": [],
+    "vanquish": [],
+    "vaunted": [],
+    "vehement": [],
+    "vicarious": [],
+    "vindictive": [],
+    "virago": [],
+    "wanting": []
+}
