@@ -66,6 +66,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:17361230314:android:3c73215ee14a5d08c17a93",
+        "android_client_info": {
+          "package_name": "com.GREninja.GRE.vocabulary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17361230314-g6jhaaj9ri5gbr5o4t7730bdof2qciu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW0Cg4tJPFXcQu18_PO_WO3B7Y0Vmo6vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17361230314-g6jhaaj9ri5gbr5o4t7730bdof2qciu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:17361230314:android:d2d36e861b7e78eac17a93",
         "android_client_info": {
           "package_name": "goyal.GRE.Verboculary"
