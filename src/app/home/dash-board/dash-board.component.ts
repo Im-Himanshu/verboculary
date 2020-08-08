@@ -34,7 +34,7 @@ export class DashBoardComponent implements OnInit {
   heightFromTop
   isGraphVisible = false;
 
-  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService, private activatedRoute: ActivatedRoute) {
+  constructor(private renderer: Renderer2, public db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService, private activatedRoute: ActivatedRoute) {
     this.totalScreenHeight = this.platform.height();
     console.log("screen Height :", this.totalScreenHeight);
     this.allSelectedSet = this.db.allSetinSelectedCategory;
