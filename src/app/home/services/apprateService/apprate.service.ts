@@ -31,7 +31,7 @@ export class ApprateService {
           {
             text: 'OK,Sure',
             handler: () => {
-              window.location.href = "market://details?id=com.GRE.verboculary";
+              window.location.href = "market://details?id=com.GREninja.GRE.vocabulary";
             }
           }
         ],
@@ -52,7 +52,7 @@ export class ApprateService {
         {
           text: 'OK,Sure',
           handler: () => {
-            window.location.href = "market://details?id=com.GRE.verboculary";
+            window.location.href = "market://details?id=com.GREninja.GRE.vocabulary";
           }
         }
       ],

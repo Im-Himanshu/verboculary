@@ -229,6 +229,6 @@ export class HomePage implements OnInit {
   }
 
   rate() {
-    window.location.href = "market://details?id=com.GRE.verboculary";
+    window.location.href = "market://details?id=com.GREninja.GRE.vocabulary";
   }
 }
