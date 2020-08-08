@@ -33,6 +33,7 @@ export class DatabaseService {
   public isToRemoveCompleteSearch = false;
   public selectedFilter = 'all';
   public deleteMe;
+  public isNavigationLoading = false;
 
   constructor(
     public storage: Storage,
@@ -45,6 +46,7 @@ export class DatabaseService {
     router.events.forEach((event: NavigationEvent) => {
       //After Navigation, because firstchild are populated only till navigation ends
       if (event instanceof NavigationEnd) {
+        this.isNavigationLoading = false;
         if (event.urlAfterRedirects.startsWith("/mainmodule/base/dashboard")) {
           this.selectedFilter = 'all'
           this.selectedSet = "allWords" // resetting this here as in ngOndestroy it was causing bugs
@@ -270,17 +272,28 @@ export class DatabaseService {
   }
 
 
+  // this function do an inplace insertionSort of the given array
+  customSortOfArray(array) {
+    for (let outer = 1; outer < array.length; outer++) {
+      for (let inner = 0; inner < outer; inner++) {
+        let wordInner = this.allWordsData[array[inner]][1];
+        let wordOuter = this.allWordsData[array[outer]][1]
+        //let isToReplace = this.allWordsData[array[outer]][1] < 
+        if (wordOuter < wordInner) {
+          const [element] = array.splice(outer, 1)
+          array.splice(inner, 0, element)
+        }
+      }
+    }
+    //console.log(array.join(' '))
+    return array
+  }
+
+
   changeSortingOfIds(sortingType) {
     if (sortingType == 'alpha') {
-      this.allSelectedWordIdsFiltered.sort(function (a, b) {
-        if (a > b) {
-          return 1;
-        }
-        if (a < b) {
-          return -1;
-        }
-        return 0;
-      })
+      this.customSortOfArray(this.allSelectedWordIdsFiltered);
+      //this.allSelectedWordIdsFiltered.sort(this.compareTwoIds);
     }
     else {
       // randomly shuffled

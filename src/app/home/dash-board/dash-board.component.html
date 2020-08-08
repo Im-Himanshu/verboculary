@@ -13,6 +13,7 @@
       <span class="message">Track the progress.</span>
     </div>
   </div>
+  <ion-spinner name="lines-small" *ngIf = "this.db.isNavigationLoading" class = "spinnerClass"></ion-spinner>
 
   <div id="masterFilter" class="masterFilter" [ngStyle]="{'top': isGraphVisible? '32%' : '2%'}">
 

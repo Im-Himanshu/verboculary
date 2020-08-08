@@ -28,7 +28,7 @@
           <ion-slides (touchstart)="stopParentProp($event)" (touchmove)="stopParentProp($event)" pager="true"
             style="background: black;" loop="true" zoom="true">
             <ion-slide *ngFor="let imgsrc of this.db.allWordsData[selectedId][7]">
-              <img class="wordImage" src="{{ imgsrc }}" class="slide-img" />
+              <img  src="{{ imgsrc }}" class="slide-img" />
             </ion-slide>
           </ion-slides>
 

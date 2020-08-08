@@ -4,7 +4,7 @@ import { DatabaseService } from "../services/data-base.service"
 import { SharingServiceService } from "../services/sharing-service.service"
 import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
 import { processedDataSharing } from '../interfaces/dropdown.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { Screenshot } from '@ionic-native/screenshot/ngx'
 @Component({
@@ -34,7 +34,7 @@ export class DashBoardComponent implements OnInit {
   heightFromTop
   isGraphVisible = false;
 
-  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService) {
+  constructor(private renderer: Renderer2, private db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService, private activatedRoute: ActivatedRoute) {
     this.totalScreenHeight = this.platform.height();
     console.log("screen Height :", this.totalScreenHeight);
     this.allSelectedSet = this.db.allSetinSelectedCategory;
@@ -44,7 +44,7 @@ export class DashBoardComponent implements OnInit {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.setChartResult();
-    if(Object.keys(this.db.allSetData.dateWiseTotalProgressReport).length>1){
+    if (Object.keys(this.db.allSetData.dateWiseTotalProgressReport).length > 1) {
       this.isGraphVisible = true;
     }
 
@@ -78,8 +78,8 @@ export class DashBoardComponent implements OnInit {
 
 
   goToUrl(url) {
-    this.router.navigate([url]);
-
+    // this.db.isNavigationLoading = true;
+    this.router.navigate([url]);//,{relativeTo: this.activatedRoute}
   }
 
   processTotalSetData() {
