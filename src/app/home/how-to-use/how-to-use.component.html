@@ -12,51 +12,49 @@
 <div style = "margin-left: 16px;width: 95%;font-size: larger;">
 
   <p>
-    <b>Basic Know how..</b>
-    GREninja contains an exhaustive list of 1100 words derived after rigiorus Machine-Learning analysis of vast GRE resources and popular words list for GRE like Baroon's 1100, Baroon's 800, Magoosh, Kaplan etc. This is one of most updated and analysis backed wordlist for GRE availaible out there. Our analysis shows, the words in GREninja list covers >95% of words you can expect to see in your GRE examinations.
-    Moreover, these words are also divided in different sets based on the importance for GRE examination. These words may not exactly follow the easy to hard sorting but are designed in such a way that you go through the important  
-    Select any set from the given list of sets, again in the side menu<br /><br />
-    All words of slected sets will come in <b>'All words'</b> Section, go through all these words one by one in <b>'Learning'</b> section, 
-    if needed toogle the left side button in word Card to know more about the word from different sources.<br />
-    After learning all the word go to the <b>'Practise' </b> section for practising the words you learned. Swipe left-right till you master them all, click on the card to know the meaning of it.<br />
-    Star marked the word you find tough to go through them later.
-    Once all words done from current set jump on to another set.
+    <b>Basic Know How :</b><br>
+    GREninja contains an exhaustive list of 1100 words derived after rigorous Machine-Learning analysis of vast GRE resources and popular words list for GRE like Baroon's 1100, Baroon's 800, Magoosh, Kaplan etc. This is one of the most updated and analysis backed wordlist for GRE availaible out there. Our analysis have showed that the words in GREninja list covers >95% of words you can expect to see in your GRE examinations. <br> <br>
+    Moreover, these words are also divided in different sets based on the importance for GRE examination. These words may not exactly follow the easy to hard sorting structure but words coming in earlier sets are more frequently asked then the later ones. We recommend you to go through them in order, and covers as many words as possible depending on time availaible to you. We are confident that if you have thoroughly mastered our wordlist you will need not to refer to any other wordlist. <br>
     <a  *ngIf = "!isToShowMore" (click) = "showMoreToggle(true)">Read More</a>
   </p>
 
-    <P *ngIf = "isToShowMore">
-    <b>About the Words in this app</b>
-    Verboculary consists of 1100 primary + 120 Extra words curated after crunching a large database of GRE Exam related resources, 
-    Word list used in this app is arguably, the most latest and relevant word list availaible for the newer GRE exam pattern. 
+  <p *ngIf = "isToShowMore">
+    <b>Important Features :</b> <br> <br>
+    Every word in GREninja comes with extensive resources linked so that you have a complete and through understanding of every word. <br> <br>
+    1. We have provided integration of most popular english dictionaries like Merriam, Google Define and Thesauras. You can enable this by clicking the toggle button in right-middle of the learn section of every Set (this would require you to have internet connection). <br> <br>
+    2. In the Newer version we have provided the feature of detailed podcast for every words. You can either play podcast of individual words or play podcast for all the words of the selected set to keep the learning going while you are Travelling, Gyming or not in situation to access your mobile screen. All these podcast are played directly from the Merriam websites. <br> <br>
+    3. Every word has one image related to the context of the word to help you remember faster. <br> <br>
+    4. You can test your knowledge using the FlashCards in the test section, The words in this section will be only those which are selected or filtered in view section so you can customize what you are testing. <br> <br>
+    5. Other then the overall progress, You can also track your progress report on individual set level by clicking the fab button 
+    in bottom right corner of view section. <br> <br>
+    6. You can share your porgress report and any individual words with your family and friends to discuss it. <br> <br>
+
+
+    We have provided an option to add your personal notes also.
+    
+    
+  </p>
+
+
+  <p *ngIf = "isToShowMore">
+    <b>Details about the selected Words :</b> <br> <br>
+    GREninja consists of 1100 words curated after crunching a large database of GRE Exam related resources, 
+    Word list used in this app is arguably, the most latest, analytically backed and relevant word list availaible for the newer GRE exam pattern.
     Barron 1100's list, has been a primary choice for most of GRE aspirant since long time.
     This list has an inherent problem of consisting non-relevent words while also missing on many important words. 
     This is expected, given it was curated long back with different exam pattern in mind.
     hence, aspirants has to refer some other list as well to make their prepration more robust and perform well in GRE. 
         <br>
-    Our aim in curating Verboculary's List was to find words, which are most relevant and exhaustive for the current GRE exam .
-    While Verboculary's list still largely(>60%) overlaps with the Barron's list, our's has removes older and outdated words, allowing more relevant words to enter in the top 1100 list.
+    Our aim in curating GREninja's List was to find words, which are most relevant and exhaustive for the current format of GRE exam.
+    While GREninja's list still largely(>60%) overlaps with the Barron's list, our's has removes older and outdated words, allowing more relevant words to enter in the top 1100 list.
     <!-- Verboculary list is arguably the most exhaustive and relevant list of words availaible out their for GRE under 1100 word counts. -->
     Moreover our analysis on GRE database has allowed us to rank these words based on the importance for GRE Exam. 
     In case you have less time remaining for GRE, its better to go through Most important once first. 
     Ranking is generated by a ML algorithm to take rankig decision more intelligently based on data.
-    Refer to the "Importnace Based" category to go through words based on this ranking.
-  </P>
-
-  <p *ngIf = "isToShowMore">
-    These extracted words are divided into different sets based on different criterion like Alphabetical,Thematic, Sets etc. to help you remember them more efficently.
-    This techniques help you to easily remember and distinguish the word which have very similiar meaning. Like if you select words based on thematic you can see the subtle diference between their meaning.
-    We recommend to first cover all the words based on 'Set' based classification and later go through other criterion like thematic, etymology etc.
-    Note : Words inside different category are same, so even if you select the different category, the same word will appear arranged in different order and sets.
-    Extra Words are the owrds to cover only if you have completed the normal Words.
   </p>
 
-  
-  <!-- <p *ngIf = "isToShowMore">
-    The app has 3 parts i.e. 'All Words' which shows all the selected(Filtered words from Side menu) words in a list together, 
-    'Learn Set' : is to go through all these words one by one and and to know more about them from different resources i.e. Google Define, Merriam & Free Thesaurus
-    'Practise' : once you have through through all the set swipe the words untill you have mastered them all.
-  </p> -->
-  <p *ngIf = "isToShowMore" >
+
+  <!-- <p *ngIf = "isToShowMore" >
     You may find some of the words in this app too basic and you need not to go through them again and again.
     For that,Star mark the word which you want to visit later, during revision set star filter and go through only relevant words.
     once you have seen the words in the learn Set section a double tick would appear along with that word to indicate that you have already seen the word.
@@ -64,7 +62,9 @@
     number of either not seen or not mastered from the selected set.
     you can reset all the progress of the selected word once you have gone through all of them.
 
-  </p>
+  </p> -->
+
+
 
   <a  *ngIf = "isToShowMore" (click) = "showMoreToggle(false)">Read Less</a>
 

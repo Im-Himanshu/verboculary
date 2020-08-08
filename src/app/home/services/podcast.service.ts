@@ -40,6 +40,7 @@ export class PodcastService {
       // desire state already running
       if (!this.isPlayerPlaying) {
         this.play();
+        this.iscontinousPlayer = isToPlayAll
       }
       return;
     }
@@ -159,6 +160,9 @@ export class PodcastService {
         console.log('onEnd');
         if (this.iscontinousPlayer) {
           this.next();
+        }
+        else {
+          this.isPlayerPlaying = false;
         }
       }
     });

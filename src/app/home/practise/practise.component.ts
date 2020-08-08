@@ -123,7 +123,11 @@ export class PractiseComponent implements OnInit {
       return;
     }
     this.isToShowMeaning = false;
-    let nextIdIndex: number = this.getRndInteger(0, this.nonMasteredWordIds.length)
+    let batchSize = 10; // keep looping starting 10 words so that user won't keep looping through the words with a skewed learning curve towards the end.
+    if (this.nonMasteredWordIds.length < batchSize) {
+      batchSize = this.nonMasteredWordIds.length;
+    }
+    let nextIdIndex: number = this.getRndInteger(0, batchSize)
     this.selectedId = this.nonMasteredWordIds[nextIdIndex];
     return this.nonMasteredWordIds[nextIdIndex];
 
