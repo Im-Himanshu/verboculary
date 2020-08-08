@@ -16,6 +16,9 @@ export class PodcastService {
   iscontinousPlayer: boolean = false;
   isInTransition = false;
   isToStopLooping = false;
+  isToSkipStartandEnd = true;
+  introSkipTime = 15;
+  EndSkipTime = 15;
 
   constructor(public musicControls: MusicControls, private db: DatabaseService, public toastController: ToastController) {
     this.currId = this.db.allSelectedWordIdsFiltered[0];
@@ -189,7 +192,20 @@ export class PodcastService {
 
   updateProgress() {
     let seek = this.player.seek();
-    this.progress = (seek / this.player.duration()) * 100 || 0;
+    let duration = this.player.duration()
+    this.progress = (seek / duration) * 100 || 0;
+    if (this.isToSkipStartandEnd) {
+      let adjustement = Math.floor((duration - 130) / 3)
+      if (seek < (this.introSkipTime + adjustement)) {
+        console.log(duration, adjustement, this.introSkipTime);
+        this.player.seek(this.introSkipTime + adjustement)
+      }
+      if (seek >= (duration - (this.EndSkipTime + adjustement))) {
+        console.log(duration, adjustement, this.EndSkipTime);
+        this.player.seek(duration);
+      }
+
+    }
     setTimeout(() => {
       this.updateProgress();
     }, 100)
