@@ -33,7 +33,7 @@ export class PodcastService {
       this.pause();
       return;
     }
-    if (!this.db.allWordsData[wordId][5] && isToPlayAll) {
+    if (!this.db.allWordsData[wordId]['podcastLink'] && isToPlayAll) {
       this.iscontinousPlayer = isToPlayAll;
       this.currId = wordId; // to make next run better
       this.next(); // if play all then 0th index is passed and the next availaible index is played
@@ -65,7 +65,7 @@ export class PodcastService {
     let index = this.db.allSelectedWordIdsFiltered.indexOf(this.currId);
     index = index - 1;
     while (index > 0) {
-      if (!this.db.allWordsData[index][5]) {
+      if (!this.db.allWordsData[index]['podcastLink']) {
         index--; // if the podcast doesn't exist then move forward
       }
       else {
@@ -91,7 +91,7 @@ export class PodcastService {
     let index = this.db.allSelectedWordIdsFiltered.indexOf(this.currId);
     let i = index + 1;
     while (i < this.db.allSelectedWordIdsFiltered.length) {
-      if (!this.db.allWordsData[i][5]) {
+      if (!this.db.allWordsData[this.db.allSelectedWordIdsFiltered[i]]['podcastLink']) {
         i++; // if the podcast doesn't exist then move forward
       }
       else {
@@ -147,7 +147,7 @@ export class PodcastService {
     if (this.player) {
       this.player.unload(); // get rid of current player first
     }
-    let srcAdress = [this.db.allWordsData[this.currId][5]]
+    let srcAdress = [this.db.allWordsData[this.currId]['podcastLink']]
     this.player = new Howl({
       src: srcAdress,
       html5: true,
@@ -218,8 +218,8 @@ export class PodcastService {
   createNotification() {
     //this.musicControls.destroy();
     this.musicControls.create({
-      track: this.db.allWordsData[this.currId][1],
-      artist: this.db.allWordsData[this.currId][2],
+      track: this.db.allWordsData[this.currId]['word'],
+      artist: this.db.allWordsData[this.currId]['defs'][0],
       cover: "/assets/appIcon.png",
       isPlaying: true,
       dismissable: false,
@@ -233,7 +233,7 @@ export class PodcastService {
       album: "",
       duration: 0,
       elapsed: 0,
-      ticker: this.db.allWordsData[this.currId][1],
+      ticker: this.db.allWordsData[this.currId]['word'],
     });
     console.log("Notification started");
 

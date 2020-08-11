@@ -113,7 +113,7 @@ export class LearnComponent implements OnInit {
     if (type == 1 && this.url[this.tabBarsKeys[this.activeURL]]) {
       return; // the event is coming from the tab changed and the url is already existing then don't repeat it.
     }
-    let word = this.allWordsData[this.selectedId][1]
+    let word = this.allWordsData[this.selectedId]['word']
     this.url[this.tabBarsKeys[this.activeURL]] = this.sanitizer.bypassSecurityTrustResourceUrl(this.tabBars[this.activeURL] + word);
     this.isSafeUrlReady = true;
     this.afterFrameAppear();

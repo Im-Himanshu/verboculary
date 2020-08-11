@@ -27,8 +27,8 @@
 
           <ion-slides (touchstart)="stopParentProp($event)" (touchmove)="stopParentProp($event)" pager="true"
             style="background: black;" loop="true" zoom="true">
-            <ion-slide *ngFor="let imgsrc of this.db.allWordsData[selectedId][7]">
-              <img  src="{{ imgsrc }}" class="slide-img" />
+            <ion-slide *ngFor="let imgsrc of crntWordAppData['imageUrls']">
+              <img src="{{ imgsrc }}" class="slide-img" />
             </ion-slide>
           </ion-slides>
 
@@ -40,10 +40,10 @@
             </ion-buttons>
             <ion-buttons class="starbutton">
               <ion-icon name="play" (click)="togglePlaying(selectedId, false)"
-                *ngIf="allWordsData[selectedId][5] && (!podcast.isPlayerPlaying || (selectedId != podcast.currId))">
+                *ngIf="crntWordAppData['podcastLink']  && (!podcast.isPlayerPlaying || (selectedId != podcast.currId))">
               </ion-icon>
               <ion-icon name="pause" (click)="togglePlaying(selectedId, true)"
-                *ngIf="allWordsData[selectedId][5] && (podcast.isPlayerPlaying && (selectedId == podcast.currId))">
+                *ngIf="crntWordAppData['podcastLink'] && (podcast.isPlayerPlaying && (selectedId == podcast.currId))">
               </ion-icon>
               <ion-icon (click)="changeMark(0, selectedId)" *ngIf="crntWordDynamicData['isMarked']" name="star">
               </ion-icon>
@@ -53,24 +53,24 @@
               <ion-icon name="share" class="shareArrow" (click)="onScreenShot($event)"></ion-icon>
             </ion-buttons>
             <h1 class="wordStyle">
-              {{ crntWordAppData[1] | titlecase}}
+              {{ crntWordAppData['word'] | titlecase}}
               <small style="font-size: 54%;">{{
-              "  (" + crntWordAppData[3].substring(0, 4) + ") "
+              "  (" + crntWordAppData['pos'].substring(0, 4) + ") "
             }}</small>
             </h1>
 
-            <p class="wordMeaning">{{ crntWordAppData[2] }}</p>
+            <p class="wordMeaning">{{ crntWordAppData['defs'] }}</p>
 
             <p class="wordExample">
               <em>
                 <div innerHTML="<b>e.g. : </b> {{
-                  ' ' + crntWordAppData[4]
-                    | highlightText: crntWordAppData[1]
+                  ' ' + crntWordAppData['examples']
+                    | highlightText: crntWordAppData['word']
                 }}"></div>
               </em>
             </p>
             <p class="synonyms"><strong>Synonyms : </strong>
-              <span *ngFor='let syn of crntWordAppData[6];let isLast=last'>
+              <span *ngFor="let syn of crntWordAppData['synonyms'];let isLast=last">
                 <span *ngIf="this.wordToIdMap[syn] != null" style="color:#ffa500" (click)="selectId(syn)">
                   {{syn|titlecase}}
                 </span>

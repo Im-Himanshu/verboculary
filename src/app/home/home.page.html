@@ -132,13 +132,13 @@
           <div style="width: 88%;" class="wordDescription"
             (click)="goToUrl('/mainmodule/base/wordSets/' + this.db.selectedSet+'/learn/'+this.podcast.currId)">
             <div style="font-size: 20px;">
-              <span>{{ this.db.allWordsData[this.podcast.currId][1] | titlecase}}</span>
+              <span>{{ this.db.allWordsData[this.podcast.currId]['word'] | titlecase}}</span>
             </div>
             <div style="font-size: 12px;">
               <div behavior="" direction="left" style="overflow: hidden;
               height: 12px;
               text-overflow: ellipsis;">
-                {{ this.db.allWordsData[this.podcast.currId][2]  }}
+                {{ this.db.allWordsData[this.podcast.currId]['defs'][0]  }}
               </div>
 
             </div>

@@ -33,6 +33,7 @@ export class DashBoardComponent implements OnInit {
   totalScreenHeight;
   heightFromTop
   isGraphVisible = false;
+  totalNumberofWords = 0;
 
   constructor(private renderer: Renderer2, public db: DatabaseService, private router: Router, private platform: Platform, public screenshot: Screenshot, private shareService: SharingServiceService, private activatedRoute: ActivatedRoute) {
     this.totalScreenHeight = this.platform.height();
@@ -117,6 +118,7 @@ export class DashBoardComponent implements OnInit {
       this.collectiveProgress['pro']['totalWords'] += this.allSetProgressData[this.allSelectedSet[one + 14]]['totalWords'];
       this.collectiveProgress['pro']['totalViewed'] += this.allSetProgressData[this.allSelectedSet[one + 14]]['totalViewed'];
     }
+    this.totalNumberofWords = this.collectiveProgress['beginner']['totalWords'] + this.collectiveProgress['transitional']['totalWords'] + this.collectiveProgress['pro']['totalWords']
 
 
 

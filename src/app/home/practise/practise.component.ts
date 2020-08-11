@@ -193,7 +193,7 @@ export class PractiseComponent implements OnInit {
       if (index || index == 0) {
         this.nonMasteredWordIds.splice(index, 1)
       }
-      this.presentToast(this.allWordsData[this.selectedId][1])
+      this.presentToast(this.allWordsData[this.selectedId]['word'])
     }
     if (oneWordDynamicData['correctCount'] < 0) {
       this.masteredWordPoint = this.masteredWordPoint + (0 - oneWordDynamicData['correctCount']);// increase by the same factor mijnus but count is negative

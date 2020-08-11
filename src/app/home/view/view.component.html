@@ -38,7 +38,9 @@
                   <svg-icon name='beginner'></svg-icon>
                 </div>
               </div>
-              <div class="word"> {{allWordsData[oneWordId][1] | titlecase}}</div>
+              <div class="word">
+                {{allWordsData[oneWordId]['word'] }}
+              </div>
               <div class="iconBox2" (click)="toggleBookMark($event, oneWordId)">
                 <div id="iconsGroup">
                   <svg-icon *ngIf="wordsDynamicData[oneWordId]['isMarked']" name='fill-bookmark'></svg-icon>
@@ -48,7 +50,7 @@
             </div>
 
             <div *ngIf="isWordopen[oneWordId]" class="secondRow" (click)="onWordClickToggleit(oneWordId)">
-              <div class="meaningtextStyle">{{allWordsData[oneWordId][2]}} </div>
+              <div class="meaningtextStyle">{{allWordsData[oneWordId]['defs']}} </div>
 
             </div>
 
@@ -65,7 +67,8 @@
 
               </div>
 
-              <div class="iconBox" *ngIf="allWordsData[oneWordId][5]" (click)="togglePlaying(oneWordId,false)">
+              <div class="iconBox" *ngIf="allWordsData[oneWordId]['podcastLink']"
+                (click)="togglePlaying(oneWordId,false)">
                 <div class="icon">
                   <div class="iconsGroup" *ngIf="podcast.isPlayerPlaying && (oneWordId == podcast.currId)">
                     <!-- will pause this id -->

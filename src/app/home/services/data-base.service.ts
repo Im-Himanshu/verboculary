@@ -23,7 +23,7 @@ export class DatabaseService {
   public allSelectedWordIds: any;
   public allSelectedWordIdsFiltered: any = [];
   public filteredSelectedWordIds: any;
-  public selectedSet = "allWords";
+  public selectedSet = "beginner-1";
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
   public allSetinSelectedCategory;
   public wordFilterChangeEvent: Subject<any> = new Subject();
@@ -82,7 +82,7 @@ export class DatabaseService {
     this.allSelectedWordIdsFiltered.splice(0, this.allSelectedWordIdsFiltered.length);
     let count = 0;
     for (var i = 0; i < this.allSelectedWordIds.length; i++) {
-      if (this.allWordsData[this.allSelectedWordIds[i]][1].indexOf(searchQuery) != -1) {
+      if (this.allWordsData[this.allSelectedWordIds[i]]['word'].indexOf(searchQuery) != -1) {
         this.allSelectedWordIdsFiltered.push(this.allSelectedWordIds[i]);
         count++
       }
@@ -276,8 +276,8 @@ export class DatabaseService {
   customSortOfArray(array) {
     for (let outer = 1; outer < array.length; outer++) {
       for (let inner = 0; inner < outer; inner++) {
-        let wordInner = this.allWordsData[array[inner]][1];
-        let wordOuter = this.allWordsData[array[outer]][1]
+        let wordInner = this.allWordsData[array[inner]]['word'];
+        let wordOuter = this.allWordsData[array[outer]]['word']
         //let isToReplace = this.allWordsData[array[outer]][1] < 
         if (wordOuter < wordInner) {
           const [element] = array.splice(outer, 1)
@@ -364,7 +364,7 @@ export class DatabaseService {
 
 
   getData() {
-    return this.http.get("assets/csvToJsonData.json");
+    return this.http.get("assets/allWordsData.json");
   }
 
   getSetDataFromJSON() {
