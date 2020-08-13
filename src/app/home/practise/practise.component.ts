@@ -73,9 +73,13 @@ export class PractiseComponent implements OnInit {
       else {
         this.nonMasteredWordIds.push(onewordsID);
       }
-      if (this.wordDynamicData[onewordsID]['isViewed']) {
-        this.seenWordCount++;
+      try {
+        if (this.wordDynamicData[onewordsID]['isViewed']) {
+          this.seenWordCount++;
 
+        }
+      } catch (error) {
+        console.log("error in word ID", onewordsID);
       }
     }
     if (this.nonMasteredWordIds.length == 0) {

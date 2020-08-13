@@ -28515,6 +28515,27 @@
       ],
       "word": "faction"
    },
+   "1002": {
+      "defs": [
+         "produced by, or characterized by internal dissension."
+      ],
+      "pos": "adjective",
+      "examples": [
+         "The controversial bill proved factious, as dissension even within parties resulted."
+      ],
+      "shortExample": [],
+      "nGramFreq": "0.1",
+      "synonyms": [
+         "divisive",
+         "discordant",
+         "dissentious"
+      ],
+      "id": 1002,
+      "wordNetDef": [],
+      "podcastLink": "",
+      "imageUrls": [],
+      "word": "factious"
+   },
    "1003": {
       "imageUrls": [
          "/assets/img/WordImages/factitious/istockphoto0.jpg"
@@ -29645,6 +29666,31 @@
       ],
       "pos": "noun"
    },
+   "1044": {
+      "wordNetDef": [],
+      "defs": [
+         ": intended for display : open to view"
+      ],
+      "synonyms": [
+         "apparent",
+         "assumed",
+         "evident"
+      ],
+      "word": "ostensible",
+      "nGramFreq": "0.985092",
+      "id": 1044,
+      "podcastLink": "",
+      "examples": [
+         "At first, Mayor Paes was an ostensible champion of the poor."
+      ],
+      "imageUrls": [
+         "/assets/img/WordImages/opulence/istockphoto0.jpg"
+      ],
+      "shortExample": [
+         "the ostensible purpose for the trip"
+      ],
+      "pos": "noun"
+   },
    "1045": {
       "shortExample": [
          "Despite his victories, Themistocles was {it}ostracized{/it} by the Athenians."
@@ -30585,6 +30631,27 @@
          "adj\tof a stern or strict bearing or demeanor; forbidding in aspect",
          "adj\tnot to be placated or appeased or moved by entreaty"
       ],
+      "podcastLink": "",
+      "shortExample": []
+   },
+   "1078": {
+      "synonyms": [
+         "fetter",
+         "inhibit",
+         "impede"
+      ],
+      "pos": "noun",
+      "id": 1078,
+      "defs": [
+         "to present an obstacle to : stand in the way of"
+      ],
+      "imageUrls": [
+         "/assets/img/WordImages/stymie or stymy/istockimages0.jpg"
+      ],
+      "word": "stymie",
+      "nGramFreq": ".612939",
+      "examples": [],
+      "wordNetDef": [],
       "podcastLink": "",
       "shortExample": []
    },

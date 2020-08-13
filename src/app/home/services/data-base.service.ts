@@ -8,6 +8,8 @@ import { Subject, forkJoin, Observable } from "rxjs";
 import { ToastController } from "@ionic/angular";
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { AdmobSerService } from './admob-ser.service';
+import { AngularFirestore } from '@angular/fire/firestore'
+import { FirebaseOperationsService } from "./firebase-operations.service"
 const STORAGE_KEY_AppData = "wordsAppData";
 const STORAGE_KEY_SetData = "setData";
 const STORAGE_KEY_WordData = "wordData";
@@ -42,6 +44,7 @@ export class DatabaseService {
     private route: ActivatedRoute,
     private router: Router,
     public admob: AdmobSerService,
+    public fireBaseService: FirebaseOperationsService
   ) {
     router.events.forEach((event: NavigationEvent) => {
       //After Navigation, because firstchild are populated only till navigation ends
@@ -69,6 +72,7 @@ export class DatabaseService {
       }
     });
   }
+
 
 
   onSearchQueryChange(searchQuery: string) {
@@ -505,6 +509,7 @@ export class DatabaseService {
       this.reStartSetDynamicData();
       this.reStartWordDynamicData();
       this.presentToast("All progress has been Reset."); // to save the session data from getting destroyed
+      this.router.navigate(['/slides']);
     });
   }
   // only word by word state change is allowed
@@ -554,5 +559,10 @@ export class DatabaseService {
 
     return array;
   }
+
+
+
+
+
 
 }

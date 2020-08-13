@@ -45,7 +45,7 @@ export class HomePage implements OnInit {
   @ViewChild('range', { static: false }) range: IonRange;
 
   constructor(public db: DatabaseService, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, public themeService: ThemeChangeService, public router: Router, public sharingService: SharingServiceService, public admob: AdmobSerService, private storage: Storage, public podcast: PodcastService,
-    private apprate : ApprateService) {
+    private apprate: ApprateService) {
     this.allSetData = this.db.allSetData;
     this.allWordsOfSets = this.allSetData.allWordOfSets;
     this.showFullscreenAdd();
@@ -80,9 +80,10 @@ export class HomePage implements OnInit {
 
 
   async presentAlertConfirm() {
+    //    this.db.fireBaseService.feedAllwordsDatainFirebase();
     const alert = await this.alertController.create({
-      header: 'Warning! Deleting all App Data?',
-      message: 'Are You sure you want to reset all the app data? this will delete all the progress.',
+      header: 'Warning! Deleting all User Data?',
+      message: "Are You sure you want to reset all the User Data? This will delete all the progress. You won't be able to retrieve it again.",
       cssClass: 'ionicAlert',
       buttons: [
         {

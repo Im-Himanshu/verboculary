@@ -1,82 +1,143 @@
-<ion-header >
-  <ion-toolbar class = "modalToolbar">          
+<ion-header>
+  <ion-toolbar class="modalToolbar">
     <ion-title>How To Use?</ion-title>
-    <ion-buttons slot="end">            
+    <ion-buttons slot="end">
       <ion-button (click)="closeModal()">Close
 
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>   
-   <ion-content class= "modalContent">
-<div style = "margin-left: 16px;width: 95%;font-size: larger;">
+</ion-header>
+<ion-content class="modalContent">
+  <div style="margin-left: 16px;width: 95%;font-size: larger;">
 
-  <p>
-    <b>Basic Know How :</b><br>
-    GREninja contains an exhaustive list of 1100 words derived after rigorous Machine-Learning analysis of vast GRE resources and popular words list for GRE like Baroon's 1100, Baroon's 800, Magoosh, Kaplan etc. This is one of the most updated and analysis backed wordlist for GRE availaible out there. Our analysis have showed that the words in GREninja list covers >95% of words you can expect to see in your GRE examinations. <br> <br>
-    Moreover, these words are also divided in different sets based on the importance for GRE examination. These words may not exactly follow the easy to hard sorting structure but words coming in earlier sets are more frequently asked then the later ones. We recommend you to go through them in order, and covers as many words as possible depending on time available to you. We are confident that if you have thoroughly mastered our wordlist you need to refer to any other wordlist. <br>
-    <a  *ngIf = "!isToShowMore" (click) = "showMoreToggle(true)">Read More</a>
-  </p>
+    <p>
+      <b>Basic Know How :</b><br>
+      GREninja contains an exhaustive list of 1100 +110 words derived after rigorous Machine-Learning analysis of vast
+      GRE resources and popular words list for GRE like Baroon's 1100, Baroon's 800, Magoosh, Kaplan etc. This is one of
+      the most updated and analysis backed wordlist for GRE availaible out there. Our analysis have showed that the
+      words in GREninja list covers >95% of words you can expect to see in your GRE examinations. <br> <br>
+      Moreover, these words are also divided in different sets based on the importance for GRE examination. These words
+      may not exactly follow the easy to hard sorting structure but words coming in earlier sets are more frequently
+      asked then the later ones. We recommend you to go through them in order, and covers as many words as possible
+      depending on time available to you. We are confident that if you have thoroughly mastered our wordlist you need to
+      refer to any other wordlist. <br>
+      <a *ngIf="!isToShowMore" (click)="showMoreToggle(true)">Read More</a>
+    </p>
 
-  <p *ngIf = "isToShowMore">
-    <b>Important Features :</b> <br> <br>
-    Bruce Lee once said, "I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times". Same applies to any GRE-Ninja, It doesn't matter if you know thousands of words on surface, you need to know the words in-depth and try to grasp their meaning in different context. We have gathered some of the best and varied resources available out there to provide you with non-exhaustive information for every word.<br> <br>
-    1. We have provided integration of most popular English dictionaries like Merriam, Google Define and Thesaurus. You can enable this by clicking the toggle button in right-middle of the learn section of every Set (this would require you to have internet connection). <br> <br>
-    2. In the Newer version we have provided the feature of detailed podcast for every word. You can either play podcast of individual words or play podcast for all the words of the selected set to keep the learning going while you are Travelling, Exercising or not in situation to access your mobile screen. All these podcast are played directly from the Merriam websites. <br> <br>
-    3. Every word has one image related to the context of the word to help you remember faster. <br> <br>
-    4. You can test your knowledge using the Flashcards in the test section, The words in this section will be only those which are selected or filtered in view section so you can customize what you are testing. <br> <br>
-    5. Other than the overall progress, You can also track your progress report on individual set level by clicking the fab button 
-    in bottom right corner of view section. <br> <br>
-    6. You can share your progress report and any individual words with your family and friends to discuss it. <br> <br>
-
-
-    We have provided an option to add your personal notes also.
-    
-    
-  </p>
-
-  <p *ngIf = "isToShowMore">
-    <b>Suggested strategy  for vocabulary Building :</b> <br> <br>
-    This strategy is designed based on scientific evidence on how our cognition memory works and how our brain remember stuff. For Example our Visual memory is much-much better than our literature memory. It is highly probable if an image and text is shown to you for same amount of time you will be able to better recall the image than the text. Similarly our series of event memory is better than single instance memory like it is highly probable that you will forget a joke but will remember a story you heard somewhere. There could be complete book over how to effectively utilize these scientific finding to increase your brain retention capacity but we will focus on what we have come up using these theory on how to help you remember words. <br> <br>
-
-    1. You need to make every word your friend, somehow make it relevant to you either by attaching it with some personal experience or making your own mnemonics For Example "Lassitude" which means "a state with, lack of Energy"... Now "Lassi" is an Punjabi drink which cause person to become lethargic so we make "Lassi + attitude" attitude after drinking Lassi is Lassitude. <br> <br>
-    
-    2. Try to prefix or sufix one another word that you already remember. for example : "Diatribe", which means "a forceful and bitter verbal attack against someone or something" you can make like "Diatribe by Trump". Now every time Diatribe comes you rather than trying to remember the meaning try to remember the attached word. You will see a lot of improvement in your learning capacity. you need to allot some time to every word to come up with these ideas. Take note of these ideas to keep them consistent through out your learning period.  <br> <br>
-
-    3. Read about every word as much as you can like origin of word (Etymology in Merriam), go in details of synonyms, Words with similar meaning(section in Merriam) etc. There will always be something that will stuck in your memory from these. <br> <br>
-    
-    4. Listen to the podcast given in app, there will always be some history of word told to you, remember it as a story. <br> <br>
-
-    5. Always focus on part of speech of words, and try to break it in root words most of the words break down to common root words while changing the meaning. <br> <br>
-
-    6. Try to continuously enforce what you have learned by revising again and again. Most of the people make this common mistake of revising only when they are done with all the words by that time they forgot all the words. Try to be continuous in your learning and dedicate sometime every day for learning. Make it your habit to go through all the words from t-3 days before start learning new words for the day. Moreover, At the end of every week go through all the words again. Keep Marking all the words you forgot from past days and go through the details of them again to enforce the meaning. Our brain memory works based on neurons and an electrical impluse is send out to the relevant memory cells every time you revise something. This electrical impulse makes it stronger and efficent over time. So keep revising makes the cell stronger before it dies out. Generation of new neuron is follows a decay curve so try to limit the words you are learning in a day, don't go too hard or too easy follow a consistent learning path.<br> <br>
-
-    7. Read and read lots of stuff while you are building vocabulary, it is very helpful if you find usage of a word that you just learn in some context that you are reading, it settles the meaning of word better in your brain. Continuously try to think the exact meaning of word you encounter. Refer to all the details in the GREninja app again. The NewYork times, NY times, Scientific American, arts & co daily . Try to Read wage topics that you don't understand fully. <br> <br>
-
-    8. Continuously solve GRE questions while you are building vocabulary, don't wait for you to complete all the words, it will take a long time. We suggest you to start practicing after completing all the words in beginner Level. <br> <br>
-
-  </p>
+    <p *ngIf="isToShowMore">
+      <b>Important Features :</b> <br> <br>
+      Bruce Lee once said, "I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced
+      one kick 10,000 times". Same applies to any GRE-Ninja, It doesn't matter if you know thousands of words on
+      surface, you need to know the words in-depth and try to grasp their meaning in different context. We have gathered
+      some of the best and varied resources available out there to provide you with non-exhaustive information for every
+      word.<br> <br>
+      1. We have provided integration of most popular English dictionaries like Merriam, Google Define and Thesaurus.
+      You can enable this by clicking the toggle button in right-middle of the learn section of every Set (this would
+      require you to have internet connection). <br> <br>
+      2. In the Newer version we have provided the feature of detailed podcast for every word. You can either play
+      podcast of individual words or play podcast for all the words of the selected set to keep the learning going while
+      you are Travelling, Exercising or not in situation to access your mobile screen. All these podcast are played
+      directly from the Merriam websites. <br> <br>
+      3. Every word has one image related to the context of the word to help you remember faster. <br> <br>
+      4. You can test your knowledge using the Flashcards in the test section, The words in this section will be only
+      those which are selected or filtered in view section so you can customize what you are testing. <br> <br>
+      5. Other than the overall progress, You can also track your progress report on individual set level by clicking
+      the fab button
+      in bottom right corner of view section. <br> <br>
+      6. You can share your progress report and any individual words with your family and friends to discuss it. <br>
+      <br>
 
 
-  <p *ngIf = "isToShowMore">
-    <b>More Details about the selected Words :</b> <br> <br>
-    GREninja consists of 1100 words curated after crunching a large database of GRE Exam related resources, 
-    Word list used in this app is arguably, the most latest, analytically backed and relevant word list available for the newer GRE exam pattern.
-    Barron 1100's list, has been a primary choice for most of GRE aspirant since long time.
-    This list has an inherent problem of consisting non-relevant words while also missing on many important words. 
-    This is expected, given it was curated long back with different exam pattern in mind.
-    hence, aspirants has to refer some other list as well to make their preparation more robust and perform well in GRE. 
-        <br>
-    Our aim in curating GREninja's List was to find words, which are most relevant and exhaustive for the current format of GRE exam.
-    While GREninja's list still largely(>60%) overlaps with the Barron's list, ours has removes older and outdated words, allowing more relevant words to enter in the top 1100 list.
-    <!-- Verboculary list is arguably the most exhaustive and relevant list of words available out there for GRE under 1100 word counts. -->
-    Moreover our analysis on GRE database has allowed us to rank these words based on the importance for GRE Exam. 
-    In case you have less time remaining for GRE, its better to go through Most important once first. 
-    Ranking is generated by a ML algorithm to take ranking decision more intelligently based on data.
-  </p>
+      We have provided an option to add your personal notes also.
 
 
-  <!-- <p *ngIf = "isToShowMore" >
+    </p>
+
+    <p *ngIf="isToShowMore">
+      <b>Suggested strategy for vocabulary Building :</b> <br> <br>
+      This strategy is designed based on scientific evidence on how our cognition memory works and how our brain
+      remember stuff. For Example our Visual memory is much-much better than our literature memory. It is highly
+      probable if an image and text is shown to you for same amount of time you will be able to better recall the image
+      than the text. Similarly our series of event memory is better than single instance memory like it is highly
+      probable that you will forget a joke but will remember a story you heard somewhere. There could be complete book
+      over how to effectively utilize these scientific finding to increase your brain retention capacity but we will
+      focus on what we have come up using these theory on how to help you remember words. <br> <br>
+
+      1. You need to make every word your friend, somehow make it relevant to you either by attaching it with some
+      personal experience or making your own mnemonics For Example "Lassitude" which means "a state with, lack of
+      Energy"... Now "Lassi" is an Punjabi drink which cause person to become lethargic so we make "Lassi + attitude"
+      attitude after drinking Lassi is Lassitude. <br> <br>
+
+      2. Try to prefix or sufix one another word that you already remember. for example : "Diatribe", which means "a
+      forceful and bitter verbal attack against someone or something" you can make like "Diatribe by Trump". Now every
+      time Diatribe comes you rather than trying to remember the meaning try to remember the attached word. You will see
+      a lot of improvement in your learning capacity. you need to allot some time to every word to come up with these
+      ideas. Take note of these ideas to keep them consistent through out your learning period. <br> <br>
+
+      3. Read about every word as much as you can like origin of word (Etymology in Merriam), go in details of synonyms,
+      Words with similar meaning(section in Merriam) etc. There will always be something that will stuck in your memory
+      from these. <br> <br>
+
+      4. Listen to the podcast given in app, there will always be some history of word told to you, remember it as a
+      story. <br> <br>
+
+      5. Always focus on part of speech of words, and try to break it in root words most of the words break down to
+      common root words while changing the meaning. <br> <br>
+
+      6. Try to continuously enforce what you have learned by revising again and again. Most of the people make this
+      common mistake of revising only when they are done with all the words by that time they forgot all the previous
+      words. <br>
+      &nbsp; i) Try
+      to be continuous in your learning and dedicate sometime every day for learning. Make it your habit to go through
+      all the words from t-3 days before start learning new words for the day.
+      <br> &nbsp; ii) Moreover, At the end of every week go through all the words again. Keep Marking all the words you
+      forgot from past days and go through the details of
+      them again to enforce the meaning.
+      <br> &nbsp; iii) Our brain memory works based on neurons and an electrical impluse is send out
+      to the relevant memory cells every time you revise something. This electrical impulse makes it stronger and
+      efficent over time. So keep revising makes the cell stronger before it dies out.
+      In a single sitting, Production of new neuron follows a decay curve so try to limit the words you are learning in
+      a day, don't go too hard
+      or too easy, follow a
+      consistent learning path.<br> <br>
+
+      7. Read and read lots of stuff while you are building vocabulary, it is very helpful if you find usage of a word
+      that you just learn in some context that you are reading, it settles the meaning of word better in your brain.
+      Continuously try to think the exact meaning of word you encounter. Refer to all the details in the GREninja app
+      again. The NewYork times, NY times, Scientific American, arts & co daily . Try to Read wage topics that you don't
+      understand fully. <br> <br>
+
+      8. Continuously solve GRE questions while you are building vocabulary, don't wait for you to complete all the
+      words, it will take a long time. We suggest you to start practicing after completing all the words in beginner
+      Level. <br> <br>
+
+    </p>
+
+
+    <p *ngIf="isToShowMore">
+      <b>More Details about the selected Words :</b> <br> <br>
+      GREninja consists of 1100 words curated after crunching a large database of GRE Exam related resources,
+      Word list used in this app is arguably, the most latest, analytically backed and relevant word list available for
+      the newer GRE exam pattern.
+      Barron 1100's list, has been a primary choice for most of GRE aspirant since long time.
+      This list has an inherent problem of consisting non-relevant words while also missing on many important words.
+      This is expected, given it was curated long back with different exam pattern in mind.
+      hence, aspirants has to refer some other list as well to make their preparation more robust and perform well in
+      GRE.
+      <br>
+      Our aim in curating GREninja's List was to find words, which are most relevant and exhaustive for the current
+      format of GRE exam.
+      While GREninja's list still largely(>60%) overlaps with the Barron's list, ours has removes older and outdated
+      words, allowing more relevant words to enter in the top 1100 list.
+      <!-- Verboculary list is arguably the most exhaustive and relevant list of words available out there for GRE under 1100 word counts. -->
+      Moreover our analysis on GRE database has allowed us to rank these words based on the importance for GRE Exam.
+      In case you have less time remaining for GRE, its better to go through Most important once first.
+      Ranking is generated by a ML algorithm to take ranking decision more intelligently based on data.
+    </p>
+
+
+    <!-- <p *ngIf = "isToShowMore" >
     You may find some of the words in this app too basic and you need not to go through them again and again.
     For that, Star mark the word which you want to visit later, during revision set star filter and go through only relevant words.
     once you have seen the words in the learn Set section a double tick would appear along with that word to indicate that you have already seen the word.
@@ -88,9 +149,8 @@
 
 
 
-  <a  *ngIf = "isToShowMore" (click) = "showMoreToggle(false)">Read Less</a>
+    <a *ngIf="isToShowMore" (click)="showMoreToggle(false)">Read Less</a>
 
-</div>
-      
-    </ion-content>
+  </div>
 
+</ion-content>

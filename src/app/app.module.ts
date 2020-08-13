@@ -13,6 +13,7 @@ import { AuthService } from "./auth.service";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { DatabaseService } from "./home/services/data-base.service";
+import { FirebaseOperationsService } from "./home/services/firebase-operations.service"
 import { IonicStorageModule } from "@ionic/storage";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -23,15 +24,15 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { SvgDefinitionsComponent } from "./components/svg-definitions/svg-definitions.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
-import { Deeplinks }  from '@ionic-native/deeplinks/ngx'
+import { Deeplinks } from '@ionic-native/deeplinks/ngx'
 import { SlidesComponent } from './home/POCs/slides/slides.component'
 import { Media } from "@ionic-native/media/ngx";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
-import{ MusicControls } from "@ionic-native/music-controls/ngx";
+import { MusicControls } from "@ionic-native/music-controls/ngx";
 import { AdMobFree } from "@ionic-native/admob-free/ngx";
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import {Screenshot} from '@ionic-native/screenshot/ngx'
+import { Screenshot } from '@ionic-native/screenshot/ngx'
 var firebaseConfig = {
   apiKey: "AIzaSyBAZ6ebK-rQPtF2ZHA5AlEt80esrypQLnY",
   authDomain: "verboculary.firebaseapp.com",
@@ -70,6 +71,7 @@ var firebaseConfig = {
   ],
   providers: [
     DatabaseService,
+    FirebaseOperationsService,
     StatusBar,
     SplashScreen,
     AuthService,
@@ -84,4 +86,4 @@ var firebaseConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

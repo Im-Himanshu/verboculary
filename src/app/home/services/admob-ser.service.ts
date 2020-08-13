@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeRewardVideoConfig,AdMobFreeInterstitialConfig } from '@ionic-native/admob-free/ngx';
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeRewardVideoConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free/ngx';
 import { Storage } from '@ionic/storage';
 import { AdmobConfig } from '../interfaces/admob-config';
 import { AlertController } from '@ionic/angular';
-import { Button } from 'protractor';
+import { AngularFirestore } from '@angular/fire/firestore'
 
 const STORAGE_KEY_AdmobSessionData = "admobSettings";
 
@@ -12,11 +12,21 @@ const STORAGE_KEY_AdmobSessionData = "admobSettings";
 })
 export class AdmobSerService {
 
+  /// modification needed 
+  // old admob id was used so remove them
+  // make the new id fetched from firebase for like once in a while..like one every day to reduce the call sizes
+  // make an algorithm to tweak the add frequency on the go
+  // like intense or slow based on the region and some logic..
+
   AdStatus;
   points;
   admobConfig = {} as AdmobConfig;
+  admobIDsDetails: any;
 
-  constructor(public admob: AdMobFree, public storage: Storage, public alertController: AlertController) {
+  constructor(public admob: AdMobFree, public storage: Storage, public alertController: AlertController, private firestore: AngularFirestore) {
+    this.firestore.collection("adMobID").doc("GREninja").get().subscribe(firebaseData => {
+      this.admobIDsDetails = firebaseData.data();
+    })
     this.getAdmobConfig().then(data => {
       if (data) {
         this.admobConfig = data;
@@ -31,55 +41,52 @@ export class AdmobSerService {
     });
   }
 
-   showInterstitialAds(){
-     if (this.AdStatus){
+  showInterstitialAds() {
+    if (this.AdStatus) {
       const interstitialConfig: AdMobFreeInterstitialConfig = {
-        id:'ca-app-pub-3699793333730266/2360882025',
+        id: this.admobIDsDetails.interstitial,
         autoShow: true,
         isTesting: false,
 
       }
 
       this.admob.interstitial.config(interstitialConfig);
-      this.admob.interstitial.prepare().then(() =>
-      {
-        console.log("SUCCESSFUL");
+      this.admob.interstitial.prepare().then((data) => {
+        console.log("interstitial ads  SUCCESSFUL", data);
       }).then(e => console.log(e));
-      }
     }
+  }
 
-  showAdMobFreeRewardVideoAds(){
-    if (true){
+  showAdMobFreeRewardVideoAds() {
+    if (true) {
       const rewardVideoConfig: AdMobFreeRewardVideoConfig = {
-        id:'ca-app-pub-3699793333730266/3937795372',
+        id: this.admobIDsDetails.rewarded,
         autoShow: true,
         isTesting: false,
       }
 
       this.admob.rewardVideo.config(rewardVideoConfig);
-      this.admob.rewardVideo.prepare().then(() =>
-      {
+      this.admob.rewardVideo.prepare().then(() => {
         console.log("SUCCESS")
         document.addEventListener(this.admob.events.REWARD_VIDEO_REWARD, (result) => {
           this.WatchedAd();
         });
-      }).then(e => console.log(e)); 
+      }).then(e => console.log(e));
     }
   }
 
-  showBannerAdd(){
-    if (this.AdStatus){
+  showBannerAdd() {
+    if (this.AdStatus) {
 
       const bannerConfig: AdMobFreeBannerConfig = {
-        id : 'ca-app-pub-3699793333730266/1239372043',
+        id: this.admobIDsDetails.banner,
         autoShow: true,
         isTesting: false,
         bannerAtTop: false,
         overlap: false,
       }
       this.admob.banner.config(bannerConfig);
-      this.admob.banner.prepare().then(() => 
-      {  
+      this.admob.banner.prepare().then(() => {
 
       }).then(e => console.log(e));
     }
@@ -87,16 +94,16 @@ export class AdmobSerService {
 
   WatchedAd() {
     let today = new Date();
-    this.admobConfig.expireDate = new Date(today.getFullYear(),today.getMonth(),today.getDate() + 1);
+    this.admobConfig.expireDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
     this.admobConfig.Adstatus = false;
     this.admobConfig.points = 0;
-    this.setAdmobConfig(this.admobConfig); 
+    this.setAdmobConfig(this.admobConfig);
   }
 
-  checkAdStatus(){
+  checkAdStatus() {
     let today = new Date();
-    
-    if(today >= this.admobConfig.expireDate && this.admobConfig.expireDate != null) {
+
+    if (today >= this.admobConfig.expireDate && this.admobConfig.expireDate != null) {
       this.admobConfig.Adstatus = true;
       this.admobConfig.expireDate = null;
       this.AdStatus = true;
@@ -104,25 +111,25 @@ export class AdmobSerService {
     }
   }
 
-  setAdmobConfig(x){
-    this.storage.set(STORAGE_KEY_AdmobSessionData,x);
+  setAdmobConfig(x) {
+    this.storage.set(STORAGE_KEY_AdmobSessionData, x);
   }
 
-  getAdmobConfig(){
+  getAdmobConfig() {
     return this.storage.get(STORAGE_KEY_AdmobSessionData);
   }
 
   async presentAlert() {
-    const alert =await this.alertController.create({
+    const alert = await this.alertController.create({
       header: 'Reward',
-      subHeader: 'Watching Video Ads Disable Ads for 24 Hours!',
+      subHeader: 'Watching one Full Video Add will Disable all in-app Ads for 24 Hours! Would you like to continue?',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
         },
         {
-          text: 'Okay',
+          text: 'Yes,Continue',
           handler: () => {
             this.showAdMobFreeRewardVideoAds();
           }
