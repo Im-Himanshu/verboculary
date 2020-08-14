@@ -68,9 +68,10 @@ https://grokonez.com/frontend/angular/angular-7/angular-7-virtual-scroll-example
   }
   ngAfterViewInit() {
     setTimeout(() => {
-      this._startLoadingWordDataSubject.next(true)
+      this.isToLoadWord = true;
+      this._startLoadingWordDataSubject.next(this.isToLoadWord)
       /*Your Code*/
-    }, 1000);
+    }, 500);
   }
 
   ngOnDestroy() {

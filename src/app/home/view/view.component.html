@@ -113,11 +113,9 @@
         </ion-item>
 
       </ion-item-sliding>
-
-
-      <ion-item class="name-item">
-        <!-- <empty end> -->
-      </ion-item>
+      <br>
+      <br>
+      <br>
       <br>
       <br>
       <br>
@@ -132,6 +130,7 @@
 
 
     </div>
+    <ion-spinner style="position: absolute;top: 43%;left: 50%;" *ngIf="!isToLoadWord" name="lines-small"></ion-spinner>
 
     <!-- here we decide what to show and how to show if search query has elements -->
   </ion-content>
