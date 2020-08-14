@@ -1,4 +1,4 @@
-<span #container>
+<span #container class="full">
   <ion-content *ngIf="isAllWordMastered" class="alignMiddle ionContentHeight"
     style="--background: var(--app-homepage-graph);">
     <ion-card>
@@ -19,6 +19,7 @@
   </ion-content>
 
   <ion-content class="learnWordsContent ioncontentheight" *ngIf="!isAllWordMastered">
+    <!-- <span class="selectedset">{{this.db.appNametoUINameMapping[db.selectedSet]}}</span> -->
     <span *ngIf="allWordsData[selectedId] as crntWordAppData">
 
       <ion-card *ngIf="wordDynamicData[selectedId] as crntWordDynamicData" [ngClass]="{ alignMiddle: !isToShowDetails }"
@@ -35,7 +36,7 @@
           <!-- <ion-ripple-effect type="unbounded"></ion-ripple-effect> -->
 
           <div class="learnCards">
-            <ion-buttons class="detailsToggleButton">
+            <ion-buttons class="detailsToggleButton" (click)="scrollIntoView()">
               <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
             </ion-buttons>
             <ion-buttons class="starbutton">
@@ -74,6 +75,7 @@
                 <span *ngIf="this.wordToIdMap[syn] != null" style="color:#ffa500" (click)="selectId(syn)">
                   {{syn|titlecase}}
                 </span>
+
                 <span *ngIf="this.wordToIdMap[syn] == null"> {{syn|titlecase}}</span>
                 {{isLast ? '' : ', '}}
 
@@ -96,8 +98,9 @@
 
     </span>
     <!-- <ion-button (click)="shareButtonClone()">Image</ion-button> -->
+    <span id="extraDict"></span>
     <ion-content class="learnWordsContent ionContentHeight" *ngIf="isToShowDetails">
-      <ion-card style="height: 61vh;">
+      <ion-card style="height: 77vh;">
         <mat-tab-group backgroundColor="primary" (selectedTabChange)="onTabChanged($event)" [selectedIndex]="activeURL">
           <mat-tab *ngFor="let thisTab of tabBarsKeys" [label]="thisTab">
             <ng-template matTabContent>
@@ -114,14 +117,23 @@
         </mat-tab-group>
       </ion-card>
     </ion-content>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
   </ion-content>
   <section class="actionButton">
     <ion-toolbar class="learnWordsChangeButton">
+
       <ion-button style="width: 48%;--background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round"
-        (click)="previous()">Previous
+        (click)="previous()">
+        <ion-icon name="arrow-round-back"></ion-icon> Previous
       </ion-button>
       <ion-button style="width: 48%; --background: var(--learn-button);" *ngIf="!isAllWordMastered" shape="round"
-        (click)="next()">Next</ion-button>
+        (click)="next()">Next <ion-icon name="arrow-round-forward"></ion-icon>
+      </ion-button>
     </ion-toolbar>
   </section>
 </span>

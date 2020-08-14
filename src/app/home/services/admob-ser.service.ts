@@ -24,9 +24,6 @@ export class AdmobSerService {
   admobIDsDetails: any;
 
   constructor(public admob: AdMobFree, public storage: Storage, public alertController: AlertController, private firestore: AngularFirestore) {
-    this.firestore.collection("adMobID").doc("GREninja").get().subscribe(firebaseData => {
-      this.admobIDsDetails = firebaseData.data();
-    })
     this.getAdmobConfig().then(data => {
       if (data) {
         this.admobConfig = data;
@@ -39,6 +36,16 @@ export class AdmobSerService {
         this.setAdmobConfig(this.admobConfig);
       }
     });
+  }
+
+  fetchAdMobIdsFromFirebase() {
+    return new Promise((resolve, reject) => {
+      this.firestore.collection("adMobID").doc("GREninja").get().subscribe(firebaseData => {
+        this.admobIDsDetails = firebaseData.data();
+        resolve(true);
+      })
+
+    })
   }
 
   showInterstitialAds() {

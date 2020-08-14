@@ -61,10 +61,12 @@ export class WordSetsComponent implements OnInit {
     if (this.viewType == 'learn') {
       //search icon shrink
       this.activeTabIndex = 1;
+      this.FabButtonVisible = false;
     }
     if (this.viewType == 'test') {
       //search icon shrink
       this.activeTabIndex = 2;
+      this.FabButtonVisible = false
     }
   }
 

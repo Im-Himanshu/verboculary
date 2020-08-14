@@ -49,6 +49,9 @@ export class LearnComponent implements OnInit {
   constructor(private screenshot: Screenshot, public db: DatabaseService, private route: ActivatedRoute, public sanitizer: DomSanitizer, public shareService: SharingServiceService, private router: Router, public podcast: PodcastService) {
 
     this.selectedSet = this.db.selectedSet;
+    this.db.selectedWordIDsChangeEvent.subscribe(data => {
+      this.selectedId = this.allSelectedWordIDs[0];
+    })
 
   }
 
@@ -226,6 +229,13 @@ export class LearnComponent implements OnInit {
     else {
       // if player is not playing then play it
       this.podcast.playPauseGivenId(wordId, true, false)
+    }
+  }
+  scrollToElement(element) { }
+
+  scrollIntoView() {
+    if (this.isToShowDetails) {
+      //document.getElementById("extraDict").scrollIntoView({ behavior: "smooth" });
     }
   }
 

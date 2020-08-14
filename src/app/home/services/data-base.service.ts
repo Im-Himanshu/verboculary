@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from "@ionic/storage";
-import { wordAppData } from "../interfaces/wordAppData.interface";
+import { wordAppData, appNameToUINameMapping } from "../interfaces/wordAppData.interface";
 import { processedDataSharing, setLevelProgress } from "../interfaces/dropdown.interface";
-import { Subject, forkJoin, Observable } from "rxjs";
+import { Subject, forkJoin, Observable, BehaviorSubject } from "rxjs";
 import { ToastController } from "@ionic/angular";
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { AdmobSerService } from './admob-ser.service';
@@ -29,6 +29,7 @@ export class DatabaseService {
   public selectedCategory: any = "Importance Based"; // by default will pick-up set from this...
   public allSetinSelectedCategory;
   public wordFilterChangeEvent: Subject<any> = new Subject();
+  public selectedWordIDsChangeEvent: Subject<any> = new Subject();
   public activeTabIndex: number = 0;
   public isSearchBarVisible: boolean = false;
   public isToShowSearchBar = false;
@@ -36,6 +37,8 @@ export class DatabaseService {
   public selectedFilter = 'all';
   public deleteMe;
   public isNavigationLoading = false;
+  public appNametoUINameMapping = new appNameToUINameMapping().appNametoUINamemapping;
+  public wordDataObservable = new BehaviorSubject([]);
 
   constructor(
     public storage: Storage,
@@ -72,6 +75,7 @@ export class DatabaseService {
       }
     });
   }
+
 
 
 
@@ -145,8 +149,9 @@ export class DatabaseService {
     })
 
     let promise3 = this.getAllWordsDataFromJSON();
+    let promise4 = this.admob.fetchAdMobIdsFromFirebase();
 
-    let allPromises: Observable<any> = forkJoin(promise1, promise2, promise3)
+    let allPromises: Observable<any> = forkJoin(promise1, promise2, promise3, promise4)
     return allPromises;
 
   }
@@ -277,7 +282,7 @@ export class DatabaseService {
 
 
   // this function do an inplace insertionSort of the given array
-  customSortOfArray(array) {
+  private customSortOfArray(array) {
     for (let outer = 1; outer < array.length; outer++) {
       for (let inner = 0; inner < outer; inner++) {
         let wordInner = this.allWordsData[array[inner]]['word'];
@@ -317,6 +322,7 @@ export class DatabaseService {
       }
 
     }
+    this.afterSelectedWordIdsUpdated('sorting');
   }
 
   filterSelectedIDBasedOnGivenCriterion(filterName) {
@@ -362,7 +368,17 @@ export class DatabaseService {
       }
 
     }
-    this.wordFilterChangeEvent.next(true);
+    this.afterSelectedWordIdsUpdated('filter');
+
+
+
+  }
+
+  afterSelectedWordIdsUpdated(type: 'sorting' | 'filter') {
+    if (type == 'filter') {
+      this.wordFilterChangeEvent.next(true);
+    }
+    this.selectedWordIDsChangeEvent.next(true);
 
   }
 

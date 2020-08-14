@@ -1,5 +1,5 @@
 .ioncontentheight {
-  height: 75vh;
+  height: 85vh;
   // width: 100%;
 }
 .mainLearnCard{
@@ -20,6 +20,20 @@
       --handle-background-checked: var(--app-learnWordTogglehandle-background);
     }
   }
+}
+
+.selectedset{
+  font-weight: 200;
+  font-size: 1em;
+  margin-left: 2%;
+  margin-top:2.5%;
+  color: #b5b596;
+}
+.actionButton{
+  position: absolute;
+    bottom: 0%;
+    width: 100%;
+
 }
 .learnWordsChangeButton {
   --background: #ffffff00;
@@ -115,10 +129,13 @@
   overflow: hidden;
   line-height: 2.5;
 }
+.full{
+  transition: 0.1s;
+}
 
 .iframe {
   width: 100%;
-  height: 520px;
+  height: 82vh;
   will-change: transform;
   transition: all 0.3s ease-in-out;
 }

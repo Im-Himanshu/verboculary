@@ -23,6 +23,10 @@ body{
     }
 }
 
+::ng-deep html {
+	scroll-behavior: smooth;
+  }
+
 // not workign as of now
 
 #style-7::-webkit-scrollbar-track

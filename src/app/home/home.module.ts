@@ -68,10 +68,12 @@ import { DatePipe } from "@angular/common";
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 
 //podcast
-import{ MusicControls } from "@ionic-native/music-controls/ngx";
+import { MusicControls } from "@ionic-native/music-controls/ngx";
 
 import { DrawerComponent } from "./POCs/drawer/drawer.component";
 import { Screenshot } from '@ionic-native/screenshot/ngx';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.3, threshold: 10 }, // override default settings // new setting for the libraray
@@ -94,6 +96,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ChartModule,
     ChartsModule,
     SuperTabsModule,
+    ScrollingModule
     // SuperTabs,
   ],
   declarations: [
@@ -145,4 +148,4 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   exports: [SvgComponent],
 })
-export class HomePageModule {}
+export class HomePageModule { }

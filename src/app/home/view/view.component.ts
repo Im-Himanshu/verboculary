@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { DatabaseService } from '../services/data-base.service';
 import { wordToIdMap } from '../../wordToId';
 import { AdmobSerService } from '../services/admob-ser.service';
 import { PodcastService } from '../services/podcast.service'
 import { appNameToUINameMapping } from "../interfaces/wordAppData.interface"
+import { BehaviorSubject, Observable } from 'rxjs';
+
 
 
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss'],
+  styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements OnInit {
   wordlist = null;
@@ -26,7 +28,22 @@ export class ViewComponent implements OnInit {
   sortedAllSelectedWordIds: string[] = [];
   selectedSet;
   shuffleIt = true;
-  appNametoUINameMapping = new appNameToUINameMapping().appNametoUINamemapping;
+  isToLoadWord = false;
+  //wordDataObservable = new BehaviorSubject([]);
+  nameTrackFn = (_: number, item: string) => item; // will update the viewport only if the item inside is updated not the whole object is checked 
+  private _startLoadingWordDataSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public startLoadingWordDataObs: Observable<boolean> = this._startLoadingWordDataSubject.asObservable();/* learning for ngFor loop optimization 
+
+
+https://blog.angular-university.io/angular-2-ngfor/  /// using track by
+https://blog.bitsrc.io/3-ways-to-render-large-lists-in-angular-9f4dcb9b65 
+https://stackoverflow.com/questions/47474743/ngif-not-updating-when-variable-changes
+https://grokonez.com/frontend/angular/angular-7/angular-7-virtual-scroll-example-angular-material-cdk
+
+
+
+
+*/
 
 
   sortingTypes = [
@@ -38,11 +55,10 @@ export class ViewComponent implements OnInit {
     { value: 'viewed', viewValue: 'Viewed' },
     { value: 'marked', viewValue: 'Marked' }
   ]
-  constructor(public db: DatabaseService,private admob: AdmobSerService, public podcast: PodcastService) {
+  constructor(public db: DatabaseService, private admob: AdmobSerService, public podcast: PodcastService) {
     this.allSelectedWordIDs = this.db.allSelectedWordIdsFiltered;
     this.allWordsData = this.db.allWordsData;
     this.wordsDynamicData = this.db.wordsDynamicData;
-
     this.selectedSet = this.db.selectedSet;
     this.admob.showBannerAdd();
   }
@@ -50,12 +66,16 @@ export class ViewComponent implements OnInit {
   ngOnInit() {
     //this.db.changeSortingOfIds("alpha")
   }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this._startLoadingWordDataSubject.next(true)
+      /*Your Code*/
+    }, 1000);
+  }
 
   ngOnDestroy() {
     //this.saveDynamicData();
   }
-
-
 
   changeFilter(event) {
     this.db.filterSelectedIDBasedOnGivenCriterion(event.value);
@@ -65,6 +85,7 @@ export class ViewComponent implements OnInit {
   shuffleButton(event) {
     this.shuffleIt = !this.shuffleIt;
     this.db.changeSortingOfIds(event.currentTarget.attributes.value.nodeValue);
+    //this.allSelectedWordIDs.splice(0, this.allSelectedWordIDs.length);
   }
   changeSorting(event) {
     this.db.changeSortingOfIds(event.value)

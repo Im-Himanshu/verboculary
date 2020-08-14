@@ -26,6 +26,7 @@ export class PractiseComponent implements OnInit {
   isAllWordMastered = false;
   flashCards = [];
   cards;
+  batchSize = 15;
 
 
   allSelectedWordIDs: string[];
@@ -127,7 +128,7 @@ export class PractiseComponent implements OnInit {
       return;
     }
     this.isToShowMeaning = false;
-    let batchSize = 10; // keep looping starting 10 words so that user won't keep looping through the words with a skewed learning curve towards the end.
+    let batchSize = this.batchSize; // keep looping starting 10 words so that user won't keep looping through the words with a skewed learning curve towards the end.
     if (this.nonMasteredWordIds.length < batchSize) {
       batchSize = this.nonMasteredWordIds.length;
     }

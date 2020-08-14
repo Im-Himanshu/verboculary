@@ -2,7 +2,7 @@
   <ion-content #ion_content class="ioncontentheight" style="--background: #fff8dc00" forceOverscroll="true">
     <!-- this part checks if the search query is empty -->
     <div class="header">
-      <span class="selectedset">{{appNametoUINameMapping[db.selectedSet]}}</span>
+      <span class="selectedset">{{this.db.appNametoUINameMapping[db.selectedSet]}}</span>
       <div class="parentDropDown">
 
 
@@ -27,8 +27,8 @@
 
       </div>
     </div>
-    <div>
-      <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs">
+    <div *ngIf="startLoadingWordDataObs | async" class="animate__fadeInDown">
+      <ion-item-sliding *ngFor="let oneWordId of allSelectedWordIDs; trackBy: nameTrackFn">
         <ion-item class="name-item">
           <div class="parentBox">
 
@@ -113,9 +113,24 @@
         </ion-item>
 
       </ion-item-sliding>
+
+
       <ion-item class="name-item">
         <!-- <empty end> -->
       </ion-item>
+      <br>
+      <br>
+      <br>
+      <br>
+      <!-- <cdk-virtual-scroll-viewport [itemSize]="30" style="height: 89vh;">
+
+
+      </cdk-virtual-scroll-viewport> -->
+      <!-- <div *cdkVirtualFor="let item of items" class="example-item">{{item}}</div> -->
+
+
+
+
     </div>
 
     <!-- here we decide what to show and how to show if search query has elements -->
