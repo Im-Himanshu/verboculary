@@ -1,8 +1,9 @@
-import { Component, ViewChild, AfterViewInit, Input} from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { BaseChartDirective, } from 'ng2-charts';
 import { ChartDataSets } from 'chart.js';
 import { SharingServiceService } from '../services/sharing-service.service'
 import { Screenshot } from '@ionic-native/screenshot/ngx';
+import { DatabaseService } from '../services/data-base.service';
 
 @Component({
   selector: 'app-progress-chart',
@@ -39,10 +40,10 @@ export class ProgressChartComponent implements AfterViewInit {
   ];
   public lineChartColors;
 
-  constructor(private shareService: SharingServiceService, private screenshot: Screenshot) { }
+  constructor(private shareService: SharingServiceService, private screenshot: Screenshot, private db: DatabaseService) { }
 
-  onScreenshot(event){
-    this.screenshot.URI(80).then(res=> {
+  onScreenshot(event) {
+    this.screenshot.URI(80).then(res => {
       this.shareService.onShareImage(res.URI);
     })
   }
@@ -50,14 +51,21 @@ export class ProgressChartComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    let allDates = Object.keys(this.chartLabelsAndData);
-
+    let allDates: any = Object.keys(this.chartLabelsAndData);
+    //let intermediate = [];
+    // let chartLabelsAndData2 = {};
+    // for (let oneDate of allDates) {
+    //   let actualDate = new Date(oneDate);
+    //   intermediate.push(actualDate)
+    //   //chartLabelsAndData2[actualDate] = 
+    // }
+    // allDates = intermediate as Date[];
     if (allDates.length == 0) {
       console.error("No Data was parsed for the charting graph")
       this.noDataParsed = true;
       return;
     }
-    allDates.sort();
+    allDates.sort(this.db.sortDates);
     let viewedSeries = [];
     let learnedSeries = [];
     this.chartLabels = [];

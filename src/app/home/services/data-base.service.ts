@@ -298,6 +298,13 @@ export class DatabaseService {
     return array
   }
 
+  public sortDates(a: string, b: string) {
+    // these string are expected to be dates
+    let a2 = new Date(a);
+    let b2 = new Date(b)
+    return (a2.getTime() - b2.getTime());
+  }
+
 
   changeSortingOfIds(sortingType) {
     if (sortingType == 'alpha') {

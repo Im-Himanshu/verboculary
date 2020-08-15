@@ -108,8 +108,8 @@ export class WordSetsComponent implements OnInit {
           individualLearnedDate.push(oneWordDynamicData["learnedDate"])
         }
       }
-      individualLearnedDate.sort();
-      individualViewedDate.sort();
+      individualLearnedDate.sort(this.db.sortDates);
+      individualViewedDate.sort(this.db.sortDates);
       let totalLearningOnDate = {}
       let totalViewedOnDate = {}
       let i = 1;
@@ -124,7 +124,7 @@ export class WordSetsComponent implements OnInit {
       }
 
       let allDates = individualLearnedDate.concat(individualViewedDate)
-      allDates.sort();
+      allDates.sort(this.db.sortDates);
 
       let lastViewedCount = 0
       let lastLearnedCount = 0;
@@ -178,9 +178,11 @@ export class WordSetsComponent implements OnInit {
       this.processChartData();
       (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "0px";
       //(<HTMLStyleElement>document.querySelector(".bg")).style.display = "block";
+      this.FabButtonVisible = false;
 
     } else {
       this.close();
+      this.FabButtonVisible = true;
     }
   }
 
@@ -190,9 +192,9 @@ export class WordSetsComponent implements OnInit {
 
     (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.bottom = "-1000px";
     (<HTMLStyleElement>document.querySelector(".bottomSheet")).style.transform = "translate3d(0px,0px,0px)";
-
     (<HTMLStyleElement>document.querySelector(".bg")).style.display = "none";
     this.isOpen = false;
+    this.FabButtonVisible = true;
   }
 
   touchMove(evt: TouchEvent) {
