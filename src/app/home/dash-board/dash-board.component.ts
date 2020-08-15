@@ -57,6 +57,7 @@ export class DashBoardComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    // this.adjustTheDragged()
 
 
     // let masterFilter = document.getElementById("masterFilter");
@@ -164,18 +165,25 @@ export class DashBoardComponent implements OnInit {
 
   }
 
+  adjustTheDragged() {
+    let masterFilter = document.getElementById("masterFilter");
+    let offSetTop = masterFilter.offsetTop + masterFilter.offsetHeight + 30; // place where slider need 
+    let toMoveElement = document.getElementById("toMove");
+    toMoveElement.style.top = offSetTop + "px"
+  }
+
 
   handleTouchEnd(event: TouchEvent) {
     let masterFilter = document.getElementById("masterFilter");
-    let offSetTop = masterFilter.offsetTop + masterFilter.offsetHeight + 100; // place where slider need to be fit in
+    let offSetTop = masterFilter.offsetTop + masterFilter.offsetHeight + 30; // place where slider need to be fit in
     let toMoveElement = document.getElementById("toMove");
     let absoluteY = event.changedTouches[0].clientY;
-    //let twoThird = offSetTop
-    if (absoluteY > (offSetTop)) {
+    let twoThird = Math.floor(3 * offSetTop / 4)
+    if (absoluteY > twoThird) {
       // more then 180 down from top take it down
       toMoveElement.style.top = offSetTop + "px"
     }
-    if (absoluteY <= (offSetTop)) { // if greater than 2 rd tha
+    else { // if greater than 2 rd tha
       //if less 180 down take it up
       toMoveElement.style.top = 10 + "px"
     }

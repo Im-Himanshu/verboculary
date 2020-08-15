@@ -43,6 +43,7 @@ export class LearnComponent implements OnInit {
 
   img = [];
   images: any;
+  isItTheFirst = true;
 
 
 
@@ -50,7 +51,13 @@ export class LearnComponent implements OnInit {
 
     this.selectedSet = this.db.selectedSet;
     this.db.selectedWordIDsChangeEvent.subscribe(data => {
-      this.selectedId = this.allSelectedWordIDs[0];
+      // for the first time it will be done from the the ngOninit because seelctedID could be in the url also 
+      if (!this.isItTheFirst) {
+        this.selectedId = this.allSelectedWordIDs[0];
+      }
+      else {
+        this.isItTheFirst = false;
+      }
     })
 
   }
