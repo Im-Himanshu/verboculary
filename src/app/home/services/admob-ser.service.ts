@@ -130,6 +130,7 @@ export class AdmobSerService {
     const alert = await this.alertController.create({
       header: 'Reward',
       subHeader: 'Watching one Full Video Add will Disable all in-app Ads for 24 Hours! Would you like to continue?',
+      cssClass: 'ionicAlert',
       buttons: [
         {
           text: 'Cancel',
