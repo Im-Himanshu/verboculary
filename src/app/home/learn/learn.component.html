@@ -36,31 +36,40 @@
           <!-- <ion-ripple-effect type="unbounded"></ion-ripple-effect> -->
 
           <div class="learnCards">
-            <ion-buttons class="detailsToggleButton" (click)="scrollIntoView()">
-              <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
-            </ion-buttons>
-            <ion-buttons class="starbutton">
-              <ion-icon name="play" (click)="togglePlaying(selectedId, false)"
-                *ngIf="crntWordAppData['podcastLink']  && (!podcast.isPlayerPlaying || (selectedId != podcast.currId))">
-              </ion-icon>
-              <ion-icon name="pause" (click)="togglePlaying(selectedId, true)"
-                *ngIf="crntWordAppData['podcastLink'] && (podcast.isPlayerPlaying && (selectedId == podcast.currId))">
-              </ion-icon>
-              <ion-icon (click)="changeMark(0, selectedId)" *ngIf="crntWordDynamicData['isMarked']" name="star">
-              </ion-icon>
-              <ion-icon (click)="changeMark(1, selectedId)" *ngIf="!crntWordDynamicData['isMarked']"
-                name="star-outline">
-              </ion-icon>
-              <ion-icon name="share" class="shareArrow" (click)="onScreenShot($event)"></ion-icon>
-            </ion-buttons>
+
             <h1 class="wordStyle">
               {{ crntWordAppData['word'] | titlecase}}
               <small style="font-size: 54%;">{{
               "  (" + crntWordAppData['pos'].substring(0, 4) + ") "
             }}</small>
             </h1>
+            <div class="wordIcons">
+              <ion-buttons (click)="scrollIntoView()">
+                <ion-toggle [(ngModel)]="isToShowDetails"></ion-toggle>
+                <ion-icon class="ionIcon" name="play" (click)="togglePlaying(selectedId, false)"
+                  *ngIf="crntWordAppData['podcastLink']  && (!podcast.isPlayerPlaying || (selectedId != podcast.currId))">
+                </ion-icon>
+                <ion-icon class="ionIcon" name="pause" (click)="togglePlaying(selectedId, true)"
+                  *ngIf="crntWordAppData['podcastLink'] && (podcast.isPlayerPlaying && (selectedId == podcast.currId))">
+                </ion-icon>
+                <ion-icon class="ionIcon" (click)="changeMark(0, selectedId)" *ngIf="crntWordDynamicData['isMarked']"
+                  name="star">
+                </ion-icon>
+                <ion-icon class="ionIcon" (click)="changeMark(1, selectedId)" *ngIf="!crntWordDynamicData['isMarked']"
+                  name="star-outline">
+                </ion-icon>
+                <ion-icon name="share" class="shareArrow ionIcon" (click)="onScreenShot($event)"></ion-icon>
+              </ion-buttons>
 
-            <p class="wordMeaning">{{ crntWordAppData['defs'] }}</p>
+            </div>
+            <div class="wordDef">
+              <b>Defs:</b>
+              <p *ngFor="let oneMeaning of crntWordAppData['defs']; let indexOfelement=index;">
+                &nbsp; {{indexOfelement+1 + ". "}} {{oneMeaning|titlecase}}
+              </p>
+            </div>
+
+            <!-- <p class="wordMeaning">{{ crntWordAppData['defs'] }}</p> -->
 
             <p class="wordExample">
               <em>
@@ -70,17 +79,19 @@
                 }}"></div>
               </em>
             </p>
-            <p class="synonyms"><strong>Synonyms : </strong>
-              <span *ngFor="let syn of crntWordAppData['synonyms'];let isLast=last">
-                <span *ngIf="this.wordToIdMap[syn] != null" style="color:#ffa500" (click)="selectId(syn)">
-                  {{syn|titlecase}}
+            <div class="wordSyn">
+              <p class="synonyms"><strong>Synonyms : </strong>
+                <span *ngFor="let syn of crntWordAppData['synonyms'];let isLast=last">
+                  <span *ngIf="this.wordToIdMap[syn] != null" style="color:#ffa500" (click)="selectId(syn)">
+                    {{syn|titlecase}}
+                  </span>
+
+                  <span *ngIf="this.wordToIdMap[syn] == null"> {{syn|titlecase}}</span>
+                  {{isLast ? '' : ', '}}
+
                 </span>
-
-                <span *ngIf="this.wordToIdMap[syn] == null"> {{syn|titlecase}}</span>
-                {{isLast ? '' : ', '}}
-
-              </span>
-            </p>
+              </p>
+            </div>
           </div>
           <!-- <ion-ripple-effect type="unbounded"></ion-ripple-effect> -->
 

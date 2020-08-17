@@ -79,9 +79,14 @@
   width: 92%;
   margin-left: 4%;  
   position: relative;
+  align-items: center;
 
 }
 
+.ionIcon{
+  height: 29px;
+  width: 29px;
+}
 .starbutton {
   right: -4%;
   top: 1px;
@@ -90,6 +95,9 @@
   margin-right: 5px;
   margin-top: 7px;
   // color: #cdd9e4;
+}
+.wordSyn{
+  width:100%
 }
 .seenButton {
   right: 1px;
@@ -106,13 +114,21 @@
   // color: #222428;
   font-size: 25px;
 }
+.wordDef{
+  width : 100%;
+  p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+  }
+}
 .wordMeaning {
-  font-weight: 400;
+  
   // color: #222428;
   padding-top: 8px;
   padding-left: 3px;
-  font-size: 20px;
-  line-height: 1;
+  
+  
   text-align: center;
 }
 .wordExample {
@@ -169,7 +185,7 @@
 }
 
 .synonyms{
-  margin-top: 3%;
+  margin-top: 1%;
   font-size: 15px;
 }
 
