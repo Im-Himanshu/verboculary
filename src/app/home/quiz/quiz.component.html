@@ -1,0 +1,48 @@
+<ion-content>
+  <ion-button *ngIf="!sessionRunning" (click)="startNewSession()"
+    style="position: relative;left: calc(50% - 96px);top:30%">
+    Start New Session
+  </ion-button>
+
+  <ion-card *ngIf="sessionRunning">
+
+    <h5 style="margin: 21px;"> {{crntQuestionType}} </h5>
+    <h5 style="margin-left: 21px;"><i>{{crntQuestion}}</i></h5>
+
+    <ion-item *ngFor="let option of options" (click)="afterOptionSelected(option)"
+      [attr.style]="sanitizer.bypassSecurityTrustStyle('--background: ' + option['color'])"
+      [ngStyle]="{'--background' : option['color'], 'background-color' : 'var(--background)'}">
+      <ion-checkbox mode="ios" color="primary" [(ngModel)]="option.isSelected" [(disabled)]="isSubmitted">
+      </ion-checkbox> &nbsp; &nbsp;
+      <div style="width : 90%">
+        <ion-label> {{option.label | titlecase}}</ion-label>
+        <p *ngIf="isSubmitted" class="optionDef" style="font-size: 12px;">{{option.afterSubmit}}</p>
+      </div>
+
+    </ion-item>
+
+
+    <ion-button *ngIf="!isSubmitted" (click)="SubmitAnswer()" [(disabled)]="noOptionSelected">
+      Submit
+    </ion-button>
+    <div *ngIf="isSubmitted">
+      <ion-button *ngIf="crntDone != maxScore" (click)="next()">
+        Next
+      </ion-button>
+      <ion-button *ngIf="crntDone == maxScore" (click)="startNewSession()">
+        Session Completed, Start New Session?
+      </ion-button>
+
+
+    </div>
+
+    <div style="text-align: center;">
+      <h3>Current Score : &nbsp; &nbsp; {{this.crntScore}}/{{this.crntDone}}</h3>
+      <h3>Total Questions : {{maxScore}}</h3>
+      <!-- <h3>Time Taken : {{CrntQuestionTimeTaken}}</h3> -->
+      <!-- <h3>Total Time Taken : {{totalTimeTaken}}</h3> -->
+    </div>
+
+  </ion-card>
+
+</ion-content>

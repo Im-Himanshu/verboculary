@@ -47,6 +47,7 @@ import { ProgressChartComponent } from "./progress-chart/progress-chart.componen
 import { ChartsModule } from "ng2-charts";
 import "chartjs-plugin-zoom";
 import { ViewComponent } from "./view/view.component";
+import { QuizComponent } from "./quiz/quiz.component"
 import { WordSetsComponent } from "./word-sets/word-sets.component";
 import { ShareComponent } from "./POCs/share/share.component";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
@@ -123,6 +124,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     AudioComponent,
     SwiperComponent,
     DrawerComponent,
+    QuizComponent
   ],
   providers: [
     HammerGestureConfig,
