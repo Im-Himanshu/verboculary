@@ -4,7 +4,7 @@
     Start New Session
   </ion-button>
 
-  <ion-card *ngIf="sessionRunning">
+  <ion-card *ngIf="sessionRunning" style="padding: 2em;">
 
     <h5 style="margin: 21px;"> {{crntQuestionType}} </h5>
     <h5 style="margin-left: 21px;"><i>{{crntQuestion}}</i></h5>
@@ -14,7 +14,7 @@
       [ngStyle]="{'--background' : option['color'], 'background-color' : 'var(--background)'}">
       <ion-checkbox mode="ios" color="primary" [(ngModel)]="option.isSelected" [(disabled)]="isSubmitted">
       </ion-checkbox> &nbsp; &nbsp;
-      <div style="width : 90%">
+      <div style="width : 90%;">
         <ion-label> {{option.label | titlecase}}</ion-label>
         <p *ngIf="isSubmitted" class="optionDef" style="font-size: 12px;">{{option.afterSubmit}}</p>
       </div>
@@ -22,7 +22,7 @@
     </ion-item>
 
 
-    <ion-button *ngIf="!isSubmitted" (click)="SubmitAnswer()" [(disabled)]="noOptionSelected">
+    <ion-button *ngIf="!isSubmitted" (click)="SubmitAnswer()" [(disabled)]="noOptionSelected" style="margin-top: 3em;">
       Submit
     </ion-button>
     <div *ngIf="isSubmitted">
