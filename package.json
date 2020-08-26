@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
     "@fivethree/core": "^1.0.0-alpha.2",
-    "@ionic-native/admob-free": "^5.27.0",
+    "@ionic-native/admob-free": "^5.28.0",
     "@ionic-native/app-rate": "^5.27.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/deeplinks": "^5.27.0",
@@ -257,7 +257,7 @@
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-admob-free": {
-        "ADMOB_APP_ID": "ca-app-pub-3699793333730266~2935597099"
+        "ADMOB_APP_ID": "ca-app-pub-3699793333730266~7117249213"
       }
     },
     "platforms": [
