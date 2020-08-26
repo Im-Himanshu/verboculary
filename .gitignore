@@ -26,6 +26,7 @@ npm-debug.log*
 /coverage
 
 
+/executables
 /dist
 /node_modules
 /platforms/
@@ -33,3 +34,4 @@ npm-debug.log*
 /config.xml
 /plugins
 /www
+/.gradle
