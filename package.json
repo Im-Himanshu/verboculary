@@ -4,12 +4,13 @@
   "author": "Himanshu Goyal",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve --port 4210 --host 0.0.0.0",
-    "build": "ng build",
+    "ng": "set NODE_OPTIONS=--openssl-legacy-provider && ng",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --port 4210 --host 0.0.0.0  ",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish": "set NODE_OPTIONS=--openssl-legacy-provider  && gulp build && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -139,7 +140,7 @@
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "verboculary",
         "DEEPLINK_SCHEME": "https",
-        "DEEPLINK_HOST": "gre.verboculary.com",
+        "DEEPLINK_HOST": "com.GREninja.GRE.vocabulary",
         "ANDROID_PATH_PREFIX": "/",
         "ANDROID_2_PATH_PREFIX": "/",
         "ANDROID_3_PATH_PREFIX": "/",

@@ -39,3 +39,4 @@ cd ../..
 mv -f platforms/android/app/build/outputs/bundle/release/app.aab executables/assets/aab_signed.aab
 # Signing the aab with keystore
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore executables/verboculary.keystore executables/assets/aab_signed.aab verboculary
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore verboculary.keystore platforms/android/app/build/outputs/bundle/release/app.aab verboculary
