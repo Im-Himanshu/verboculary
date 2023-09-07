@@ -1,4 +1,4 @@
-# GRENinja Android Application  
+# GRENinja Android Application  | [Live Demo](verboculary.web.app/)
 
 Welcome to GreNinja android application! This app has a variety of amazing features that will make your experience of learning words and build vocabulary to be more enjoyable and productive. Below you can find screenshots of the app, showcasing its different functionalities and design.  
 Download and Try all new [GreNinja](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary) Application from the [Google Play Store](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary).
@@ -55,7 +55,15 @@ Thank you for choosing GreNinja Android Application! We hope you enjoy using it.
 3. Set the service path in URL without leading / (e.g. to refer csvDataJson, use `assets/csvToJsonData.json`). This will pick the path from the base URL.  
 4. To check, go to `platforms\browser\www` and run `live-server` to initiate the server.  
 5. Icons won't appear here but will work on the GitHub site.  
-6. Task remaining: direct build the browser in DemoForStatic File vala folder, otherwise have to copy and paste again and again.  
+6. Task remaining: direct build the browser in DemoForStatic File vala folder, otherwise have to copy and paste again and again.
+
+Firebase:
+1. npm install -g firebase-tools
+2. firebase login
+3. one time setup: firebase init hosting
+3. firebase emulators:start
+
+
    
 ## GitHub Pages Setup  
    
@@ -176,3 +184,6 @@ Article on Subjects: [https://medium.com/@luukgruijs/understanding-rxjs-behavior
    
 ## Release 2 Ideas
 1. Include the word cartoons from https://quizlet.com/Vince_Kotchian/folders/vince-kotchian-gre-pre
+
+# ToDO
+1. publish the webapp and host it on firebase or 
