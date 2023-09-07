@@ -6,19 +6,20 @@ Welcome to GreNinja application! This app has a variety of amazing features that
    
 <table>  
   <tr>  
-    <td><img src="./docs/img1.png" alt="Image 1" width="200"></td>  
-    <td><img src="./docs/img2.png" alt="Image 2" width="200"></td>  
-    <td><img src="./docs/img3.png" alt="Image 3" width="200"></td>  
-    <td><img src="./docs/img4.png" alt="Image 4" width="200"></td>  
+    <td><img src="./docs/img1.png?raw=true" alt="Image 1" width="200"></td>  
+    <td><img src="./docs/img2.png?raw=true" alt="Image 2" width="200"></td>  
+    <td><img src="./docs/img3.png?raw=true" alt="Image 3" width="200"></td>  
+    <td><img src="./docs/img4.png?raw=true" alt="Image 4" width="200"></td>  
   </tr>  
   <tr>  
-    <td><img src="./docs/img5.png" alt="Image 5" width="200"></td>  
-    <td><img src="./docs/img6.png" alt="Image 6" width="200"></td>  
-    <td><img src="./docs/img7.png" alt="Image 7" width="200"></td>  
-    <td><img src="./docs/img8.png" alt="Image 8" width="200"></td>  
+    <td><img src="./docs/img5.png?raw=true" alt="Image 5" width="200"></td>  
+    <td><img src="./docs/img6.png?raw=true" alt="Image 6" width="200"></td>  
+    <td><img src="./docs/img7.png?raw=true" alt="Image 7" width="200"></td>  
+    <td><img src="./docs/img8.png?raw=true" alt="Image 8" width="200"></td>  
   </tr>
 </table>  
-   
+ 
+![Screenshot](./docs/img5.png)  
 ## Features  
    
 * 1100+ words Handpicked for GRE only 
