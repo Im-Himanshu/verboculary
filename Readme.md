@@ -1,8 +1,9 @@
-# GRENinja Andorid Application  
+# GRENinja Android Application  
 
-Welcome to GreNinja application! This app has a variety of amazing features that will make your experience enjoyable and productive. Below you can find screenshots of the app, showcasing its different functionalities and design.  
-   
-## ScreenShots  
+Welcome to GreNinja android application! This app has a variety of amazing features that will make your experience of learning words and build vocabulary to be more enjoyable and productive. Below you can find screenshots of the app, showcasing its different functionalities and design.  
+Download and Try all new [GreNinja](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary) Application from the [Google Play Store](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary).
+
+## ScreenShots & Features
 
 <table>  
   <tr>  
@@ -20,7 +21,7 @@ Welcome to GreNinja application! This app has a variety of amazing features that
 </table>  
 
 
-## Features  
+## Functionalities  
    
 * 1100+ words Handpicked for GRE only 
 * Help build memory for a word using pictures and memes
@@ -35,13 +36,13 @@ Welcome to GreNinja application! This app has a variety of amazing features that
    
 To install the app, simply head over to the Google Play Store and search for "GREninja". Alternatively, you can click on the following link:  
    
-[Download My Android Application from the Google Play Store](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary)  
+[Download GreNinja Application from the Google Play Store](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary)  
    
 ## Support  
    
-If you encounter any issues or have any questions, please feel free to reach out to our support team at support@example.com.  
-   
-Thank you for choosing My Android Application! We hope you enjoy using it.
+If you encounter any issues or have any questions, please feel free to reach out to our support team at goyalhimanshu414@gmail.com.  
+
+Thank you for choosing GreNinja Android Application! We hope you enjoy using it.
 
 
 
@@ -77,13 +78,6 @@ For debugging this live app deployment, you can go here: [https://www.youtube.co
 - `chrome://inspect/#extensions` -> Inspect  
    
 # App Life Cycle  
-   
-## Build  
-   
-`ionic cordova build android --prod --release`  
-   
-## App Downloaded  
-   
 ### Step 1: App First Started  
    
 There will be two one-time operations of creating data for the Application:  
@@ -108,7 +102,10 @@ There will be two one-time operations of creating data for the Application:
 - [https://freefrontend.com/css-color-palettes/](https://freefrontend.com/css-color-palettes/)  
    
 Article on Subjects: [https://medium.com/@luukgruijs/understanding-rxjs-behaviorsubject-replaysubject-and-asyncsubject-8cc061f1cfc0](https://medium.com/@luukgruijs/understanding-rxjs-behaviorsubject-replaysubject-and-async
-
+## Build  
+   
+`ionic cordova build android --prod --release`  
+   
 # Task to do  
    
 - Experiment by importing the extra UI module in another project to check if it is a problem with Ionic.  
@@ -148,36 +145,25 @@ Article on Subjects: [https://medium.com/@luukgruijs/understanding-rxjs-behavior
 ## Animation Source  
    
 - https://daneden.github.io/animate.css/ // for more animation  
-- http://hammerjs.github.io/  
-   
-## YouTube  
-   
+- http://hammerjs.github.io/
 - https://www.youtube.com/watch?time_continue=195&v=5Z2C0wy4bmg&feature=emb_logo  
    
-## GitHub  
-   
-- https://github.com/yannbf/ionic3-components  
-   
-## Good Components  
-   
+## GitHub Good Components
+- https://github.com/yannbf/ionic3-components
 - I don't know why, but if a new component is declared in the module app, it has to be restarted from the CLI; otherwise, it will throw an error.  
    
-## Theming the App  
-   
+## Theming the App
 - https://louisem.com/29880/color-thesaurus-infographic  
 - https://ingridsnotes.wordpress.com/2014/02/04/the-color-thesaurus/  
    
-## LearnSet  
-   
+## LearnSet
 - Changing filter not changing the word list  
    
-## Logo Maker  
-   
+## Logo Maker
 - https://www.brandcrowd.com/  
 - https://www.canva.com/design/DADyYRsp6oY/OYwGrD2ok3Z0AGfKg_-P_Q/edit  
    
-## Release Steps  
-   
+## Release Steps   
 1. `ionic cordova build android --prod --release`  
 2. `keytool -genkey -v -keystore verboculary.keystore -alias verboculary -keyalg RSA -keysize 2048 -validity 10000`  
     - keyStore password: verboculary  
@@ -185,10 +171,8 @@ Article on Subjects: [https://medium.com/@luukgruijs/understanding-rxjs-behavior
 3. `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore verboculary.keystore app-release-unsigned.apk verboculary`  
 4. `"C:\Users\Himanshu\AppData\Local\Android\Sdk\build-tools\29.0.2\zipalign.exe" -f -v 4 app-release-1.1.0_Signed.apk app-release-1.1.0-zipaligned.apk`  
    
-## AdMob App ID  
-   
+## AdMob App ID   
 - ca-app-pub-4352525331879046~1258287684  
    
-## Release 2 Ideas  
-   
+## Release 2 Ideas
 1. Include the word cartoons from https://quizlet.com/Vince_Kotchian/folders/vince-kotchian-gre-pre
