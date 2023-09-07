@@ -1,3 +1,49 @@
+# GRENinja Andorid Application  
+
+Welcome to GreNinja application! This app has a variety of amazing features that will make your experience enjoyable and productive. Below you can find screenshots of the app, showcasing its different functionalities and design.  
+   
+## ScreenShots  
+   
+<table>  
+  <tr>  
+    <td><img src="./docs/img1.png" alt="Image 1" width="200"></td>  
+    <td><img src="./docs/img2.png" alt="Image 2" width="200"></td>  
+    <td><img src="./docs/img3.png" alt="Image 3" width="200"></td>  
+    <td><img src="./docs/img4.png" alt="Image 4" width="200"></td>  
+  </tr>  
+  <tr>  
+    <td><img src="./docs/img5.png" alt="Image 5" width="200"></td>  
+    <td><img src="./docs/img6.png" alt="Image 6" width="200"></td>  
+    <td><img src="./docs/img7.png" alt="Image 7" width="200"></td>  
+    <td><img src="./docs/img8.png" alt="Image 8" width="200"></td>  
+  </tr>
+</table>  
+   
+## Features  
+   
+* 1100+ words Handpicked for GRE only 
+* Help build memory for a word using pictures and memes
+* Multiple inbuilt dictionary support to help you understand all the different context of a word  
+* Support Dark Mode for all the Night Dwellers
+* Can't afford to look at screen? No worries, we have you covered with very interesting podcast covering word by word.
+* Track your progress is real-time
+* Words Level-categorization based on importance for GRE, More important one comes first, Rarer we will do Later. 
+* Practise test with swipe-able card
+   
+## Installation  
+   
+To install the app, simply head over to the Google Play Store and search for "GREninja". Alternatively, you can click on the following link:  
+   
+[Download My Android Application from the Google Play Store](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary)  
+   
+## Support  
+   
+If you encounter any issues or have any questions, please feel free to reach out to our support team at support@example.com.  
+   
+Thank you for choosing My Android Application! We hope you enjoy using it.
+
+
+
 # Loading the Application in JavaScript  
    
 ## Local Setup  
