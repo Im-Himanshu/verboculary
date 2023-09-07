@@ -3,23 +3,23 @@
 Welcome to GreNinja application! This app has a variety of amazing features that will make your experience enjoyable and productive. Below you can find screenshots of the app, showcasing its different functionalities and design.  
    
 ## ScreenShots  
-   
+
 <table>  
   <tr>  
-    <td><img src="./docs/img1.png?raw=true" alt="Image 1" width="200"></td>  
-    <td><img src="./docs/img2.png?raw=true" alt="Image 2" width="200"></td>  
-    <td><img src="./docs/img3.png?raw=true" alt="Image 3" width="200"></td>  
-    <td><img src="./docs/img4.png?raw=true" alt="Image 4" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/a0df74f0-599f-4f7b-a171-9884237d6939" alt="Image 1" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/b08ee924-66c8-49f8-9b4f-1c7b40fc2299" alt="Image 2" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/9695398a-c008-4087-8e75-311f057a7714" alt="Image 3" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/6daf9296-2131-4d0b-b2db-5094fa14f5cf" alt="Image 4" width="200"></td>  
   </tr>  
   <tr>  
-    <td><img src="./docs/img5.png?raw=true" alt="Image 5" width="200"></td>  
-    <td><img src="./docs/img6.png?raw=true" alt="Image 6" width="200"></td>  
-    <td><img src="./docs/img7.png?raw=true" alt="Image 7" width="200"></td>  
-    <td><img src="./docs/img8.png?raw=true" alt="Image 8" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/18f6233a-4de7-43f2-abf2-e5b1d96d7c18" alt="Image 5" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/b121342e-0091-4ce3-9550-d20dd06ee046" alt="Image 6" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/1dd1434a-16b5-46f8-a6ef-2f5b83b3dca7" alt="Image 7" width="200"></td>  
+    <td><img src="https://github.com/Im-Himanshu/verboculary/assets/16800094/2789b0ab-818a-4769-9477-85e2a2a98939" alt="Image 8" width="200"></td>  
   </tr>
 </table>  
- 
-![Screenshot](./docs/img5.png)  
+
+
 ## Features  
    
 * 1100+ words Handpicked for GRE only 
