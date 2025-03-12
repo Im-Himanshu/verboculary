@@ -1,4 +1,4 @@
-# GRENinja Android Application  | [Live Demo](verboculary.web.app/)
+# GRENinja Android Application  | [Live Demo](https://verboculary.web.app/#/mainmodule/base/dashboard)
 
 Welcome to GreNinja android application! This app has a variety of amazing features that will make your experience of learning words and build vocabulary to be more enjoyable and productive. Below you can find screenshots of the app, showcasing its different functionalities and design.  
 Download and Try all new [GreNinja](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary) Application from the [Google Play Store](https://play.google.com/store/apps/details?id=com.GREninja.GRE.vocabulary).
